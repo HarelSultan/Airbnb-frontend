@@ -1,0 +1,16 @@
+// Setup
+@import './setup/_vars.scss';
+@import './setup/_typography.scss';
+@import './setup/_function.scss';
+@import './setup/_mixins.scss';
+
+// Base
+@import './base/_base.scss';
+@import './base/_helpers.scss';
+@import './base/_layout.scss';
+
+// Cmps
+@import './cmps/_app-header.scss';
+
+// Pages
+@import './pages/_home.scss';
