@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom'
-import { Home } from './ts/pages/Home/Home'
+import { HomePage } from './ts/pages/Home/home-page'
 import './assets/style/main.scss'
 
 function App() {
     return (
         <div className='App'>
             <Routes>
-                <Route path='/' element={<Home />} />
+                <Route path='/' element={<HomePage />} />
             </Routes>
         </div>
     )

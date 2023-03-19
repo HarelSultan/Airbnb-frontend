@@ -1,0 +1,12 @@
+.app-header {
+    box-shadow: rgb(0 0 0 / 8%) 0 1px 0;
+    .app-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-block: 1.1rem;
+    }
+    .app-logo {
+        cursor: pointer;
+    }
+}

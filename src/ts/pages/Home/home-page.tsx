@@ -1,10 +1,10 @@
 import { AppHeader } from '../../cmps/AppHeader/app-header'
 
-export function Home() {
+export function HomePage() {
     return (
-        <section className='main-layout home'>
+        <section className='main-layout home-page'>
             <AppHeader />
-            Home
+            <div>Home</div>
         </section>
     )
 }

@@ -9,7 +9,7 @@ html,
 body {
     height: 100%;
     color: $main-text-clr;
-    font-family: Cereal-Book;
+    font-family: $font-family-regular;
     font-size: 15px;
     line-height: 1.43;
     overflow-x: hidden;
@@ -51,6 +51,11 @@ a {
     text-decoration: none;
 }
 
-button {
+.btn {
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
 }

@@ -1,0 +1,13 @@
+.user-menu {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+    border: 1px solid #dddddd;
+    padding: 5px 5px 5px 12px;
+    border-radius: 1.4rem;
+    display: flex;
+    color: $sub-text-clr;
+
+    .user-wrapper {
+        font-size: 2rem;
+        margin-left: 0.8rem;
+    }
+}

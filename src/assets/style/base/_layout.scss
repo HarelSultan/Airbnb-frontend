@@ -1,0 +1,24 @@
+.main-layout {
+    display: grid;
+    grid-template-columns: $layout-padding-narrow 1fr $layout-padding-narrow;
+
+    > * {
+        grid-column: 2;
+    }
+
+    > *.full {
+        grid-column: 1 / -1;
+    }
+
+    @include for-narrow-layout {
+        @include layoutGTC($layout-padding-narrow);
+    }
+
+    @include for-normal-layout {
+        @include layoutGTC($layout-padding-normal);
+    }
+
+    @include for-wide-layout {
+        @include layoutGTC($layout-padding-wide);
+    }
+}
