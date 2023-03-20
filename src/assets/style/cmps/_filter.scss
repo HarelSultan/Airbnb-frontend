@@ -4,8 +4,45 @@
     gap: 1.5rem;
     grid-template-columns: 1fr auto;
     padding-top: 1.125rem;
-    .filter-items {
+    position: sticky;
+
+    .category-filter-slider {
         display: flex;
+        align-items: center;
+        gap: 2.135rem;
+        overflow-y: hidden;
+        // margin-inline: 4rem;
+    }
+
+    .btn-categories {
+        border: 0.5px solid rgb(0 0 0/0.3);
+        border-radius: 50%;
+        z-index: 3;
+        height: 28px;
+        min-width: 28px;
+        // position: absolute;
+        // left: 2.5rem;
+
+        &:hover {
+            transform: scale(1.04);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        svg {
+            font-size: 20px;
+        }
+    }
+
+    .category-filters-container {
+        // width: 100%;
+        // height: 100%;
+        display: flex;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        gap: 3rem;
+        white-space: nowrap;
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
     .filter-widget {
         color: $main-text-clr;
@@ -40,6 +77,20 @@
         img {
             max-width: 24px;
             margin-bottom: 0.5rem;
+        }
+    }
+    .btn-filters {
+        border: 1px solid #ddd;
+        border-radius: 0.8rem;
+        color: #313131;
+        color: $main-text-clr;
+        font-size: 12px;
+        font-weight: 600;
+        gap: 0.53rem;
+        padding-inline: 1.02rem;
+        height: calc(100% - 2.175rem);
+        svg {
+            height: 14px;
         }
     }
 }
