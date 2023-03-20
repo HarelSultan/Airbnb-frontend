@@ -1,0 +1,45 @@
+.filter {
+    display: grid;
+    align-items: center;
+    gap: 1.5rem;
+    grid-template-columns: 1fr auto;
+    padding-top: 1.125rem;
+    .filter-items {
+        display: flex;
+    }
+    .filter-widget {
+        color: $main-text-clr;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-block: 1rem;
+        opacity: 0.6425;
+        transition: opacity 0.2s ease;
+        position: relative;
+        &::after {
+            background: #dddddd;
+            content: '';
+            height: 2px;
+            opacity: 0;
+        }
+        &:hover,
+        &.active {
+            opacity: 1;
+            &::after {
+                opacity: 1;
+                position: absolute;
+                inset-inline: 0;
+                bottom: 4px;
+            }
+        }
+        &.active::after {
+            background: #000000;
+        }
+        img {
+            max-width: 24px;
+            margin-bottom: 0.5rem;
+        }
+    }
+}
