@@ -5,6 +5,20 @@
     grid-template-columns: 1fr auto;
     padding-top: 1.125rem;
     position: sticky;
+    top: 65px;
+    background: white;
+    z-index: 1;
+    &.scroll::after {
+        right: 0;
+        left: 0;
+        transition: box-shadow 0.2s ease;
+        box-shadow: rgb(0 0 0 / 16%) 0 0 6px;
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+    }
 
     .category-filter-slider {
         display: flex;

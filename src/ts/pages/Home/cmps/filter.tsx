@@ -43,4 +43,3 @@ export function Filter() {
         </section>
     )
 }
-// style={'display':'block';height:14px;width:14px;fill:currentColor"}

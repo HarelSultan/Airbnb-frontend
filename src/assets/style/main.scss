@@ -13,7 +13,11 @@
 @import './cmps/_app-header.scss';
 @import './cmps/_search-teaser.scss';
 @import './cmps/_user-menu.scss';
-@import './cmps/_filter.scss';
 
 // Pages
-@import './pages/_home.scss';
+// Home:
+@import './pages/Home/_home.scss';
+@import './pages/Home/_filter.scss';
+@import './pages/Home/_stay-list.scss';
+@import './pages/Home/_stay-preview.scss';
+@import './pages/Home/_img-carousel.scss';

@@ -1,0 +1,50 @@
+.stay-preview {
+    display: flex;
+    flex-direction: column;
+    // width: 100%;
+    border-radius: 1rem;
+    cursor: pointer;
+    gap: 0.75rem;
+
+    .stay-details-wrapper {
+        display: flex;
+        flex-direction: column;
+        line-height: 19px;
+        position: relative;
+        gap: 0.15rem;
+        .stay-location {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .stay-rating {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 0;
+            gap: 4px;
+            svg {
+                display: block;
+                height: 13px;
+                width: 12px;
+                fill: currentcolor;
+            }
+        }
+
+        .stay-type,
+        .avaliable-dates {
+            color: $sub-text-clr;
+            // overflow: clip;
+        }
+
+        .stay-price {
+            display: flex;
+            gap: 0.3rem;
+            font-family: $font-family-medium;
+            margin-top: 0.4rem;
+            span {
+                font-family: $font-family-regular;
+            }
+        }
+    }
+}

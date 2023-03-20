@@ -1,0 +1,49 @@
+.carousel-root {
+    height: 100%;
+    .stay-img-wrapper {
+        height: 100%;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+    }
+    .carousel {
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            opacity: 0;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 50%;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            background-color: rgba(255, 255, 255, 0.9);
+            touch-action: manipulation;
+            height: 32px;
+            width: 32px;
+            top: calc(50% - 16px);
+            z-index: 2;
+            cursor: pointer;
+            transition: opacity 0.25s ease, transform 0.25s ease, -webkit-transform 0.25s ease;
+            .stay-preview:hover & {
+                opacity: 0.9;
+            }
+            &:hover {
+                transform: scale(1.04);
+                background-color: white;
+            }
+            svg {
+                font-size: 20px;
+            }
+        }
+
+        .dot {
+            height: 6px;
+            width: 6px;
+            margin: 0 3px;
+            opacity: 0.4;
+        }
+    }
+}
