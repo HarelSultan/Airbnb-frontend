@@ -23,9 +23,29 @@
     .category-filter-slider {
         display: flex;
         align-items: center;
-        gap: 2.135rem;
         overflow-y: hidden;
+        position: relative;
+        // gap: 2.135rem;
+
         // margin-inline: 4rem;
+        &::before,
+        &::after {
+            content: '';
+            height: 100%;
+            pointer-events: none;
+            position: absolute;
+            z-index: 2;
+            width: 40px;
+        }
+
+        &::before {
+            background: linear-gradient(270deg, rgba(255, 255, 255, 0), #fff);
+            left: 29px;
+        }
+        &::after {
+            right: 29px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff);
+        }
     }
 
     .btn-categories {
@@ -34,9 +54,9 @@
         z-index: 3;
         height: 28px;
         min-width: 28px;
+        margin-right: 0.5px;
         // position: absolute;
         // left: 2.5rem;
-
         &:hover {
             transform: scale(1.04);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
@@ -46,65 +66,84 @@
         }
     }
 
-    .category-filters-container {
-        // width: 100%;
-        // height: 100%;
-        display: flex;
-        overflow-x: scroll;
-        scroll-behavior: smooth;
-        gap: 3rem;
-        white-space: nowrap;
-        &::-webkit-scrollbar {
-            display: none;
-        }
+    // .btn-prev::after,
+    // .btn-next::after {
+    //     content: '';
+    //     height: 100%;
+    //     pointer-events: none;
+    //     position: absolute;
+    //     z-index: 2;
+    //     width: 40px;
+    // }
+
+    // .btn-prev::after {
+    //     background: linear-gradient(270deg, rgba(255, 255, 255, 0), #fff);
+    //     left: 29px;
+    // }
+    // .btn-next::before {
+    //     right: 29px;
+    //     background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff);
+    // }
+}
+
+.category-filters-container {
+    // width: 100%;
+    // height: 100%;
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    gap: 3rem;
+    white-space: nowrap;
+    &::-webkit-scrollbar {
+        display: none;
     }
-    .filter-widget {
-        color: $main-text-clr;
-        font-size: 12px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-block: 1rem;
-        opacity: 0.6425;
-        transition: opacity 0.2s ease;
-        position: relative;
+}
+.filter-widget {
+    color: $main-text-clr;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-block: 1rem;
+    opacity: 0.6425;
+    transition: opacity 0.2s ease;
+    position: relative;
+    &::after {
+        background: #dddddd;
+        content: '';
+        height: 2px;
+        opacity: 0;
+    }
+    &:hover,
+    &.active {
+        opacity: 1;
         &::after {
-            background: #dddddd;
-            content: '';
-            height: 2px;
-            opacity: 0;
-        }
-        &:hover,
-        &.active {
             opacity: 1;
-            &::after {
-                opacity: 1;
-                position: absolute;
-                inset-inline: 0;
-                bottom: 4px;
-            }
-        }
-        &.active::after {
-            background: #000000;
-        }
-        img {
-            max-width: 24px;
-            margin-bottom: 0.5rem;
+            position: absolute;
+            inset-inline: 0;
+            bottom: 4px;
         }
     }
-    .btn-filters {
-        border: 1px solid #ddd;
-        border-radius: 0.8rem;
-        color: #313131;
-        color: $main-text-clr;
-        font-size: 12px;
-        font-weight: 600;
-        gap: 0.53rem;
-        padding-inline: 1.02rem;
-        height: calc(100% - 2.175rem);
-        svg {
-            height: 14px;
-        }
+    &.active::after {
+        background: #000000;
+    }
+    img {
+        max-width: 24px;
+        margin-bottom: 0.5rem;
+    }
+}
+.btn-filters {
+    border: 1px solid #ddd;
+    border-radius: 0.8rem;
+    color: #313131;
+    color: $main-text-clr;
+    font-size: 12px;
+    font-weight: 600;
+    gap: 0.53rem;
+    padding-inline: 1.02rem;
+    height: calc(100% - 2.175rem);
+    svg {
+        height: 14px;
     }
 }

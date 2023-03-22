@@ -2,6 +2,7 @@
     height: 100%;
     .stay-img-wrapper {
         height: 100%;
+        max-height: 257.6px;
 
         img {
             height: 100%;
@@ -33,6 +34,9 @@
             &:hover {
                 transform: scale(1.04);
                 background-color: white;
+                & svg {
+                    transform: scale(1.04);
+                }
             }
             svg {
                 font-size: 20px;
