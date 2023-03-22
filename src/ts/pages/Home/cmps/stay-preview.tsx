@@ -1,5 +1,6 @@
 import { StayProps } from '../../../interfaces/stay-interface'
-import { FaStar } from 'react-icons/fa'
+import { stayService } from '../../../services/stay.service'
+import { utilService } from '../../../services/util.service'
 import { ImgCarousel } from './img-carousel'
 
 interface Props {
@@ -10,9 +11,6 @@ interface Props {
 export function StayPreview({ stay, onStayDetails }: Props) {
     return (
         <article className='stay-preview' onClick={() => onStayDetails(stay._id)}>
-            {/* <div className='stay-img-wrapper'>
-                <img src={stay.imgUrls[0]} />
-            </div> */}
             <ImgCarousel imgUrls={stay.imgUrls} />
             <div className='stay-details-wrapper'>
                 <h3 className='stay-location'>{stay.loc.address}</h3>
@@ -29,10 +27,10 @@ export function StayPreview({ stay, onStayDetails }: Props) {
                             fillRule='evenodd'
                         ></path>
                     </svg>
-                    <span>4.45</span>
+                    <span>{stayService.getStayAverageRating(stay).toFixed(1)}</span>
                 </div>
                 <span className='stay-type'>{stay.type}</span>
-                <span className='avaliable-dates'>Mar 20 - 27</span>
+                <span className='avaliable-dates'>{utilService.formatDateRange(stay.randomAvaliableDates)}</span>
                 <p className='stay-price'>
                     ${stay.price}
                     <span>night</span>

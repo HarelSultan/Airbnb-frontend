@@ -1,6 +1,5 @@
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
-import { CSSProperties } from 'react'
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr'
 
 interface Props {

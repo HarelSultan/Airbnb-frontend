@@ -2,7 +2,7 @@ import { storageService } from './async-storage.service'
 import minifiedStays from '../data/minified-stays.json'
 import categoryFilters from '../data/category-filters.json'
 import { utilService } from './util.service'
-import { StayProps } from '../interfaces/stay-interface'
+import { StayProps, StayReviewProps } from '../interfaces/stay-interface'
 const STORAGE_KEY: string = 'stay_DB'
 
 _createStays()
@@ -10,6 +10,7 @@ _createStays()
 export const stayService = {
     query,
     getCategoryFilters,
+    getStayAverageRating,
 }
 
 async function query() {
@@ -18,6 +19,16 @@ async function query() {
 
 function getCategoryFilters() {
     return categoryFilters
+}
+
+function getStayAverageRating(stay: StayProps) {
+    return (
+        stay.reviews.reduce((acc: number, review: StayReviewProps) => {
+            const values: number[] = Object.values(review.moreRate)
+            const avg = values.reduce((sum, value) => sum + value, 0) / values.length
+            return acc + avg
+        }, 0) / stay.reviews.length
+    )
 }
 
 function _createStays() {
@@ -33,6 +44,7 @@ function _makeStays() {
     stays.sort(() => (Math.random() > 0.5 ? 1 : -1))
     stays = stays.map((stay: any) => {
         stay._id = utilService.makeId()
+        stay.randomAvaliableDates = utilService.getRandomAvaliableDates()
         return stay
     })
     return stays
