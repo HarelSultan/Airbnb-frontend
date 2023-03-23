@@ -1,3 +1,4 @@
+import { searchByGuestProps } from '../interfaces/search-by-interface'
 import { AvaliableDatesProps } from '../interfaces/stay-interface'
 
 export const utilService = {
@@ -7,6 +8,7 @@ export const utilService = {
     getRandomInt,
     getRandomAvaliableDates,
     formatDateRange,
+    formatGuestCount,
 }
 
 function getRandomAvaliableDates() {
@@ -31,6 +33,19 @@ function formatDateRange({ checkInDate, checkOutDate }: AvaliableDatesProps) {
     // Checking if Checkout date is in a different month
     if (checkInMonth !== checkOutMonth) formattedDateRange += ` ${checkOutMonth}`
     return formattedDateRange
+}
+
+function formatGuestCount(guests: searchByGuestProps) {
+    // If there are no adults returning empty string -> fallback to placeholder
+    if (guests.adults === 0) return ''
+    // Checking the count of guests and formatting to either a singular or plural
+    let formattedGuestCount = formatPlural(guests.adults + guests.children, 'guest')
+    if (guests.infants) formattedGuestCount += `,${formatPlural(guests.infants, 'infant')}`
+    if (guests.pets) formattedGuestCount += `,${formatPlural(guests.pets, 'pet')}`
+}
+
+function formatPlural(count: number, key: string) {
+    return count > 1 ? count + key + 's' : count + key
 }
 
 function makeId(length = 6) {

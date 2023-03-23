@@ -11,6 +11,7 @@ export const stayService = {
     query,
     getCategoryFilters,
     getStayAverageRating,
+    getDeafultSearchProps,
 }
 
 async function query() {
@@ -29,6 +30,20 @@ function getStayAverageRating(stay: StayProps) {
             return acc + avg
         }, 0) / stay.reviews.length
     )
+}
+
+function getDeafultSearchProps() {
+    return {
+        destination: '',
+        checkIn: new Date(),
+        checkOut: new Date(),
+        guests: {
+            adults: 0,
+            children: 0,
+            infants: 0,
+            pets: 0,
+        },
+    }
 }
 
 function _createStays() {
