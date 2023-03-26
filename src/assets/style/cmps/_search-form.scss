@@ -78,13 +78,19 @@
     }
 
     .btn-search {
-        width: 7.4rem;
+        width: 3.2rem;
         height: 3.2rem;
+        font-size: 16px;
+        font-family: $font-family-medium;
         background: $brand-clr;
         color: #fff;
         border-radius: 5rem;
         grid-area: 1/2/3/3;
         margin-right: 0.1rem;
         gap: 0.4rem;
+
+        &.extended {
+            width: 7.4rem;
+        }
     }
 }

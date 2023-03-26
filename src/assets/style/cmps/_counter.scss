@@ -1,0 +1,27 @@
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    button {
+        background: transparent;
+        padding: 0.3rem;
+        border: 1px #b0b0b0 solid;
+        border-radius: 12rem;
+        outline: none;
+
+        &:hover {
+            color: rgb(34, 34, 34);
+            border-color: rgb(34, 34, 34);
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            color: rgb(235, 235, 235);
+            border-color: rgb(235, 235, 235);
+        }
+    }
+
+    p {
+    }
+}

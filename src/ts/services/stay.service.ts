@@ -35,8 +35,8 @@ function getStayAverageRating(stay: StayProps) {
 function getDeafultSearchProps() {
     return {
         destination: '',
-        checkIn: new Date(),
-        checkOut: new Date(),
+        checkIn: null,
+        checkOut: null,
         guests: {
             adults: 0,
             children: 0,

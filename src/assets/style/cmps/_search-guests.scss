@@ -1,0 +1,40 @@
+.search-guests {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    padding: 16px 32px;
+    border-radius: 2rem;
+    margin-top: 0.75rem;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.15);
+
+    // justify-content: center;
+
+    & > * {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr auto;
+        gap: 0.5rem;
+        padding-block: 24px;
+        &:not(:last-child) {
+            border-bottom: 1px solid rgb(235, 235, 235);
+        }
+    }
+
+    .guest-title {
+        text-transform: capitalize;
+        font-family: $font-family-bold;
+    }
+
+    .guest-desc {
+        color: $sub-text-clr;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .counter {
+        grid-area: 1/2/3/3;
+        justify-self: end;
+    }
+}

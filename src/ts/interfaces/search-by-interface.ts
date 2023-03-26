@@ -1,7 +1,7 @@
 export interface SearchByProps {
     destination: string
-    checkIn: Date
-    checkOut: Date
+    checkIn: Date | null
+    checkOut: Date | null
     guests: searchByGuestProps
 }
 

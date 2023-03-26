@@ -9,6 +9,7 @@ export const utilService = {
     getRandomAvaliableDates,
     formatDateRange,
     formatGuestCount,
+    formatDate,
 }
 
 function getRandomAvaliableDates() {
@@ -35,13 +36,19 @@ function formatDateRange({ checkInDate, checkOutDate }: AvaliableDatesProps) {
     return formattedDateRange
 }
 
+function formatDate(date: Date | null) {
+    if (date === null) return ''
+    return `${date.toLocaleString('default', { month: 'short' })} ${date.getDate()}`
+}
+
 function formatGuestCount(guests: searchByGuestProps) {
     // If there are no adults returning empty string -> fallback to placeholder
     if (guests.adults === 0) return ''
     // Checking the count of guests and formatting to either a singular or plural
-    let formattedGuestCount = formatPlural(guests.adults + guests.children, 'guest')
-    if (guests.infants) formattedGuestCount += `,${formatPlural(guests.infants, 'infant')}`
-    if (guests.pets) formattedGuestCount += `,${formatPlural(guests.pets, 'pet')}`
+    let formattedGuestCount = formatPlural(guests.adults + guests.children, ' guest')
+    if (guests.infants) formattedGuestCount += `, ${formatPlural(guests.infants, ' infant')}`
+    if (guests.pets) formattedGuestCount += `, ${formatPlural(guests.pets, ' pet')}`
+    return formattedGuestCount
 }
 
 function formatPlural(count: number, key: string) {
