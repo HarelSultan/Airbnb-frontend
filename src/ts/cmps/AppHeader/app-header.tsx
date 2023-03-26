@@ -10,18 +10,20 @@ import { SearchByProps } from '../../interfaces/search-by-interface'
 export function AppHeader() {
     const [isSearchOpen, setIsSearchOpen] = useState<Boolean>(false)
     const [searchBy, setSearchBy] = useState<SearchByProps>(stayService.getDeafultSearchProps())
-    const [selectedSearchModule, setSelectedSearchModule] = useState<String>('destination')
+    const [selectedSearchModule, setSelectedSearchModule] = useState<string>('searchDestination')
 
     const onToggleSearchDisplay = () => {
         setIsSearchOpen(prevState => !prevState)
     }
 
-    const onSelectSearchModule = (searchModule: String) => {
+    const onSelectSearchModule = (searchModule: string) => {
         if (selectedSearchModule === searchModule) return
         setSelectedSearchModule(searchModule)
     }
 
-    const onSetSearchBy = () => {}
+    const onSetSearchBy = (updatedSearchBy: SearchByProps) => {
+        setSearchBy(updatedSearchBy)
+    }
 
     const onSearchStays = () => {}
 

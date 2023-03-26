@@ -8,10 +8,11 @@ import unitedStatesImg from '../../../../assets/img/united-states.webp'
 
 interface Props {
     searchBy: SearchByProps
-    onSetSearchBy: () => void
+    onSetSearchBy: (updatedSearchBy: SearchByProps) => void
+    onSelectSearchModule: (searchModule: string) => void
 }
 
-export function SearchDestination({ searchBy, onSetSearchBy }: Props) {
+export function SearchDestination({ searchBy, onSetSearchBy, onSelectSearchModule }: Props) {
     const destinations = [
         {
             title: `I'm Flexible`,
@@ -39,6 +40,12 @@ export function SearchDestination({ searchBy, onSetSearchBy }: Props) {
         },
     ]
 
+    const onSelectDestination = (destination: string) => {
+        const updatedSearchBy = { ...searchBy, destination }
+        onSetSearchBy(updatedSearchBy)
+        onSelectSearchModule('searchCheckInDate')
+    }
+
     return (
         <section className='expanded-search-module search-destination'>
             <h2>Search by region</h2>
@@ -48,7 +55,7 @@ export function SearchDestination({ searchBy, onSetSearchBy }: Props) {
                         key={destination.title}
                         className={`destination-wrapper ${searchBy.destination === destination.title ? 'active' : ''}`}
                     >
-                        <img src={destination.imgSrc} alt='' />
+                        <img onClick={() => onSelectDestination(destination.title)} src={destination.imgSrc} alt='' />
                         <span>{destination.title}</span>
                     </li>
                 ))}

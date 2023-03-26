@@ -11,3 +11,7 @@ export interface searchByGuestProps {
     infants: number
     pets: number
 }
+
+export interface SearchModule {
+    [key: string]: React.ReactNode
+}

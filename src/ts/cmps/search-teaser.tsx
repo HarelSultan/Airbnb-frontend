@@ -2,16 +2,16 @@ import { FaSearch } from 'react-icons/fa'
 
 interface Props {
     onToggleSearchDisplay: () => void
-    onSelectSearchModule: (searchModule: String) => void
+    onSelectSearchModule: (searchModule: string) => void
 }
 
 export function SearchTeaser({ onToggleSearchDisplay, onSelectSearchModule }: Props) {
     return (
         <div className='search-teaser flex' onClick={onToggleSearchDisplay}>
-            <button className='btn btn-location' onClick={() => onSelectSearchModule('destination')}>
+            <button className='btn btn-location' onClick={() => onSelectSearchModule('searchDestination')}>
                 <span className='divider'>Anywhere</span>
             </button>
-            <button className='btn btn-date' onClick={() => onSelectSearchModule('dates')}>
+            <button className='btn btn-date' onClick={() => onSelectSearchModule('searchCheckInDate')}>
                 <span className='divider'>Any week</span>
             </button>
             <button className='btn btn-guests' onClick={() => onSelectSearchModule('guests')}>
