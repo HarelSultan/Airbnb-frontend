@@ -1,0 +1,42 @@
+.search-destination {
+    // width: 406px;
+    padding: 8px 55px 55px;
+    position: absolute;
+    top: 100%;
+    margin-top: 12px;
+    background-color: white;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 32px;
+
+    h2 {
+        font-size: 14px;
+        font-family: $font-family-bold;
+        margin-block: 2rem;
+    }
+
+    .destinations-container {
+        display: grid;
+        grid-template-columns: repeat(3, min-content);
+        grid-template-rows: 1fr 1fr;
+        gap: 2rem 1rem;
+    }
+
+    .destination-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        width: 8.1rem;
+        img {
+            cursor: pointer;
+            border: 1px solid #dddddd;
+            border-radius: 1rem;
+            transition: border-color 0.15s ease-in-out;
+            &:hover {
+                border-color: #000000;
+            }
+        }
+        span {
+            font-size: 14px;
+        }
+    }
+}
