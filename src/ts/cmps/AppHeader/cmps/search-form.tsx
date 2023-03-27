@@ -6,16 +6,14 @@ import { SearchDestination } from './search-destination'
 import { SearchGuests } from './search-guests'
 
 interface Props {
-    onToggleSearchDisplay: () => void
     searchBy: SearchByProps
     onSelectSearchModule: (searchModule: string) => void
     selectedSearchModule: string
     onSetSearchBy: (updatedSearchBy: SearchByProps) => void
-    onSearchStays: () => void
+    onSearchStays: (ev: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export function SearchForm({
-    onToggleSearchDisplay,
     searchBy,
     onSelectSearchModule,
     selectedSearchModule,
@@ -85,7 +83,10 @@ export function SearchForm({
                         placeholder='Add guests'
                         readOnly
                     />
-                    <button className={`btn btn-search flex flex-center ${selectedSearchModule ? 'extended' : ''}`}>
+                    <button
+                        onClick={onSearchStays}
+                        className={`btn btn-search flex flex-center ${selectedSearchModule ? 'extended' : ''}`}
+                    >
                         <FaSearch />
                         {selectedSearchModule && 'Search'}
                     </button>

@@ -3,6 +3,7 @@
     grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
     gap: 40px;
     grid-auto-flow: row dense;
+    margin-top: 2.5rem;
     // grid-auto-rows: minmax(min-content, max-content);
     // grid-auto-rows: 1fr;
 }

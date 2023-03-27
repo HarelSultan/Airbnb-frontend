@@ -1,0 +1,106 @@
+.label-filter-slider {
+    display: flex;
+    align-items: center;
+    overflow-y: hidden;
+    position: relative;
+
+    .btn-labels-wrapper {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+        min-width: 68px;
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.2s ease-out;
+        height: 78.66px;
+        pointer-events: none;
+        &.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        &.btn-prev-wrapper {
+            background-image: linear-gradient(to left, rgb(255 255 255/0), white 40px);
+        }
+
+        &.btn-next-wrapper {
+            right: 0;
+            justify-content: end;
+            background-image: linear-gradient(to right, rgb(255 255 255/0), white 40px);
+        }
+    }
+
+    .btn-labels {
+        border: 0.5px solid rgb(0 0 0/0.3);
+        border-radius: 50%;
+        z-index: 3;
+        height: 28px;
+        min-width: 28px;
+        margin-right: 0.5px;
+        transition: all 0.2s ease;
+        opacity: 1;
+        position: relative;
+        pointer-events: all;
+        &.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        &:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        svg {
+            font-size: 20px;
+        }
+    }
+
+    .label-filters-container {
+        display: flex;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        gap: 3rem;
+        white-space: nowrap;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    .filter-widget {
+        color: $main-text-clr;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-block: 1rem;
+        opacity: 0.6425;
+        transition: opacity 0.2s ease;
+        position: relative;
+        cursor: pointer;
+        &::after {
+            background: #dddddd;
+            content: '';
+            height: 2px;
+            opacity: 0;
+            position: absolute;
+            bottom: 4px;
+        }
+        &:hover,
+        &.active {
+            opacity: 1;
+            &::after {
+                opacity: 1;
+                inset-inline: 0;
+            }
+        }
+        &.active {
+            cursor: default;
+            &::after {
+                background: #000000;
+            }
+        }
+
+        img {
+            max-width: 24px;
+            margin-bottom: 0.5rem;
+        }
+    }
+}

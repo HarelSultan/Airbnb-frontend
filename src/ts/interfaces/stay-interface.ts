@@ -54,6 +54,6 @@ export interface StayReviewProps {
 }
 
 export interface AvaliableDatesProps {
-    checkInDate: Date
-    checkOutDate: Date
+    checkIn: Date
+    checkOut: Date
 }

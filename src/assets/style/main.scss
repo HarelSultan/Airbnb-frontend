@@ -23,7 +23,8 @@
 // Pages
 // Home:
 @import './pages/Home/_home.scss';
-@import './pages/Home/_filter.scss';
-@import './pages/Home/_stay-list.scss';
-@import './pages/Home/_stay-preview.scss';
-@import './pages/Home/_img-carousel.scss';
+@import './pages/Home/cmps/_filter.scss';
+@import './pages/Home/cmps/_label-filter.scss';
+@import './pages/Home/cmps/_stay-list.scss';
+@import './pages/Home/cmps/_stay-preview.scss';
+@import './pages/Home/cmps/_img-carousel.scss';

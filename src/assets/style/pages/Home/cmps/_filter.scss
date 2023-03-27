@@ -1,0 +1,37 @@
+.filter {
+    display: grid;
+    align-items: center;
+    gap: 1.5rem;
+    grid-template-columns: 1fr auto;
+    padding-top: 1.125rem;
+    position: sticky;
+    top: 65px;
+    background: white;
+    z-index: 1;
+    &.scroll::after {
+        right: 0;
+        left: 0;
+        transition: box-shadow 0.2s ease;
+        box-shadow: rgb(0 0 0 / 16%) 0 0 6px;
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+
+    .btn-filters {
+        border: 1px solid #ddd;
+        border-radius: 0.8rem;
+        color: #313131;
+        color: $main-text-clr;
+        font-size: 12px;
+        font-weight: 600;
+        gap: 0.53rem;
+        padding-inline: 1.02rem;
+        height: calc(100% - 2.175rem);
+        svg {
+            height: 14px;
+        }
+    }
+}

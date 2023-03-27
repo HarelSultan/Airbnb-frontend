@@ -1,33 +1,25 @@
 import { stayService } from '../../../services/stay.service'
 import { useState } from 'react'
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
+import { LabelFilter } from './Filter/label-filter'
+import { FilterByProps } from '../../../interfaces/filter-by-interface'
 
-const categoryFilters = stayService.getCategoryFilters()
+const labelFilters = stayService.getLabelFilters()
 
 export function Filter() {
-    const [selectedFilter, setSelectedFilter] = useState(null)
+    const [filterBy, setFilterBy] = useState<FilterByProps>(stayService.getDefaultFilterProps())
+
+    const onSelectLabelFilter = (selectedLabel: string) => {}
+
+    const labelFilterProps = {
+        labelFilters,
+        selectedLabelFilter: filterBy.label,
+        onSelectLabelFilter,
+    }
 
     return (
         <section className='filter'>
-            <div className='category-filter-slider'>
-                <button className={`btn btn-categories btn-prev`}>
-                    <GrFormPrevious />
-                </button>
-                <div className='category-filters-container'>
-                    {categoryFilters.map(filter => (
-                        <div
-                            key={filter.desc}
-                            className={`filter-widget ${selectedFilter === filter.desc ? 'active' : ''}`}
-                        >
-                            <img src={filter.url} alt={`${filter.desc} image`} />
-                            <p>{filter.desc}</p>
-                        </div>
-                    ))}
-                </div>
-                <button className={`btn btn-categories btn-next`}>
-                    <GrFormNext />
-                </button>
-            </div>
+            <LabelFilter {...labelFilterProps} />
             <button className='btn btn-filters'>
                 <svg
                     viewBox='0 0 16 16'

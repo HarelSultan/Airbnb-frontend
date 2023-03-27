@@ -1,6 +1,6 @@
 import { storageService } from './async-storage.service'
 import minifiedStays from '../data/minified-stays.json'
-import categoryFilters from '../data/category-filters.json'
+import labelFilters from '../data/label-filters.json'
 import { utilService } from './util.service'
 import { StayProps, StayReviewProps } from '../interfaces/stay-interface'
 const STORAGE_KEY: string = 'stay_DB'
@@ -9,17 +9,18 @@ _createStays()
 
 export const stayService = {
     query,
-    getCategoryFilters,
+    getLabelFilters,
     getStayAverageRating,
     getDeafultSearchProps,
+    getDefaultFilterProps,
 }
 
 async function query() {
     return (await storageService.query(STORAGE_KEY)) as StayProps[]
 }
 
-function getCategoryFilters() {
-    return categoryFilters
+function getLabelFilters() {
+    return labelFilters
 }
 
 function getStayAverageRating(stay: StayProps) {
@@ -43,6 +44,12 @@ function getDeafultSearchProps() {
             infants: 0,
             pets: 0,
         },
+    }
+}
+
+function getDefaultFilterProps() {
+    return {
+        label: 'OMG!',
     }
 }
 

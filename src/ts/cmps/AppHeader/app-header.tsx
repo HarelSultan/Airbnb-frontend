@@ -35,10 +35,13 @@ export function AppHeader() {
         setSearchBy(updatedSearchBy)
     }
 
-    const onSearchStays = () => {}
+    const onSearchStays = (ev: React.MouseEvent<HTMLButtonElement>) => {
+        ev.preventDefault()
+        setIsSearchOpen(false)
+        console.log(searchBy)
+    }
 
     const searchProps = {
-        onToggleSearchDisplay,
         searchBy,
         onSelectSearchModule,
         selectedSearchModule,
@@ -60,6 +63,7 @@ export function AppHeader() {
                     </div>
                 ) : (
                     <SearchTeaser
+                        searchBy={searchBy}
                         onToggleSearchDisplay={onToggleSearchDisplay}
                         onSelectSearchModule={onSelectSearchModule}
                     />

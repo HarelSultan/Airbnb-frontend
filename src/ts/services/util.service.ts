@@ -13,24 +13,24 @@ export const utilService = {
 }
 
 function getRandomAvaliableDates() {
-    const checkInDate = new Date()
-    checkInDate.setDate(checkInDate.getDate() + getRandomInt(0, 120))
-    const checkOutDate = new Date(checkInDate)
+    const checkIn = new Date()
+    checkIn.setDate(checkIn.getDate() + getRandomInt(0, 120))
+    const checkOut = new Date(checkIn)
     const randNumOfNights = getRandomInt(1, 7)
-    checkOutDate.setDate(checkInDate.getDate() + randNumOfNights)
+    checkOut.setDate(checkIn.getDate() + randNumOfNights)
     return {
-        checkInDate,
-        checkOutDate,
+        checkIn,
+        checkOut,
     }
 }
 
-function formatDateRange({ checkInDate, checkOutDate }: AvaliableDatesProps) {
+function formatDateRange({ checkIn, checkOut }: AvaliableDatesProps) {
     // Converting checkIn/Out dates to Date object
-    checkInDate = new Date(checkInDate)
-    checkOutDate = new Date(checkOutDate)
-    const checkInMonth = checkInDate.toLocaleString('default', { month: 'short' })
-    const checkOutMonth = checkOutDate.toLocaleString('default', { month: 'short' })
-    let formattedDateRange = `${checkInMonth} ${checkInDate.getDate()} - ${checkOutDate.getDate()}`
+    checkIn = new Date(checkIn)
+    checkOut = new Date(checkOut)
+    const checkInMonth = checkIn.toLocaleString('default', { month: 'short' })
+    const checkOutMonth = checkOut.toLocaleString('default', { month: 'short' })
+    let formattedDateRange = `${checkInMonth} ${checkIn.getDate()} - ${checkOut.getDate()}`
     // Checking if Checkout date is in a different month
     if (checkInMonth !== checkOutMonth) formattedDateRange += ` ${checkOutMonth}`
     return formattedDateRange
