@@ -25,7 +25,7 @@
             height: 32px;
             width: 32px;
             top: calc(50% - 16px);
-            z-index: 2;
+            z-index: 1;
             cursor: pointer;
             transition: opacity 0.25s ease, transform 0.25s ease, -webkit-transform 0.25s ease;
             .stay-preview:hover & {
