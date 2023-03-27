@@ -12,8 +12,8 @@ interface Props {
 
 export function SearchDates({ searchBy, onSetSearchBy, selectedSearchModule, onSelectSearchModule }: Props) {
     const selectionRange = {
-        startDate: searchBy.checkIn,
-        endDate: searchBy.checkOut,
+        startDate: searchBy.checkIn || new Date(),
+        endDate: searchBy.checkOut || new Date(),
         key: 'selection',
     }
 
