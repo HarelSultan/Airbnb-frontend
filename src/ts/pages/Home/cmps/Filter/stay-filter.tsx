@@ -1,6 +1,7 @@
 import { AiOutlineClose } from 'react-icons/ai'
 import { FilterByProps } from '../../../../interfaces/filter-by-interface'
 import { PriceFilter } from './price-filter'
+import { TypeFilter } from './type-filter'
 
 interface Props {
     filterBy: FilterByProps
@@ -11,6 +12,11 @@ interface Props {
 }
 
 export function StayFilters({ filterBy, onSetFilterBy, onCloseModal, onClearFilterBy, onSearchStays }: Props) {
+    const stayFilterProps = {
+        filterBy,
+        onSetFilterBy,
+    }
+
     return (
         <section className='stay-filter'>
             <div className='filter-header'>
@@ -19,7 +25,10 @@ export function StayFilters({ filterBy, onSetFilterBy, onCloseModal, onClearFilt
                 </button>
                 <h3>Filters</h3>
             </div>
-            <PriceFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            <div className='stay-filters-container'>
+                <PriceFilter {...stayFilterProps} />
+                <TypeFilter {...stayFilterProps} />
+            </div>
             <div className='filter-footer'>
                 <button onClick={onClearFilterBy} className='btn btn-clear-filters'>
                     Clear all

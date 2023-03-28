@@ -1,17 +1,4 @@
 .price-filter {
-    padding: 32px 24px;
-    border-bottom: 1px solid #ebebeb;
-
-    .filter-title {
-        font-family: $font-family-medium;
-    }
-
-    .filter-sub-title {
-        color: $sub-text-clr;
-        font-size: 16px;
-        padding-block: 0.5em 40px;
-    }
-
     .price-range-wrapper {
         display: flex;
         align-items: center;

@@ -1,0 +1,36 @@
+.type-filter {
+    .filter-title {
+        padding-bottom: 24px;
+    }
+
+    .type-filters-container {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 12px;
+    }
+
+    .stay-type {
+        display: flex;
+    }
+
+    input {
+        align-self: start;
+        margin-right: 16px;
+        min-width: 24px;
+        height: 24px;
+    }
+
+    .type-info-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .type-title {
+        font-size: 16px;
+    }
+    .type-desc {
+        font-size: 14px;
+        color: $sub-text-clr;
+    }
+}

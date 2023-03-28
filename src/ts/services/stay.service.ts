@@ -52,6 +52,7 @@ function getDefaultFilterProps() {
         label: 'OMG!',
         minPrice: 10,
         maxPrice: 1400,
+        type: [''],
     }
 }
 

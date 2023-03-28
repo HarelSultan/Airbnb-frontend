@@ -17,7 +17,10 @@ export function Filter() {
         setIsFilterModalOpen(prevState => !prevState)
     }
 
-    const onSetFilterBy = (updatedFilter: FilterByProps) => {}
+    const onSetFilterBy = (updatedFilter: FilterByProps) => {
+        console.log(updatedFilter)
+        setFilterBy(updatedFilter)
+    }
 
     const onClearFilterBy = () => {
         setFilterBy(stayService.getDefaultFilterProps())
