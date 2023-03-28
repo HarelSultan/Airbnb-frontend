@@ -50,6 +50,8 @@ function getDeafultSearchProps() {
 function getDefaultFilterProps() {
     return {
         label: 'OMG!',
+        minPrice: 10,
+        maxPrice: 1400,
     }
 }
 

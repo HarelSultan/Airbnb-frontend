@@ -17,10 +17,29 @@ export function Filter() {
         setIsFilterModalOpen(prevState => !prevState)
     }
 
+    const onSetFilterBy = (updatedFilter: FilterByProps) => {}
+
+    const onClearFilterBy = () => {
+        setFilterBy(stayService.getDefaultFilterProps())
+    }
+
+    const onSearchStays = () => {
+        toggleFilterModalDisplay()
+        // query new stays with filter props
+    }
+
     const labelFilterProps = {
         labelFilters,
         selectedLabelFilter: filterBy.label,
         onSelectLabelFilter,
+    }
+
+    const stayFilterProps = {
+        filterBy,
+        onSetFilterBy,
+        onCloseModal: toggleFilterModalDisplay,
+        onClearFilterBy,
+        onSearchStays,
     }
 
     return (
@@ -35,7 +54,7 @@ export function Filter() {
             {isFilterModalOpen && (
                 <div className='filter-modal-container'>
                     <DarkOverlay isOpen={isFilterModalOpen} setIsOpen={toggleFilterModalDisplay} />
-                    <StayFilters onCloseModal={toggleFilterModalDisplay} />
+                    <StayFilters {...stayFilterProps} />
                 </div>
             )}
         </section>

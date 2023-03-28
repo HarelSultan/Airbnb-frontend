@@ -31,6 +31,12 @@ select {
     font: inherit;
 }
 
+input {
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

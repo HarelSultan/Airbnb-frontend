@@ -1,24 +1,32 @@
 import { AiOutlineClose } from 'react-icons/ai'
-import { DarkOverlay } from '../../../../cmps/AppHeader/cmps/dark-overlay'
+import { FilterByProps } from '../../../../interfaces/filter-by-interface'
 import { PriceFilter } from './price-filter'
 
 interface Props {
+    filterBy: FilterByProps
+    onSetFilterBy: (updatedFilter: FilterByProps) => void
     onCloseModal: () => void
+    onClearFilterBy: () => void
+    onSearchStays: () => void
 }
 
-export function StayFilters({ onCloseModal }: Props) {
+export function StayFilters({ filterBy, onSetFilterBy, onCloseModal, onClearFilterBy, onSearchStays }: Props) {
     return (
         <section className='stay-filter'>
             <div className='filter-header'>
-                <button className='btn btn-close'>
+                <button onClick={onCloseModal} className='btn btn-close'>
                     <AiOutlineClose />
                 </button>
                 <h3>Filters</h3>
             </div>
-            <PriceFilter />
+            <PriceFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             <div className='filter-footer'>
-                <button className='btn btn-clear-filters'>Clear all</button>
-                <button className='btn btn-filter-stays'>Show homes</button>
+                <button onClick={onClearFilterBy} className='btn btn-clear-filters'>
+                    Clear all
+                </button>
+                <button onClick={onSearchStays} className='btn btn-filter-stays'>
+                    Show homes
+                </button>
             </div>
         </section>
     )
