@@ -4,6 +4,7 @@ import { LabelFilter } from './Filter/label-filter'
 import { FilterByProps } from '../../../interfaces/filter-by-interface'
 import { StayFilters } from './Filter/stay-filter'
 import { DarkOverlay } from '../../../cmps/AppHeader/cmps/dark-overlay'
+import { setFilter } from '../../../store/stay/stay.action'
 
 const labelFilters = stayService.getLabelFilters()
 
@@ -11,7 +12,9 @@ export function Filter() {
     const [filterBy, setFilterBy] = useState<FilterByProps>(stayService.getDefaultFilterProps())
     const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false)
 
-    const onSelectLabelFilter = (selectedLabel: string) => {}
+    const onSelectLabelFilter = (selectedLabel: string) => {
+        setFilterBy(prevFilterBy => ({ ...prevFilterBy, label: selectedLabel }))
+    }
 
     const toggleFilterModalDisplay = () => {
         setIsFilterModalOpen(prevState => !prevState)
@@ -29,6 +32,7 @@ export function Filter() {
     const onSearchStays = () => {
         toggleFilterModalDisplay()
         // query new stays with filter props
+        setFilter(filterBy)
     }
 
     const labelFilterProps = {

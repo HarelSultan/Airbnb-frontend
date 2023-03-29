@@ -3,6 +3,7 @@ import minifiedStays from '../data/minified-stays.json'
 import labelFilters from '../data/label-filters.json'
 import { utilService } from './util.service'
 import { StayProps, StayReviewProps } from '../interfaces/stay-interface'
+import { FilterByProps } from '../interfaces/filter-by-interface'
 const STORAGE_KEY: string = 'stay_DB'
 
 _createStays()
@@ -15,8 +16,25 @@ export const stayService = {
     getDefaultFilterProps,
 }
 
-async function query() {
-    return (await storageService.query(STORAGE_KEY)) as StayProps[]
+async function query(filterBy: FilterByProps = getDefaultFilterProps()) {
+    let filteredStays = (await storageService.query(STORAGE_KEY)) as StayProps[]
+
+    if (filterBy.label) {
+        filteredStays = filteredStays.filter(stay => stay.labels.includes(filterBy.label))
+    }
+
+    if (filterBy.minPrice > 0) {
+        filteredStays = filteredStays.filter(stay => stay.price > filterBy.minPrice)
+    }
+
+    if (filterBy.maxPrice > 0) {
+        filteredStays = filteredStays.filter(stay => stay.price < filterBy.maxPrice)
+    }
+
+    if (filterBy.type.length) {
+        filteredStays = filteredStays.filter(stay => filterBy.type.includes(stay.type))
+    }
+    return filteredStays
 }
 
 function getLabelFilters() {
@@ -50,9 +68,9 @@ function getDeafultSearchProps() {
 function getDefaultFilterProps() {
     return {
         label: 'OMG!',
-        minPrice: 10,
-        maxPrice: 1400,
-        type: [''],
+        minPrice: 0,
+        maxPrice: 0,
+        type: [],
     }
 }
 
@@ -67,7 +85,7 @@ function _createStays() {
 function _makeStays() {
     let stays: any = minifiedStays
     stays.sort(() => (Math.random() > 0.5 ? 1 : -1))
-    stays = stays.map((stay: any) => {
+    stays = stays.map((stay: StayProps) => {
         stay._id = utilService.makeId()
         stay.randomAvaliableDates = utilService.getRandomAvaliableDates()
         return stay

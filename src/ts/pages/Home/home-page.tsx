@@ -1,22 +1,30 @@
-import { useEffect, useState } from 'react'
-import { AppHeader } from '../../cmps/AppHeader/app-header'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
 import { StayProps } from '../../interfaces/stay-interface'
-import { stayService } from '../../services/stay.service'
+import { RootStateProps } from '../../store/store'
+
+import { AppHeader } from '../../cmps/AppHeader/app-header'
 import { Filter } from './cmps/filter'
 import { StayList } from './cmps/stay-list'
+import { loadStays } from '../../store/stay/stay.action'
 
 export function HomePage() {
-    const [stays, setStays] = useState<StayProps[] | []>([])
+    const stays: StayProps[] = useSelector((storeState: RootStateProps) => storeState.stayModule.stays)
+    const filterBy = useSelector((storeState: RootStateProps) => storeState.stayModule.filterBy)
+    const location = useLocation()
 
     useEffect(() => {
-        loadStays()
-    }, [])
+        console.log(location.search)
+        onLoadStays()
+    }, [filterBy])
 
-    const loadStays = async () => {
+    const onLoadStays = () => {
         try {
-            const stays = await stayService.query()
-            setStays(stays)
+            loadStays(filterBy)
         } catch (err) {
+            // Show error msg
             console.log('Getting stays failed with error:', err)
         }
     }

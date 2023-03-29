@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { SearchTeaser } from '../search-teaser'
 import { UserMenu } from '../user-menu'
 import { AppLogo } from './Logo/logo'
@@ -7,6 +7,7 @@ import { SearchForm } from './cmps/search-form'
 import { stayService } from '../../services/stay.service'
 import { SearchByProps } from '../../interfaces/search-by-interface'
 import { DarkOverlay } from './cmps/dark-overlay'
+import { utilService } from '../../services/util.service'
 
 export function AppHeader() {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
@@ -14,6 +15,7 @@ export function AppHeader() {
     const [selectedSearchModule, setSelectedSearchModule] = useState<string>('searchDestination')
 
     const searchFormWrapperRef = useRef<HTMLDivElement>(null)
+    const [_, setSearchParams] = useSearchParams()
 
     const onToggleSearchDisplay = () => {
         setIsSearchOpen(prevState => !prevState)
@@ -38,7 +40,8 @@ export function AppHeader() {
     const onSearchStays = (ev: React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault()
         setIsSearchOpen(false)
-        console.log(searchBy)
+        const searchParams = new URLSearchParams(utilService.formatSearchParams(searchBy))
+        setSearchParams(searchParams)
     }
 
     const searchProps = {

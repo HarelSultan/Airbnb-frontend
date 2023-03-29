@@ -1,4 +1,4 @@
-import { searchByGuestProps } from '../interfaces/search-by-interface'
+import { searchByGuestProps, SearchByProps } from '../interfaces/search-by-interface'
 import { AvaliableDatesProps } from '../interfaces/stay-interface'
 
 export const utilService = {
@@ -10,6 +10,7 @@ export const utilService = {
     formatDateRange,
     formatGuestCount,
     formatDate,
+    formatSearchParams,
 }
 
 function getRandomAvaliableDates() {
@@ -53,6 +54,19 @@ function formatGuestCount(guests: searchByGuestProps) {
 
 function formatPlural(count: number, key: string) {
     return count > 1 ? count + key + 's' : count + key
+}
+
+function formatSearchParams(searchBy: SearchByProps) {
+    const searchParams: any = {}
+    searchParams.destination = searchBy.destination
+    if (searchBy.checkIn) searchParams.checkIn = searchBy.checkIn.toISOString().slice(0, 10)
+    if (searchBy.checkOut) searchParams.checkOut = searchBy.checkOut.toISOString().slice(0, 10)
+    if (searchBy.guests.adults) {
+        Object.entries(searchBy.guests).map(([key, value]) => {
+            searchParams[key] = value.toString()
+        })
+    }
+    return searchParams
 }
 
 function makeId(length = 6) {
