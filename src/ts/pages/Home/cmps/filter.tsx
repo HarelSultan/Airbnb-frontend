@@ -13,9 +13,16 @@ export function Filter() {
     const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false)
 
     const onSelectLabelFilter = (selectedLabel: string) => {
-        setFilterBy(prevFilterBy => ({ ...prevFilterBy, label: selectedLabel }))
+        if (selectedLabel === filterBy.label) return
+        // Castels, Iconic Cities, Ski-in/out, Shephred's huts, Lake
+        setFilterBy(prevFilterBy => {
+            const updatedFilter = { ...prevFilterBy, label: selectedLabel }
+            setFilter(updatedFilter)
+            return updatedFilter
+        })
     }
 
+    console.log(filterBy)
     const toggleFilterModalDisplay = () => {
         setIsFilterModalOpen(prevState => !prevState)
     }
