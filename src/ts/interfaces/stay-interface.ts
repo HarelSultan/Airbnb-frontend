@@ -7,7 +7,8 @@ export interface StayProps {
     summary: string
     amenities: string[]
     roomType: string
-    randomAvaliableDates: AvaliableDatesProps
+    randomAvaliableDates: DatesProps
+    takenDates: DatesProps[]
     host: {
         _id: string
         fullname: string
@@ -19,6 +20,7 @@ export interface StayProps {
         countryCode: string
         city: string
         address: string
+        destination: string
         lat: number
         lng: number
     }
@@ -53,7 +55,7 @@ export interface StayReviewProps {
     }
 }
 
-export interface AvaliableDatesProps {
+export interface DatesProps {
     checkIn: Date
     checkOut: Date
 }

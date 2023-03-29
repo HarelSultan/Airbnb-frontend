@@ -9,6 +9,8 @@ import { AppHeader } from '../../cmps/AppHeader/app-header'
 import { Filter } from './cmps/filter'
 import { StayList } from './cmps/stay-list'
 import { loadStays } from '../../store/stay/stay.action'
+import { stayService } from '../../services/stay.service'
+import { SearchByProps } from '../../interfaces/search-by-interface'
 
 export function HomePage() {
     const stays: StayProps[] = useSelector((storeState: RootStateProps) => storeState.stayModule.stays)
@@ -16,13 +18,14 @@ export function HomePage() {
     const location = useLocation()
 
     useEffect(() => {
-        console.log(location.search)
-        onLoadStays()
-    }, [filterBy])
+        const searchParams = new URLSearchParams(location.search)
+        const searchBy = stayService.getParamsSearchBy(searchParams)
+        onLoadStays(searchBy)
+    }, [filterBy, location.search])
 
-    const onLoadStays = () => {
+    const onLoadStays = (searchBy: SearchByProps) => {
         try {
-            loadStays(filterBy)
+            loadStays(searchBy, filterBy)
         } catch (err) {
             // Show error msg
             console.log('Getting stays failed with error:', err)

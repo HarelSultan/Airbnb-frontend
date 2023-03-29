@@ -1,31 +1,52 @@
 import { searchByGuestProps, SearchByProps } from '../interfaces/search-by-interface'
-import { AvaliableDatesProps } from '../interfaces/stay-interface'
+import { DatesProps } from '../interfaces/stay-interface'
 
 export const utilService = {
     makeId,
     saveToStorage,
     loadFromStorage,
     getRandomInt,
-    getRandomAvaliableDates,
+    getRandomDates,
     formatDateRange,
     formatGuestCount,
     formatDate,
     formatSearchParams,
+    isDateRangeTaken,
 }
 
-function getRandomAvaliableDates() {
+function getRandomDates(takenDates: DatesProps[]): DatesProps {
     const checkIn = new Date()
     checkIn.setDate(checkIn.getDate() + getRandomInt(0, 120))
     const checkOut = new Date(checkIn)
     const randNumOfNights = getRandomInt(1, 7)
     checkOut.setDate(checkIn.getDate() + randNumOfNights)
+    if (isDateRangeTaken(takenDates, { checkIn, checkOut })) {
+        console.log('takenDates:', takenDates, 'requestedDates:', { checkIn, checkOut })
+        return getRandomDates(takenDates)
+    }
     return {
         checkIn,
         checkOut,
     }
 }
 
-function formatDateRange({ checkIn, checkOut }: AvaliableDatesProps) {
+function isDateRangeTaken(takenDates: DatesProps[], requestedDates: DatesProps) {
+    if (!takenDates.length) return false
+    const requestedCheckIn = requestedDates.checkIn.getTime()
+    const requestedCheckOut = requestedDates.checkOut.getTime()
+    return takenDates.some(takenDate => {
+        const takenCheckIn =
+            typeof takenDate.checkIn === 'string' ? new Date(takenDate.checkIn).getTime() : takenDate.checkIn.getTime()
+        const takenCheckOut =
+            typeof takenDate.checkOut === 'string'
+                ? new Date(takenDate.checkOut).getTime()
+                : takenDate.checkOut.getTime()
+        if (requestedCheckIn < takenCheckOut && requestedCheckOut > takenCheckIn) return true
+        return false
+    })
+}
+
+function formatDateRange({ checkIn, checkOut }: DatesProps) {
     // Converting checkIn/Out dates to Date object
     checkIn = new Date(checkIn)
     checkOut = new Date(checkOut)

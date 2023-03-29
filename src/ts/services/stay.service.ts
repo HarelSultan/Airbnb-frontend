@@ -2,8 +2,9 @@ import { storageService } from './async-storage.service'
 import minifiedStays from '../data/minified-stays.json'
 import labelFilters from '../data/label-filters.json'
 import { utilService } from './util.service'
-import { StayProps, StayReviewProps } from '../interfaces/stay-interface'
+import { DatesProps, StayProps, StayReviewProps } from '../interfaces/stay-interface'
 import { FilterByProps } from '../interfaces/filter-by-interface'
+import { SearchByProps } from '../interfaces/search-by-interface'
 const STORAGE_KEY: string = 'stay_DB'
 
 _createStays()
@@ -14,27 +15,73 @@ export const stayService = {
     getStayAverageRating,
     getDeafultSearchProps,
     getDefaultFilterProps,
+    getParamsSearchBy,
 }
 
-async function query(filterBy: FilterByProps = getDefaultFilterProps()) {
-    let filteredStays = (await storageService.query(STORAGE_KEY)) as StayProps[]
+async function query(
+    searchBy: SearchByProps = getDeafultSearchProps(),
+    filterBy: FilterByProps = getDefaultFilterProps()
+) {
+    console.log(searchBy)
+    console.log(filterBy)
 
+    let stays = (await storageService.query(STORAGE_KEY)) as StayProps[]
+    stays = searchStays(stays, searchBy)
+    stays = filterStays(stays, filterBy)
+    return stays
+}
+
+function searchStays(stays: StayProps[], searchBy: SearchByProps) {
+    if (searchBy.destination) {
+        stays = stays.filter(stay => stay.loc.destination === searchBy.destination)
+    }
+
+    if (searchBy.checkIn && searchBy.checkOut) {
+        const { checkIn, checkOut } = searchBy
+        stays = stays.filter(stay => utilService.isDateRangeTaken(stay.takenDates, { checkIn, checkOut }))
+    }
+
+    if (searchBy.guests.adults) {
+        const { adults, children, infants, pets } = searchBy.guests
+        const guestCount = adults + children + infants + pets
+        stays = stays.filter(stay => stay.stayDetails.guests >= guestCount)
+    }
+    return stays
+}
+
+function filterStays(stays: StayProps[], filterBy: FilterByProps) {
     if (filterBy.label) {
-        filteredStays = filteredStays.filter(stay => stay.labels.includes(filterBy.label))
+        stays = stays.filter(stay => stay.labels.includes(filterBy.label))
     }
 
     if (filterBy.minPrice > 0) {
-        filteredStays = filteredStays.filter(stay => stay.price > filterBy.minPrice)
+        stays = stays.filter(stay => stay.price >= filterBy.minPrice)
     }
 
     if (filterBy.maxPrice > 0) {
-        filteredStays = filteredStays.filter(stay => stay.price < filterBy.maxPrice)
+        stays = stays.filter(stay => stay.price <= filterBy.maxPrice)
     }
 
     if (filterBy.type.length) {
-        filteredStays = filteredStays.filter(stay => filterBy.type.includes(stay.type))
+        stays = stays.filter(stay => filterBy.type.includes(stay.type))
     }
-    return filteredStays
+    return stays
+}
+
+function getParamsSearchBy(searchParams: URLSearchParams): SearchByProps {
+    const params = Object.fromEntries(searchParams.entries())
+    const searchBy = {
+        destination: params.destination || '',
+        checkIn: params.checkIn ? new Date(params.checkIn) : null,
+        checkOut: params.checkOut ? new Date(params.checkOut) : null,
+        guests: {
+            adults: +params.adults || 0,
+            children: +params.children || 0,
+            infants: +params.infants || 0,
+            pets: +params.pets || 0,
+        },
+    }
+    return searchBy
 }
 
 function getLabelFilters() {
@@ -87,7 +134,11 @@ function _makeStays() {
     stays.sort(() => (Math.random() > 0.5 ? 1 : -1))
     stays = stays.map((stay: StayProps) => {
         stay._id = utilService.makeId()
-        stay.randomAvaliableDates = utilService.getRandomAvaliableDates()
+        stay.takenDates = []
+        while (stay.takenDates.length < 5) {
+            stay.takenDates.push(utilService.getRandomDates(stay.takenDates))
+        }
+        stay.randomAvaliableDates = utilService.getRandomDates(stay.takenDates)
         return stay
     })
     return stays
