@@ -1,0 +1,51 @@
+.stay-header {
+    margin-top: 24px;
+    font-size: 14px;
+    .stay-title {
+        font-family: $font-family-medium;
+        font-size: 26px;
+    }
+    .stay-teaser {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: $font-family-medium;
+    }
+
+    .stay-info {
+        .dot-seperator {
+            margin-inline: 8px;
+        }
+
+        .stay-rating {
+            .dot-seperator {
+                margin-inline: 4px;
+            }
+            svg {
+                font-size: 16px;
+                margin-right: 2px;
+            }
+        }
+
+        .super-host {
+            font-family: $font-family-regular;
+            svg {
+                font-size: 12px;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .action-btns-container {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        & button {
+            padding: 8px;
+        }
+        & svg {
+            font-size: 15px;
+            margin-right: 6px;
+        }
+    }
+}

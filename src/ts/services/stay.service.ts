@@ -2,7 +2,7 @@ import { storageService } from './async-storage.service'
 import minifiedStays from '../data/minified-stays.json'
 import labelFilters from '../data/label-filters.json'
 import { utilService } from './util.service'
-import { DatesProps, StayProps, StayReviewProps } from '../interfaces/stay-interface'
+import { StayProps, StayReviewProps } from '../interfaces/stay-interface'
 import { FilterByProps } from '../interfaces/filter-by-interface'
 import { SearchByProps } from '../interfaces/search-by-interface'
 const STORAGE_KEY: string = 'stay_DB'
@@ -16,6 +16,7 @@ export const stayService = {
     getDeafultSearchProps,
     getDefaultFilterProps,
     getParamsSearchBy,
+    getById,
 }
 
 async function query(
@@ -29,6 +30,10 @@ async function query(
     stays = searchStays(stays, searchBy)
     stays = filterStays(stays, filterBy)
     return stays
+}
+
+async function getById(stayId: string) {
+    return storageService.get(STORAGE_KEY, stayId) as Promise<StayProps>
 }
 
 function searchStays(stays: StayProps[], searchBy: SearchByProps) {

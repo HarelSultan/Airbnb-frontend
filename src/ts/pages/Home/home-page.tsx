@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { StayProps } from '../../interfaces/stay-interface'
@@ -16,6 +16,7 @@ export function HomePage() {
     const stays: StayProps[] = useSelector((storeState: RootStateProps) => storeState.stayModule.stays)
     const filterBy = useSelector((storeState: RootStateProps) => storeState.stayModule.filterBy)
     const location = useLocation()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search)
@@ -33,7 +34,7 @@ export function HomePage() {
     }
 
     const onStayDetails = (stayId: string) => {
-        console.log(stayId)
+        navigate(`/stay/${stayId}`)
     }
 
     return (
