@@ -93,13 +93,13 @@ function getLabelFilters() {
     return labelFilters
 }
 
-function getStayAverageRating(stay: StayProps) {
+function getStayAverageRating(reviews: StayReviewProps[]) {
     return (
-        stay.reviews.reduce((acc: number, review: StayReviewProps) => {
+        reviews.reduce((acc: number, review: StayReviewProps) => {
             const values: number[] = Object.values(review.moreRate)
             const avg = values.reduce((sum, value) => sum + value, 0) / values.length
             return acc + avg
-        }, 0) / stay.reviews.length
+        }, 0) / reviews.length
     )
 }
 

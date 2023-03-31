@@ -12,6 +12,8 @@ export const utilService = {
     formatDate,
     formatSearchParams,
     isDateRangeTaken,
+    formatPlural,
+    getFirstName,
 }
 
 function getRandomDates(takenDates: DatesProps[]): DatesProps {
@@ -75,6 +77,10 @@ function formatGuestCount(guests: searchByGuestProps) {
 
 function formatPlural(count: number, key: string) {
     return count > 1 ? count + key + 's' : count + key
+}
+
+function getFirstName(fullName: string) {
+    return fullName.split(' ')[0]
 }
 
 function formatSearchParams(searchBy: SearchByProps) {

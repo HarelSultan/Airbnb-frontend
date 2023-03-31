@@ -17,7 +17,7 @@ export function StayHeader({ stay }: Props) {
                 <div className='stay-info flex align-center'>
                     <div className='stay-rating flex align-center'>
                         <AiFillStar />
-                        <span>{stayService.getStayAverageRating(stay).toFixed(1)}</span>
+                        <span>{stayService.getStayAverageRating(stay.reviews).toFixed(1)}</span>
                         <span className='dot-seperator'>·</span>
                     </div>
                     <span className='review-count underline'> {stay.reviews.length} reviews</span>

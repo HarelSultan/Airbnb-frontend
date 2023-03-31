@@ -5,6 +5,7 @@ import { StayProps } from '../../interfaces/stay-interface'
 import { stayService } from '../../services/stay.service'
 import { StayGallery } from './cmps/stay-gallery'
 import { StayHeader } from './cmps/stay-header'
+import { StayDetails } from './cmps/StayDetails/stay-details'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -36,6 +37,9 @@ export function StayPage() {
             <AppHeader />
             <StayHeader stay={selectedStay} />
             <StayGallery imgUrls={selectedStay.imgUrls} />
+            <div className='layout-wrapper'>
+                <StayDetails stay={selectedStay} />
+            </div>
         </section>
     )
 }

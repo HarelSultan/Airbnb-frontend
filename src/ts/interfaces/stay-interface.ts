@@ -9,12 +9,7 @@ export interface StayProps {
     roomType: string
     randomAvaliableDates: DatesProps
     takenDates: DatesProps[]
-    host: {
-        _id: string
-        fullname: string
-        imgUrl: string
-        isSuperHost: boolean
-    }
+    host: StayHostProps
     loc: {
         country: string
         countryCode: string
@@ -27,12 +22,21 @@ export interface StayProps {
     reviews: StayReviewProps[]
     likedByUsers: string[]
     labels: string[]
-    stayDetails: {
-        guests: number
-        bedrooms: number
-        beds: number
-        bathrooms: number
-    }
+    stayDetails: StayDetailsProps
+}
+
+export interface StayHostProps {
+    _id: string
+    fullname: string
+    imgUrl: string
+    isSuperHost: boolean
+}
+
+export interface StayDetailsProps {
+    guests: number
+    bedrooms: number
+    beds: number
+    bathrooms: number
 }
 
 export interface StayReviewProps {

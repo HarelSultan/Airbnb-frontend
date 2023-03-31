@@ -27,7 +27,7 @@ export function StayPreview({ stay, onStayDetails }: Props) {
                             fillRule='evenodd'
                         ></path>
                     </svg>
-                    <span>{stayService.getStayAverageRating(stay).toFixed(1)}</span>
+                    <span>{stayService.getStayAverageRating(stay.reviews).toFixed(1)}</span>
                 </div>
                 <span className='stay-type'>{stay.type}</span>
                 <span className='avaliable-dates'>{utilService.formatDateRange(stay.randomAvaliableDates)}</span>
