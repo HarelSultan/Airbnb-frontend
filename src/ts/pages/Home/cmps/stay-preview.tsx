@@ -5,12 +5,12 @@ import { ImgCarousel } from './img-carousel'
 
 interface Props {
     stay: StayProps
-    onStayDetails: (stayId: string) => void
+    onStayDetails: (stay: StayProps) => void
 }
 
 export function StayPreview({ stay, onStayDetails }: Props) {
     return (
-        <article className='stay-preview' onClick={() => onStayDetails(stay._id)}>
+        <article className='stay-preview' onClick={() => onStayDetails(stay)}>
             <ImgCarousel imgUrls={stay.imgUrls} />
             <div className='stay-details-wrapper'>
                 <h3 className='stay-location'>{stay.loc.address}</h3>

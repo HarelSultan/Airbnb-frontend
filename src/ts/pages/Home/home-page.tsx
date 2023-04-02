@@ -33,8 +33,11 @@ export function HomePage() {
         }
     }
 
-    const onStayDetails = (stayId: string) => {
-        navigate(`/stay/${stayId}`)
+    const onStayDetails = (stay: StayProps) => {
+        const searchParams = new URLSearchParams(location.search)
+        searchParams.set('checkIn', stay.randomAvaliableDates.checkIn.toString().slice(0, 10))
+        searchParams.set('checkOut', stay.randomAvaliableDates.checkOut.toString().slice(0, 10))
+        navigate(`/stay/${stay._id}?${searchParams}`)
     }
 
     return (

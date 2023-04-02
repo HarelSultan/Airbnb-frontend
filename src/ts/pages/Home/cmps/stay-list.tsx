@@ -3,7 +3,7 @@ import { StayPreview } from './stay-preview'
 
 interface Props {
     stays: StayProps[]
-    onStayDetails: (stayId: string) => void
+    onStayDetails: (stay: StayProps) => void
 }
 
 export function StayList({ stays, onStayDetails }: Props) {

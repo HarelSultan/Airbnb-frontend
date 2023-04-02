@@ -43,7 +43,7 @@ function searchStays(stays: StayProps[], searchBy: SearchByProps) {
 
     if (searchBy.checkIn && searchBy.checkOut) {
         const { checkIn, checkOut } = searchBy
-        stays = stays.filter(stay => utilService.isDateRangeTaken(stay.takenDates, { checkIn, checkOut }))
+        stays = stays.filter(stay => !utilService.isDateRangeTaken(stay.takenDates, { checkIn, checkOut }))
     }
 
     if (searchBy.guests.adults) {
@@ -140,7 +140,7 @@ function _makeStays() {
     stays = stays.map((stay: StayProps) => {
         stay._id = utilService.makeId()
         stay.takenDates = []
-        while (stay.takenDates.length < 5) {
+        while (stay.takenDates.length < 3) {
             stay.takenDates.push(utilService.getRandomDates(stay.takenDates))
         }
         stay.randomAvaliableDates = utilService.getRandomDates(stay.takenDates)

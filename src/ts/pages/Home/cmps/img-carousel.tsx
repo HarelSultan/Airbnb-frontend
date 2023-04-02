@@ -18,18 +18,45 @@ export function ImgCarousel({ imgUrls }: Props) {
             statusFormatter={(current, total) => `Current slide: ${current} / Total: ${total}`}
             renderArrowPrev={(onClickHandler, hasPrev, label) =>
                 hasPrev && (
-                    <button type='button' onClick={onClickHandler} title={label} style={{ left: 15 }}>
+                    <button
+                        type='button'
+                        onClick={ev => {
+                            ev.stopPropagation()
+                            onClickHandler()
+                        }}
+                        title={label}
+                        style={{ left: 15 }}
+                    >
                         <GrFormPrevious />
                     </button>
                 )
             }
             renderArrowNext={(onClickHandler, hasNext, label) =>
                 hasNext && (
-                    <button type='button' onClick={onClickHandler} title={label} style={{ right: 15 }}>
+                    <button
+                        type='button'
+                        onClick={ev => {
+                            ev.stopPropagation()
+                            onClickHandler()
+                        }}
+                        title={label}
+                        style={{ right: 15 }}
+                    >
                         <GrFormNext />
                     </button>
                 )
             }
+            renderIndicator={(onClickHandler, isSelected, index) => {
+                return (
+                    <span onClick={e => e.stopPropagation()}>
+                        <li
+                            className={`dot ${isSelected && 'dot selected'}`}
+                            onClick={onClickHandler}
+                            key={`carousel-${index}`}
+                        />
+                    </span>
+                )
+            }}
         >
             {imgUrls.map(url => (
                 <div key={url} className='stay-img-wrapper'>
@@ -38,13 +65,4 @@ export function ImgCarousel({ imgUrls }: Props) {
             ))}
         </Carousel>
     )
-    // return (
-    //     <Carousel {...carouselSettings}>
-    //         {imgUrls.map(url => (
-    //             <div className='stay-img-wrapper'>
-    //                 <img src={url} alt='' />
-    //             </div>
-    //         ))}
-    //     </Carousel>
-    // )
 }
