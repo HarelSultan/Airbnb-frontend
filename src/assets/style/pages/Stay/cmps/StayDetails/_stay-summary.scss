@@ -1,0 +1,16 @@
+.stay-summary {
+    padding-block: 32px 48px;
+    font-size: 16px;
+    .summary-translation {
+        display: flex;
+        gap: 0.75em;
+        img {
+            width: 16px;
+            height: 100%;
+        }
+    }
+
+    .summary {
+        padding-top: 32px;
+    }
+}

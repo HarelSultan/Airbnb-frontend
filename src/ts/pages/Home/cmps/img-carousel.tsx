@@ -46,17 +46,15 @@ export function ImgCarousel({ imgUrls }: Props) {
                     </button>
                 )
             }
-            renderIndicator={(onClickHandler, isSelected, index) => {
-                return (
-                    <span onClick={e => e.stopPropagation()}>
-                        <li
-                            className={`dot ${isSelected && 'dot selected'}`}
-                            onClick={onClickHandler}
-                            key={`carousel-${index}`}
-                        />
-                    </span>
-                )
-            }}
+            renderIndicator={(onClickHandler, isSelected, index) => (
+                <span onClick={e => e.stopPropagation()}>
+                    <li
+                        className={`dot ${isSelected && 'dot selected'}`}
+                        onClick={onClickHandler}
+                        key={`carousel-${index}`}
+                    />
+                </span>
+            )}
         >
             {imgUrls.map(url => (
                 <div key={url} className='stay-img-wrapper'>

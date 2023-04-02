@@ -1,0 +1,28 @@
+.stay-attributes {
+    padding-block: 32px;
+
+    .attribute-container {
+        display: flex;
+        gap: 1rem;
+
+        &:not(:last-child) {
+            margin-bottom: 24px;
+        }
+    }
+
+    .attribute-img-wrapper {
+        width: 24px;
+    }
+
+    .attribute-desc {
+        h4 {
+            font-size: 16px;
+            font-family: $font-family-medium;
+            margin-bottom: 2px;
+        }
+        p {
+            font-size: 14px;
+            color: $sub-text-clr;
+        }
+    }
+}

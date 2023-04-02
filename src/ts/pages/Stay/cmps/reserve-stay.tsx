@@ -1,6 +1,8 @@
 import { AiFillStar } from 'react-icons/ai'
 import { DatesProps, StayReviewProps } from '../../../interfaces/stay-interface'
 import { stayService } from '../../../services/stay.service'
+import { SearchByProps } from '../../../interfaces/search-by-interface'
+import { SearchDates } from '../../../cmps/AppHeader/cmps/search-dates'
 
 interface Props {
     price: number

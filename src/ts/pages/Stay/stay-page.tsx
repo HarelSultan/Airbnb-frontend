@@ -33,11 +33,11 @@ export function StayPage() {
         }
     }
 
-    const reserveStayProps = {
-        price: selectedStay?.price,
-        reviews: selectedStay?.reviews,
-        takenDates: selectedStay?.takenDates,
-    }
+    // const reserveStayProps = {
+    //     price: selectedStay?.price,
+    //     reviews: selectedStay?.reviews,
+    //     takenDates: selectedStay?.takenDates,
+    // }
 
     if (!selectedStay) return <section>Loadin'</section>
     return (

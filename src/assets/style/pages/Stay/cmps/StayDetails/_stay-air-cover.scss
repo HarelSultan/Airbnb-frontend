@@ -1,0 +1,17 @@
+.stay-air-cover {
+    padding-block: 32px;
+    font-size: 16px;
+
+    .air-cover-img {
+        height: 26px;
+        margin-bottom: 21px;
+    }
+
+    .air-cover-desc {
+        margin-bottom: 1em;
+    }
+
+    a {
+        font-family: $font-family-medium;
+    }
+}

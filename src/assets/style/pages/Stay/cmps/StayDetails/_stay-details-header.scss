@@ -4,17 +4,6 @@
     grid-template-columns: 1fr auto;
     align-items: center;
     padding-bottom: 24px;
-    position: relative;
-    &::after {
-        content: '';
-        height: 100%;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 3;
-        box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0;
-        pointer-events: none;
-    }
 
     h3 {
         font-family: $font-family-bold;
