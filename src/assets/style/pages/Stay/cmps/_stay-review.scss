@@ -1,0 +1,23 @@
+.stay-review {
+    font-size: 16px;
+    // height: 116px;
+    margin-bottom: 2.5rem;
+    .review-header {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 12px;
+
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        h4 {
+            font-family: $font-family-medium;
+        }
+        span {
+            font-size: 14px;
+            color: $sub-text-clr;
+        }
+    }
+}

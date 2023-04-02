@@ -13,6 +13,7 @@ export const stayService = {
     query,
     getLabelFilters,
     getStayAverageRating,
+    getCategoryAverageRating,
     getDeafultSearchProps,
     getDefaultFilterProps,
     getParamsSearchBy,
@@ -96,11 +97,15 @@ function getLabelFilters() {
 function getStayAverageRating(reviews: StayReviewProps[]) {
     return (
         reviews.reduce((acc: number, review: StayReviewProps) => {
-            const values: number[] = Object.values(review.moreRate)
-            const avg = values.reduce((sum, value) => sum + value, 0) / values.length
+            const ratings: number[] = Object.values(review.moreRate)
+            const avg = getCategoryAverageRating(ratings)
             return acc + avg
         }, 0) / reviews.length
     )
+}
+
+function getCategoryAverageRating(ratings: number[]) {
+    return ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length
 }
 
 function getDeafultSearchProps() {

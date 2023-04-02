@@ -50,7 +50,7 @@ export interface StayReviewProps {
     txt: string
     id: string
     moreRate: {
-        cleanliness: number
+        cleanlliness: number
         accuracy: number
         communication: number
         location: number

@@ -7,6 +7,7 @@ import { ReserveStay } from './cmps/reserve-stay'
 import { StayGallery } from './cmps/stay-gallery'
 import { StayHeader } from './cmps/stay-header'
 import { StayDetails } from './cmps/StayDetails/stay-details'
+import { StayReviews } from './cmps/StayReviews/stay-reviews'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -53,6 +54,7 @@ export function StayPage() {
                     takenDates={selectedStay.takenDates}
                 />
             </div>
+            <StayReviews reviews={selectedStay.reviews} />
         </section>
     )
 }

@@ -1,11 +1,12 @@
 .stay-details {
-    & > * {
+    & > *:not(:last-child) {
         position: relative;
         &::after {
             content: '';
             height: 100%;
             position: absolute;
             top: 0;
+            left: 0;
             width: 100%;
             z-index: 3;
             box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0;

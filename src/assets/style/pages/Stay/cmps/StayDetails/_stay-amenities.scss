@@ -1,0 +1,27 @@
+.stay-amenities {
+    padding-block: 48px;
+    font-size: 16px;
+
+    h3 {
+        font-size: 22px;
+        font-family: $font-family-medium;
+        padding-bottom: 24px;
+    }
+
+    .amenity-wrapper {
+        // display: flex;
+        // gap: 0.5em;
+        padding-bottom: 1em;
+    }
+    .btn-more-amenities {
+        margin-top: 24px;
+        border: 1px solid $main-text-clr;
+        border-radius: 0.5em;
+        padding: 12px 22px;
+        font-family: $font-family-medium;
+        &:hover {
+            border-color: black;
+            background: #f7f7f7;
+        }
+    }
+}
