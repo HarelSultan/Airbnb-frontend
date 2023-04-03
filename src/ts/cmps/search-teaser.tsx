@@ -21,7 +21,7 @@ export function SearchTeaser({ searchBy, onToggleSearchDisplay, onSelectSearchMo
                               checkIn: searchBy.checkIn,
                               checkOut: searchBy.checkOut,
                           })
-                        : 'Anywhere'}
+                        : 'Any week'}
                 </span>
             </button>
             <button className='btn btn-guests' onClick={() => onSelectSearchModule('guests')}>

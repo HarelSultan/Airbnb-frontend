@@ -1,4 +1,4 @@
-import { AiFillStar } from 'react-icons/ai'
+import { AiFillStar, AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
 import { DatesProps, StayReviewProps } from '../../../../interfaces/stay-interface'
 import { stayService } from '../../../../services/stay.service'
 import { useState } from 'react'
@@ -6,6 +6,7 @@ import { utilService } from '../../../../services/util.service'
 import { ReserveByProps, ReserveModule } from '../../../../interfaces/reserve-by-interface'
 import { ReserveDates } from './cmps/reserve-dates'
 import { ReserveGuests } from './cmps/reserve-guests'
+import { CtaBtn } from '../../../../cmps/cta-btn'
 
 interface Props {
     price: number
@@ -46,12 +47,18 @@ export function ReserveStay({ price, reviews, takenDates, reserveBy, onSetReserv
 
     return (
         <section className='reserve-stay'>
-            <h3 className='price'>${price} night</h3>
-            <div className='stay-rating flex align-center'>
-                <AiFillStar />
-                <span>{stayService.getStayAverageRating(reviews).toFixed(1)} ·</span>
-                <span className='review-count underline'> {reviews.length} reviews</span>
+            <div className='reserve-header'>
+                <div className='price'>
+                    <h3>${price}</h3>
+                    <span>night</span>
+                </div>
+                <div className='stay-rating flex align-center'>
+                    <AiFillStar />
+                    <span>{stayService.getStayAverageRating(reviews).toFixed(1)} ·</span>
+                    <span className='review-count underline'> {reviews.length} reviews</span>
+                </div>
             </div>
+
             <form>
                 <label
                     className={`reserve-module check-in ${
@@ -82,11 +89,16 @@ export function ReserveStay({ price, reviews, takenDates, reserveBy, onSetReserv
                         placeholder='Add guests'
                         readOnly
                     />
-                    <button onClick={onReserveStay} className='btn btn-reserve flex flex-center'>
-                        Reserve
-                    </button>
+                    <div className='arrow-wrapper'>
+                        {selectedReserveModule === 'reserveGuests' ? <AiOutlineUp /> : <AiOutlineDown />}
+                    </div>
                 </label>
             </form>
+            <CtaBtn onClickCB={onReserveStay} txt='Reserve' />
+            {/* <button onClick={onReserveStay} className='btn btn-reserve flex flex-center'>
+                Reserve
+            </button> */}
+            <p className='disclaimer'>You won't be charged yet</p>
             {selectedReserveModule && reserveModuleMap[selectedReserveModule]}
         </section>
     )

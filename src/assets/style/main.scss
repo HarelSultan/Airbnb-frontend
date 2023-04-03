@@ -19,6 +19,7 @@
 @import './cmps/_counter.scss';
 @import './cmps/_dark-overlay.scss';
 @import './cmps/_user-menu.scss';
+@import './cmps/_cta-btn.scss';
 
 // Pages
 // Home:
@@ -36,7 +37,9 @@
 @import './pages/Stay/_stay.scss';
 @import './pages/Stay/cmps/_stay-header.scss';
 @import './pages/Stay/cmps/_stay-gallery.scss';
-@import './pages/Stay/cmps/_reserve-stay.scss';
+@import './pages/Stay/cmps/ReserveStay/_reserve-stay.scss';
+@import './pages/Stay/cmps/ReserveStay/_reserve-dates.scss';
+@import './pages/Stay/cmps/ReserveStay/_reserve-guests.scss';
 @import './pages/Stay/cmps/StayDetails/_stay-details.scss';
 @import './pages/Stay/cmps/StayDetails/_stay-details-header.scss';
 @import './pages/Stay/cmps/StayDetails/_stay-attributes.scss';
