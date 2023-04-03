@@ -2,15 +2,23 @@ import { DateRangePicker } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { SearchByProps } from '../../../interfaces/search-by-interface'
+import { DatesProps } from '../../../interfaces/stay-interface'
 
 interface Props {
     searchBy: SearchByProps
     onSetSearchBy: (updatedSearchBy: SearchByProps) => void
     selectedSearchModule: string
     onSelectSearchModule: (searchModule: string) => void
+    takenDates?: DatesProps[] | null
 }
 
-export function SearchDates({ searchBy, onSetSearchBy, selectedSearchModule, onSelectSearchModule }: Props) {
+export function SearchDates({
+    searchBy,
+    onSetSearchBy,
+    selectedSearchModule,
+    onSelectSearchModule,
+    takenDates = null,
+}: Props) {
     const selectionRange = {
         startDate: searchBy.checkIn || new Date(),
         endDate: searchBy.checkOut || new Date(),

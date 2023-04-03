@@ -5,6 +5,7 @@ import { utilService } from './util.service'
 import { StayProps, StayReviewProps } from '../interfaces/stay-interface'
 import { FilterByProps } from '../interfaces/filter-by-interface'
 import { SearchByProps } from '../interfaces/search-by-interface'
+import { ReserveByProps } from '../interfaces/reserve-by-interface'
 const STORAGE_KEY: string = 'stay_DB'
 
 _createStays()
@@ -18,6 +19,7 @@ export const stayService = {
     getDefaultFilterProps,
     getParamsSearchBy,
     getById,
+    getReserveByProps,
 }
 
 async function query(
@@ -107,6 +109,25 @@ function getStayAverageRating(reviews: StayReviewProps[]) {
 function getCategoryAverageRating(ratings: number[]) {
     return ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length
 }
+
+function getReserveByProps(searchBy: SearchByProps): ReserveByProps {
+    const reserveBy = JSON.parse(JSON.stringify(searchBy))
+    delete reserveBy.destination
+    return {
+        checkIn: new Date(reserveBy.checkIn) || new Date(),
+        checkOut: new Date(reserveBy.checkOut) || new Date(),
+        guests: reserveBy.guests,
+    }
+}
+// function getReserveByProps(searchBy: SearchByProps): ReserveByProps {
+//     const reserveBy = JSON.parse(JSON.stringify(searchBy))
+//     delete reserveBy.destination
+//     return {
+//         checkIn: new Date(reserveBy.checkIn) || new Date(),
+//         checkOut: new Date(reserveBy.checkOut) || new Date(),
+//         guests: reserveBy.guests,
+//     }
+// }
 
 function getDeafultSearchProps() {
     return {

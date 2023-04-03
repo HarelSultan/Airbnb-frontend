@@ -37,6 +37,7 @@ export function HomePage() {
         const searchParams = new URLSearchParams(location.search)
         searchParams.set('checkIn', stay.randomAvaliableDates.checkIn.toString().slice(0, 10))
         searchParams.set('checkOut', stay.randomAvaliableDates.checkOut.toString().slice(0, 10))
+        if (!searchParams.get('adults')) searchParams.set('adults', '1')
         navigate(`/stay/${stay._id}?${searchParams}`)
     }
 

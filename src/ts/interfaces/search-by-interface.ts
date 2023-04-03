@@ -2,10 +2,10 @@ export interface SearchByProps {
     destination: string
     checkIn: Date | null
     checkOut: Date | null
-    guests: searchByGuestProps
+    guests: GuestProps
 }
 
-export interface searchByGuestProps {
+export interface GuestProps {
     adults: number
     children: number
     infants: number

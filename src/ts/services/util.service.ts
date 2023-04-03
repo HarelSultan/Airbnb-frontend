@@ -1,4 +1,4 @@
-import { searchByGuestProps, SearchByProps } from '../interfaces/search-by-interface'
+import { GuestProps, SearchByProps } from '../interfaces/search-by-interface'
 import { DatesProps } from '../interfaces/stay-interface'
 
 export const utilService = {
@@ -65,7 +65,7 @@ function formatDate(date: Date | null) {
     return `${date.toLocaleString('default', { month: 'short' })} ${date.getDate()}`
 }
 
-function formatGuestCount(guests: searchByGuestProps) {
+function formatGuestCount(guests: GuestProps) {
     // If there are no adults returning empty string -> fallback to placeholder
     if (guests.adults === 0) return ''
     // Checking the count of guests and formatting to either a singular or plural

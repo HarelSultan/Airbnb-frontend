@@ -1,9 +1,9 @@
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
-import { searchByGuestProps } from '../../../interfaces/search-by-interface'
+import { GuestProps } from '../../../interfaces/search-by-interface'
 
 interface Props {
-    guestType: keyof searchByGuestProps
-    handleCounterChange: (changeBy: number, guestType: keyof searchByGuestProps) => void
+    guestType: keyof GuestProps
+    handleCounterChange: (changeBy: number, guestType: keyof GuestProps) => void
     count: number
 }
 export function Counter({ handleCounterChange, guestType, count }: Props) {

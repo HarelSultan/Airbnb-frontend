@@ -1,10 +1,11 @@
-import { SearchByProps } from '../../../interfaces/search-by-interface'
-import { GuestProps } from '../../../interfaces/search-by-interface'
-import { Counter } from './counter'
+import { Counter } from '../../../../../cmps/AppHeader/cmps/counter'
+import { ReserveByProps } from '../../../../../interfaces/reserve-by-interface'
+import { GuestProps } from '../../../../../interfaces/search-by-interface'
 
 interface Props {
-    searchBy: SearchByProps
-    onSetSearchBy: (updatedSearchBy: SearchByProps) => void
+    reserveBy: ReserveByProps
+    onSetReserveBy: (updatedReservation: ReserveByProps) => void
+    onSelectReserveModule: (reserveModule: string | null) => void
 }
 
 interface Guest {
@@ -12,11 +13,11 @@ interface Guest {
     desc: string
 }
 
-export function SearchGuests({ searchBy, onSetSearchBy }: Props) {
+export function ReserveGuests({ reserveBy, onSetReserveBy, onSelectReserveModule }: Props) {
     const handleCounterChange = (changeBy: number, guestType: keyof GuestProps) => {
-        const updatedCount = searchBy.guests[guestType] + changeBy
-        const updatedGuestCount = { ...searchBy.guests, [guestType]: updatedCount }
-        onSetSearchBy({ ...searchBy, guests: updatedGuestCount })
+        const updatedCount = reserveBy.guests[guestType] + changeBy
+        const updatedGuestCount = { ...reserveBy.guests, [guestType]: updatedCount }
+        onSetReserveBy({ ...reserveBy, guests: updatedGuestCount })
     }
 
     const guests: Guest[] = [
@@ -46,7 +47,7 @@ export function SearchGuests({ searchBy, onSetSearchBy }: Props) {
                     <p className='guest-desc'>{guest.desc}</p>
                     <Counter
                         guestType={guest.guestType}
-                        count={searchBy.guests[guest.guestType]}
+                        count={reserveBy.guests[guest.guestType]}
                         handleCounterChange={handleCounterChange}
                     />
                 </div>

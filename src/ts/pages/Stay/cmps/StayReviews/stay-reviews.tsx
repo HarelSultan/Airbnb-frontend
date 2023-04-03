@@ -50,7 +50,7 @@ export function StayReviews({ reviews }: Props) {
             </div>
             <div className='reviews-container'>
                 {reviews.map(review => (
-                    <Stayreview review={review} />
+                    <Stayreview key={review.id} review={review} />
                 ))}
             </div>
         </section>
