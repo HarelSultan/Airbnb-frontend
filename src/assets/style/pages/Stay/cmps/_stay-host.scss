@@ -1,0 +1,76 @@
+.stay-host {
+    font-size: 16px;
+    .host-details-container {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 24px;
+        img {
+            width: 56px;
+            border-radius: 50%;
+        }
+        h2 {
+            font-size: 22px;
+            font-family: $font-family-medium;
+        }
+        p {
+            font-size: 14px;
+            color: $sub-text-clr;
+        }
+    }
+
+    .host-attrs,
+    .super-host-attr {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    .host-attrs {
+        margin-bottom: 24px;
+        .reviews {
+            font-size: 19px;
+        }
+        .verified {
+            font-size: 17px;
+        }
+        span {
+            margin-right: 1rem;
+            line-height: 20px;
+        }
+    }
+
+    .super-host {
+        margin-bottom: 24px;
+        h4 {
+            font-family: $font-family-medium;
+            margin-bottom: 6px;
+        }
+    }
+
+    .response-rate {
+        margin-bottom: 6px;
+    }
+
+    .btn-contact {
+        margin-block: 24px;
+        border: 1px solid #222222;
+        border-radius: 0.5em;
+        padding: 12px 22px;
+        font-family: $font-family-medium;
+        &:hover {
+            border-color: black;
+            background: #f7f7f7;
+        }
+    }
+
+    .disclaimer {
+        display: flex;
+        gap: 1rem;
+        img {
+            width: 24px;
+        }
+        p {
+            width: 28%;
+            font-size: 12px;
+        }
+    }
+}
