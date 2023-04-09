@@ -9,6 +9,7 @@ interface Props {
     selectedReserveModule: string | null
     onSelectReserveModule: (reserveModule: string | null) => void
     takenDates?: DatesProps[]
+    nightsCount: number
 }
 
 export function ReserveDates({
@@ -17,6 +18,7 @@ export function ReserveDates({
     selectedReserveModule,
     onSelectReserveModule,
     takenDates,
+    nightsCount,
 }: Props) {
     const selectionRange = {
         startDate: reserveBy.checkIn,
@@ -76,7 +78,7 @@ export function ReserveDates({
 
     return (
         <section className='expanded-search-module reserve-dates'>
-            <h2>{utilService.getNightsCount(reserveBy.checkIn, reserveBy.checkOut)}</h2>
+            <h2>{nightsCount} Nights</h2>
             <p>{formatReservationDates()}</p>
             <DateRangePicker
                 ranges={[selectionRange]}

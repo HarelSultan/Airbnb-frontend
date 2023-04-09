@@ -1,0 +1,30 @@
+.pricing-summary {
+    margin-top: 24px;
+    & > * {
+        display: flex;
+        justify-content: space-between;
+        &:not(:last-child) {
+            padding-bottom: 16px;
+        }
+    }
+
+    .air-bnb-fee {
+        position: relative;
+        &::after {
+            content: '';
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0;
+            pointer-events: none;
+        }
+    }
+
+    .total-price {
+        margin-top: 24px;
+        font-family: $font-family-medium;
+    }
+}

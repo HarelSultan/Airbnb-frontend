@@ -1,4 +1,8 @@
 .stay-page {
+    .app-header {
+        position: relative;
+    }
+
     .layout-wrapper {
         display: grid;
         grid-template-columns: 1fr 0.6fr;

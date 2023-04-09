@@ -7,6 +7,7 @@ import { ReserveByProps, ReserveModule } from '../../../../interfaces/reserve-by
 import { ReserveDates } from './cmps/reserve-dates'
 import { ReserveGuests } from './cmps/reserve-guests'
 import { CtaBtn } from '../../../../cmps/cta-btn'
+import { PricingSummary } from './cmps/pricing-summary'
 
 interface Props {
     price: number
@@ -31,12 +32,15 @@ export function ReserveStay({ price, reviews, takenDates, reserveBy, onSetReserv
         return date.toLocaleDateString('default', { month: 'numeric', day: 'numeric', year: 'numeric' })
     }
 
+    const nightsCount = utilService.getNightsCount(reserveBy.checkIn, reserveBy.checkOut)
+
     const reserveModuleProps = {
         reserveBy,
         onSetReserveBy,
         selectedReserveModule,
         onSelectReserveModule,
         takenDates,
+        nightsCount,
     }
 
     const reserveModuleMap: ReserveModule = {
@@ -97,6 +101,7 @@ export function ReserveStay({ price, reviews, takenDates, reserveBy, onSetReserv
             <CtaBtn onClickCB={onReserveStay} txt='Reserve' />
             <p className='disclaimer'>You won't be charged yet</p>
             {selectedReserveModule && reserveModuleMap[selectedReserveModule]}
+            <PricingSummary nightlyPrice={price} nightsCount={nightsCount} />
         </section>
     )
 }

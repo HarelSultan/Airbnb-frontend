@@ -70,7 +70,7 @@ function getNightsCount(checkIn: Date, checkOut: Date) {
     const checkInTime = checkIn.getTime()
     const checkOutTime = checkOut.getTime()
     const diff = checkOutTime - checkInTime
-    return `${Math.round(diff / (1000 * 60 * 60 * 24))} Nights`
+    return Math.round(diff / (1000 * 60 * 60 * 24))
 }
 
 function formatGuestCount(guests: GuestProps) {
