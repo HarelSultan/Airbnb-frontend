@@ -16,10 +16,19 @@ interface Props {
     reserveBy: ReserveByProps
     onSetReserveBy: (updatedReservation: ReserveByProps) => void
     onReserveStay: () => void
+    nightsCount: number
 }
 
 // Search by ?
-export function ReserveStay({ price, reviews, takenDates, reserveBy, onSetReserveBy, onReserveStay }: Props) {
+export function ReserveStay({
+    price,
+    reviews,
+    takenDates,
+    reserveBy,
+    onSetReserveBy,
+    onReserveStay,
+    nightsCount,
+}: Props) {
     const [selectedReserveModule, setSelectedReserveModule] = useState<string | null>(null)
 
     const onSelectReserveModule = (reserveModule: string | null) => {
@@ -31,8 +40,6 @@ export function ReserveStay({ price, reviews, takenDates, reserveBy, onSetReserv
         if (!date) return undefined
         return date.toLocaleDateString('default', { month: 'numeric', day: 'numeric', year: 'numeric' })
     }
-
-    const nightsCount = utilService.getNightsCount(reserveBy.checkIn, reserveBy.checkOut)
 
     const reserveModuleProps = {
         reserveBy,

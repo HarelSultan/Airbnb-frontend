@@ -52,8 +52,8 @@
             "countryCode": "HK",
             "city": "Hong Kong",
             "address": "Hong Kong, Hong Kong Island, Hong Kong",
-            "lat": 114.18207,
-            "lng": 22.28096,
+            "lng": 114.18207,
+            "lat": 22.28096,
             "destination": "Middle East"
         },
         "reviews": [
@@ -506,8 +506,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, QC, Canada",
-            "lat": -73.57646,
-            "lng": 45.53347,
+            "lng": -73.57646,
+            "lat": 45.53347,
             "destination": "United States"
         },
         "reviews": [
@@ -607,8 +607,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "New York, NY, United States",
-            "lat": -73.9648,
-            "lng": 40.80732,
+            "lng": -73.9648,
+            "lat": 40.80732,
             "destination": "France"
         },
         "reviews": [
@@ -1066,8 +1066,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "Brooklyn, NY, United States",
-            "lat": -73.98102,
-            "lng": 40.69406,
+            "lng": -73.98102,
+            "lat": 40.69406,
             "destination": "France"
         },
         "reviews": [
@@ -1156,8 +1156,8 @@
             "countryCode": "HK",
             "city": "Hong Kong",
             "address": "Hong Kong , Causeway Bay, Hong Kong",
-            "lat": 114.18976,
-            "lng": 22.27983,
+            "lng": 114.18976,
+            "lat": 22.27983,
             "destination": "United States"
         },
         "reviews": [
@@ -1292,8 +1292,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montreal, QC, Canada",
-            "lat": -73.55591,
-            "lng": 45.50488,
+            "lng": -73.55591,
+            "lat": 45.50488,
             "destination": "France"
         },
         "reviews": [
@@ -1737,8 +1737,8 @@
             "countryCode": "TR",
             "city": "Istanbul",
             "address": "Fatih, Istanbul, Turkey",
-            "lat": 28.96792,
-            "lng": 41.0063,
+            "lng": 28.96792,
+            "lat": 41.0063,
             "destination": "Middle East"
         },
         "reviews": [
@@ -1943,8 +1943,8 @@
             "countryCode": "TR",
             "city": "Istanbul",
             "address": "Taksim, Cihangir, Istanbul , Beyoğlu, Turkey",
-            "lat": 28.98648,
-            "lng": 41.03376,
+            "lng": 28.98648,
+            "lat": 41.03376,
             "destination": "France"
         },
         "reviews": [
@@ -2393,8 +2393,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montreal, QC, Canada",
-            "lat": -73.5671,
-            "lng": 45.53713,
+            "lng": -73.5671,
+            "lat": 45.53713,
             "destination": "France"
         },
         "reviews": [
@@ -2857,8 +2857,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montreal, QC, Canada",
-            "lat": -73.58256,
-            "lng": 45.51664,
+            "lng": -73.58256,
+            "lat": 45.51664,
             "destination": "Italy"
         },
         "reviews": [
@@ -3298,8 +3298,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Kihei, HI, United States",
-            "lat": -156.44864,
-            "lng": 20.7264,
+            "lng": -156.44864,
+            "lat": 20.7264,
             "destination": "Middle East"
         },
         "reviews": [
@@ -3399,8 +3399,8 @@
             "countryCode": "TR",
             "city": "Istanbul",
             "address": "Burgazada , İstanbul, Turkey",
-            "lat": 29.06121,
-            "lng": 40.88288,
+            "lng": 29.06121,
+            "lat": 40.88288,
             "destination": "Middle East"
         },
         "reviews": [
@@ -3491,8 +3491,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalonia, Spain",
-            "lat": 2.15307,
-            "lng": 41.3866,
+            "lng": 2.15307,
+            "lat": 41.3866,
             "destination": "South America"
         },
         "reviews": [
@@ -3699,8 +3699,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, Québec, Canada",
-            "lat": -73.55208,
-            "lng": 45.55157,
+            "lng": -73.55208,
+            "lat": 45.55157,
             "destination": "Middle East"
         },
         "reviews": [
@@ -4155,8 +4155,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, Québec, Canada",
-            "lat": -73.69275,
-            "lng": 45.44423,
+            "lng": -73.69275,
+            "lat": 45.44423,
             "destination": "South America"
         },
         "reviews": [
@@ -4240,8 +4240,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "Queens, NY, United States",
-            "lat": -73.9474,
-            "lng": 40.74771,
+            "lng": -73.9474,
+            "lat": 40.74771,
             "destination": "France"
         },
         "reviews": [
@@ -4692,8 +4692,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.15836,
-            "lng": 41.41582,
+            "lng": 2.15836,
+            "lat": 41.41582,
             "destination": "Middle East"
         },
         "reviews": [
@@ -5144,8 +5144,8 @@
             "countryCode": "TR",
             "city": "Istanbul",
             "address": "Istanbul, Istanbul Province, Turkey",
-            "lat": 28.99543,
-            "lng": 41.05987,
+            "lng": 28.99543,
+            "lat": 41.05987,
             "destination": "Middle East"
         },
         "reviews": [
@@ -5402,8 +5402,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, Québec, Canada",
-            "lat": -73.56646,
-            "lng": 45.51778,
+            "lng": -73.56646,
+            "lat": 45.51778,
             "destination": "South America"
         },
         "reviews": [
@@ -5611,8 +5611,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Kihei, HI, United States",
-            "lat": -156.43514,
-            "lng": 20.68934,
+            "lng": -156.43514,
+            "lat": 20.68934,
             "destination": "France"
         },
         "reviews": [
@@ -5846,8 +5846,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "New York, NY, United States",
-            "lat": -73.95735,
-            "lng": 40.78465,
+            "lng": -73.95735,
+            "lat": 40.78465,
             "destination": "France"
         },
         "reviews": [
@@ -6072,8 +6072,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "Brooklyn, NY, United States",
-            "lat": -73.94883,
-            "lng": 40.6536,
+            "lng": -73.94883,
+            "lat": 40.6536,
             "destination": "Middle East"
         },
         "reviews": [
@@ -6513,8 +6513,8 @@
             "countryCode": "HK",
             "city": "Hong Kong",
             "address": "Tai Kok Tsui, Kowloon, Hong Kong",
-            "lat": 114.15992,
-            "lng": 22.32324,
+            "lng": 114.15992,
+            "lat": 22.32324,
             "destination": "United States"
         },
         "reviews": [
@@ -6675,8 +6675,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Hawi, HI, United States",
-            "lat": -155.83491,
-            "lng": 20.24861,
+            "lng": -155.83491,
+            "lat": 20.24861,
             "destination": "United States"
         },
         "reviews": [
@@ -7176,8 +7176,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalonia, Spain",
-            "lat": 2.16365,
-            "lng": 41.39416,
+            "lng": 2.16365,
+            "lat": 41.39416,
             "destination": "Italy"
         },
         "reviews": [
@@ -7641,8 +7641,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Lahaina, HI, United States",
-            "lat": -156.67817,
-            "lng": 20.97214,
+            "lng": -156.67817,
+            "lat": 20.97214,
             "destination": "South America"
         },
         "reviews": [
@@ -8102,8 +8102,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Hawi, HI, United States",
-            "lat": -155.87199,
-            "lng": 20.23256,
+            "lng": -155.87199,
+            "lat": 20.23256,
             "destination": "France"
         },
         "reviews": [
@@ -8196,8 +8196,8 @@
             "countryCode": "HK",
             "city": "Hong Kong",
             "address": "Hong Kong, Hong Kong Island, Hong Kong",
-            "lat": 114.15202,
-            "lng": 22.28582,
+            "lng": 114.15202,
+            "lat": 22.28582,
             "destination": "South America"
         },
         "reviews": [
@@ -8662,8 +8662,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.21291,
-            "lng": 41.40308,
+            "lng": 2.21291,
+            "lat": 41.40308,
             "destination": "Middle East"
         },
         "reviews": [
@@ -9108,8 +9108,8 @@
             "countryCode": "AU",
             "city": "Sydney",
             "address": "Dangar Island, NSW, Australia",
-            "lat": 151.23946,
-            "lng": -33.53785,
+            "lng": 151.23946,
+            "lat": -33.53785,
             "destination": "Middle East"
         },
         "reviews": [
@@ -9590,8 +9590,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Lahaina, HI, United States",
-            "lat": -156.68034,
-            "lng": 20.97104,
+            "lng": -156.68034,
+            "lat": 20.97104,
             "destination": "South America"
         },
         "reviews": [
@@ -9982,8 +9982,8 @@
             "countryCode": "BR",
             "city": "Rio De Janeiro",
             "address": "Rio de Janeiro, Rio de Janeiro, Brazil",
-            "lat": -43.1998455458952,
-            "lng": -22.980051683700506,
+            "lng": -43.1998455458952,
+            "lat": -22.980051683700506,
             "destination": "South America"
         },
         "reviews": [
@@ -10482,8 +10482,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Lahaina, HI, United States",
-            "lat": -156.69171,
-            "lng": 20.936890000000002,
+            "lng": -156.69171,
+            "lat": 20.936890000000002,
             "destination": "France"
         },
         "reviews": [
@@ -10639,8 +10639,8 @@
             "countryCode": "PT",
             "city": "Porto",
             "address": "Porto, Porto District, Portugal",
-            "lat": -8.63082,
-            "lng": 41.18075,
+            "lng": -8.63082,
+            "lat": 41.18075,
             "destination": "Italy"
         },
         "reviews": [
@@ -10797,8 +10797,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "Brooklyn, NY, United States",
-            "lat": -73.92922,
-            "lng": 40.68683,
+            "lng": -73.92922,
+            "lat": 40.68683,
             "destination": "Middle East"
         },
         "reviews": [
@@ -11268,8 +11268,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, Québec, Canada",
-            "lat": -73.58359,
-            "lng": 45.52143,
+            "lng": -73.58359,
+            "lat": 45.52143,
             "destination": "Italy"
         },
         "reviews": [
@@ -11486,8 +11486,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Lahaina, HI, United States",
-            "lat": -156.67924,
-            "lng": 20.971,
+            "lng": -156.67924,
+            "lat": 20.971,
             "destination": "Italy"
         },
         "reviews": [
@@ -11933,8 +11933,8 @@
             "countryCode": "AU",
             "city": "Sydney",
             "address": "Sydney , NSW, Australia",
-            "lat": 151.16994,
-            "lng": -33.86771,
+            "lng": 151.16994,
+            "lat": -33.86771,
             "destination": "South America"
         },
         "reviews": [
@@ -12242,8 +12242,8 @@
             "countryCode": "TR",
             "city": "Istanbul",
             "address": "Istanbul, Istanbul Province, Turkey",
-            "lat": 28.91629,
-            "lng": 41.06038,
+            "lng": 28.91629,
+            "lat": 41.06038,
             "destination": "South America"
         },
         "reviews": [
@@ -12679,8 +12679,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "Brooklyn, NY, United States",
-            "lat": -73.98057,
-            "lng": 40.67549,
+            "lng": -73.98057,
+            "lat": 40.67549,
             "destination": "United States"
         },
         "reviews": [
@@ -12772,8 +12772,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Paia, HI, United States",
-            "lat": -156.37856,
-            "lng": 20.91356,
+            "lng": -156.37856,
+            "lat": 20.91356,
             "destination": "Italy"
         },
         "reviews": [
@@ -13229,8 +13229,8 @@
             "countryCode": "TR",
             "city": "Istanbul",
             "address": "Şişli, İstanbul, Turkey",
-            "lat": 29.01145,
-            "lng": 41.06423,
+            "lng": 29.01145,
+            "lat": 41.06423,
             "destination": "France"
         },
         "reviews": [
@@ -13319,8 +13319,8 @@
             "countryCode": "AU",
             "city": "Sydney",
             "address": "Elizabeth Bay, NSW, Australia",
-            "lat": 151.22674,
-            "lng": -33.87226,
+            "lng": 151.22674,
+            "lat": -33.87226,
             "destination": "South America"
         },
         "reviews": [
@@ -13768,8 +13768,8 @@
             "countryCode": "AU",
             "city": "Sydney",
             "address": "Sydney Olympic Park, NSW, Australia",
-            "lat": 151.07343,
-            "lng": -33.84673,
+            "lng": 151.07343,
+            "lat": -33.84673,
             "destination": "France"
         },
         "reviews": [
@@ -14230,8 +14230,8 @@
             "countryCode": "AU",
             "city": "Sydney",
             "address": "Randwick, NSW, Australia",
-            "lat": 151.24591,
-            "lng": -33.91446,
+            "lng": 151.24591,
+            "lat": -33.91446,
             "destination": "United States"
         },
         "reviews": [
@@ -14680,8 +14680,8 @@
             "countryCode": "PT",
             "city": "Porto",
             "address": "Porto, Porto, Portugal",
-            "lat": -8.67559,
-            "lng": 41.15223,
+            "lng": -8.67559,
+            "lat": 41.15223,
             "destination": "United States"
         },
         "reviews": [
@@ -15131,8 +15131,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "New York, NY, United States",
-            "lat": -73.98763,
-            "lng": 40.72808,
+            "lng": -73.98763,
+            "lat": 40.72808,
             "destination": "Middle East"
         },
         "reviews": [
@@ -15556,8 +15556,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.16685,
-            "lng": 41.38371,
+            "lng": 2.16685,
+            "lat": 41.38371,
             "destination": "South America"
         },
         "reviews": [
@@ -15669,8 +15669,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, CT, Spain",
-            "lat": 2.17935,
-            "lng": 41.43038,
+            "lng": 2.17935,
+            "lat": 41.43038,
             "destination": "France"
         },
         "reviews": [
@@ -16003,8 +16003,8 @@
             "countryCode": "PT",
             "city": "Porto",
             "address": "Porto, Porto, Portugal",
-            "lat": -8.60154,
-            "lng": 41.14834,
+            "lng": -8.60154,
+            "lat": 41.14834,
             "destination": "United States"
         },
         "reviews": [
@@ -16431,8 +16431,8 @@
             "countryCode": "BR",
             "city": "Rio De Janeiro",
             "address": "Rio de Janeiro, Rio de Janeiro, Brazil",
-            "lat": -43.182736348008305,
-            "lng": -22.9106385343457,
+            "lng": -43.182736348008305,
+            "lat": -22.9106385343457,
             "destination": "Italy"
         },
         "reviews": [
@@ -16883,8 +16883,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.18146,
-            "lng": 41.39716,
+            "lng": 2.18146,
+            "lat": 41.39716,
             "destination": "Italy"
         },
         "reviews": [
@@ -17336,8 +17336,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.17481,
-            "lng": 41.39243,
+            "lng": 2.17481,
+            "lat": 41.39243,
             "destination": "France"
         },
         "reviews": [
@@ -17783,8 +17783,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, Québec, Canada",
-            "lat": -73.57981,
-            "lng": 45.51702,
+            "lng": -73.57981,
+            "lat": 45.51702,
             "destination": "Middle East"
         },
         "reviews": [
@@ -18251,8 +18251,8 @@
             "countryCode": "HK",
             "city": "Hong Kong",
             "address": "Hong Kong, Kowloon, Hong Kong",
-            "lat": 114.17308,
-            "lng": 22.30039,
+            "lng": 114.17308,
+            "lat": 22.30039,
             "destination": "South America"
         },
         "reviews": [
@@ -18726,8 +18726,8 @@
             "countryCode": "AU",
             "city": "Sydney",
             "address": "Darlinghurst, NSW, Australia",
-            "lat": 151.21346,
-            "lng": -33.87603,
+            "lng": 151.21346,
+            "lat": -33.87603,
             "destination": "Middle East"
         },
         "reviews": [
@@ -19177,8 +19177,8 @@
             "countryCode": "TR",
             "city": "Istanbul",
             "address": "TR, Turkey",
-            "lat": 29.06648,
-            "lng": 40.87794,
+            "lng": 29.06648,
+            "lat": 40.87794,
             "destination": "Italy"
         },
         "reviews": [
@@ -19635,8 +19635,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montreal, QC, Canada",
-            "lat": -73.56244,
-            "lng": 45.51006,
+            "lng": -73.56244,
+            "lat": 45.51006,
             "destination": "Italy"
         },
         "reviews": [
@@ -20054,8 +20054,8 @@
             "countryCode": "BR",
             "city": "Rio De Janeiro",
             "address": "Rio de Janeiro, Rio de Janeiro, Brazil",
-            "lat": -43.37035220190699,
-            "lng": -22.91636184358952,
+            "lng": -43.37035220190699,
+            "lat": -22.91636184358952,
             "destination": "Middle East"
         },
         "reviews": [
@@ -20141,8 +20141,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, QC, Canada",
-            "lat": -73.54985,
-            "lng": 45.52797,
+            "lng": -73.54985,
+            "lat": 45.52797,
             "destination": "United States"
         },
         "reviews": [
@@ -20292,8 +20292,8 @@
             "countryCode": "PT",
             "city": "Porto",
             "address": "Porto, Porto, Portugal",
-            "lat": -8.6311,
-            "lng": 41.16087,
+            "lng": -8.6311,
+            "lat": 41.16087,
             "destination": "Italy"
         },
         "reviews": [
@@ -20651,8 +20651,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, Québec, Canada",
-            "lat": -73.55985,
-            "lng": 45.53481,
+            "lng": -73.55985,
+            "lat": 45.53481,
             "destination": "France"
         },
         "reviews": [
@@ -20846,8 +20846,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Lahaina, HI, United States",
-            "lat": -156.6917,
-            "lng": 20.93792,
+            "lng": -156.6917,
+            "lat": 20.93792,
             "destination": "United States"
         },
         "reviews": [
@@ -21078,8 +21078,8 @@
             "countryCode": "TR",
             "city": "Istanbul",
             "address": "Fatih, İstanbul, Turkey",
-            "lat": 28.96755,
-            "lng": 41.00488,
+            "lng": 28.96755,
+            "lat": 41.00488,
             "destination": "Italy"
         },
         "reviews": [
@@ -21532,8 +21532,8 @@
             "countryCode": "HK",
             "city": "Hong Kong",
             "address": "Tsim Sha Tsui, Kowloon, Hong Kong",
-            "lat": 114.17366,
-            "lng": 22.2982,
+            "lng": 114.17366,
+            "lat": 22.2982,
             "destination": "South America"
         },
         "reviews": [
@@ -21986,8 +21986,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.1643,
-            "lng": 41.40211,
+            "lng": 2.1643,
+            "lat": 41.40211,
             "destination": "Middle East"
         },
         "reviews": [
@@ -22446,8 +22446,8 @@
             "countryCode": "TR",
             "city": "Istanbul",
             "address": "Beyoğlu, İstanbul, Turkey",
-            "lat": 28.97477,
-            "lng": 41.03735,
+            "lng": 28.97477,
+            "lat": 41.03735,
             "destination": "United States"
         },
         "reviews": [
@@ -22901,8 +22901,8 @@
             "countryCode": "AU",
             "city": "Sydney",
             "address": "Avalon Beach, NSW, Australia",
-            "lat": 151.31642,
-            "lng": -33.62564,
+            "lng": 151.31642,
+            "lat": -33.62564,
             "destination": "Middle East"
         },
         "reviews": [
@@ -23363,8 +23363,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, Québec, Canada",
-            "lat": -73.58208,
-            "lng": 45.49165,
+            "lng": -73.58208,
+            "lat": 45.49165,
             "destination": "Middle East"
         },
         "reviews": [
@@ -23819,8 +23819,8 @@
             "countryCode": "PT",
             "city": "Porto",
             "address": "Porto, Porto, Portugal",
-            "lat": -8.61289,
-            "lng": 41.14501,
+            "lng": -8.61289,
+            "lat": 41.14501,
             "destination": "South America"
         },
         "reviews": [
@@ -24301,8 +24301,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Wailuku, HI, United States",
-            "lat": -156.50456,
-            "lng": 20.79559,
+            "lng": -156.50456,
+            "lat": 20.79559,
             "destination": "United States"
         },
         "reviews": [
@@ -24577,8 +24577,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montreal, QC, Canada",
-            "lat": -73.58677,
-            "lng": 45.52572,
+            "lng": -73.58677,
+            "lat": 45.52572,
             "destination": "United States"
         },
         "reviews": [
@@ -25041,8 +25041,8 @@
             "countryCode": "AU",
             "city": "Sydney",
             "address": "Monterey, NSW, Australia",
-            "lat": 151.15248,
-            "lng": -33.96822,
+            "lng": 151.15248,
+            "lat": -33.96822,
             "destination": "South America"
         },
         "reviews": [
@@ -25498,8 +25498,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.15691,
-            "lng": 41.37475,
+            "lng": 2.15691,
+            "lat": 41.37475,
             "destination": "Middle East"
         },
         "reviews": [
@@ -25938,8 +25938,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, Québec, Canada",
-            "lat": -73.58664,
-            "lng": 45.47348,
+            "lng": -73.58664,
+            "lat": 45.47348,
             "destination": "South America"
         },
         "reviews": [
@@ -26032,8 +26032,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "Queens, NY, United States",
-            "lat": -73.91932,
-            "lng": 40.71112,
+            "lng": -73.91932,
+            "lat": 40.71112,
             "destination": "South America"
         },
         "reviews": [
@@ -26153,8 +26153,8 @@
             "countryCode": "PT",
             "city": "Porto",
             "address": "Porto, Porto, Portugal",
-            "lat": -8.59275,
-            "lng": 41.1462,
+            "lng": -8.59275,
+            "lat": 41.1462,
             "destination": "South America"
         },
         "reviews": [
@@ -26605,8 +26605,8 @@
             "countryCode": "BR",
             "city": "Rio De Janeiro",
             "address": "Rio de Janeiro, Rio de Janeiro, Brazil",
-            "lat": -43.364530263111185,
-            "lng": -23.008791637258927,
+            "lng": -43.364530263111185,
+            "lat": -23.008791637258927,
             "destination": "Italy"
         },
         "reviews": [
@@ -26769,8 +26769,8 @@
             "countryCode": "TR",
             "city": "Istanbul",
             "address": "Istanbul, Istanbul, Turkey",
-            "lat": 28.98158,
-            "lng": 41.0314,
+            "lng": 28.98158,
+            "lat": 41.0314,
             "destination": "Middle East"
         },
         "reviews": [
@@ -26921,8 +26921,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.15566,
-            "lng": 41.37479,
+            "lng": 2.15566,
+            "lat": 41.37479,
             "destination": "South America"
         },
         "reviews": [
@@ -27372,8 +27372,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Kihei, HI, United States",
-            "lat": -156.45205,
-            "lng": 20.76124,
+            "lng": -156.45205,
+            "lat": 20.76124,
             "destination": "South America"
         },
         "reviews": [
@@ -27622,8 +27622,8 @@
             "countryCode": "HK",
             "city": "Hong Kong",
             "address": "Sheung Wan, Hong Kong Island, Hong Kong",
-            "lat": 114.15241,
-            "lng": 22.28351,
+            "lng": 114.15241,
+            "lat": 22.28351,
             "destination": "United States"
         },
         "reviews": [
@@ -27876,8 +27876,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, Québec, Canada",
-            "lat": -73.59906,
-            "lng": 45.54521,
+            "lng": -73.59906,
+            "lat": 45.54521,
             "destination": "United States"
         },
         "reviews": [
@@ -28339,8 +28339,8 @@
             "countryCode": "HK",
             "city": "Hong Kong",
             "address": "Wan Chai, Hong Kong Island, Hong Kong",
-            "lat": 114.16853,
-            "lng": 22.2751,
+            "lng": 114.16853,
+            "lat": 22.2751,
             "destination": "France"
         },
         "reviews": [
@@ -28595,8 +28595,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Wailuku, HI, United States",
-            "lat": -156.50624,
-            "lng": 20.79562,
+            "lng": -156.50624,
+            "lat": 20.79562,
             "destination": "United States"
         },
         "reviews": [
@@ -29054,8 +29054,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "New York, NY, United States",
-            "lat": -73.93955,
-            "lng": 40.79733,
+            "lng": -73.93955,
+            "lat": 40.79733,
             "destination": "United States"
         },
         "reviews": [
@@ -29495,8 +29495,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalonia, Spain",
-            "lat": 2.17561,
-            "lng": 41.38701,
+            "lng": 2.17561,
+            "lat": 41.38701,
             "destination": "Italy"
         },
         "reviews": [
@@ -29936,8 +29936,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, Québec, Canada",
-            "lat": -73.57711,
-            "lng": 45.5084,
+            "lng": -73.57711,
+            "lat": 45.5084,
             "destination": "France"
         },
         "reviews": [
@@ -30307,8 +30307,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "Brooklyn, NY, United States",
-            "lat": -73.94854,
-            "lng": 40.70998,
+            "lng": -73.94854,
+            "lat": 40.70998,
             "destination": "France"
         },
         "reviews": [
@@ -30779,8 +30779,8 @@
             "countryCode": "PT",
             "city": "Porto",
             "address": "Espinho, Aveiro, Portugal",
-            "lat": -8.64343,
-            "lng": 40.99568,
+            "lng": -8.64343,
+            "lat": 40.99568,
             "destination": "United States"
         },
         "reviews": [
@@ -31273,8 +31273,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Lahaina, HI, United States",
-            "lat": -156.68832,
-            "lng": 20.95134,
+            "lng": -156.68832,
+            "lat": 20.95134,
             "destination": "South America"
         },
         "reviews": [
@@ -31713,8 +31713,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "New York, NY, United States",
-            "lat": -73.95854,
-            "lng": 40.7664,
+            "lng": -73.95854,
+            "lat": 40.7664,
             "destination": "United States"
         },
         "reviews": [
@@ -31958,8 +31958,8 @@
             "countryCode": "HK",
             "city": "Hong Kong",
             "address": "Hong Kong, Hong Kong Island, Hong Kong",
-            "lat": 114.15096,
-            "lng": 22.284,
+            "lng": 114.15096,
+            "lat": 22.284,
             "destination": "United States"
         },
         "reviews": [
@@ -32300,8 +32300,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Wailuku, HI, United States",
-            "lat": -156.5039,
-            "lng": 20.79664,
+            "lng": -156.5039,
+            "lat": 20.79664,
             "destination": "United States"
         },
         "reviews": [
@@ -32506,8 +32506,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Paia, HI, United States",
-            "lat": -156.37272,
-            "lng": 20.90555,
+            "lng": -156.37272,
+            "lat": 20.90555,
             "destination": "Middle East"
         },
         "reviews": [
@@ -32985,8 +32985,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.17877,
-            "lng": 41.37903,
+            "lng": 2.17877,
+            "lat": 41.37903,
             "destination": "France"
         },
         "reviews": [
@@ -33196,8 +33196,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.16622,
-            "lng": 41.3719,
+            "lng": 2.16622,
+            "lat": 41.3719,
             "destination": "Italy"
         },
         "reviews": [
@@ -33654,8 +33654,8 @@
             "countryCode": "AU",
             "city": "Sydney",
             "address": "Darlington, NSW, Australia",
-            "lat": 151.1965,
-            "lng": -33.88848,
+            "lng": 151.1965,
+            "lat": -33.88848,
             "destination": "France"
         },
         "reviews": [
@@ -33778,8 +33778,8 @@
             "countryCode": "HK",
             "city": "Hong Kong",
             "address": "香港, 九龍, Hong Kong",
-            "lat": 114.17545,
-            "lng": 22.29643,
+            "lng": 114.17545,
+            "lat": 22.29643,
             "destination": "United States"
         },
         "reviews": [
@@ -34241,8 +34241,8 @@
             "countryCode": "PT",
             "city": "Porto",
             "address": "Porto, Porto, Portugal",
-            "lat": -8.61279,
-            "lng": 41.14106,
+            "lng": -8.61279,
+            "lat": 41.14106,
             "destination": "United States"
         },
         "reviews": [
@@ -34702,8 +34702,8 @@
             "countryCode": "US",
             "city": "New York",
             "address": "New York, NY, United States",
-            "lat": -73.93943,
-            "lng": 40.79805,
+            "lng": -73.93943,
+            "lat": 40.79805,
             "destination": "United States"
         },
         "reviews": [
@@ -35141,8 +35141,8 @@
             "countryCode": "BR",
             "city": "Rio De Janeiro",
             "address": "Rio de Janeiro, RJ, Brazil",
-            "lat": -43.4186896742968,
-            "lng": -22.96840021041473,
+            "lng": -43.4186896742968,
+            "lat": -22.96840021041473,
             "destination": "Middle East"
         },
         "reviews": [
@@ -35227,8 +35227,8 @@
             "countryCode": "ES",
             "city": "Barcelona",
             "address": "Barcelona, Catalunya, Spain",
-            "lat": 2.17434,
-            "lng": 41.39137,
+            "lng": 2.17434,
+            "lat": 41.39137,
             "destination": "France"
         },
         "reviews": [

@@ -1,13 +1,12 @@
 import { DateRangePicker } from 'react-date-range'
 import { ReserveByProps } from '../../../../../interfaces/reserve-by-interface'
 import { DatesProps } from '../../../../../interfaces/stay-interface'
-import { utilService } from '../../../../../services/util.service'
 
 interface Props {
     reserveBy: ReserveByProps
     onSetReserveBy: (updatedReservation: ReserveByProps) => void
-    selectedReserveModule: string | null
-    onSelectReserveModule: (reserveModule: string | null) => void
+    selectedReserveModule?: string | null
+    onSelectReserveModule?: (reserveModule: string | null) => void
     takenDates?: DatesProps[]
     nightsCount: number
 }
@@ -33,9 +32,11 @@ export function ReserveDates({
             checkOut: ranges.selection.endDate,
         }
         onSetReserveBy(updatedReserveBy)
-        const nextReserveModule =
-            selectedReserveModule === 'reserveCheckInDate' ? 'reserveCheckOutDate' : 'reserveGuests'
-        onSelectReserveModule(nextReserveModule)
+        if (onSelectReserveModule) {
+            const nextReserveModule =
+                selectedReserveModule === 'reserveCheckInDate' ? 'reserveCheckOutDate' : 'reserveGuests'
+            onSelectReserveModule(nextReserveModule)
+        }
     }
 
     const formatTakenDates = () => {
@@ -73,6 +74,7 @@ export function ReserveDates({
     }
 
     const onCloseDatesModule = () => {
+        if (!onSelectReserveModule) return
         onSelectReserveModule(null)
     }
 
@@ -89,9 +91,11 @@ export function ReserveDates({
                 showDateDisplay={false}
                 disabledDates={formatTakenDates()}
             />
-            <button onClick={onCloseDatesModule} className='btn btn-close'>
-                Close
-            </button>
+            {onSelectReserveModule && (
+                <button onClick={onCloseDatesModule} className='btn btn-close'>
+                    Close
+                </button>
+            )}
         </section>
     )
 }

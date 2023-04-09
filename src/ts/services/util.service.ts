@@ -66,7 +66,10 @@ function formatDate(date: Date | null) {
     return `${date.toLocaleString('default', { month: 'short' })} ${date.getDate()}`
 }
 
-function getNightsCount(checkIn: Date, checkOut: Date) {
+function getNightsCount(stayDates: DatesProps | null) {
+    // Change here after using skeletons
+    if (!stayDates) return null
+    const { checkIn, checkOut } = stayDates
     const checkInTime = checkIn.getTime()
     const checkOutTime = checkOut.getTime()
     const diff = checkOutTime - checkInTime

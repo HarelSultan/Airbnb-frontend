@@ -9,6 +9,8 @@ import { StayHeader } from './cmps/stay-header'
 import { StayDetails } from './cmps/StayDetails/stay-details'
 import { StayReviews } from './cmps/StayReviews/stay-reviews'
 import { ReserveByProps } from '../../interfaces/reserve-by-interface'
+import { utilService } from '../../services/util.service'
+import { StayMap } from './cmps/stay-map'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -50,6 +52,8 @@ export function StayPage() {
 
     const onReserveStay = () => {}
 
+    const nightsCount = utilService.getNightsCount(reserveBy) || 1
+
     // const reserveStayProps = {
     //     price: selectedStay?.price,
     //     reviews: selectedStay?.reviews,
@@ -64,7 +68,13 @@ export function StayPage() {
             <StayHeader stay={selectedStay} />
             <StayGallery imgUrls={selectedStay.imgUrls} />
             <div className='layout-wrapper'>
-                <StayDetails stay={selectedStay} />
+                <StayDetails
+                    stay={selectedStay}
+                    takenDates={selectedStay.takenDates}
+                    reserveBy={reserveBy}
+                    onSetReserveBy={onSetReserveBy}
+                    nightsCount={nightsCount}
+                />
                 <ReserveStay
                     price={selectedStay.price}
                     reviews={selectedStay.reviews}
@@ -72,9 +82,16 @@ export function StayPage() {
                     reserveBy={reserveBy}
                     onSetReserveBy={onSetReserveBy}
                     onReserveStay={onReserveStay}
+                    nightsCount={nightsCount}
                 />
             </div>
             <StayReviews reviews={selectedStay.reviews} />
+            <StayMap
+                lat={selectedStay.loc.lat}
+                lng={selectedStay.loc.lng}
+                stayArea={selectedStay.loc.address}
+                staySummary={selectedStay.summary}
+            />
         </section>
     )
 }

@@ -13,4 +13,18 @@
             pointer-events: none;
         }
     }
+
+    .reserve-dates {
+        padding: 48px 0;
+        position: static;
+        z-index: 0;
+        box-shadow: none;
+        .rdrMonth {
+            width: 480px;
+        }
+
+        .rdrDefinedRangesWrapper {
+            display: none;
+        }
+    }
 }
