@@ -63,7 +63,7 @@ function formatDateRange({ checkIn, checkOut }: DatesProps) {
 
 function formatDate(date: Date | null) {
     if (date === null) return ''
-    return `${date.toLocaleString('default', { month: 'short' })} ${date.getDate()}`
+    return date.toLocaleString('default', { month: 'short', day: 'numeric' })
 }
 
 function getNightsCount(stayDates: DatesProps | null) {

@@ -12,6 +12,7 @@ import { ReserveByProps } from '../../interfaces/reserve-by-interface'
 import { utilService } from '../../services/util.service'
 import { StayMap } from './cmps/stay-map'
 import { StayHost } from './cmps/stay-host'
+import { StayThingsToKnow } from './cmps/things-to-know'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -94,6 +95,11 @@ export function StayPage() {
                 staySummary={selectedStay.summary}
             />
             <StayHost host={selectedStay.host} />
+            <StayThingsToKnow
+                amenities={selectedStay.amenities}
+                guestsCount={selectedStay.stayDetails.guests}
+                checkIn={reserveBy.checkIn}
+            />
         </section>
     )
 }
