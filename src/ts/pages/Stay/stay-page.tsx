@@ -13,6 +13,7 @@ import { utilService } from '../../services/util.service'
 import { StayMap } from './cmps/stay-map'
 import { StayHost } from './cmps/stay-host'
 import { StayThingsToKnow } from './cmps/things-to-know'
+import { AppFooter } from '../../cmps/app-footer'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -100,6 +101,7 @@ export function StayPage() {
                 guestsCount={selectedStay.stayDetails.guests}
                 checkIn={reserveBy.checkIn}
             />
+            <AppFooter />
         </section>
     )
 }

@@ -8,6 +8,7 @@
     position: sticky;
     top: 80px;
     transition: bottom 1.1s ease;
+    z-index: 2;
 
     .reserve-header {
         display: flex;

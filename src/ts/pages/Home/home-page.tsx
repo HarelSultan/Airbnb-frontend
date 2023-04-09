@@ -11,6 +11,7 @@ import { StayList } from './cmps/stay-list'
 import { loadStays } from '../../store/stay/stay.action'
 import { stayService } from '../../services/stay.service'
 import { SearchByProps } from '../../interfaces/search-by-interface'
+import { AppFooter } from '../../cmps/app-footer'
 
 export function HomePage() {
     const stays: StayProps[] = useSelector((storeState: RootStateProps) => storeState.stayModule.stays)
@@ -46,6 +47,7 @@ export function HomePage() {
             <AppHeader />
             <Filter />
             <StayList stays={stays} onStayDetails={onStayDetails} />
+            <AppFooter />
         </section>
     )
 }
