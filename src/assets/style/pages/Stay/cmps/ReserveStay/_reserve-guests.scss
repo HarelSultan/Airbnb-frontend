@@ -1,0 +1,43 @@
+.reserve-guests {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px;
+
+    position: absolute;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 0;
+    top: 194px;
+    right: 24px;
+
+    & > *:not(.btn-close) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr auto;
+        gap: 0.5rem;
+        padding-block: 12px;
+    }
+
+    .guest-title {
+        text-transform: capitalize;
+        font-family: $font-family-bold;
+    }
+
+    .guest-desc {
+        color: $sub-text-clr;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .counter {
+        grid-area: 1/2/3/3;
+        justify-self: end;
+    }
+    .btn-close {
+        align-self: flex-end;
+        font-size: 16px;
+        font-family: $font-family-bold;
+        padding-bottom: 6px;
+    }
+}

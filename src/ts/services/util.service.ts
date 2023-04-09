@@ -14,6 +14,7 @@ export const utilService = {
     isDateRangeTaken,
     formatPlural,
     getFirstName,
+    getNightsCount,
 }
 
 function getRandomDates(takenDates: DatesProps[]): DatesProps {
@@ -63,6 +64,13 @@ function formatDateRange({ checkIn, checkOut }: DatesProps) {
 function formatDate(date: Date | null) {
     if (date === null) return ''
     return `${date.toLocaleString('default', { month: 'short' })} ${date.getDate()}`
+}
+
+function getNightsCount(checkIn: Date, checkOut: Date) {
+    const checkInTime = checkIn.getTime()
+    const checkOutTime = checkOut.getTime()
+    const diff = checkOutTime - checkInTime
+    return `${Math.round(diff / (1000 * 60 * 60 * 24))} Nights`
 }
 
 function formatGuestCount(guests: GuestProps) {

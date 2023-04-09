@@ -20,6 +20,10 @@ export function ReserveGuests({ reserveBy, onSetReserveBy, onSelectReserveModule
         onSetReserveBy({ ...reserveBy, guests: updatedGuestCount })
     }
 
+    const onCloseGuestModule = () => {
+        onSelectReserveModule(null)
+    }
+
     const guests: Guest[] = [
         {
             guestType: 'adults',
@@ -40,7 +44,7 @@ export function ReserveGuests({ reserveBy, onSetReserveBy, onSelectReserveModule
     ]
 
     return (
-        <section className='expanded-search-module search-guests'>
+        <section className='expanded-reserve-module reserve-guests guest-module'>
             {guests.map(guest => (
                 <div key={guest.guestType}>
                     <h4 className='guest-title'>{guest.guestType}</h4>
@@ -52,6 +56,9 @@ export function ReserveGuests({ reserveBy, onSetReserveBy, onSelectReserveModule
                     />
                 </div>
             ))}
+            <button onClick={onCloseGuestModule} className='btn btn-close underline'>
+                Close
+            </button>
         </section>
     )
 }

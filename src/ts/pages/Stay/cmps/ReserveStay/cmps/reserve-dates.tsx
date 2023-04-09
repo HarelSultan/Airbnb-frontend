@@ -1,6 +1,7 @@
 import { DateRangePicker } from 'react-date-range'
 import { ReserveByProps } from '../../../../../interfaces/reserve-by-interface'
 import { DatesProps } from '../../../../../interfaces/stay-interface'
+import { utilService } from '../../../../../services/util.service'
 
 interface Props {
     reserveBy: ReserveByProps
@@ -24,12 +25,12 @@ export function ReserveDates({
     }
 
     const handleDateSelect = (ranges: any) => {
-        const updatedSearchBy = {
+        const updatedReserveBy = {
             ...reserveBy,
             checkIn: ranges.selection.startDate,
             checkOut: ranges.selection.endDate,
         }
-        onSetReserveBy(updatedSearchBy)
+        onSetReserveBy(updatedReserveBy)
         const nextReserveModule =
             selectedReserveModule === 'reserveCheckInDate' ? 'reserveCheckOutDate' : 'reserveGuests'
         onSelectReserveModule(nextReserveModule)
@@ -54,8 +55,29 @@ export function ReserveDates({
         return takenDates
     }
 
+    const formatReservationDates = () => {
+        if (!reserveBy.checkIn || !reserveBy.checkOut) return 'Select dates'
+        const formattedCheckIn = reserveBy.checkIn.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+        })
+        const formattedCheckOut = reserveBy.checkOut.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+        })
+        return `${formattedCheckIn} - ${formattedCheckOut}`
+    }
+
+    const onCloseDatesModule = () => {
+        onSelectReserveModule(null)
+    }
+
     return (
-        <section className='expanded-search-module search-dates'>
+        <section className='expanded-search-module reserve-dates'>
+            <h2>{utilService.getNightsCount(reserveBy.checkIn, reserveBy.checkOut)}</h2>
+            <p>{formatReservationDates()}</p>
             <DateRangePicker
                 ranges={[selectionRange]}
                 minDate={new Date()}
@@ -65,6 +87,9 @@ export function ReserveDates({
                 showDateDisplay={false}
                 disabledDates={formatTakenDates()}
             />
+            <button onClick={onCloseDatesModule} className='btn btn-close'>
+                Close
+            </button>
         </section>
     )
 }

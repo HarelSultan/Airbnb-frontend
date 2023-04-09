@@ -59,7 +59,7 @@ export function ReserveStay({ price, reviews, takenDates, reserveBy, onSetReserv
                 </div>
             </div>
 
-            <form>
+            <form className={selectedReserveModule ? 'expanded' : ''}>
                 <label
                     className={`reserve-module check-in ${
                         selectedReserveModule === 'reserveCheckInDate' ? 'active' : ''
@@ -95,9 +95,6 @@ export function ReserveStay({ price, reviews, takenDates, reserveBy, onSetReserv
                 </label>
             </form>
             <CtaBtn onClickCB={onReserveStay} txt='Reserve' />
-            {/* <button onClick={onReserveStay} className='btn btn-reserve flex flex-center'>
-                Reserve
-            </button> */}
             <p className='disclaimer'>You won't be charged yet</p>
             {selectedReserveModule && reserveModuleMap[selectedReserveModule]}
         </section>
