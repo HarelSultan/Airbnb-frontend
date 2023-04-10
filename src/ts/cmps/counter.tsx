@@ -1,5 +1,5 @@
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
-import { GuestProps } from '../../../interfaces/search-by-interface'
+import { GuestProps } from '../interfaces/search-by-interface'
 
 interface Props {
     guestType: keyof GuestProps

@@ -1,28 +1,37 @@
-import { stayService } from '../../../services/stay.service'
 import { useState } from 'react'
-import { LabelFilter } from './Filter/label-filter'
-import { FilterByProps } from '../../../interfaces/filter-by-interface'
-import { StayFilters } from './Filter/stay-filter'
-import { DarkOverlay } from '../../../cmps/AppHeader/cmps/dark-overlay'
-import { setFilter } from '../../../store/stay/stay.action'
+import { SearchByProps } from '../../../../interfaces/search-by-interface'
+import { MobileSearchTeaser } from './cmps/mobile-search-teaser'
+import { FilterByProps } from '../../../../interfaces/filter-by-interface'
+import { stayService } from '../../../../services/stay.service'
+import { setFilter } from '../../../../store/stay/stay.action'
+import { StayFilters } from '../../../../pages/Home/cmps/Filter/stay-filter'
+import { DarkOverlay } from '../dark-overlay'
+import { SearchForm } from '../search-form'
 
-const labelFilters = stayService.getLabelFilters()
+interface Props {
+    searchBy: SearchByProps
+    isSearchOpen: boolean
+    onToggleSearchDisplay: () => void
+    onSelectSearchModule: (searchModule: string) => void
+    selectedSearchModule: string
+    onSetSearchBy: (updatedSearchBy: SearchByProps) => void
+    onSearchStays: (ev: React.MouseEvent<HTMLButtonElement>) => void
+}
 
-export function Filter() {
+export function MobileNavbar({
+    searchBy,
+    isSearchOpen,
+    onToggleSearchDisplay,
+    onSelectSearchModule,
+    selectedSearchModule,
+    onSetSearchBy,
+    onSearchStays,
+}: Props) {
+    // ? const {checkIn, checkOut} = searchBy
+
     const [filterBy, setFilterBy] = useState<FilterByProps>(stayService.getDefaultFilterProps())
     const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false)
 
-    const onSelectLabelFilter = (selectedLabel: string) => {
-        if (selectedLabel === filterBy.label) return
-        // Castels, Iconic Cities, Ski-in/out, Shephred's huts, Lake
-        setFilterBy(prevFilterBy => {
-            const updatedFilter = { ...prevFilterBy, label: selectedLabel }
-            setFilter(updatedFilter)
-            return updatedFilter
-        })
-    }
-
-    console.log(filterBy)
     const toggleFilterModalDisplay = () => {
         setIsFilterModalOpen(prevState => !prevState)
     }
@@ -42,10 +51,12 @@ export function Filter() {
         setFilter(filterBy)
     }
 
-    const labelFilterProps = {
-        labelFilters,
-        selectedLabelFilter: filterBy.label,
-        onSelectLabelFilter,
+    const searchProps = {
+        searchBy,
+        onSelectSearchModule,
+        selectedSearchModule,
+        onSetSearchBy,
+        onSearchStays,
     }
 
     const stayFilterProps = {
@@ -57,20 +68,21 @@ export function Filter() {
     }
 
     return (
-        <section className={`filter ${isFilterModalOpen ? 'modal-open' : ''}`}>
-            <LabelFilter {...labelFilterProps} />
+        <nav className='mobile-navbar'>
+            <MobileSearchTeaser searchBy={searchBy} onToggleSearchDisplay={onToggleSearchDisplay} />
             <button className='btn btn-filters' onClick={toggleFilterModalDisplay}>
                 <svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' role='presentation'>
                     <path d='M5 8c1.306 0 2.418.835 2.83 2H14v2H7.829A3.001 3.001 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.829 4H2V4h6.17A3.001 3.001 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'></path>
                 </svg>
-                Filters
             </button>
+            {isSearchOpen && <SearchForm {...searchProps} />}
+
             {isFilterModalOpen && (
                 <div className='filter-modal-container'>
                     <DarkOverlay isOpen={isFilterModalOpen} setIsOpen={toggleFilterModalDisplay} />
                     <StayFilters {...stayFilterProps} />
                 </div>
             )}
-        </section>
+        </nav>
     )
 }

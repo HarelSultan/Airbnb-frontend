@@ -8,10 +8,10 @@ interface Props {
     onSetFilterBy: (updatedFilter: FilterByProps) => void
     onCloseModal: () => void
     onClearFilterBy: () => void
-    onSearchStays: () => void
+    onFilterStays: () => void
 }
 
-export function StayFilters({ filterBy, onSetFilterBy, onCloseModal, onClearFilterBy, onSearchStays }: Props) {
+export function StayFilters({ filterBy, onSetFilterBy, onCloseModal, onClearFilterBy, onFilterStays }: Props) {
     const stayFilterProps = {
         filterBy,
         onSetFilterBy,
@@ -33,7 +33,7 @@ export function StayFilters({ filterBy, onSetFilterBy, onCloseModal, onClearFilt
                 <button onClick={onClearFilterBy} className='btn btn-clear-filters'>
                     Clear all
                 </button>
-                <button onClick={onSearchStays} className='btn btn-filter-stays'>
+                <button onClick={onFilterStays} className='btn btn-filter-stays'>
                     Show homes
                 </button>
             </div>

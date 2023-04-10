@@ -3,7 +3,9 @@
     align-items: center;
     gap: 1.5rem;
     grid-template-columns: 1fr auto;
-    padding-top: 1.125rem;
+    @include for-narrow-layout {
+        padding-top: 1.125rem;
+    }
     position: sticky;
     top: 65px;
     background: white;

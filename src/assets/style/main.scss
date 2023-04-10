@@ -10,17 +10,24 @@
 @import './base/_layout.scss';
 
 // Cmps
-@import './cmps/_app-header.scss';
-@import './cmps/_search-teaser.scss';
-@import './cmps/_search-form.scss';
+// Common:
+@import './cmps/_dark-overlay.scss';
+@import './cmps/_counter.scss';
+@import './cmps/_cta-btn.scss';
+@import './cmps/_app-footer.scss';
 @import './cmps/_search-destination.scss';
 @import './cmps/_search-dates.scss';
 @import './cmps/_search-guests.scss';
-@import './cmps/_counter.scss';
-@import './cmps/_dark-overlay.scss';
+
+// Header:
+@import './cmps/_app-header.scss';
+// PC:
+@import './cmps/_search-teaser.scss';
+@import './cmps/_search-form.scss';
 @import './cmps/_user-menu.scss';
-@import './cmps/_cta-btn.scss';
-@import './cmps/_app-footer.scss';
+// Mobile:
+@import './cmps/_mobile-navbar.scss';
+@import './cmps/_mobile-search-teaser.scss';
 
 // Pages
 // Home:

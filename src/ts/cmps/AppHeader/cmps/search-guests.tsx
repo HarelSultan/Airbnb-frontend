@@ -1,6 +1,6 @@
 import { SearchByProps } from '../../../interfaces/search-by-interface'
 import { GuestProps } from '../../../interfaces/search-by-interface'
-import { Counter } from './counter'
+import { Counter } from '../../counter'
 
 interface Props {
     searchBy: SearchByProps

@@ -14,15 +14,17 @@
     &.expanded::before {
         height: 270%;
     }
-    &::after {
-        content: '';
-        height: 100%;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 3;
-        box-shadow: rgb(0 0 0 / 8%) 0 1px 0;
-        pointer-events: none;
+    @include for-narrow-layout {
+        &::after {
+            content: '';
+            height: 100%;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 3;
+            box-shadow: rgb(0 0 0 / 8%) 0 1px 0;
+            pointer-events: none;
+        }
     }
     .app-nav {
         display: flex;
@@ -34,4 +36,18 @@
     .app-logo {
         cursor: pointer;
     }
+
+    // .pc-navbar {
+    //     &::before {
+    //         content: '';
+    //         width: 100%;
+    //         height: 100%;
+    //         background: white;
+    //         position: absolute;
+    //         z-index: -1;
+    //     }
+    //     &.expanded::before {
+    //         height: 270%;
+    //     }
+    // }
 }

@@ -1,4 +1,4 @@
-import { Counter } from '../../../../../cmps/AppHeader/cmps/counter'
+import { Counter } from '../../../../../cmps/counter'
 import { ReserveByProps } from '../../../../../interfaces/reserve-by-interface'
 import { GuestProps } from '../../../../../interfaces/search-by-interface'
 

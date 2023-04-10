@@ -1,4 +1,4 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { SearchTeaser } from '../search-teaser'
 import { UserMenu } from '../user-menu'
 import { AppLogo } from './Logo/logo'
@@ -8,8 +8,13 @@ import { stayService } from '../../services/stay.service'
 import { SearchByProps } from '../../interfaces/search-by-interface'
 import { DarkOverlay } from './cmps/dark-overlay'
 import { utilService } from '../../services/util.service'
+import { MobileNavbar } from './cmps/MobileNavbar/mobile-navbar'
 
-export function AppHeader() {
+interface Props {
+    isMobile?: boolean
+}
+
+export function AppHeader({ isMobile }: Props) {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
     const [searchBy, setSearchBy] = useState<SearchByProps>(stayService.getDeafultSearchProps())
     const [selectedSearchModule, setSelectedSearchModule] = useState<string>('searchDestination')
@@ -57,23 +62,33 @@ export function AppHeader() {
             onClick={onCloseSearchModule}
             className={`main-layout full app-header ${isSearchOpen ? 'expanded' : ''}`}
         >
-            <DarkOverlay isOpen={isSearchOpen} setIsOpen={onToggleSearchDisplay} />
-            <nav className='app-nav'>
-                <AppLogo />
-                {isSearchOpen ? (
-                    <div ref={searchFormWrapperRef} className='search-form-wrapper'>
-                        <SearchForm {...searchProps} />
-                    </div>
-                ) : (
-                    <SearchTeaser
-                        searchBy={searchBy}
-                        onToggleSearchDisplay={onToggleSearchDisplay}
-                        onSelectSearchModule={onSelectSearchModule}
-                    />
-                )}
-                <Link to='./'>Airbnb your home</Link>
-                <UserMenu />
-            </nav>
+            {isMobile ? (
+                <MobileNavbar
+                    isSearchOpen={isSearchOpen}
+                    onToggleSearchDisplay={onToggleSearchDisplay}
+                    {...searchProps}
+                />
+            ) : (
+                <>
+                    <DarkOverlay isOpen={isSearchOpen} setIsOpen={onToggleSearchDisplay} />
+                    <nav className='app-nav'>
+                        <AppLogo />
+                        {isSearchOpen ? (
+                            <div ref={searchFormWrapperRef} className='search-form-wrapper'>
+                                <SearchForm {...searchProps} />
+                            </div>
+                        ) : (
+                            <SearchTeaser
+                                searchBy={searchBy}
+                                onToggleSearchDisplay={onToggleSearchDisplay}
+                                onSelectSearchModule={onSelectSearchModule}
+                            />
+                        )}
+                        <Link to='./'>Airbnb your home</Link>
+                        <UserMenu />
+                    </nav>
+                </>
+            )}
         </header>
     )
 }
