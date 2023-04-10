@@ -1,9 +1,26 @@
 import { Routes, Route } from 'react-router-dom'
 import { HomePage } from './ts/pages/Home/home-page'
-import './assets/style/main.scss'
 import { StayPage } from './ts/pages/Stay/stay-page'
+import './assets/style/main.scss'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { RootStateProps } from './ts/store/store'
+import { MOBILE_MAX_WIDTH } from './ts/store/app/app.reducer'
+import { setIsMobile } from './ts/store/app/app.action'
 
 function App() {
+    const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
+    useEffect(() => {
+        function handleResize() {
+            const updatedIsMobile = window.innerWidth < MOBILE_MAX_WIDTH
+            if (updatedIsMobile === isMobile) return
+            setIsMobile(updatedIsMobile)
+        }
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [isMobile])
+
     return (
         <div className='App'>
             <Routes>
