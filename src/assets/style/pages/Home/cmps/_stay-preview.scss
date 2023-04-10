@@ -15,6 +15,11 @@
         .stay-location {
             font-size: 1rem;
             font-weight: 600;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            width: 85%;
         }
 
         .stay-rating {
