@@ -46,7 +46,7 @@ export function HomePage() {
     return (
         <section className='main-layout home-page'>
             <AppHeader isMobile={isMobile} />
-            <Filter />
+            <Filter isMobile={isMobile} />
             <StayList stays={stays} onStayDetails={onStayDetails} />
             <AppFooter />
         </section>

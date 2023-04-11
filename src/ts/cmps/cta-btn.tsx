@@ -1,5 +1,5 @@
 interface Props {
-    onClickCB: () => void
+    onClickCB: (ev: React.MouseEvent<HTMLButtonElement>) => void
     txt: string
 }
 
