@@ -1,5 +1,5 @@
 import { utilService } from '../../../../../services/util.service'
-import { SearchByProps, SearchModule } from '../../../../../interfaces/search-by-interface'
+import { SearchByProps } from '../../../../../interfaces/search-by-interface'
 import { SearchDestination } from '../../search-destination'
 import { SearchDates } from '../../search-dates'
 import { SearchGuests } from '../../search-guests'
@@ -39,15 +39,15 @@ export function MobileSearchForm({
 
     return (
         <section className='mobile-search-form'>
-            <button className='btn-btn-close'>
+            <button className='btn btn-close'>
                 <AiOutlineClose />
             </button>
-            <h4 className='underline'>Stays</h4>
+            <h4 className='search-stays'>Stays</h4>
 
             {selectedSearchModule !== 'searchDestination' ? (
                 <div onClick={() => onSelectSearchModule('searchDestination')} className='search-module destination'>
-                    <span>Where</span>
-                    <span>{searchBy.destination}</span>
+                    <span className='search-title'>Where</span>
+                    <span className='search-value'>{searchBy.destination || `I'm flexible`}</span>
                 </div>
             ) : (
                 <div className='search-module expanded'>
@@ -62,8 +62,8 @@ export function MobileSearchForm({
 
             {selectedSearchModule !== 'searchCheckInDate' ? (
                 <div onClick={() => onSelectSearchModule('searchCheckInDate')} className='search-module dates'>
-                    <span>When</span>
-                    <span>{formattedDateRange}</span>
+                    <span className='search-title'>When</span>
+                    <span className='search-value'>{formattedDateRange}</span>
                 </div>
             ) : (
                 <div className='search-module expanded'>
@@ -78,8 +78,10 @@ export function MobileSearchForm({
 
             {selectedSearchModule !== 'searchGuests' ? (
                 <div onClick={() => onSelectSearchModule('searchGuests')} className='search-module guests'>
-                    <span>Who</span>
-                    <span>{utilService.formatGuestCount(searchBy.guests) || 'Add guests'}</span>
+                    <span className='search-title'>Who</span>
+                    <span className='search-value'>
+                        {utilService.formatGuestCount(searchBy.guests) || 'Add guests'}
+                    </span>
                 </div>
             ) : (
                 <div className='search-module expanded'>

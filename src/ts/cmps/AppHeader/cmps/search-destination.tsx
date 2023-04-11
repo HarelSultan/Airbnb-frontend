@@ -51,11 +51,13 @@ export function SearchDestination({ searchBy, onSetSearchBy, onSelectSearchModul
             <h2>Search by region</h2>
             <ol className='clean-list destinations-container'>
                 {destinations.map(destination => (
-                    <li
-                        key={destination.title}
-                        className={`destination-wrapper ${searchBy.destination === destination.title ? 'active' : ''}`}
-                    >
-                        <img onClick={() => onSelectDestination(destination.title)} src={destination.imgSrc} alt='' />
+                    <li key={destination.title} className='destination-wrapper'>
+                        <img
+                            className={`${searchBy.destination === destination.title ? 'active' : ''}`}
+                            onClick={() => onSelectDestination(destination.title)}
+                            src={destination.imgSrc}
+                            alt=''
+                        />
                         <span>{destination.title}</span>
                     </li>
                 ))}
