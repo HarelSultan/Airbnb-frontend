@@ -2,4 +2,48 @@
     display: flex;
     align-items: center;
     padding-top: 14px;
+
+    .btn-filters {
+        position: absolute;
+        right: 34px;
+        font-size: 12px;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        color: $main-text-clr;
+        svg {
+            height: 16px;
+        }
+    }
+
+    .dark-overlay {
+        height: 100vh;
+        top: -50px;
+    }
+
+    .stay-filter {
+        left: 0;
+        top: 1rem;
+        width: 100vw;
+        height: 98vh;
+
+        .stay-filters-container > * {
+            padding: 24px;
+        }
+
+        .filter-header {
+            padding: 12px 24px;
+        }
+
+        .btn-close {
+            top: 0.5rem;
+        }
+
+        .filter-title {
+            font-size: 18px;
+        }
+        .currecy {
+            bottom: 9px;
+        }
+    }
 }
