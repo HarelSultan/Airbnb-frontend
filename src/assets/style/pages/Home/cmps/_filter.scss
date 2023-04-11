@@ -3,13 +3,33 @@
     align-items: center;
     gap: 1.5rem;
     grid-template-columns: 1fr auto;
-    @include for-narrow-layout {
-        padding-top: 1.125rem;
-    }
     position: sticky;
     top: 65px;
     background: white;
     z-index: 2;
+    &::after {
+        content: '';
+        width: 100vw;
+        height: 100%;
+        position: absolute;
+        bottom: 0;
+        left: calc(-1 * $layout-padding-mobile);
+        box-shadow: rgb(0 0 0 / 16%) 0 0 6px;
+    }
+    @include for-narrow-layout {
+        padding-top: 1.125rem;
+        box-shadow: none;
+        &.scrolled::after {
+            box-shadow: rgb(0 0 0 / 16%) 0 0 6px;
+            left: calc(-1 * $layout-padding-normal);
+        }
+    }
+
+    @include for-wide-layout {
+        &::after {
+            left: calc(-1 * $layout-padding-wide);
+        }
+    }
     &.modal-open {
         z-index: 3;
     }

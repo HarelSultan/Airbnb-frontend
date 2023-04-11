@@ -1,3 +1,15 @@
 .search-dates {
-    height: 500px;
+    display: flex;
+    justify-content: center;
+    @include for-narrow-layout {
+        position: absolute;
+        transform: scale(1.1);
+        margin-top: 12px;
+        top: 125%;
+        left: 40.3%;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+    .rdrDefinedRangesWrapper {
+        display: none;
+    }
 }

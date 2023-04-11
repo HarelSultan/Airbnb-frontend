@@ -57,6 +57,7 @@ export function MobileNavbar({
         selectedSearchModule,
         onSetSearchBy,
         onSearchStays,
+        onToggleSearchDisplay,
     }
 
     const stayFilterProps = {
@@ -69,7 +70,7 @@ export function MobileNavbar({
 
     return (
         <nav className='mobile-navbar'>
-            {isSearchOpen ? (
+            {!isSearchOpen ? (
                 <>
                     <MobileSearchTeaser searchBy={searchBy} onToggleSearchDisplay={onToggleSearchDisplay} />
                     <button className='btn btn-filters' onClick={toggleFilterModalDisplay}>

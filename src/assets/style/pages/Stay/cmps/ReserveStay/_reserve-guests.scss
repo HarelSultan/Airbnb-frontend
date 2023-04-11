@@ -14,7 +14,6 @@
     & > *:not(.btn-close) {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr auto;
         gap: 0.5rem;
         padding-block: 12px;
     }

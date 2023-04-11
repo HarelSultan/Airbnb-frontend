@@ -32,6 +32,7 @@ export function AppHeader({ isMobile }: Props) {
     }
 
     const onCloseSearchModule = (ev: React.MouseEvent<HTMLDivElement>) => {
+        if (isMobile) return
         if (!isSearchOpen || !selectedSearchModule) return
         const searchWrapper = searchFormWrapperRef.current
         const clickedElement = ev.target as Node

@@ -6,6 +6,7 @@ import { SearchGuests } from '../../search-guests'
 import { AiOutlineClose } from 'react-icons/ai'
 import { FaSearch } from 'react-icons/fa'
 import { CtaBtn } from '../../../../cta-btn'
+import { stayService } from '../../../../../services/stay.service'
 
 interface Props {
     searchBy: SearchByProps
@@ -13,6 +14,7 @@ interface Props {
     selectedSearchModule: string
     onSelectSearchModule: (searchModule: string) => void
     onSearchStays: (ev: React.MouseEvent<HTMLButtonElement>) => void
+    onToggleSearchDisplay: () => void
 }
 
 export function MobileSearchForm({
@@ -21,6 +23,7 @@ export function MobileSearchForm({
     selectedSearchModule,
     onSelectSearchModule,
     onSearchStays,
+    onToggleSearchDisplay,
 }: Props) {
     const formattedDateRange: string =
         searchBy.checkIn && searchBy.checkOut
@@ -29,6 +32,10 @@ export function MobileSearchForm({
                   checkOut: searchBy.checkOut,
               })
             : 'Add dates'
+
+    const onClearSearchBy = () => {
+        onSetSearchBy(stayService.getDeafultSearchProps())
+    }
 
     const searchModuleProps = {
         searchBy,
@@ -39,10 +46,12 @@ export function MobileSearchForm({
 
     return (
         <section className='mobile-search-form'>
-            <button className='btn btn-close'>
-                <AiOutlineClose />
-            </button>
-            <h4 className='search-stays'>Stays</h4>
+            <div className='mobile-search-header'>
+                <button onClick={onToggleSearchDisplay} className='btn btn-close'>
+                    <AiOutlineClose />
+                </button>
+                <h4 className='search-stays'>Stays</h4>
+            </div>
 
             {selectedSearchModule !== 'searchDestination' ? (
                 <div onClick={() => onSelectSearchModule('searchDestination')} className='search-module destination'>
@@ -60,18 +69,19 @@ export function MobileSearchForm({
                 </div>
             )}
 
-            {selectedSearchModule !== 'searchCheckInDate' ? (
+            {selectedSearchModule !== 'searchCheckInDate' && selectedSearchModule !== 'searchCheckOutDate' ? (
                 <div onClick={() => onSelectSearchModule('searchCheckInDate')} className='search-module dates'>
                     <span className='search-title'>When</span>
                     <span className='search-value'>{formattedDateRange}</span>
                 </div>
             ) : (
-                <div className='search-module expanded'>
+                <div className='search-module search-dates expanded'>
                     <h2>When's your trip?</h2>
                     <SearchDates {...searchModuleProps} />
                     <div className='search-dates-footer'>
-                        <button className='btn btn-skip underline'>Skip</button>
-                        <button className='btn btn-next'>Next</button>
+                        <button onClick={() => onSelectSearchModule('searchGuests')} className='btn btn-skip underline'>
+                            Skip
+                        </button>
                     </div>
                 </div>
             )}
@@ -84,13 +94,15 @@ export function MobileSearchForm({
                     </span>
                 </div>
             ) : (
-                <div className='search-module expanded'>
+                <div className='search-module guests expanded'>
                     <h2>Who's coming?</h2>
                     <SearchGuests {...searchModuleProps} />
                 </div>
             )}
             <div className='search-form-footer'>
-                <button className='btn btn-clear underline'>Clear all</button>
+                <button onClick={onClearSearchBy} className='btn btn-clear underline'>
+                    Clear all
+                </button>
                 <CtaBtn onClickCB={onSearchStays} txt={'Search'} />
             </div>
         </section>

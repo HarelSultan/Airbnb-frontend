@@ -1,14 +1,17 @@
 .search-destination {
+    h2 {
+        display: none;
+    }
+
     .destinations-container {
         display: grid;
         grid-template-rows: 1fr;
         grid-template-columns: repeat(6, 1fr);
         overflow-x: scroll;
         gap: 18px;
-    }
-
-    h2 {
-        display: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     @include for-narrow-layout {
