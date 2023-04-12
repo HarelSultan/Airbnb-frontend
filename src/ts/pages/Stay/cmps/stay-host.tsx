@@ -14,19 +14,23 @@ export function StayHost({ host }: Props) {
     return (
         <section className='stay-host'>
             <div className='host-details-container'>
-                <img src={host.imgUrl} />
                 <div className='host-details'>
                     <h2>Hosted by {hostFirstName}</h2>
                     <p>Joined in June 2014</p>
                 </div>
+                <img src={host.imgUrl} />
             </div>
             <div className='host-attrs'>
-                <AiFillStar className='reviews' />
-                <span>278 Reviews</span>
-                <MdVerifiedUser className='verified' />
-                <span>Identity verified</span>
+                <div className='attr-wrapper flex'>
+                    <AiFillStar className='reviews' />
+                    <span>278 Reviews</span>
+                </div>
+                <div className='attr-wrapper flex'>
+                    <MdVerifiedUser className='verified' />
+                    <span>Identity verified</span>
+                </div>
                 {host.isSuperHost && (
-                    <div className='super-host-attr '>
+                    <div className='attr-wrapper  flex align-center'>
                         <FaMedal />
                         <span>Superhost</span>
                     </div>
@@ -45,13 +49,13 @@ export function StayHost({ host }: Props) {
             <p>Response time: within an hour</p>
             <button className='btn btn-contact'>Contact Host</button>
             <div className='disclaimer'>
+                <p>
+                    To protect your payment, never transfer money or communicate outside of the Airbnb website or app.
+                </p>
                 <img
                     src='https://res.cloudinary.com/dotasvsuv/image/upload/v1681055703/alpi2hzv1xb1i3q5hefe.svg'
                     alt=''
                 />
-                <p>
-                    To protect your payment, never transfer money or communicate outside of the Airbnb website or app.
-                </p>
             </div>
         </section>
     )

@@ -2,8 +2,14 @@
     font-size: 16px;
     .host-details-container {
         display: flex;
+        justify-content: space-between;
         gap: 1rem;
         margin-bottom: 24px;
+        @include for-narrow-layout {
+            flex-direction: row-reverse;
+            justify-content: start;
+        }
+
         img {
             width: 56px;
             border-radius: 50%;
@@ -18,14 +24,14 @@
         }
     }
 
-    .host-attrs,
-    .super-host-attr {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-    }
     .host-attrs {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        align-items: start;
+        gap: 1rem;
         margin-bottom: 24px;
+
         .reviews {
             font-size: 19px;
         }
@@ -33,8 +39,16 @@
             font-size: 17px;
         }
         span {
-            margin-right: 1rem;
+            margin-inline: 9px 0px;
             line-height: 20px;
+        }
+        @include for-narrow-layout {
+            flex-direction: row;
+            gap: 0.5rem;
+
+            span {
+                margin-inline: 10px 15px;
+            }
         }
     }
 
@@ -65,12 +79,18 @@
     .disclaimer {
         display: flex;
         gap: 1rem;
+
         img {
             width: 24px;
         }
         p {
-            width: 28%;
             font-size: 12px;
+        }
+        @include for-narrow-layout {
+            flex-direction: row-reverse;
+            p {
+                width: 28%;
+            }
         }
     }
 }
