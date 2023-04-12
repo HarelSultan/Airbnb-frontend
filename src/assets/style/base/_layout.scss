@@ -24,4 +24,10 @@
     @include for-wide-layout {
         @include layoutGTC($layout-padding-wide);
     }
+
+    &.stay-layout {
+        @include for-wide-stay-layout {
+            @include layoutGTC($layout-padding-wide);
+        }
+    }
 }

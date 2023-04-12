@@ -66,7 +66,7 @@ export function StayPage() {
 
     if (!selectedStay || !reserveBy) return <section>Loadin'</section>
     return (
-        <section className='main-layout stay-page'>
+        <section className='main-layout stay-layout stay-page'>
             <AppHeader />
             <StayHeader stay={selectedStay} />
             <StayGallery imgUrls={selectedStay.imgUrls} />
