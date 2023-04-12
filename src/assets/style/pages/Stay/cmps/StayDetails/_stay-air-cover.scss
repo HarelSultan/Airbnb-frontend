@@ -1,6 +1,10 @@
 .stay-air-cover {
-    padding-block: 32px;
-    font-size: 16px;
+    padding-block: 24px;
+    font-size: 14px;
+    @include for-narrow-layout {
+        padding-block: 32px;
+        font-size: 16px;
+    }
 
     .air-cover-img {
         height: 26px;

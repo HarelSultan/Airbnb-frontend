@@ -1,5 +1,8 @@
 .stay-attributes {
-    padding-block: 32px;
+    padding-block: 32px 24px;
+    @include for-narrow-layout {
+        padding-block: 32px;
+    }
 
     .attribute-container {
         display: flex;

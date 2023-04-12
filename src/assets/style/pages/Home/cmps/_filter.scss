@@ -18,8 +18,7 @@
     }
     @include for-narrow-layout {
         padding-top: 1.125rem;
-        box-shadow: none;
-        &.scrolled::after {
+        &::after {
             box-shadow: rgb(0 0 0 / 16%) 0 0 6px;
             left: calc(-1 * $layout-padding-normal);
         }

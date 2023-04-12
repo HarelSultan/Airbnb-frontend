@@ -1,15 +1,16 @@
 import { StayProps } from '../../../interfaces/stay-interface'
 import { stayService } from '../../../services/stay.service'
-import { FiShare } from 'react-icons/fi'
+import { FiShare, FiHeart } from 'react-icons/fi'
 import { FaMedal } from 'react-icons/fa'
 import { BsHeart } from 'react-icons/bs'
 import { AiFillStar } from 'react-icons/ai'
 
 interface Props {
     stay: StayProps
+    isMobile: boolean
 }
 
-export function StayHeader({ stay }: Props) {
+export function StayHeader({ stay, isMobile }: Props) {
     return (
         <section className='stay-header'>
             <h2 className='stay-title'>{stay.name}</h2>
@@ -32,16 +33,18 @@ export function StayHeader({ stay }: Props) {
                     )}
                     <span className='location underline'>{stay.loc.address}</span>
                 </div>
-                <div className='action-btns-container'>
-                    <button className='btn btn-share underline'>
-                        <FiShare />
-                        Share
-                    </button>
-                    <button className='btn btn-save underline'>
-                        <BsHeart />
-                        Save
-                    </button>
-                </div>
+                {!isMobile && (
+                    <div className='action-btns-container'>
+                        <button className='btn btn-share underline'>
+                            <FiShare />
+                            Share
+                        </button>
+                        <button className='btn btn-save underline'>
+                            <FiHeart />
+                            Save
+                        </button>
+                    </div>
+                )}
             </div>
         </section>
     )

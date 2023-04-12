@@ -1,5 +1,8 @@
 .stay-summary {
-    padding-block: 32px 48px;
+    padding-block: 32px;
+    @include for-narrow-layout {
+        padding-block: 32px 48px;
+    }
     font-size: 16px;
     .summary-translation {
         display: flex;

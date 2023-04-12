@@ -1,5 +1,8 @@
 .stay-sleeping-arrangement {
-    padding-block: 48px;
+    padding-block: 32px 24px;
+    @include for-narrow-layout {
+        padding-block: 48px;
+    }
     font-size: 16px;
     h3 {
         font-size: 22px;

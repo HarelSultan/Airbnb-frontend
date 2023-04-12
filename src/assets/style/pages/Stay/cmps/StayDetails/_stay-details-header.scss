@@ -1,21 +1,26 @@
 .stay-details-header {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr auto;
-    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
     padding-bottom: 24px;
 
     h3 {
-        font-family: $font-family-bold;
+        font-family: $font-family-medium;
         font-size: 22px;
+        max-width: 60%;
+        @include for-narrow-layout {
+            max-width: 100%;
+        }
     }
     .stay-capacity {
         font-size: 16px;
     }
 
     .host-img-wrapper {
-        width: 56px;
-        grid-area: 1/2/3/3;
+        width: 48px;
+        @include for-narrow-layout {
+            width: 56px;
+        }
         img {
             border-radius: 50%;
         }

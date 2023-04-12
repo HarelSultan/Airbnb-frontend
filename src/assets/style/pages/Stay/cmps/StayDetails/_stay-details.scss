@@ -15,12 +15,19 @@
     }
 
     .reserve-dates {
-        padding: 48px 0;
+        padding-block: 24px;
+        @include for-narrow-layout {
+            padding: 48px 0;
+        }
         position: static;
         z-index: 0;
         box-shadow: none;
+        .rdrDateRangePickerWrapper,
+        .rdrCalendarWrapper,
         .rdrMonth {
-            width: 480px;
+            // width: 480px;
+            width: 100%;
+            // font-size: 1.1em;
         }
 
         .rdrDefinedRangesWrapper {

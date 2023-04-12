@@ -1,0 +1,43 @@
+.stay-img-carousel {
+    margin-top: -2px;
+    position: relative;
+
+    .carousel-root {
+        img {
+            border-radius: 0;
+            aspect-ratio: 1/0.66;
+        }
+    }
+
+    button {
+        background-color: white;
+        padding: 9.5px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    .btn-go-back {
+        position: absolute;
+        top: 10px;
+        left: 13px;
+        svg {
+            margin-right: 1px;
+            margin-left: -1px;
+        }
+    }
+
+    .action-btns-container {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        position: absolute;
+        top: 10px;
+        right: 13px;
+        z-index: 1;
+        svg {
+            font-size: 16px;
+            stroke-width: 3px;
+        }
+    }
+}

@@ -1,23 +1,33 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { AppHeader } from '../../cmps/AppHeader/app-header'
-import { StayProps } from '../../interfaces/stay-interface'
+import { useSelector } from 'react-redux'
+
 import { stayService } from '../../services/stay.service'
-import { ReserveStay } from './cmps/ReserveStay/reserve-stay'
-import { StayGallery } from './cmps/stay-gallery'
-import { StayHeader } from './cmps/stay-header'
-import { StayDetails } from './cmps/StayDetails/stay-details'
-import { StayReviews } from './cmps/StayReviews/stay-reviews'
-import { ReserveByProps } from '../../interfaces/reserve-by-interface'
 import { utilService } from '../../services/util.service'
+
+import { StayProps } from '../../interfaces/stay-interface'
+import { ReserveByProps } from '../../interfaces/reserve-by-interface'
+import { RootStateProps } from '../../store/store'
+
+import { AppHeader } from '../../cmps/AppHeader/app-header'
+import { StayHeader } from './cmps/stay-header'
+import { StayGallery } from './cmps/stay-gallery'
+import { ImgCarousel } from '../Home/cmps/img-carousel'
+import { StayDetails } from './cmps/StayDetails/stay-details'
+import { ReserveStay } from './cmps/ReserveStay/reserve-stay'
+import { StayReviews } from './cmps/StayReviews/stay-reviews'
 import { StayMap } from './cmps/stay-map'
 import { StayHost } from './cmps/stay-host'
 import { StayThingsToKnow } from './cmps/things-to-know'
 import { AppFooter } from '../../cmps/app-footer'
 
+import { GrPrevious } from 'react-icons/gr'
+import { StayImgCarousel } from './cmps/stay-img-carousel'
+
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
     const [reserveBy, setReserveBy] = useState<ReserveByProps | null>(null)
+    const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
 
     const { stayId } = useParams()
     const navigate = useNavigate()
@@ -67,9 +77,10 @@ export function StayPage() {
     if (!selectedStay || !reserveBy) return <section>Loadin'</section>
     return (
         <section className='main-layout stay-layout stay-page'>
-            <AppHeader />
-            <StayHeader stay={selectedStay} />
-            <StayGallery imgUrls={selectedStay.imgUrls} />
+            {!isMobile && <AppHeader />}
+            {isMobile && <StayImgCarousel imgUrls={selectedStay.imgUrls} />}
+            <StayHeader stay={selectedStay} isMobile={isMobile} />
+            {!isMobile && <StayGallery imgUrls={selectedStay.imgUrls} />}
             <div className='layout-wrapper'>
                 <StayDetails
                     stay={selectedStay}
@@ -78,17 +89,19 @@ export function StayPage() {
                     onSetReserveBy={onSetReserveBy}
                     nightsCount={nightsCount}
                 />
-                <ReserveStay
-                    price={selectedStay.price}
-                    reviews={selectedStay.reviews}
-                    takenDates={selectedStay.takenDates}
-                    reserveBy={reserveBy}
-                    onSetReserveBy={onSetReserveBy}
-                    onReserveStay={onReserveStay}
-                    nightsCount={nightsCount}
-                />
+                {!isMobile && (
+                    <ReserveStay
+                        price={selectedStay.price}
+                        reviews={selectedStay.reviews}
+                        takenDates={selectedStay.takenDates}
+                        reserveBy={reserveBy}
+                        onSetReserveBy={onSetReserveBy}
+                        onReserveStay={onReserveStay}
+                        nightsCount={nightsCount}
+                    />
+                )}
             </div>
-            <StayReviews reviews={selectedStay.reviews} />
+            {/* <StayReviews reviews={selectedStay.reviews} /> */}
             <StayMap
                 lat={selectedStay.loc.lat}
                 lng={selectedStay.loc.lng}

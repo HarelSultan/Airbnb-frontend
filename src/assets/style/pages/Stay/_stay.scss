@@ -1,17 +1,24 @@
 .stay-page {
     max-width: 1280px;
     margin: 0 auto;
+    width: 100%;
 
     .app-header {
         position: relative;
     }
 
+    .stay-header,
     .layout-wrapper,
     .stay-reviews,
     .stay-map,
     .stay-host,
     .stay-things-to-know {
-        padding-block: 48px;
+        &:not(.stay-map) {
+            padding-block: 24px;
+        }
+        @include for-narrow-layout {
+            padding-block: 48px;
+        }
         position: relative;
         &::after {
             content: '';
@@ -26,10 +33,18 @@
         }
     }
 
-    .layout-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 0.6fr;
-        gap: 4rem;
+    @include for-narrow-layout {
+        .stay-header {
+            padding-block: 24px 0;
+            &::after {
+                content: none;
+            }
+        }
+        .layout-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 0.6fr;
+            gap: 4rem;
+        }
     }
 
     .app-footer {
