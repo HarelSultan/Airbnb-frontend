@@ -12,17 +12,15 @@ import { RootStateProps } from '../../store/store'
 import { AppHeader } from '../../cmps/AppHeader/app-header'
 import { StayHeader } from './cmps/stay-header'
 import { StayGallery } from './cmps/stay-gallery'
-import { ImgCarousel } from '../Home/cmps/img-carousel'
 import { StayDetails } from './cmps/StayDetails/stay-details'
 import { ReserveStay } from './cmps/ReserveStay/reserve-stay'
-import { StayReviews } from './cmps/StayReviews/stay-reviews'
 import { StayMap } from './cmps/stay-map'
 import { StayHost } from './cmps/stay-host'
 import { StayThingsToKnow } from './cmps/things-to-know'
 import { AppFooter } from '../../cmps/app-footer'
-
-import { GrPrevious } from 'react-icons/gr'
 import { StayImgCarousel } from './cmps/stay-img-carousel'
+import { StayReviews } from './cmps/StayReviews/stay-reviews'
+import { MobileReserveStay } from './cmps/ReserveStay/mobile-reserve-stay'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -89,7 +87,9 @@ export function StayPage() {
                     onSetReserveBy={onSetReserveBy}
                     nightsCount={nightsCount}
                 />
-                {!isMobile && (
+                {isMobile ? (
+                    <MobileReserveStay price={selectedStay.price} reserveBy={reserveBy} onReserveStay={onReserveStay} />
+                ) : (
                     <ReserveStay
                         price={selectedStay.price}
                         reviews={selectedStay.reviews}
@@ -101,7 +101,7 @@ export function StayPage() {
                     />
                 )}
             </div>
-            {/* <StayReviews reviews={selectedStay.reviews} /> */}
+            <StayReviews reviews={selectedStay.reviews} />
             <StayMap
                 lat={selectedStay.loc.lat}
                 lng={selectedStay.loc.lng}

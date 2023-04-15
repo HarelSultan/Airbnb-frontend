@@ -12,6 +12,13 @@
         padding-bottom: 24px;
     }
 
+    @include for-wide-stay-layout {
+        .amenities-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
     .amenity-wrapper {
         // display: flex;
         // gap: 0.5em;

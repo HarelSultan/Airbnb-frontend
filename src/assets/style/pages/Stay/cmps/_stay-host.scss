@@ -1,4 +1,5 @@
 .stay-host {
+    padding-block: 32px 24px;
     font-size: 16px;
     .host-details-container {
         display: flex;
@@ -65,6 +66,10 @@
     }
 
     .btn-contact {
+        width: 100%;
+        @include for-narrow-layout {
+            width: max-content;
+        }
         margin-block: 24px;
         border: 1px solid #222222;
         border-radius: 0.5em;

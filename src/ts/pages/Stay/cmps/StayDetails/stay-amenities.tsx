@@ -8,11 +8,13 @@ export function StayAmenities({ amenities }: Props) {
     return (
         <section className='stay-amenities'>
             <h3>What this place offers</h3>
-            {amenitiesToDisplay.map(amenity => (
-                <div key={amenity} className='amenity-wrapper'>
-                    <span>{amenity}</span>
-                </div>
-            ))}
+            <div className='amenities-container'>
+                {amenitiesToDisplay.map(amenity => (
+                    <div key={amenity} className='amenity-wrapper'>
+                        <span>{amenity}</span>
+                    </div>
+                ))}
+            </div>
             <button className='btn btn-more-amenities'>Show all {amenities.length} amenities</button>
         </section>
     )

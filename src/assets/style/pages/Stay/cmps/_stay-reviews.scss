@@ -1,6 +1,9 @@
 .stay-reviews {
+    overflow-x: scroll;
+    padding-block: 32px 24px;
     .stay-rating {
         font-family: $font-family-medium;
+
         margin-bottom: 32px;
         & > * {
             font-size: 22px;
@@ -13,14 +16,31 @@
     }
 
     .categories-rating-container {
-        display: grid;
-        grid-template-rows: 1fr 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
-        margin-bottom: 32px;
+        display: none;
+        @include for-narrow-layout {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 32px;
+            column-gap: 13.5%;
+        }
     }
 
     .reviews-container {
         display: flex;
-        flex-direction: column;
+        gap: 16px;
+        @include for-narrow-layout {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        @include for-wide-stay-layout {
+            flex-direction: row;
+            flex-wrap: wrap;
+            column-gap: 14%;
+            .stay-review {
+                width: 43%;
+            }
+        }
     }
 }

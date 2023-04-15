@@ -1,0 +1,29 @@
+.mobile-reserve-stay {
+    width: 100%;
+    background-color: white;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    border-top: 1px solid rgb(221, 221, 221);
+    font-size: 14px;
+
+    .reservation-info {
+        .nightly-price,
+        .dates {
+            font-family: $font-family-medium;
+        }
+    }
+
+    .nightly-price,
+    .btn-cta {
+        font-size: 16px;
+    }
+
+    .btn-cta {
+        width: 108px;
+    }
+}

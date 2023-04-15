@@ -10,9 +10,9 @@
         align-items: center;
         font-family: $font-family-medium;
         margin-top: 8px;
-        @include for-narrow-layout {
-            margin-top: 0;
-        }
+        // @include for-narrow-layout {
+        //     margin-top: 0;
+        // }
     }
 
     .stay-info {

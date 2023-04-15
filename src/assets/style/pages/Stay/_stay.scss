@@ -9,13 +9,16 @@
 
     .stay-header,
     .layout-wrapper,
+    .stay-things-to-know {
+        padding-block: 24px;
+    }
+
+    .stay-header,
+    .layout-wrapper,
     .stay-reviews,
     .stay-map,
     .stay-host,
     .stay-things-to-know {
-        &:not(.stay-map) {
-            padding-block: 24px;
-        }
         @include for-narrow-layout {
             padding-block: 48px;
         }
@@ -32,6 +35,31 @@
             pointer-events: none;
         }
     }
+    // .stay-header,
+    // .layout-wrapper,
+    // .stay-reviews,
+    // .stay-map,
+    // .stay-host,
+    // .stay-things-to-know {
+    //     &:not(.stay-map, .stay-reviews, .stay-header) {
+    //         padding-block: 24px;
+    //     }
+    //     @include for-narrow-layout {
+    //         padding-block: 48px;
+    //     }
+    //     position: relative;
+    //     &::after {
+    //         content: '';
+    //         height: 100%;
+    //         position: absolute;
+    //         top: 0;
+    //         left: 0;
+    //         width: 100%;
+    //         z-index: 1;
+    //         box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0;
+    //         pointer-events: none;
+    //     }
+    // }
 
     @include for-narrow-layout {
         .stay-header {

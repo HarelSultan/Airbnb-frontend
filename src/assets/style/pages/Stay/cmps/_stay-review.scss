@@ -1,4 +1,14 @@
 .stay-review {
+    min-width: 280px;
+    max-height: 260px;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    padding: 16px;
+
+    @include for-narrow-layout {
+        border: none;
+        padding: 0;
+    }
     font-size: 16px;
     // height: 116px;
     margin-bottom: 2.5rem;
@@ -19,5 +29,12 @@
             font-size: 14px;
             color: $sub-text-clr;
         }
+    }
+
+    .review-desc {
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 }
