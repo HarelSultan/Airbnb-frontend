@@ -14,7 +14,7 @@
         @include for-narrow-layout {
             height: 480px;
         }
-        div:first-child {
+        div:first-child:not(.map-marker) {
             border-radius: 1rem;
             @include for-narrow-layout {
                 border-radius: 0;
