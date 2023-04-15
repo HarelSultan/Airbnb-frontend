@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { RootStateProps } from './ts/store/store'
 import { MOBILE_MAX_WIDTH } from './ts/store/app/app.reducer'
 import { setIsMobile } from './ts/store/app/app.action'
+import { BookingPage } from './ts/pages/Booking/booking-page'
 
 function App() {
     const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
@@ -26,6 +27,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/stay/:stayId' element={<StayPage />} />
+                <Route path='/book/:stayId' element={<BookingPage />} />
             </Routes>
         </div>
     )
