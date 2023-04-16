@@ -1,0 +1,21 @@
+.booking-page {
+    .confirmation-header {
+        padding: 21px 16px;
+        display: flex;
+        justify-content: center;
+        position: sticky;
+        .btn-go-back {
+            position: absolute;
+            left: 20px;
+            top: 25px;
+        }
+
+        h2 {
+            font-family: $font-family-bold;
+            font-size: 16px;
+            @include for-narrow-layout {
+                font-size: 32px;
+            }
+        }
+    }
+}

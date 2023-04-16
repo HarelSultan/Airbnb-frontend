@@ -13,6 +13,10 @@ import { GrPrevious } from 'react-icons/gr'
 import { PricingSummary } from '../Stay/cmps/ReserveStay/cmps/pricing-summary'
 import { AppFooter } from '../../cmps/app-footer'
 import { CtaBtn } from '../../cmps/cta-btn'
+import { TripDetails } from './cmps/trip-details'
+import { StayListingCard } from './cmps/stay-listing-card'
+import { MobileStayBooking } from './cmps/mobile-stay-booking'
+import { DesktopStayBooking } from './cmps/desktop-stay-booking'
 
 export function BookingPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -59,6 +63,13 @@ export function BookingPage() {
     const nightsCount = utilService.getNightsCount(reserveBy) || 1
 
     if (!selectedStay || !reserveBy) return <section>Loadin'</section>
+    const stayBookingProps = {
+        stay: selectedStay,
+        reserveBy,
+        nightsCount,
+        onReservationComplete,
+    }
+
     return (
         <section className='booking-page'>
             {!isMobile && (
@@ -72,37 +83,14 @@ export function BookingPage() {
                 </button>
                 <h2>Confirm and pay</h2>
             </section>
-            <section className='trip-details'>
-                <h4>Your trip</h4>
-                <div className='trip-dates'>
-                    <h5>Dates</h5>
-                    <p>{utilService.formatDateRange({ checkIn: reserveBy.checkIn, checkOut: reserveBy.checkOut })}</p>
-                    <button className='btn btn-edit'>Edit</button>
-                </div>
-                <div className='trip-check-in-time'>
-                    <h5>Check-in time</h5>
-                    <p>8:00 PM - 10:00 PM</p>
-                    <button className='btn btn-edit'>Edit</button>
-                </div>
-                <div className='trip-guests'>
-                    <h5>Guests</h5>
-                    <p>{utilService.formatGuestCount(reserveBy.guests)}</p>
-                    <button className='btn btn-edit'>Edit</button>
-                </div>
-            </section>
 
-            {isMobile && (
-                <section className='price-details'>
-                    <h4>Price details</h4>
-                    <PricingSummary nightlyPrice={selectedStay.price} nightsCount={nightsCount} />
-                </section>
-            )}
-            <section className='login-signup'>
-                <h4>Log in or sign up to book</h4>
+            {isMobile ? <MobileStayBooking {...stayBookingProps} /> : <DesktopStayBooking {...stayBookingProps} />}
 
-                <CtaBtn onClickCB={onReservationComplete} txt={'Continue'} />
-            </section>
             <AppFooter />
         </section>
     )
 }
+
+// Mobile - StayListingCard,AirCover. TripDetails. PriceDetails. LoginSignup
+
+// Desktop LayoutWrapper -

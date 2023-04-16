@@ -1,6 +1,9 @@
 .stay-reviews {
-    overflow-x: scroll;
     padding-block: 32px 24px;
+    overflow-x: scroll;
+    @include for-narrow-layout {
+        overflow-x: hidden;
+    }
     .stay-rating {
         font-family: $font-family-medium;
 
@@ -29,6 +32,7 @@
     .reviews-container {
         display: flex;
         gap: 16px;
+
         @include for-narrow-layout {
             flex-direction: column;
             gap: 0;
