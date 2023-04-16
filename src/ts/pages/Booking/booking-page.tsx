@@ -77,7 +77,7 @@ export function BookingPage() {
                     <AppLogo />
                 </header>
             )}
-            <section className='full confirmation-header'>
+            <section className={`confirmation-header ${isMobile ? 'full' : ''}`}>
                 <button onClick={onGoBack} className='btn btn-go-back'>
                     <GrPrevious />
                 </button>

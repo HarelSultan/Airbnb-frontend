@@ -6,7 +6,7 @@ import { StayProps, StayReviewProps } from '../interfaces/stay-interface'
 import { FilterByProps } from '../interfaces/filter-by-interface'
 import { SearchByProps } from '../interfaces/search-by-interface'
 import { ReserveByProps } from '../interfaces/reserve-by-interface'
-const STORAGE_KEY: string = 'stay_DB'
+const STORAGE_KEY_STAY_DB: string = 'stay_DB'
 
 _createStays()
 
@@ -29,14 +29,14 @@ async function query(
     console.log(searchBy)
     console.log(filterBy)
 
-    let stays = (await storageService.query(STORAGE_KEY)) as StayProps[]
+    let stays = (await storageService.query(STORAGE_KEY_STAY_DB)) as StayProps[]
     stays = searchStays(stays, searchBy)
     stays = filterStays(stays, filterBy)
     return stays
 }
 
 async function getById(stayId: string) {
-    return storageService.get(STORAGE_KEY, stayId) as Promise<StayProps>
+    return storageService.get(STORAGE_KEY_STAY_DB, stayId) as Promise<StayProps>
 }
 
 function searchStays(stays: StayProps[], searchBy: SearchByProps) {
@@ -153,10 +153,10 @@ function getDefaultFilterProps() {
 }
 
 function _createStays() {
-    let stays = utilService.loadFromStorage(STORAGE_KEY)
+    let stays = utilService.loadFromStorage(STORAGE_KEY_STAY_DB)
     if (!stays || !stays.length) {
         stays = _makeStays()
-        utilService.saveToStorage(STORAGE_KEY, stays)
+        utilService.saveToStorage(STORAGE_KEY_STAY_DB, stays)
     }
 }
 

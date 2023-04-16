@@ -1,4 +1,5 @@
 import { CtaBtn } from '../../../cmps/cta-btn'
+import { LoginSignup } from '../../../cmps/login-signup'
 import { ReserveByProps } from '../../../interfaces/reserve-by-interface'
 import { StayProps } from '../../../interfaces/stay-interface'
 import { PricingSummary } from '../../Stay/cmps/ReserveStay/cmps/pricing-summary'
@@ -34,11 +35,7 @@ export function MobileStayBooking({ stay, reserveBy, nightsCount, onReservationC
                 <PricingSummary nightlyPrice={stay.price} nightsCount={nightsCount} />
             </section>
             <div className='seperator full'></div>
-            <section className='login-signup'>
-                <h4>Log in or sign up to book</h4>
-
-                <CtaBtn onClickCB={onReservationComplete} txt={'Continue'} />
-            </section>
+            <LoginSignup isSignningUp={false} />
         </section>
     )
 }

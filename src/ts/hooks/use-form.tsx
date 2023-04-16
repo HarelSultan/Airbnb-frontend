@@ -18,7 +18,7 @@ export const useFormRegister = (
         return cb({ ...initialState, [field]: value })
     }
 
-    const register = (field: string, type = '') => {
+    const register = (field: string, type = 'text') => {
         console.log(initialState)
         return {
             type,
