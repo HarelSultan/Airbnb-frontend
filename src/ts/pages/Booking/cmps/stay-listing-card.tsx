@@ -12,12 +12,12 @@ export function StayListingCard({ stay }: Props) {
             <div className='stay-img-wrapper'>
                 <img src={stay.imgUrls[0]} alt='' />
             </div>
-            <div className='stay-details'>
+            <div className='listing-details'>
                 <p className='stay-type'>{stay.type}</p>
                 <p className='stay-name'>{stay.name}</p>
                 <div className='stay-rating'>
                     <AiFillStar />
-                    {stayService.getStayAverageRating(stay.reviews).toFixed(2)}
+                    <span className='avg-rating'>{stayService.getStayAverageRating(stay.reviews).toFixed(2)}</span>
                     <span className='reviews-count'>({stay.reviews.length})</span>
                 </div>
             </div>

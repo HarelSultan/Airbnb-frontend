@@ -1,21 +1,87 @@
 .booking-page {
+    .booking-header {
+        padding: 24px;
+    }
+
     .confirmation-header {
-        padding: 21px 16px;
+        background-color: white;
         display: flex;
         justify-content: center;
+        padding-block: 16px;
         position: sticky;
+        top: 0;
         .btn-go-back {
             position: absolute;
             left: 20px;
-            top: 25px;
+            top: 20px;
         }
 
         h2 {
             font-family: $font-family-bold;
             font-size: 16px;
-            @include for-narrow-layout {
+        }
+
+        @include for-narrow-layout {
+            padding-block: 64px 16px;
+            justify-content: start;
+
+            h2 {
+                font-family: $font-family-medium;
                 font-size: 32px;
+                margin-left: 32px;
+            }
+
+            .btn-go-back {
+                position: static;
             }
         }
+    }
+
+    .booking-header,
+    .stay-listing-card {
+        position: relative;
+        &::after {
+            content: '';
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0;
+            pointer-events: none;
+        }
+    }
+
+    .air-cover {
+        display: flex;
+        align-items: baseline;
+        font-size: 14px;
+        padding-block: 24px;
+        img {
+            height: 11px;
+            padding-left: 2px;
+        }
+        @include for-narrow-layout {
+            font-size: 16px;
+            img {
+                height: 13px;
+            }
+        }
+    }
+
+    .price-details {
+        padding-block: 24px;
+        font-size: 16px;
+        h4 {
+            font-size: 22px;
+            font-family: $font-family-medium;
+        }
+    }
+
+    .app-footer {
+        padding-block: 24px;
+        position: relative;
+        background-color: rgb(235, 235, 235);
     }
 }

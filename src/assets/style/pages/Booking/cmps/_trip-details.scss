@@ -1,0 +1,30 @@
+.trip-details {
+    font-size: 16px;
+    & > * {
+        padding-bottom: 24px;
+    }
+
+    h4 {
+        font-size: 22px;
+        font-family: $font-family-medium;
+        padding-top: 24px;
+    }
+
+    .trip-detail {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: 1fr 1fr;
+
+        h5,
+        .btn-edit {
+            font-size: inherit;
+            font-family: $font-family-medium;
+        }
+        p {
+            margin-top: 4px;
+        }
+        .btn-edit {
+            grid-area: 1/2/2/3;
+        }
+    }
+}

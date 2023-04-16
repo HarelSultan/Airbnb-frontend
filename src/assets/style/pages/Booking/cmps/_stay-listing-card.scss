@@ -1,0 +1,36 @@
+.stay-listing-card {
+    padding-block: 24px;
+    display: flex;
+    font-size: 12px;
+
+    .stay-img-wrapper {
+        width: 126px;
+        img {
+            height: 100%;
+            border-radius: 8px;
+        }
+    }
+    .listing-details {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        padding-left: 12px;
+    }
+
+    .stay-type {
+        color: $sub-text-clr;
+    }
+    .stay-name {
+        font-size: 14px;
+        width: 85%;
+    }
+    .stay-rating {
+        display: flex;
+        align-self: end;
+        line-height: 1;
+
+        .avg-rating {
+            padding-inline: 3px;
+            font-family: $font-family-medium;
+        }
+    }
+}

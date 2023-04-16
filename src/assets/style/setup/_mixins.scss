@@ -22,7 +22,7 @@
     }
 }
 
-@mixin for-wide-stay-layout {
+@mixin for-wide-secondary-layout {
     @media (min-width: $stay-break-wide) {
         @content;
     }

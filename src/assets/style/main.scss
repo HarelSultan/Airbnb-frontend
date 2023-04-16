@@ -68,4 +68,7 @@
 
 // Booking:
 @import './pages/Booking/_booking.scss';
+@import './pages/Booking/cmps/_mobile-stay-booking.scss';
+@import './pages/Booking/cmps/_desktop-stay-booking.scss';
+@import './pages/Booking/cmps/_stay-listing-card.scss';
 @import './pages/Booking/cmps/_trip-details.scss';

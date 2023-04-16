@@ -25,8 +25,8 @@
         @include layoutGTC($layout-padding-wide);
     }
 
-    &.stay-layout {
-        @include for-wide-stay-layout {
+    &.secondary-layout {
+        @include for-wide-secondary-layout {
             @include layoutGTC($layout-padding-wide);
         }
     }

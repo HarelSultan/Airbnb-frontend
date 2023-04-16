@@ -71,13 +71,13 @@ export function BookingPage() {
     }
 
     return (
-        <section className='booking-page'>
+        <section className='main-layout secondary-layout booking-page'>
             {!isMobile && (
-                <header className='booking-header'>
+                <header className='full booking-header'>
                     <AppLogo />
                 </header>
             )}
-            <section className='confirmation-header'>
+            <section className='full confirmation-header'>
                 <button onClick={onGoBack} className='btn btn-go-back'>
                     <GrPrevious />
                 </button>

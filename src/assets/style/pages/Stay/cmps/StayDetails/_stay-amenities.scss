@@ -12,7 +12,7 @@
         padding-bottom: 24px;
     }
 
-    @include for-wide-stay-layout {
+    @include for-wide-secondary-layout {
         .amenities-container {
             display: grid;
             grid-template-columns: 1fr 1fr;

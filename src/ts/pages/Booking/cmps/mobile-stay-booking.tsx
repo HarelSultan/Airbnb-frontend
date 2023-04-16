@@ -15,14 +15,25 @@ interface Props {
 
 export function MobileStayBooking({ stay, reserveBy, nightsCount, onReservationComplete }: Props) {
     return (
-        <section className='mobile-stay-booking'>
+        <section className='main-layout secondary-layout full mobile-stay-booking'>
             <StayListingCard stay={stay} />
-            <StayAirCover />
+            <section className='air-cover'>
+                <p>Your booking is protected by</p>
+                <img
+                    className='air-cover-img'
+                    src='https://res.cloudinary.com/dotasvsuv/image/upload/v1680445107/f9axjhl7sxlnhy5owbbw.webp'
+                    alt=''
+                />
+            </section>
+            <div className='seperator full'></div>
             <TripDetails reserveBy={reserveBy} />
+            <div className='seperator full'></div>
+
             <section className='price-details'>
                 <h4>Price details</h4>
                 <PricingSummary nightlyPrice={stay.price} nightsCount={nightsCount} />
             </section>
+            <div className='seperator full'></div>
             <section className='login-signup'>
                 <h4>Log in or sign up to book</h4>
 

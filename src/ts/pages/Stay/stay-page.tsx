@@ -81,7 +81,7 @@ export function StayPage() {
 
     if (!selectedStay || !reserveBy) return <section>Loadin'</section>
     return (
-        <section className='main-layout stay-layout stay-page'>
+        <section className='main-layout secondary-layout stay-page'>
             {!isMobile && <AppHeader />}
             {isMobile && <StayImgCarousel imgUrls={selectedStay.imgUrls} />}
             <StayHeader stay={selectedStay} isMobile={isMobile} />

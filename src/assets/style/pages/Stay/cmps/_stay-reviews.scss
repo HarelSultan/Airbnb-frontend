@@ -38,7 +38,7 @@
             gap: 0;
         }
 
-        @include for-wide-stay-layout {
+        @include for-wide-secondary-layout {
             flex-direction: row;
             flex-wrap: wrap;
             column-gap: 14%;
