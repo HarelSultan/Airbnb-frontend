@@ -7,7 +7,12 @@
     .booking-stay-details {
         padding-inline: 24px;
         border: 1px solid rgb(221, 221, 221);
-        margin-bottom: 60px;
+        // margin-bottom: 60px;
         border-radius: 12px;
+        height: max-content;
+        position: sticky;
+        top: 75px;
+        margin-top: 24px;
+        transition: bottom 1.1s ease;
     }
 }

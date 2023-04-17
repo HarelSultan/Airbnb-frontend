@@ -4,7 +4,9 @@
     font-size: 12px;
 
     .stay-img-wrapper {
-        width: 126px;
+        min-width: 124px;
+        width: 124px;
+        aspect-ratio: 1/0.85;
         img {
             height: 100%;
             border-radius: 8px;
@@ -21,12 +23,18 @@
     }
     .stay-name {
         font-size: 14px;
-        width: 85%;
+        line-height: 18px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        // width: 85%;
     }
     .stay-rating {
         display: flex;
         align-self: end;
         line-height: 1;
+        margin-top: 8px;
 
         .avg-rating {
             padding-inline: 3px;

@@ -40,6 +40,7 @@ export function MobileStayBooking({ stay, reserveBy, nightsCount, onCompleteRese
             <div className='seperator full'></div>
             {loggedInUser ? (
                 <ConfirmBooking
+                    isMobile={true}
                     loggedInUser={loggedInUser}
                     checkIn={reserveBy.checkIn}
                     onCompleteReservation={onCompleteReservation}

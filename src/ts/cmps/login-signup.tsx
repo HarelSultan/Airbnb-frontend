@@ -43,13 +43,15 @@ export function LoginSignup({ isSignningUp }: Props) {
             <h2>{isSignup ? 'Sign up' : 'Log in'}</h2>
             <div className='login-signup-header'>
                 <p>{isSignup ? 'Already a member ?' : `Don't have an account ?`}</p>
-                <button onClick={toggleIsSignup} className='btn btn-toggle underline'>
-                    {isSignup ? 'Log in' : 'Sign up'}
-                </button>
-                |
-                <button onClick={onDemoUserLogin} className='btn btn-demo-user underline'>
-                    <p>Continue with demo user</p>
-                </button>
+                <div className='btns-container'>
+                    <button onClick={toggleIsSignup} className='btn btn-toggle underline'>
+                        {isSignup ? 'Log in' : 'Sign up'}
+                    </button>
+                    |
+                    <button onClick={onDemoUserLogin} className='btn btn-demo-user underline'>
+                        <p>Continue with demo user</p>
+                    </button>
+                </div>
             </div>
             {isSignup && (
                 <label className='full-name'>

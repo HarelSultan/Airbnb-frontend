@@ -3,21 +3,24 @@ import { UserProps } from '../../../interfaces/user-interface'
 import { utilService } from '../../../services/util.service'
 
 interface Props {
+    isMobile: boolean
     loggedInUser: UserProps
     checkIn: Date
     onCompleteReservation: () => void
 }
 
-export function ConfirmBooking({ loggedInUser, checkIn, onCompleteReservation }: Props) {
+export function ConfirmBooking({ isMobile, loggedInUser, checkIn, onCompleteReservation }: Props) {
     const lastCancellationDate = new Date(checkIn)
     lastCancellationDate.setDate(checkIn.getDate() - 1)
 
     return (
-        <section className='confirm-booking'>
+        <section className={`confirm-booking ${isMobile ? 'main-layout secondary-layout full' : ''}`}>
             <div className='confirm-booking-header'>
                 <h2>{`Hi ${utilService.getFirstName(loggedInUser.fullName)}, you're logged in`}</h2>
                 <p>Review your booking details to continue.</p>
             </div>
+            {isMobile && <div className='seperator full'></div>}
+
             <div className='cancellation'>
                 <h2>Cancellation policy</h2>
                 <p className='cancellation-time-limit'>
@@ -28,6 +31,8 @@ export function ConfirmBooking({ loggedInUser, checkIn, onCompleteReservation }:
                     disruptions caused by COVID-19.
                 </p>
             </div>
+
+            {isMobile && <div className='seperator full'></div>}
 
             <div className='ground-rules'>
                 <h2>Ground rules</h2>
@@ -41,6 +46,8 @@ export function ConfirmBooking({ loggedInUser, checkIn, onCompleteReservation }:
                     </li>
                 </ul>
             </div>
+            {isMobile && <div className='seperator full'></div>}
+
             <small className='terms-agreement'>
                 By selecting the button below, I agree to the Host's House Rules, Ground rules for guests, Airbnb's
                 Refund Policy, and that Airbnb can charge my payment method if I’m responsible for damage.

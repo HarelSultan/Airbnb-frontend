@@ -23,6 +23,7 @@ export function DesktopStayBooking({ stay, reserveBy, nightsCount, onCompleteRes
                 <TripDetails reserveBy={reserveBy} />
                 {loggedInUser ? (
                     <ConfirmBooking
+                        isMobile={false}
                         loggedInUser={loggedInUser}
                         checkIn={reserveBy.checkIn}
                         onCompleteReservation={onCompleteReservation}
