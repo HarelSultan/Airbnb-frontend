@@ -1,4 +1,4 @@
-import { UserCredentials } from '../interfaces/user-interface'
+import { UserLoginProps, UserProps } from '../interfaces/user-interface'
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 
@@ -8,6 +8,7 @@ const STORAGE_KEY_USER_DB = 'user_DB'
 export const userService = {
     login,
     signup,
+    logout,
     getUserDefaultCreds,
     getLoggedinUser,
 }
@@ -18,9 +19,9 @@ function getUsers() {
     return storageService.query(STORAGE_KEY_USER_DB)
 }
 
-async function signup(credentials: UserCredentials) {
+async function signup(credentials: UserProps) {
     try {
-        const users = (await getUsers()) as UserCredentials[]
+        const users = (await getUsers()) as UserProps[]
         const isUsernameTaken = users.find(user => user.username === credentials.username)
         if (isUsernameTaken) throw new Error('Username already taken.')
         const user = await storageService.post(STORAGE_KEY_USER_DB, credentials)
@@ -31,9 +32,9 @@ async function signup(credentials: UserCredentials) {
     }
 }
 
-async function login(credentials: UserCredentials) {
+async function login(credentials: UserLoginProps) {
     try {
-        const users = (await getUsers()) as UserCredentials[]
+        const users = (await getUsers()) as UserProps[]
         const user = users.find(u => u.username === credentials.username && u.password === credentials.password)
         if (user) {
             return _saveLocalUser(user)
@@ -45,12 +46,16 @@ async function login(credentials: UserCredentials) {
     }
 }
 
+async function logout() {
+    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+}
+
 function getLoggedinUser() {
     const loggedinUser = sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)
     return loggedinUser ? JSON.parse(loggedinUser) : null
 }
 
-function getUserDefaultCreds(): UserCredentials {
+function getUserDefaultCreds(): UserProps {
     return {
         _id: '',
         fullName: '',
@@ -59,7 +64,7 @@ function getUserDefaultCreds(): UserCredentials {
     }
 }
 
-function _saveLocalUser(user: UserCredentials) {
+function _saveLocalUser(user: UserProps) {
     console.log(user)
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
