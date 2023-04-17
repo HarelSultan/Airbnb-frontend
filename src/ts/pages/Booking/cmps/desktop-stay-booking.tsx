@@ -2,7 +2,9 @@ import { CtaBtn } from '../../../cmps/cta-btn'
 import { LoginSignup } from '../../../cmps/login-signup'
 import { ReserveByProps } from '../../../interfaces/reserve-by-interface'
 import { StayProps } from '../../../interfaces/stay-interface'
+import { UserProps } from '../../../interfaces/user-interface'
 import { PricingSummary } from '../../Stay/cmps/ReserveStay/cmps/pricing-summary'
+import { ConfirmBooking } from './confirm-booking'
 import { StayListingCard } from './stay-listing-card'
 import { TripDetails } from './trip-details'
 
@@ -10,15 +12,24 @@ interface Props {
     stay: StayProps
     reserveBy: ReserveByProps
     nightsCount: number
-    onReservationComplete: () => void
+    onCompleteReservation: () => void
+    loggedInUser: UserProps | null
 }
 
-export function DesktopStayBooking({ stay, reserveBy, nightsCount, onReservationComplete }: Props) {
+export function DesktopStayBooking({ stay, reserveBy, nightsCount, onCompleteReservation, loggedInUser }: Props) {
     return (
         <section className='desktop-stay-booking'>
             <div className='booking-details'>
                 <TripDetails reserveBy={reserveBy} />
-                <LoginSignup isSignningUp={false} />
+                {loggedInUser ? (
+                    <ConfirmBooking
+                        loggedInUser={loggedInUser}
+                        checkIn={reserveBy.checkIn}
+                        onCompleteReservation={onCompleteReservation}
+                    />
+                ) : (
+                    <LoginSignup isSignningUp={false} />
+                )}
             </div>
 
             <div className='booking-stay-details'>

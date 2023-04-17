@@ -8,7 +8,7 @@ interface Props {
 
 export function StayThingsToKnow({ amenities, guestsCount, checkIn }: Props) {
     const lastCancellationDate = new Date(checkIn)
-    lastCancellationDate.setDate(checkIn.getDate() + 1)
+    lastCancellationDate.setDate(checkIn.getDate() - 1)
 
     return (
         <section className='stay-things-to-know'>

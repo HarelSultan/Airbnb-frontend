@@ -5,7 +5,9 @@
 
     .booking-header,
     .confirmation-header,
-    .stay-listing-card {
+    .stay-listing-card,
+    .cancellation,
+    .ground-rules {
         position: relative;
         &::after {
             content: '';
@@ -78,6 +80,11 @@
             }
         }
     }
+
+    // .mobile-stay-booking,
+    // .desktop-stay-booking {
+    //     min-height: 100vh;
+    // }
 
     .air-cover {
         display: flex;
