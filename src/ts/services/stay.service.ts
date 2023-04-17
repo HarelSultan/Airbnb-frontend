@@ -6,7 +6,9 @@ import { StayProps, StayReviewProps } from '../interfaces/stay-interface'
 import { FilterByProps } from '../interfaces/filter-by-interface'
 import { SearchByProps } from '../interfaces/search-by-interface'
 import { ReserveByProps } from '../interfaces/reserve-by-interface'
+
 const STORAGE_KEY_STAY_DB: string = 'stay_DB'
+const ALL_HOMES: string = 'All homes'
 
 _createStays()
 
@@ -58,7 +60,7 @@ function searchStays(stays: StayProps[], searchBy: SearchByProps) {
 }
 
 function filterStays(stays: StayProps[], filterBy: FilterByProps) {
-    if (filterBy.label) {
+    if (filterBy.label && filterBy.label !== ALL_HOMES) {
         stays = stays.filter(stay => stay.labels.includes(filterBy.label))
     }
 
@@ -145,7 +147,7 @@ function getDeafultSearchProps() {
 
 function getDefaultFilterProps() {
     return {
-        label: 'OMG!',
+        label: ALL_HOMES,
         minPrice: 0,
         maxPrice: 0,
         type: [],

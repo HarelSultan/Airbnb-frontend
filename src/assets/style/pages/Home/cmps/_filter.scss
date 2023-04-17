@@ -4,7 +4,7 @@
     gap: 1.5rem;
     grid-template-columns: 1fr auto;
     position: sticky;
-    top: 65px;
+    top: 68px;
     background: white;
     z-index: 2;
     &::after {
@@ -15,6 +15,7 @@
         bottom: 0;
         left: calc(-1 * $layout-padding-mobile);
         box-shadow: rgb(0 0 0 / 16%) 0 0 6px;
+        pointer-events: none;
     }
     @include for-narrow-layout {
         padding-top: 1.125rem;
