@@ -12,6 +12,7 @@ import { loadStays } from '../../store/stay/stay.action'
 import { stayService } from '../../services/stay.service'
 import { SearchByProps } from '../../interfaces/search-by-interface'
 import { AppFooter } from '../../cmps/app-footer'
+import { StayMapList } from './cmps/Filter/stay-map-list'
 
 export function HomePage() {
     const [isMapOpen, setIsMapOpen] = useState<boolean>(false)
@@ -54,11 +55,17 @@ export function HomePage() {
         navigate(`/stay/${stay._id}?${searchParams}`)
     }
 
+    const stayListProps = {
+        stays,
+        onStayDetails,
+        onSaveStay,
+    }
+
     return (
-        <section className='main-layout home-page'>
+        <section className={`main-layout home-page ${isMapOpen ? 'map-open' : ''}`}>
             <AppHeader isMobile={isMobile} />
             <Filter isMobile={isMobile} />
-            <StayList stays={stays} onStayDetails={onStayDetails} onSaveStay={onSaveStay} />
+            {isMapOpen ? <StayMapList {...stayListProps} /> : <StayList {...stayListProps} />}
             <button onClick={onToggleMapDisplay} className='btn btn-toggle-map'>
                 {isMapOpen ? (
                     <div>
@@ -91,7 +98,7 @@ export function HomePage() {
                     </div>
                 )}
             </button>
-            <AppFooter />
+            {!isMapOpen && <AppFooter />}
         </section>
     )
 }

@@ -61,7 +61,10 @@
             color: $sub-text-clr;
             // overflow: clip;
         }
-
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+        }
         .stay-price {
             display: flex;
             gap: 0.3rem;

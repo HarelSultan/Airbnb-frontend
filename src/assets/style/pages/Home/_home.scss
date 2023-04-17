@@ -1,4 +1,9 @@
 .home-page {
+    &.map-open {
+        height: 100vh;
+        overflow-y: hidden;
+    }
+
     .btn-toggle-map {
         border: 1px solid rgba(0, 0, 0, 0.08);
         background-color: $main-text-clr;

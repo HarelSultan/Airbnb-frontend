@@ -1,0 +1,103 @@
+.stay-map-list {
+    width: 100%;
+    height: calc(100vh - 178px);
+
+    .stay-map-marker {
+        width: max-content;
+        height: 28px;
+
+        cursor: pointer;
+        font-size: 14px;
+        font-family: $font-family-bold;
+        color: $main-text-clr;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        border: 1px solid rgba(0, 0, 0, 0.18);
+        border-radius: 28px;
+        padding: 0px 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+        transform-origin: 50% 50%;
+        transition: transform 200ms, cubic-bezier(0.2, 0, 0, 1);
+        &.selected {
+            background-color: $main-text-clr;
+            color: white;
+            position: relative;
+        }
+        &:hover {
+            transform: scale(1.077);
+        }
+    }
+
+    .stay-modal {
+        position: absolute;
+        top: -90px;
+        left: 85px;
+        width: 327px;
+        height: 308px;
+        z-index: 5;
+        background-color: white;
+        // border-top-right-radius: 1rem;
+        // border-top-left-radius: 1rem;
+        border-radius: 1rem;
+
+        .btn-close-modal {
+            position: absolute;
+        }
+
+        .stay-preview {
+            gap: 0;
+            border-radius: 0;
+        }
+
+        .carousel-root,
+        .carousel-slider,
+        .stay-img-wrapper {
+            height: 211px;
+        }
+
+        .stay-img-wrapper {
+            img {
+                border-radius: 0;
+                border-top-right-radius: 1rem;
+                border-top-left-radius: 1rem;
+                aspect-ratio: 1/0.66;
+            }
+        }
+
+        .stay-details-wrapper {
+            font-size: 15px;
+            padding: 16px;
+            .stay-rating {
+                align-items: stretch;
+                right: 12px;
+                span {
+                    line-height: 1;
+                }
+            }
+            .stay-type {
+                margin-top: 2px;
+            }
+
+            .wrapper {
+                flex-direction: row-reverse;
+                justify-content: start;
+                align-items: baseline;
+            }
+            .stay-price {
+                margin: 0 12px 0 0;
+                position: relative;
+                &::after {
+                    content: '·';
+                    position: absolute;
+                    height: 100%;
+                    width: 2px;
+                    right: -6px;
+                }
+            }
+            .avaliable-dates {
+                line-height: 1;
+            }
+        }
+    }
+}

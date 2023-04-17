@@ -13,13 +13,9 @@ interface Props {
 interface StayMapMarkerProps {
     stay: StayProps
     onClickCB: (stay: StayProps) => void
+    lat: number
+    lng: number
 }
-
-const StayMapMarker = ({ stay, onClickCB }: StayMapMarkerProps) => (
-    <div className='stay-map-marker' onClick={() => onClickCB(stay)}>
-        ${stay.price}
-    </div>
-)
 
 export function StayMapList({ stays, onStayDetails, onSaveStay }: Props) {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -34,6 +30,7 @@ export function StayMapList({ stays, onStayDetails, onSaveStay }: Props) {
 
     const onOpenStayModal = (stay: StayProps) => {
         if (selectedStay?._id === stay._id) return
+        console.log(stay)
         setSelectedStay(stay)
     }
 
@@ -41,23 +38,38 @@ export function StayMapList({ stays, onStayDetails, onSaveStay }: Props) {
         setSelectedStay(null)
     }
 
+    const StayMapMarker = ({ stay, onClickCB }: StayMapMarkerProps) => (
+        <div
+        // className={`stay-map-marker ${selectedStay?._id === stay._id ? 'selected' : ''}`}
+        // onClick={() => onClickCB(stay)}
+        >
+            <button
+                className={`stay-map-marker ${selectedStay?._id === stay._id ? 'selected' : ''}`}
+                onClick={() => onClickCB(stay)}
+            >
+                ${stay.price}
+            </button>
+
+            {selectedStay?._id === stay._id && (
+                <div className='stay-modal'>
+                    <button onClick={onCloseStayModal} className='btn btn-close-modal'></button>
+                    <StayPreview stay={selectedStay} onStayDetails={onStayDetails} onSaveStay={onSaveStay} />
+                </div>
+            )}
+        </div>
+    )
+
     return (
-        <section className='stay-map-list'>
+        <section className='stay-map-list full'>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyCl84V5HhaYpXpF0C_et_OYStOFmNKjz1E' }}
                 defaultCenter={mapProps.center}
                 defaultZoom={mapProps.zoom}
             >
                 {stays.map(stay => (
-                    <StayMapMarker stay={stay} onClickCB={onOpenStayModal} />
+                    <StayMapMarker stay={stay} onClickCB={onOpenStayModal} lat={stay.loc.lat} lng={stay.loc.lng} />
                 ))}
             </GoogleMapReact>
-            {selectedStay && (
-                <div className='stay-modal'>
-                    <button onClick={onCloseStayModal} className='btn btn-close-modal'></button>
-                    <StayPreview stay={selectedStay} onStayDetails={onStayDetails} onSaveStay={onSaveStay} />
-                </div>
-            )}
         </section>
     )
 }
