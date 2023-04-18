@@ -1,27 +1,22 @@
 import { useEffect, RefObject } from 'react'
 
-interface Props {
-    elementRef: RefObject<HTMLElement>
-    onClickOutside: () => void
-}
-
 export const useOnClickOutside = (elementRef: RefObject<HTMLElement>, onClickOutside: () => void) => {
     useEffect(() => {
         const el = elementRef.current
 
-        const handleClick = (ev: MouseEvent) => {
+        function handleClick(ev: MouseEvent) {
             if (!el || el.contains(ev.target as Node)) return
+
+            const toggleButton = document.querySelector('.user-menu')
+            if (toggleButton && toggleButton.contains(ev.target as Node)) return
+
+            ev.stopPropagation()
             onClickOutside()
         }
-        console.log('on')
-        // function handleClick(ev: MouseEvent) {
-        //     if (!el || el.contains(ev.target as Node)) return
-        //     onClickOutside()
-        // }
         document.addEventListener('mousedown', handleClick)
 
         return () => {
             document.removeEventListener('mousedown', handleClick)
         }
-    }, [elementRef])
+    }, [elementRef.current, onClickOutside])
 }

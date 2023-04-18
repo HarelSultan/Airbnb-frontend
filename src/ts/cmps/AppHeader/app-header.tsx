@@ -87,7 +87,7 @@ export function AppHeader({ isMobile, onToggleLoginSignup }: Props) {
                             />
                         )}
                         <Link to='./'>Airbnb your home</Link>
-                        <UserMenu isSearchOpen={isSearchOpen} setSelectedSearchModule={setSelectedSearchModule} />
+                        <UserMenu />
                     </nav>
                 </>
             )}
