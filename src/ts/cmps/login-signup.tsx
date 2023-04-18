@@ -54,17 +54,17 @@ export function LoginSignup({ isSignningUp }: Props) {
                 </div>
             </div>
             {isSignup && (
-                <label className='full-name'>
+                <label className={`full-name ${credentials.fullName ? 'filled' : ''}`}>
                     <div className='place-holder'>Full name</div>
 
                     <input placeholder='Full name' {...register('fullName')} required />
                 </label>
             )}
-            <label className='user-name'>
+            <label className={`user-name ${credentials.username ? 'filled' : ''}`}>
                 <div className='place-holder'>Username</div>
                 <input placeholder='Username' {...register('username')} required />
             </label>
-            <label className='password'>
+            <label className={`password ${credentials.password ? 'filled' : ''}`}>
                 <div className='place-holder'>Password</div>
 
                 <input placeholder='Password' {...register('password')} required />

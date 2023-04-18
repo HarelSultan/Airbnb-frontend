@@ -13,14 +13,25 @@ import { stayService } from '../../services/stay.service'
 import { SearchByProps } from '../../interfaces/search-by-interface'
 import { AppFooter } from '../../cmps/app-footer'
 import { StayMapList } from './cmps/Filter/stay-map-list'
+import { Modal } from '../../cmps/modal'
+import { LoginSignup } from '../../cmps/login-signup'
+
+export interface LoginSignupDisplayProps {
+    isOpen: boolean
+    isSignup: boolean
+}
 
 export function HomePage() {
     const [isMapOpen, setIsMapOpen] = useState<boolean>(false)
-    const [isLoginSignupOpen, setIsLoginSignupOpen] = useState<boolean>(false)
+    const [loginSignupDisplay, setLoginSignupDisplay] = useState<LoginSignupDisplayProps>({
+        isOpen: false,
+        isSignup: false,
+    })
 
     const stays: StayProps[] = useSelector((storeState: RootStateProps) => storeState.stayModule.stays)
     const isMobile: boolean = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
     const filterBy = useSelector((storeState: RootStateProps) => storeState.stayModule.filterBy)
+    const loggedinUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -48,8 +59,8 @@ export function HomePage() {
         console.log(stay)
     }
 
-    const onToggleLoginSignup = (isOpen: boolean) => {
-        setIsLoginSignupOpen(isOpen)
+    const onToggleLoginSignup = (isSignup: boolean = false) => {
+        setLoginSignupDisplay(prevState => ({ isOpen: !prevState.isOpen, isSignup }))
     }
 
     const onStayDetails = (stay: StayProps) => {
@@ -64,6 +75,13 @@ export function HomePage() {
         stays,
         onStayDetails,
         onSaveStay,
+    }
+
+    const loginSignupModalProps = {
+        className: 'login-signup-modal',
+        onCloseModal: onToggleLoginSignup,
+        headerTxt: 'Welcome to Airbnb',
+        children: <LoginSignup isSignningUp={loginSignupDisplay.isSignup} />,
     }
 
     return (
@@ -103,6 +121,7 @@ export function HomePage() {
                     </div>
                 )}
             </button>
+            {loginSignupDisplay.isOpen && !loggedinUser && <Modal {...loginSignupModalProps} />}
             {!isMapOpen && <AppFooter />}
         </section>
     )

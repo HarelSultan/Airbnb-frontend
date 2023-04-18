@@ -12,7 +12,7 @@ import { MobileNavbar } from './cmps/MobileNavbar/mobile-navbar'
 
 interface Props {
     isMobile?: boolean
-    onToggleLoginSignup?: (isOpen: boolean) => void
+    onToggleLoginSignup?: (isSignup: boolean) => void
 }
 
 export function AppHeader({ isMobile, onToggleLoginSignup }: Props) {
@@ -87,7 +87,7 @@ export function AppHeader({ isMobile, onToggleLoginSignup }: Props) {
                             />
                         )}
                         <Link to='./'>Airbnb your home</Link>
-                        <UserMenu />
+                        <UserMenu onToggleLoginSignup={onToggleLoginSignup} />
                     </nav>
                 </>
             )}

@@ -4,7 +4,11 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { FaUserCircle } from 'react-icons/fa'
 import { useOnClickOutside } from '../hooks/use-on-click-outside'
 
-export function UserMenu() {
+interface Props {
+    onToggleLoginSignup?: (isSignup: boolean) => void
+}
+
+export function UserMenu({ onToggleLoginSignup }: Props) {
     const [isUserToolTipOpen, setIsUserToolTipOpen] = useState<boolean>(false)
 
     const toolTipRef = useRef<HTMLDivElement | null>(null)
@@ -16,6 +20,11 @@ export function UserMenu() {
 
     const onCloseUserToolTip = () => {
         setIsUserToolTipOpen(false)
+    }
+
+    const onOpenLoginSignup = (isSignup: boolean) => {
+        if (!onToggleLoginSignup) return
+        onToggleLoginSignup(isSignup)
     }
 
     useOnClickOutside(toolTipRef, onCloseUserToolTip)
@@ -30,8 +39,12 @@ export function UserMenu() {
             </div>
             {isUserToolTipOpen && (
                 <div className='user-tool-tip'>
-                    <button className='btn btn-login'>Log in</button>
-                    <button className='btn btn-signup'>Sign up</button>
+                    <button onClick={() => onOpenLoginSignup(false)} className='btn btn-login'>
+                        Log in
+                    </button>
+                    <button onClick={() => onOpenLoginSignup(true)} className='btn btn-signup'>
+                        Sign up
+                    </button>
                     <div className='seperator'></div>
                     <button className='btn btn-airbnb'>Airbnb your home</button>
                 </div>

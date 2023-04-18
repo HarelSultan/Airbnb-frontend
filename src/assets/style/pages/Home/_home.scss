@@ -39,4 +39,12 @@
             fill: white;
         }
     }
+
+    .modal-wrapper.login-signup-modal {
+        .login-signup {
+            & > * {
+                margin-top: 12px;
+            }
+        }
+    }
 }
