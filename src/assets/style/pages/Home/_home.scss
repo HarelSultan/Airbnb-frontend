@@ -2,6 +2,10 @@
     &.map-open {
         height: 100vh;
         overflow-y: hidden;
+
+        .btn-toggle-map {
+            bottom: 15px;
+        }
     }
 
     .btn-toggle-map {
@@ -12,11 +16,12 @@
         position: sticky;
         bottom: 85px;
         margin: 0 auto;
-        padding: 13px 19.55px;
+        padding: 14px 19.55px;
         z-index: 3;
         transition: -ms-transform 0.25s ease 0s, -webkit-transform 0.25s ease 0s, transform 0.25s ease 0s;
         font-family: $font-family-medium;
         font-size: 14px;
+        outline: none;
         &:hover {
             transform: scale(1.04);
             box-shadow: 0 0 0 1px transparent, 0 0 0 4px transparent, 0 6px 16px rgba(0, 0, 0, 0.12);
@@ -24,7 +29,9 @@
         div {
             display: flex;
             gap: 8px;
-            align-items: center;
+        }
+        span {
+            line-height: 18px;
         }
         svg {
             height: 16px;

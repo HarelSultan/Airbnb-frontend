@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import GoogleMapReact from 'google-map-react'
 import { StayProps } from '../../../../interfaces/stay-interface'
-import { ImgCarousel } from '../img-carousel'
 import { StayPreview } from '../stay-preview'
+import { AiOutlineClose } from 'react-icons/ai'
 
 interface Props {
     stays: StayProps[]
@@ -52,7 +52,9 @@ export function StayMapList({ stays, onStayDetails, onSaveStay }: Props) {
 
             {selectedStay?._id === stay._id && (
                 <div className='stay-modal'>
-                    <button onClick={onCloseStayModal} className='btn btn-close-modal'></button>
+                    <button onClick={onCloseStayModal} className='btn btn-close-modal'>
+                        <AiOutlineClose />
+                    </button>
                     <StayPreview stay={selectedStay} onStayDetails={onStayDetails} onSaveStay={onSaveStay} />
                 </div>
             )}
