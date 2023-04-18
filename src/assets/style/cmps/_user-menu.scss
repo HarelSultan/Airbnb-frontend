@@ -4,10 +4,43 @@
     padding: 5px 5px 5px 12px;
     border-radius: 1.4rem;
     display: flex;
+    align-items: center;
     color: $sub-text-clr;
+    position: relative;
 
     .user-wrapper {
         font-size: 2rem;
         margin-left: 0.8rem;
+    }
+
+    .user-tool-tip {
+        position: absolute;
+        top: 50px;
+        right: 3px;
+        background-color: white;
+        padding-block: 8px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+        border-radius: 12px;
+        font-size: 14px;
+        .btn {
+            padding: 12px 16px;
+            width: 240px;
+            color: $main-text-clr;
+            justify-content: start;
+            &.btn-login {
+                font-family: $font-family-medium;
+            }
+            &:hover {
+                background-color: #f7f7f7;
+            }
+        }
+
+        .seperator {
+            height: 1px;
+            margin-block: 4px;
+            background-color: #dddddd;
+        }
     }
 }

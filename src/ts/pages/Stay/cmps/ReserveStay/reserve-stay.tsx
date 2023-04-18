@@ -1,13 +1,15 @@
+import { useState, useRef } from 'react'
+
 import { AiFillStar, AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
 import { DatesProps, StayReviewProps } from '../../../../interfaces/stay-interface'
 import { stayService } from '../../../../services/stay.service'
-import { useState } from 'react'
 import { utilService } from '../../../../services/util.service'
 import { ReserveByProps, ReserveModule } from '../../../../interfaces/reserve-by-interface'
 import { ReserveDates } from './cmps/reserve-dates'
 import { ReserveGuests } from './cmps/reserve-guests'
 import { CtaBtn } from '../../../../cmps/cta-btn'
 import { PricingSummary } from './cmps/pricing-summary'
+import { useOnClickOutside } from '../../../../hooks/use-on-click-outside'
 
 interface Props {
     price: number
@@ -31,6 +33,8 @@ export function ReserveStay({
 }: Props) {
     const [selectedReserveModule, setSelectedReserveModule] = useState<string | null>(null)
 
+    const activeReserveModuleRef = useRef(null)
+
     const onSelectReserveModule = (reserveModule: string | null) => {
         if (reserveModule === selectedReserveModule) return
         setSelectedReserveModule(reserveModule)
@@ -40,6 +44,13 @@ export function ReserveStay({
         if (!date) return undefined
         return date.toLocaleDateString('default', { month: 'numeric', day: 'numeric', year: 'numeric' })
     }
+
+    const onCloseReserveModule = () => {
+        console.log('closed')
+        setSelectedReserveModule(null)
+    }
+
+    useOnClickOutside(activeReserveModuleRef, onCloseReserveModule)
 
     const reserveModuleProps = {
         reserveBy,
@@ -107,7 +118,9 @@ export function ReserveStay({
             </form>
             <CtaBtn onClickCB={onReserveStay} txt='Reserve' />
             <p className='disclaimer'>You won't be charged yet</p>
-            {selectedReserveModule && reserveModuleMap[selectedReserveModule]}
+            <div ref={activeReserveModuleRef} className='reserve-module-wrapper'>
+                {selectedReserveModule && reserveModuleMap[selectedReserveModule]}
+            </div>
             <PricingSummary nightlyPrice={price} nightsCount={nightsCount} />
         </section>
     )

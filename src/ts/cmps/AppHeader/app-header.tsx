@@ -12,9 +12,10 @@ import { MobileNavbar } from './cmps/MobileNavbar/mobile-navbar'
 
 interface Props {
     isMobile?: boolean
+    onToggleLoginSignup?: (isOpen: boolean) => void
 }
 
-export function AppHeader({ isMobile }: Props) {
+export function AppHeader({ isMobile, onToggleLoginSignup }: Props) {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
     const [searchBy, setSearchBy] = useState<SearchByProps>(stayService.getDeafultSearchProps())
     const [selectedSearchModule, setSelectedSearchModule] = useState<string>('searchDestination')
@@ -86,7 +87,7 @@ export function AppHeader({ isMobile }: Props) {
                             />
                         )}
                         <Link to='./'>Airbnb your home</Link>
-                        <UserMenu />
+                        <UserMenu isSearchOpen={isSearchOpen} setSelectedSearchModule={setSelectedSearchModule} />
                     </nav>
                 </>
             )}

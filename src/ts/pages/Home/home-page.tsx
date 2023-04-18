@@ -16,6 +16,7 @@ import { StayMapList } from './cmps/Filter/stay-map-list'
 
 export function HomePage() {
     const [isMapOpen, setIsMapOpen] = useState<boolean>(false)
+    const [isLoginSignupOpen, setIsLoginSignupOpen] = useState<boolean>(false)
 
     const stays: StayProps[] = useSelector((storeState: RootStateProps) => storeState.stayModule.stays)
     const isMobile: boolean = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
@@ -47,6 +48,10 @@ export function HomePage() {
         console.log(stay)
     }
 
+    const onToggleLoginSignup = (isOpen: boolean) => {
+        setIsLoginSignupOpen(isOpen)
+    }
+
     const onStayDetails = (stay: StayProps) => {
         const searchParams = new URLSearchParams(location.search)
         searchParams.set('checkIn', stay.randomAvaliableDates.checkIn.toString().slice(0, 10))
@@ -63,7 +68,7 @@ export function HomePage() {
 
     return (
         <section className={`main-layout home-page ${isMapOpen ? 'map-open' : ''}`}>
-            <AppHeader isMobile={isMobile} />
+            <AppHeader isMobile={isMobile} onToggleLoginSignup={onToggleLoginSignup} />
             <Filter isMobile={isMobile} />
             {isMapOpen ? <StayMapList {...stayListProps} /> : <StayList {...stayListProps} />}
             <button onClick={onToggleMapDisplay} className='btn btn-toggle-map'>
