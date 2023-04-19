@@ -8,9 +8,11 @@ import { AiFillStar } from 'react-icons/ai'
 interface Props {
     stay: StayProps
     isMobile: boolean
+    onToggleSaveStay: (ev: React.MouseEvent<HTMLButtonElement>) => void
+    isStaySaved: boolean
 }
 
-export function StayHeader({ stay, isMobile }: Props) {
+export function StayHeader({ stay, isMobile, onToggleSaveStay, isStaySaved }: Props) {
     return (
         <section className='stay-header'>
             <h2 className='stay-title'>{stay.name}</h2>
@@ -39,7 +41,10 @@ export function StayHeader({ stay, isMobile }: Props) {
                             <FiShare />
                             Share
                         </button>
-                        <button className='btn btn-save underline'>
+                        <button
+                            onClick={onToggleSaveStay}
+                            className={`btn btn-save underline ${isStaySaved ? 'saved' : ''}`}
+                        >
                             <FiHeart />
                             Save
                         </button>

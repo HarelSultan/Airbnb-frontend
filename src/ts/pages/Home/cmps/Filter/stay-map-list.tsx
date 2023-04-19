@@ -7,7 +7,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 interface Props {
     stays: StayProps[]
     onStayDetails: (stay: StayProps) => void
-    onSaveStay: (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => void
+    onToggleSaveStay: (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => void
     wishList: string[]
 }
 
@@ -18,7 +18,7 @@ interface StayMapMarkerProps {
     lng: number
 }
 
-export function StayMapList({ stays, onStayDetails, onSaveStay, wishList }: Props) {
+export function StayMapList({ stays, onStayDetails, onToggleSaveStay, wishList }: Props) {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
 
     const mapProps = {
@@ -59,7 +59,7 @@ export function StayMapList({ stays, onStayDetails, onSaveStay, wishList }: Prop
                     <StayPreview
                         stay={selectedStay}
                         onStayDetails={onStayDetails}
-                        onSaveStay={onSaveStay}
+                        onToggleSaveStay={onToggleSaveStay}
                         wishList={wishList}
                     />
                 </div>

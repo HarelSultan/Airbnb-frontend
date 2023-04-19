@@ -45,11 +45,16 @@ export async function demoUserLogin() {
 
 export async function updateWishList(user: UserProps, stayId: string) {
     try {
+        // Checking if the stayId is already in the wish list
+        // If so returning updatedWishList excluding the clicked stay
+        // If not returning updatedWishList including the clicked stay
+        const isRemoving = user.stayWishList.includes(stayId)
+        const updatedWishList = isRemoving
+            ? user.stayWishList.filter(savedStayId => savedStayId !== stayId)
+            : [...user.stayWishList, stayId]
         // Optimistic approach
-        const updatedWishList = [...user.stayWishList, stayId]
         store.dispatch({ type: SET_USER, user: { ...user, stayWishList: updatedWishList } })
         await userService.update({ ...user, stayWishList: updatedWishList })
-        console.log('sucess')
     } catch (err) {
         console.log(user)
         store.dispatch({ type: SET_USER, user })

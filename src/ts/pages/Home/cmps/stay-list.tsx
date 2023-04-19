@@ -4,11 +4,11 @@ import { StayPreview } from './stay-preview'
 interface Props {
     stays: StayProps[]
     onStayDetails: (stay: StayProps) => void
-    onSaveStay: (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => void
+    onToggleSaveStay: (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => void
     wishList: string[]
 }
 
-export function StayList({ stays, onStayDetails, onSaveStay, wishList }: Props) {
+export function StayList({ stays, onStayDetails, onToggleSaveStay, wishList }: Props) {
     return (
         <section className='stay-list'>
             {stays.map(stay => (
@@ -16,7 +16,7 @@ export function StayList({ stays, onStayDetails, onSaveStay, wishList }: Props) 
                     stay={stay}
                     onStayDetails={onStayDetails}
                     key={stay._id}
-                    onSaveStay={onSaveStay}
+                    onToggleSaveStay={onToggleSaveStay}
                     wishList={wishList}
                 />
             ))}

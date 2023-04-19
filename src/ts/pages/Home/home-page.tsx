@@ -55,7 +55,7 @@ export function HomePage() {
         setIsMapOpen(prevState => !prevState)
     }
 
-    const onSaveStay = async (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => {
+    const onToggleSaveStay = async (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => {
         ev.stopPropagation()
         if (!loggedInUser) return onToggleLoginSignup()
         try {
@@ -83,7 +83,7 @@ export function HomePage() {
     const stayListProps = {
         stays,
         onStayDetails,
-        onSaveStay,
+        onToggleSaveStay,
         wishList: loggedInUser?.stayWishList || [''],
     }
 

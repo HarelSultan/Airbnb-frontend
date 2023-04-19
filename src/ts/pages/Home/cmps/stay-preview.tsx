@@ -6,16 +6,16 @@ import { ImgCarousel } from './img-carousel'
 interface Props {
     stay: StayProps
     onStayDetails: (stay: StayProps) => void
-    onSaveStay: (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => void
+    onToggleSaveStay: (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => void
     wishList: string[]
 }
 
-export function StayPreview({ stay, onStayDetails, onSaveStay, wishList }: Props) {
+export function StayPreview({ stay, onStayDetails, onToggleSaveStay, wishList }: Props) {
     return (
         <article className='stay-preview' onClick={() => onStayDetails(stay)}>
             <ImgCarousel imgUrls={stay.imgUrls} />
             <button
-                onClick={ev => onSaveStay(ev, stay)}
+                onClick={ev => onToggleSaveStay(ev, stay)}
                 className={`btn btn-save ${wishList.includes(stay._id) ? 'saved' : ''}`}
             >
                 <svg

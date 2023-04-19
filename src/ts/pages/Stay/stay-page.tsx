@@ -22,6 +22,9 @@ import { StayImgCarousel } from './cmps/stay-img-carousel'
 import { StayReviews } from './cmps/StayReviews/stay-reviews'
 import { MobileReserveStay } from './cmps/ReserveStay/mobile-reserve-stay'
 import { LoginSignupDisplayProps } from '../Home/home-page'
+import { updateWishList } from '../../store/user/user.action'
+import { Modal } from '../../cmps/modal'
+import { LoginSignup } from '../../cmps/login-signup'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -77,48 +80,90 @@ export function StayPage() {
         navigate(`/book/${selectedStay._id}?${searchParams}`)
     }
 
+    const onToggleSaveStay = async (ev: React.MouseEvent<HTMLButtonElement>) => {
+        console.log('toggling')
+        ev.stopPropagation()
+        // TODO: should remove null props from selectedStay
+        if (!selectedStay) return
+        if (!loggedInUser) return onToggleLoginSignup()
+        try {
+            updateWishList(loggedInUser, selectedStay._id)
+            // TODO: ShowSucessMsg(`${stay.name saved to wish list.}`)
+        } catch (err: any) {
+            // TODO: ShowErrorMsg(err.msg)
+            console.log(err.msg)
+        }
+    }
+
     const onToggleLoginSignup = (isSignup: boolean = false) => {
         setLoginSignupDisplay(prevState => ({ isOpen: !prevState.isOpen, isSignup }))
     }
 
+    // // TODO: Change after removing null props from selectedStay
+    // const isStaySaved: boolean = selectedStay && loggedInUser?.stayWishList.includes(selectedStay?._id) || false
+
     const nightsCount = utilService.getNightsCount(reserveBy) || 1
 
-    // const reserveStayProps = {
-    //     price: selectedStay?.price,
-    //     reviews: selectedStay?.reviews,
-    //     takenDates: selectedStay?.takenDates,
-    //     reserveBy:{reserveBy}
-    // }
-
     if (!selectedStay || !reserveBy) return <section>Loadin'</section>
+
+    const isStaySaved: boolean = loggedInUser?.stayWishList.includes(selectedStay?._id) || false
+
+    const stayHeaderProps = {
+        stay: selectedStay,
+        isMobile,
+        onToggleSaveStay,
+        isStaySaved,
+    }
+
+    const reserveStayProps = {
+        price: selectedStay?.price,
+        reviews: selectedStay?.reviews,
+        takenDates: selectedStay?.takenDates,
+        reserveBy,
+        onSetReserveBy,
+        onReserveStay,
+        nightsCount,
+    }
+
+    const stayDetailsProps = {
+        stay: selectedStay,
+        takenDates: selectedStay?.takenDates,
+        reserveBy,
+        onSetReserveBy,
+        nightsCount,
+    }
+
+    const loginSignupModalProps = {
+        className: 'login-signup-modal',
+        onCloseModal: onToggleLoginSignup,
+        headerTxt: 'Welcome to Airbnb',
+        children: <LoginSignup isSignningUp={loginSignupDisplay.isSignup} onLoginSignupCB={onToggleLoginSignup} />,
+    }
+
     return (
         <section className='main-layout secondary-layout stay-page'>
             {!isMobile && <AppHeader onToggleLoginSignup={onToggleLoginSignup} loggedInUser={loggedInUser} />}
-            {isMobile && <StayImgCarousel imgUrls={selectedStay.imgUrls} />}
-            <StayHeader stay={selectedStay} isMobile={isMobile} />
-            {!isMobile && <StayGallery imgUrls={selectedStay.imgUrls} />}
-            <div className='layout-wrapper'>
-                <StayDetails
-                    stay={selectedStay}
-                    takenDates={selectedStay.takenDates}
-                    reserveBy={reserveBy}
-                    onSetReserveBy={onSetReserveBy}
-                    nightsCount={nightsCount}
+
+            {isMobile && (
+                <StayImgCarousel
+                    imgUrls={selectedStay.imgUrls}
+                    onToggleSaveStay={onToggleSaveStay}
+                    isStaySaved={isStaySaved}
                 />
+            )}
+
+            <StayHeader {...stayHeaderProps} />
+            {!isMobile && <StayGallery imgUrls={selectedStay.imgUrls} />}
+
+            <div className='layout-wrapper'>
+                <StayDetails {...stayDetailsProps} />
                 {isMobile ? (
                     <MobileReserveStay price={selectedStay.price} reserveBy={reserveBy} onReserveStay={onReserveStay} />
                 ) : (
-                    <ReserveStay
-                        price={selectedStay.price}
-                        reviews={selectedStay.reviews}
-                        takenDates={selectedStay.takenDates}
-                        reserveBy={reserveBy}
-                        onSetReserveBy={onSetReserveBy}
-                        onReserveStay={onReserveStay}
-                        nightsCount={nightsCount}
-                    />
+                    <ReserveStay {...reserveStayProps} />
                 )}
             </div>
+
             <StayReviews reviews={selectedStay.reviews} />
             <StayMap
                 lat={selectedStay.loc.lat}
@@ -132,6 +177,7 @@ export function StayPage() {
                 guestsCount={selectedStay.stayDetails.guests}
                 checkIn={reserveBy.checkIn}
             />
+            {loginSignupDisplay.isOpen && !loggedInUser && <Modal {...loginSignupModalProps} />}
             <AppFooter />
         </section>
     )
