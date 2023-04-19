@@ -37,6 +37,15 @@
         cursor: pointer;
     }
 
+    .air-bnb-host {
+        padding: 12px;
+        border-radius: 24px;
+        cursor: pointer;
+        &:hover {
+            background-color: #f7f7f7;
+        }
+    }
+
     // .pc-navbar {
     //     &::before {
     //         content: '';

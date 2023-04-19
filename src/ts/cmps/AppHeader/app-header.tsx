@@ -9,13 +9,15 @@ import { SearchByProps } from '../../interfaces/search-by-interface'
 import { DarkOverlay } from './cmps/dark-overlay'
 import { utilService } from '../../services/util.service'
 import { MobileNavbar } from './cmps/MobileNavbar/mobile-navbar'
+import { UserProps } from '../../interfaces/user-interface'
 
 interface Props {
     isMobile?: boolean
     onToggleLoginSignup?: (isSignup: boolean) => void
+    loggedInUser: UserProps | null
 }
 
-export function AppHeader({ isMobile, onToggleLoginSignup }: Props) {
+export function AppHeader({ isMobile, onToggleLoginSignup, loggedInUser }: Props) {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
     const [searchBy, setSearchBy] = useState<SearchByProps>(stayService.getDeafultSearchProps())
     const [selectedSearchModule, setSelectedSearchModule] = useState<string>('searchDestination')
@@ -86,8 +88,10 @@ export function AppHeader({ isMobile, onToggleLoginSignup }: Props) {
                                 onSelectSearchModule={onSelectSearchModule}
                             />
                         )}
-                        <Link to='./'>Airbnb your home</Link>
-                        <UserMenu onToggleLoginSignup={onToggleLoginSignup} />
+                        <Link className='air-bnb-host' to='./'>
+                            Airbnb your home
+                        </Link>
+                        <UserMenu onToggleLoginSignup={onToggleLoginSignup} loggedInUser={loggedInUser} />
                     </nav>
                 </>
             )}

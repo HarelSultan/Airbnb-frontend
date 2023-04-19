@@ -7,9 +7,10 @@ import { demoUserLogin, login, signup } from '../store/user/user.action'
 
 interface Props {
     isSignningUp: boolean
+    onLoginSignupCB?: () => void
 }
 
-export function LoginSignup({ isSignningUp }: Props) {
+export function LoginSignup({ isSignningUp, onLoginSignupCB }: Props) {
     const [isSignup, setIsSignup] = useState<boolean>(isSignningUp)
     const [credentials, setCredentials] = useState<UserProps>(userService.getUserDefaultCreds())
 
@@ -22,6 +23,7 @@ export function LoginSignup({ isSignningUp }: Props) {
     const onLoginSignup = async () => {
         try {
             const user = isSignup ? signup(credentials) : login(credentials)
+            if (onLoginSignupCB) onLoginSignupCB()
             // TODO: showSucessMsg(`Welcome back, ${user.fullName}`)
             // ? return user ? showSucessMsg(`Welcome back, ${user.fullName}`) : ''
         } catch (err) {
@@ -32,6 +34,7 @@ export function LoginSignup({ isSignningUp }: Props) {
     const onDemoUserLogin = async () => {
         try {
             const demoUser = demoUserLogin()
+            if (onLoginSignupCB) onLoginSignupCB()
             // TODO: showSucessMsg(`Welcome, you are logged in with a demo user`)
         } catch (err) {
             // TODO: showErrorMsg(err.txt)

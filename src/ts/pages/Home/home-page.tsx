@@ -31,7 +31,7 @@ export function HomePage() {
     const stays: StayProps[] = useSelector((storeState: RootStateProps) => storeState.stayModule.stays)
     const isMobile: boolean = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
     const filterBy = useSelector((storeState: RootStateProps) => storeState.stayModule.filterBy)
-    const loggedinUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
+    const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -57,9 +57,11 @@ export function HomePage() {
     const onSaveStay = (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => {
         ev.stopPropagation()
         console.log(stay)
+        loggedInUser ? console.log('saving') : onToggleLoginSignup()
     }
 
     const onToggleLoginSignup = (isSignup: boolean = false) => {
+        console.log(loginSignupDisplay)
         setLoginSignupDisplay(prevState => ({ isOpen: !prevState.isOpen, isSignup }))
     }
 
@@ -81,12 +83,12 @@ export function HomePage() {
         className: 'login-signup-modal',
         onCloseModal: onToggleLoginSignup,
         headerTxt: 'Welcome to Airbnb',
-        children: <LoginSignup isSignningUp={loginSignupDisplay.isSignup} />,
+        children: <LoginSignup isSignningUp={loginSignupDisplay.isSignup} onLoginSignupCB={onToggleLoginSignup} />,
     }
 
     return (
         <section className={`main-layout home-page ${isMapOpen ? 'map-open' : ''}`}>
-            <AppHeader isMobile={isMobile} onToggleLoginSignup={onToggleLoginSignup} />
+            <AppHeader isMobile={isMobile} onToggleLoginSignup={onToggleLoginSignup} loggedInUser={loggedInUser} />
             <Filter isMobile={isMobile} />
             {isMapOpen ? <StayMapList {...stayListProps} /> : <StayList {...stayListProps} />}
             <button onClick={onToggleMapDisplay} className='btn btn-toggle-map'>
@@ -121,7 +123,7 @@ export function HomePage() {
                     </div>
                 )}
             </button>
-            {loginSignupDisplay.isOpen && !loggedinUser && <Modal {...loginSignupModalProps} />}
+            {loginSignupDisplay.isOpen && !loggedInUser && <Modal {...loginSignupModalProps} />}
             {!isMapOpen && <AppFooter />}
         </section>
     )

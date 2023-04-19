@@ -21,11 +21,18 @@ import { AppFooter } from '../../cmps/app-footer'
 import { StayImgCarousel } from './cmps/stay-img-carousel'
 import { StayReviews } from './cmps/StayReviews/stay-reviews'
 import { MobileReserveStay } from './cmps/ReserveStay/mobile-reserve-stay'
+import { LoginSignupDisplayProps } from '../Home/home-page'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
     const [reserveBy, setReserveBy] = useState<ReserveByProps | null>(null)
+    const [loginSignupDisplay, setLoginSignupDisplay] = useState<LoginSignupDisplayProps>({
+        isOpen: false,
+        isSignup: false,
+    })
+
     const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
+    const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
 
     const { stayId } = useParams()
     const navigate = useNavigate()
@@ -70,6 +77,10 @@ export function StayPage() {
         navigate(`/book/${selectedStay._id}?${searchParams}`)
     }
 
+    const onToggleLoginSignup = (isSignup: boolean = false) => {
+        setLoginSignupDisplay(prevState => ({ isOpen: !prevState.isOpen, isSignup }))
+    }
+
     const nightsCount = utilService.getNightsCount(reserveBy) || 1
 
     // const reserveStayProps = {
@@ -82,7 +93,7 @@ export function StayPage() {
     if (!selectedStay || !reserveBy) return <section>Loadin'</section>
     return (
         <section className='main-layout secondary-layout stay-page'>
-            {!isMobile && <AppHeader />}
+            {!isMobile && <AppHeader onToggleLoginSignup={onToggleLoginSignup} loggedInUser={loggedInUser} />}
             {isMobile && <StayImgCarousel imgUrls={selectedStay.imgUrls} />}
             <StayHeader stay={selectedStay} isMobile={isMobile} />
             {!isMobile && <StayGallery imgUrls={selectedStay.imgUrls} />}

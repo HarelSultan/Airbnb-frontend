@@ -1,5 +1,4 @@
 .user-menu {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
     border: 1px solid #dddddd;
     padding: 5px 5px 5px 12px;
     border-radius: 1.4rem;
@@ -7,6 +6,11 @@
     align-items: center;
     color: $sub-text-clr;
     position: relative;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+    &:hover {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+    }
 
     .user-wrapper {
         font-size: 2rem;
