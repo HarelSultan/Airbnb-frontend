@@ -8,6 +8,7 @@ interface Props {
     stays: StayProps[]
     onStayDetails: (stay: StayProps) => void
     onSaveStay: (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => void
+    wishList: string[]
 }
 
 interface StayMapMarkerProps {
@@ -17,7 +18,7 @@ interface StayMapMarkerProps {
     lng: number
 }
 
-export function StayMapList({ stays, onStayDetails, onSaveStay }: Props) {
+export function StayMapList({ stays, onStayDetails, onSaveStay, wishList }: Props) {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
 
     const mapProps = {
@@ -55,7 +56,12 @@ export function StayMapList({ stays, onStayDetails, onSaveStay }: Props) {
                     <button onClick={onCloseStayModal} className='btn btn-close-modal'>
                         <AiOutlineClose />
                     </button>
-                    <StayPreview stay={selectedStay} onStayDetails={onStayDetails} onSaveStay={onSaveStay} />
+                    <StayPreview
+                        stay={selectedStay}
+                        onStayDetails={onStayDetails}
+                        onSaveStay={onSaveStay}
+                        wishList={wishList}
+                    />
                 </div>
             )}
         </div>

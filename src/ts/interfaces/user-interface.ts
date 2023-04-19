@@ -3,6 +3,7 @@ export interface UserProps {
     username: string
     password: string
     fullName: string
+    stayWishList: string[]
 }
 
 export interface UserLoginProps {

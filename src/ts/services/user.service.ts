@@ -11,6 +11,7 @@ export const userService = {
     logout,
     getUserDefaultCreds,
     getLoggedinUser,
+    update,
 }
 
 _createDemoUser()
@@ -50,6 +51,12 @@ async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
 }
 
+async function update(credentials: UserProps) {
+    const updatedUser = await storageService.put(STORAGE_KEY_USER_DB, credentials)
+    if (getLoggedinUser()._id === updatedUser._id) _saveLocalUser(updatedUser)
+    return updatedUser
+}
+
 function getLoggedinUser() {
     const loggedinUser = sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)
     return loggedinUser ? JSON.parse(loggedinUser) : null
@@ -61,16 +68,23 @@ function getUserDefaultCreds(): UserProps {
         fullName: '',
         username: '',
         password: '',
+        stayWishList: [],
     }
 }
 
 function _saveLocalUser(user: UserProps) {
-    console.log(user)
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
 
-async function _createDemoUser() {
+function _createDemoUser() {
     if (utilService.loadFromStorage(STORAGE_KEY_USER_DB)) return
-    return signup({ _id: 'Demo555', fullName: 'DemoUser', username: 'Demo123', password: 'Demo123' })
+    const demoUser: UserProps = {
+        _id: 'Demo555',
+        fullName: 'DemoUser',
+        username: 'Demo123',
+        password: 'Demo123',
+        stayWishList: [],
+    }
+    utilService.saveToStorage(STORAGE_KEY_USER_DB, [demoUser])
 }

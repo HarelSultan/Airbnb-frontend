@@ -24,6 +24,9 @@
             stroke-width: 2;
             overflow: visible;
         }
+        &.saved svg {
+            fill: #ff385c;
+        }
     }
 
     .stay-details-wrapper {

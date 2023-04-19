@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ErrorInfo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -15,6 +15,7 @@ import { AppFooter } from '../../cmps/app-footer'
 import { StayMapList } from './cmps/Filter/stay-map-list'
 import { Modal } from '../../cmps/modal'
 import { LoginSignup } from '../../cmps/login-signup'
+import { updateWishList } from '../../store/user/user.action'
 
 export interface LoginSignupDisplayProps {
     isOpen: boolean
@@ -54,10 +55,16 @@ export function HomePage() {
         setIsMapOpen(prevState => !prevState)
     }
 
-    const onSaveStay = (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => {
+    const onSaveStay = async (ev: React.MouseEvent<HTMLButtonElement>, stay: StayProps) => {
         ev.stopPropagation()
-        console.log(stay)
-        loggedInUser ? console.log('saving') : onToggleLoginSignup()
+        if (!loggedInUser) return onToggleLoginSignup()
+        try {
+            updateWishList(loggedInUser, stay._id)
+            // TODO: ShowSucessMsg(`${stay.name saved to wish list.}`)
+        } catch (err: any) {
+            // TODO: ShowErrorMsg(err.msg)
+            console.log(err.msg)
+        }
     }
 
     const onToggleLoginSignup = (isSignup: boolean = false) => {
@@ -77,6 +84,7 @@ export function HomePage() {
         stays,
         onStayDetails,
         onSaveStay,
+        wishList: loggedInUser?.stayWishList || [''],
     }
 
     const loginSignupModalProps = {
