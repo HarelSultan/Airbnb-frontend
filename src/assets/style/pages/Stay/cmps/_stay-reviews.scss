@@ -19,14 +19,11 @@
     }
 
     .categories-rating-container {
-        display: none;
-        @include for-narrow-layout {
-            display: grid;
-            grid-template-rows: 1fr 1fr 1fr;
-            grid-template-columns: 1fr 1fr;
-            margin-bottom: 32px;
-            column-gap: 13.5%;
-        }
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 32px;
+        column-gap: 13.5%;
     }
 
     .reviews-container {
@@ -45,6 +42,23 @@
             .stay-review {
                 width: 43%;
             }
+        }
+    }
+
+    .btn-more-reviews {
+        font-size: 16px;
+        width: 100%;
+        @include for-narrow-layout {
+            width: max-content;
+        }
+        margin-top: 24px;
+        border: 1px solid $main-text-clr;
+        border-radius: 0.5em;
+        padding: 12px 22px;
+        font-family: $font-family-medium;
+        &:hover {
+            border-color: black;
+            background: #f7f7f7;
         }
     }
 }

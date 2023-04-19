@@ -5,7 +5,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 interface Props {
     className: string
     onCloseModal: () => void
-    headerTxt: string
+    headerTxt: string | null
     children: ReactElement
 }
 

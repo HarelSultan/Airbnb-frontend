@@ -6,9 +6,12 @@ import { Stayreview } from './cmps/stay-review'
 
 interface Props {
     reviews: StayReviewProps[]
+    onToggleReviewsModalDisplay?: () => void
+    isExpanded: boolean
+    isMobile: boolean
 }
 
-export function StayReviews({ reviews }: Props) {
+export function StayReviews({ reviews, onToggleReviewsModalDisplay, isExpanded, isMobile }: Props) {
     const categoriesRating = [
         {
             category: 'Cleanliness',
@@ -36,6 +39,8 @@ export function StayReviews({ reviews }: Props) {
         },
     ]
 
+    const reviewsToDisplay = isExpanded ? reviews : reviews.slice(0, 4)
+
     return (
         <section className='stay-reviews'>
             <div className='stay-rating flex align-center'>
@@ -43,16 +48,23 @@ export function StayReviews({ reviews }: Props) {
                 <h3>{stayService.getStayAverageRating(reviews).toFixed(1)} ·</h3>
                 <h3 className='review-count'>{reviews.length} reviews</h3>
             </div>
-            <div className='categories-rating-container'>
-                {categoriesRating.map(categoryRating => (
-                    <StayCategoryRating key={categoryRating.category} categoryRating={categoryRating} />
-                ))}
-            </div>
+            {(!isMobile || isExpanded) && (
+                <div className='categories-rating-container'>
+                    {categoriesRating.map(categoryRating => (
+                        <StayCategoryRating key={categoryRating.category} categoryRating={categoryRating} />
+                    ))}
+                </div>
+            )}
             <div className='reviews-container'>
-                {reviews.map(review => (
+                {reviewsToDisplay.map(review => (
                     <Stayreview key={review.id} review={review} />
                 ))}
             </div>
+            {reviews.length > 4 && onToggleReviewsModalDisplay && (
+                <button onClick={onToggleReviewsModalDisplay} className='btn btn-more-reviews'>
+                    Show all {reviews.length} reviews
+                </button>
+            )}
         </section>
     )
 }

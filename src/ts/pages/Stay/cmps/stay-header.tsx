@@ -10,9 +10,10 @@ interface Props {
     isMobile: boolean
     onToggleSaveStay: (ev: React.MouseEvent<HTMLButtonElement>) => void
     isStaySaved: boolean
+    onToggleReviewsModalDisplay: () => void
 }
 
-export function StayHeader({ stay, isMobile, onToggleSaveStay, isStaySaved }: Props) {
+export function StayHeader({ stay, isMobile, onToggleSaveStay, isStaySaved, onToggleReviewsModalDisplay }: Props) {
     return (
         <section className='stay-header'>
             <h2 className='stay-title'>{stay.name}</h2>
@@ -23,7 +24,10 @@ export function StayHeader({ stay, isMobile, onToggleSaveStay, isStaySaved }: Pr
                         <span>{stayService.getStayAverageRating(stay.reviews).toFixed(1)}</span>
                         <span className='dot-seperator'>·</span>
                     </div>
-                    <span className='review-count underline'> {stay.reviews.length} reviews</span>
+                    <span onClick={onToggleReviewsModalDisplay} className='review-count underline'>
+                        {' '}
+                        {stay.reviews.length} reviews
+                    </span>
                     <span className='dot-seperator'>·</span>
 
                     {stay.host.isSuperHost && (

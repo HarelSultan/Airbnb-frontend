@@ -55,6 +55,61 @@
         }
     }
 
+    .reviews-modal {
+        .modal {
+            height: 100%;
+            overflow-y: scroll;
+            position: relative;
+        }
+        .modal-header {
+            position: sticky;
+            top: 0;
+            z-index: 3;
+            background: white;
+        }
+        .stay-reviews {
+            overflow-x: hidden;
+            padding-block: 0;
+            flex-direction: column;
+        }
+
+        .stay-rating > * {
+            font-size: 26px;
+            svg {
+                margin-top: 2px;
+            }
+        }
+
+        .categories-rating-container {
+            grid-template-columns: 1fr;
+        }
+
+        .reviews-container {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .stay-review {
+            border: none;
+            padding: 0;
+        }
+
+        @include for-narrow-layout {
+            .modal {
+                width: 90.5%;
+                height: 90.5%;
+            }
+
+            .stay-rating > * {
+                font-size: 32px;
+            }
+
+            .categories-rating-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    }
+
     .app-footer {
         position: relative;
     }

@@ -29,6 +29,7 @@ import { LoginSignup } from '../../cmps/login-signup'
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
     const [reserveBy, setReserveBy] = useState<ReserveByProps | null>(null)
+    const [isReviewsModalOpen, setIsReviewsModalOpen] = useState<boolean>(false)
     const [loginSignupDisplay, setLoginSignupDisplay] = useState<LoginSignupDisplayProps>({
         isOpen: false,
         isSignup: false,
@@ -95,12 +96,13 @@ export function StayPage() {
         }
     }
 
+    const onToggleReviewsModalDisplay = () => {
+        setIsReviewsModalOpen(prevState => !prevState)
+    }
+
     const onToggleLoginSignup = (isSignup: boolean = false) => {
         setLoginSignupDisplay(prevState => ({ isOpen: !prevState.isOpen, isSignup }))
     }
-
-    // // TODO: Change after removing null props from selectedStay
-    // const isStaySaved: boolean = selectedStay && loggedInUser?.stayWishList.includes(selectedStay?._id) || false
 
     const nightsCount = utilService.getNightsCount(reserveBy) || 1
 
@@ -113,6 +115,7 @@ export function StayPage() {
         isMobile,
         onToggleSaveStay,
         isStaySaved,
+        onToggleReviewsModalDisplay,
     }
 
     const reserveStayProps = {
@@ -133,6 +136,13 @@ export function StayPage() {
         nightsCount,
     }
 
+    const reviewsModalProps = {
+        className: 'reviews-modal',
+        onCloseModal: onToggleReviewsModalDisplay,
+        headerTxt: null,
+        children: <StayReviews reviews={selectedStay.reviews} isExpanded={true} isMobile={isMobile} />,
+    }
+
     const loginSignupModalProps = {
         className: 'login-signup-modal',
         onCloseModal: onToggleLoginSignup,
@@ -143,7 +153,6 @@ export function StayPage() {
     return (
         <section className='main-layout secondary-layout stay-page'>
             {!isMobile && <AppHeader onToggleLoginSignup={onToggleLoginSignup} loggedInUser={loggedInUser} />}
-
             {isMobile && (
                 <StayImgCarousel
                     imgUrls={selectedStay.imgUrls}
@@ -164,19 +173,28 @@ export function StayPage() {
                 )}
             </div>
 
-            <StayReviews reviews={selectedStay.reviews} />
+            <StayReviews
+                reviews={selectedStay.reviews}
+                onToggleReviewsModalDisplay={onToggleReviewsModalDisplay}
+                isExpanded={false}
+                isMobile={isMobile}
+            />
+
             <StayMap
                 lat={selectedStay.loc.lat}
                 lng={selectedStay.loc.lng}
                 stayArea={selectedStay.loc.address}
                 staySummary={selectedStay.summary}
             />
+
             <StayHost host={selectedStay.host} />
             <StayThingsToKnow
                 amenities={selectedStay.amenities}
                 guestsCount={selectedStay.stayDetails.guests}
                 checkIn={reserveBy.checkIn}
             />
+
+            {isReviewsModalOpen && <Modal {...reviewsModalProps} />}
             {loginSignupDisplay.isOpen && !loggedInUser && <Modal {...loginSignupModalProps} />}
             <AppFooter />
         </section>
