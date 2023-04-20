@@ -13,7 +13,9 @@
     .modal {
         padding-bottom: 18px;
         background-color: white;
-        border-radius: 12px;
+        @include for-narrow-layout {
+            border-radius: 12px;
+        }
         box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
         z-index: 3;
     }

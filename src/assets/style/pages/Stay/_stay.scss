@@ -55,11 +55,15 @@
         }
     }
 
-    .reviews-modal {
+    .modal-wrapper {
         .modal {
             height: 100%;
             overflow-y: scroll;
             position: relative;
+            @include for-narrow-layout {
+                width: 90.5%;
+                height: 90.5%;
+            }
         }
         .modal-header {
             position: sticky;
@@ -67,6 +71,9 @@
             z-index: 3;
             background: white;
         }
+    }
+
+    .reviews-modal {
         .stay-reviews {
             overflow-x: hidden;
             padding-block: 0;
@@ -95,11 +102,6 @@
         }
 
         @include for-narrow-layout {
-            .modal {
-                width: 90.5%;
-                height: 90.5%;
-            }
-
             .stay-rating > * {
                 font-size: 32px;
             }

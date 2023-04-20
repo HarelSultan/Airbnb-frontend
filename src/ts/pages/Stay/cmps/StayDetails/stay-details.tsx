@@ -14,9 +14,10 @@ interface Props {
     reserveBy: ReserveByProps
     onSetReserveBy: (updatedReservation: ReserveByProps) => void
     nightsCount: number
+    onOpenModal: (expandedModal: string) => void
 }
 
-export function StayDetails({ stay, takenDates, reserveBy, onSetReserveBy, nightsCount }: Props) {
+export function StayDetails({ stay, takenDates, reserveBy, onSetReserveBy, nightsCount, onOpenModal }: Props) {
     const stayDetailsHeaderProps = {
         host: stay.host,
         details: stay.stayDetails,
@@ -34,7 +35,7 @@ export function StayDetails({ stay, takenDates, reserveBy, onSetReserveBy, night
         <section className='stay-details'>
             <StayDetailsHeader {...stayDetailsHeaderProps} />
             <StayAttributes />
-            <StayAirCover />
+            <StayAirCover onOpenModal={onOpenModal} />
             <StaySummary summary={stay.summary} />
             <StaySleepingArrangement details={stay.stayDetails} />
             <StayAmenities amenities={stay.amenities} />

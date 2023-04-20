@@ -3,15 +3,16 @@ import { stayService } from '../../../../services/stay.service'
 import { StayReviewProps } from '../../../../interfaces/stay-interface'
 import { StayCategoryRating } from './cmps/stay-category-rating'
 import { Stayreview } from './cmps/stay-review'
+import { REVIEWS_MODAL } from '../../stay-page'
 
 interface Props {
     reviews: StayReviewProps[]
-    onToggleReviewsModalDisplay?: () => void
+    onOpenReviewsModal?: (expandedModal: string) => void
     isExpanded: boolean
     isMobile: boolean
 }
 
-export function StayReviews({ reviews, onToggleReviewsModalDisplay, isExpanded, isMobile }: Props) {
+export function StayReviews({ reviews, onOpenReviewsModal, isExpanded, isMobile }: Props) {
     const categoriesRating = [
         {
             category: 'Cleanliness',
@@ -60,8 +61,8 @@ export function StayReviews({ reviews, onToggleReviewsModalDisplay, isExpanded, 
                     <Stayreview key={review.id} review={review} />
                 ))}
             </div>
-            {reviews.length > 4 && onToggleReviewsModalDisplay && (
-                <button onClick={onToggleReviewsModalDisplay} className='btn btn-more-reviews'>
+            {reviews.length > 4 && onOpenReviewsModal && (
+                <button onClick={() => onOpenReviewsModal(REVIEWS_MODAL)} className='btn btn-more-reviews'>
                     Show all {reviews.length} reviews
                 </button>
             )}

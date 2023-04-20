@@ -1,4 +1,9 @@
-export function StayAirCover() {
+import { AIR_COVER_MODAL } from '../../stay-page'
+
+interface Props {
+    onOpenModal: (expandedModal: string) => void
+}
+export function StayAirCover({ onOpenModal }: Props) {
     return (
         <section className='stay-air-cover'>
             <img
@@ -10,9 +15,12 @@ export function StayAirCover() {
                 Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues
                 like trouble checking in.
             </p>
-            <a href='/' target='_' className='underline'>
+            <button onClick={() => onOpenModal(AIR_COVER_MODAL)} className='btn btn-more underline'>
                 Learn more
-            </a>
+            </button>
+            {/* <a href='/' target='_' className='underline'>
+                Learn more
+            </a> */}
         </section>
     )
 }

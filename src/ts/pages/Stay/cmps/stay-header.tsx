@@ -4,16 +4,17 @@ import { FiShare, FiHeart } from 'react-icons/fi'
 import { FaMedal } from 'react-icons/fa'
 import { BsHeart } from 'react-icons/bs'
 import { AiFillStar } from 'react-icons/ai'
+import { REVIEWS_MODAL } from '../stay-page'
 
 interface Props {
     stay: StayProps
     isMobile: boolean
     onToggleSaveStay: (ev: React.MouseEvent<HTMLButtonElement>) => void
     isStaySaved: boolean
-    onToggleReviewsModalDisplay: () => void
+    onOpenReviewsModal: (expandedModal: string) => void
 }
 
-export function StayHeader({ stay, isMobile, onToggleSaveStay, isStaySaved, onToggleReviewsModalDisplay }: Props) {
+export function StayHeader({ stay, isMobile, onToggleSaveStay, isStaySaved, onOpenReviewsModal }: Props) {
     return (
         <section className='stay-header'>
             <h2 className='stay-title'>{stay.name}</h2>
@@ -24,7 +25,7 @@ export function StayHeader({ stay, isMobile, onToggleSaveStay, isStaySaved, onTo
                         <span>{stayService.getStayAverageRating(stay.reviews).toFixed(1)}</span>
                         <span className='dot-seperator'>·</span>
                     </div>
-                    <span onClick={onToggleReviewsModalDisplay} className='review-count underline'>
+                    <span onClick={() => onOpenReviewsModal(REVIEWS_MODAL)} className='review-count underline'>
                         {' '}
                         {stay.reviews.length} reviews
                     </span>

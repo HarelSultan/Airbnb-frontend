@@ -1,0 +1,38 @@
+.air-cover-expanded {
+    font-size: 16px;
+    .air-cover-header {
+        position: relative;
+        &::after {
+            content: '';
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0;
+            pointer-events: none;
+        }
+        .air-cover-img {
+            height: 32px;
+        }
+
+        p {
+            padding-block: 18px 24px;
+        }
+    }
+
+    .booking-protection,
+    .check-in-gurantee,
+    .stay-gurantee,
+    .safe-line {
+        margin-block: 24px;
+        h4 {
+            font-family: $font-family-medium;
+            margin-bottom: 8px;
+        }
+        p {
+            color: $sub-text-clr;
+        }
+    }
+}

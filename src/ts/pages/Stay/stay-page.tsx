@@ -23,13 +23,17 @@ import { StayReviews } from './cmps/StayReviews/stay-reviews'
 import { MobileReserveStay } from './cmps/ReserveStay/mobile-reserve-stay'
 import { LoginSignupDisplayProps } from '../Home/home-page'
 import { updateWishList } from '../../store/user/user.action'
-import { Modal } from '../../cmps/modal'
+import { Modal, ModalProps } from '../../cmps/modal'
 import { LoginSignup } from '../../cmps/login-signup'
+import { AirCoverExpanded } from './cmps/air-cover-expanded'
+
+export const REVIEWS_MODAL = 'reviewsModal'
+export const AIR_COVER_MODAL = 'airCoverModal'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
     const [reserveBy, setReserveBy] = useState<ReserveByProps | null>(null)
-    const [isReviewsModalOpen, setIsReviewsModalOpen] = useState<boolean>(false)
+    const [expandedModal, setExpandedModal] = useState<string | null>(null)
     const [loginSignupDisplay, setLoginSignupDisplay] = useState<LoginSignupDisplayProps>({
         isOpen: false,
         isSignup: false,
@@ -96,8 +100,8 @@ export function StayPage() {
         }
     }
 
-    const onToggleReviewsModalDisplay = () => {
-        setIsReviewsModalOpen(prevState => !prevState)
+    const onSetExpandedModal = (expandedModal: string | null) => {
+        setExpandedModal(expandedModal)
     }
 
     const onToggleLoginSignup = (isSignup: boolean = false) => {
@@ -110,12 +114,31 @@ export function StayPage() {
 
     const isStaySaved: boolean = loggedInUser?.stayWishList.includes(selectedStay?._id) || false
 
+    type ModalMap = {
+        [key: string]: ModalProps
+    }
+
+    const stayModalsMap: ModalMap = {
+        reviewsModal: {
+            className: 'reviews-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: null,
+            children: <StayReviews reviews={selectedStay.reviews} isExpanded={true} isMobile={isMobile} />,
+        },
+        airCoverModal: {
+            className: 'air-cover-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: null,
+            children: <AirCoverExpanded />,
+        },
+    }
+
     const stayHeaderProps = {
         stay: selectedStay,
         isMobile,
         onToggleSaveStay,
         isStaySaved,
-        onToggleReviewsModalDisplay,
+        onOpenReviewsModal: onSetExpandedModal,
     }
 
     const reserveStayProps = {
@@ -134,14 +157,15 @@ export function StayPage() {
         reserveBy,
         onSetReserveBy,
         nightsCount,
+        onOpenModal: onSetExpandedModal,
     }
 
-    const reviewsModalProps = {
-        className: 'reviews-modal',
-        onCloseModal: onToggleReviewsModalDisplay,
-        headerTxt: null,
-        children: <StayReviews reviews={selectedStay.reviews} isExpanded={true} isMobile={isMobile} />,
-    }
+    // const reviewsModalProps = {
+    //     className: 'reviews-modal',
+    //     onCloseModal: onToggleReviewsModalDisplay,
+    //     headerTxt: null,
+    //     children: <StayReviews reviews={selectedStay.reviews} isExpanded={true} isMobile={isMobile} />,
+    // }
 
     const loginSignupModalProps = {
         className: 'login-signup-modal',
@@ -175,7 +199,7 @@ export function StayPage() {
 
             <StayReviews
                 reviews={selectedStay.reviews}
-                onToggleReviewsModalDisplay={onToggleReviewsModalDisplay}
+                onOpenReviewsModal={onSetExpandedModal}
                 isExpanded={false}
                 isMobile={isMobile}
             />
@@ -194,7 +218,7 @@ export function StayPage() {
                 checkIn={reserveBy.checkIn}
             />
 
-            {isReviewsModalOpen && <Modal {...reviewsModalProps} />}
+            {expandedModal && <Modal {...stayModalsMap[expandedModal]} />}
             {loginSignupDisplay.isOpen && !loggedInUser && <Modal {...loginSignupModalProps} />}
             <AppFooter />
         </section>

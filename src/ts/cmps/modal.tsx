@@ -2,14 +2,14 @@ import { ReactElement } from 'react'
 import { DarkOverlay } from './AppHeader/cmps/dark-overlay'
 import { AiOutlineClose } from 'react-icons/ai'
 
-interface Props {
+export interface ModalProps {
     className: string
     onCloseModal: () => void
     headerTxt: string | null
     children: ReactElement
 }
 
-export function Modal({ className, onCloseModal, headerTxt, children }: Props) {
+export function Modal({ className, onCloseModal, headerTxt, children }: ModalProps) {
     return (
         <div className={`modal-wrapper ${className}`}>
             <DarkOverlay isOpen={true} setIsOpen={onCloseModal} />
