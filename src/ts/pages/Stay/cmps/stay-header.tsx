@@ -4,7 +4,7 @@ import { FiShare, FiHeart } from 'react-icons/fi'
 import { FaMedal } from 'react-icons/fa'
 import { BsHeart } from 'react-icons/bs'
 import { AiFillStar } from 'react-icons/ai'
-import { REVIEWS_MODAL } from '../stay-page'
+import { LOCATION_MODAL, REVIEWS_MODAL } from '../stay-page'
 
 interface Props {
     stay: StayProps
@@ -12,9 +12,17 @@ interface Props {
     onToggleSaveStay: (ev: React.MouseEvent<HTMLButtonElement>) => void
     isStaySaved: boolean
     onOpenReviewsModal: (expandedModal: string) => void
+    onOpenLocationModal: (expandedModal: string) => void
 }
 
-export function StayHeader({ stay, isMobile, onToggleSaveStay, isStaySaved, onOpenReviewsModal }: Props) {
+export function StayHeader({
+    stay,
+    isMobile,
+    onToggleSaveStay,
+    isStaySaved,
+    onOpenReviewsModal,
+    onOpenLocationModal,
+}: Props) {
     return (
         <section className='stay-header'>
             <h2 className='stay-title'>{stay.name}</h2>
@@ -25,10 +33,10 @@ export function StayHeader({ stay, isMobile, onToggleSaveStay, isStaySaved, onOp
                         <span>{stayService.getStayAverageRating(stay.reviews).toFixed(1)}</span>
                         <span className='dot-seperator'>·</span>
                     </div>
-                    <span onClick={() => onOpenReviewsModal(REVIEWS_MODAL)} className='review-count underline'>
+                    <button onClick={() => onOpenReviewsModal(REVIEWS_MODAL)} className='btn review-count underline'>
                         {' '}
                         {stay.reviews.length} reviews
-                    </span>
+                    </button>
                     <span className='dot-seperator'>·</span>
 
                     {stay.host.isSuperHost && (
@@ -38,7 +46,9 @@ export function StayHeader({ stay, isMobile, onToggleSaveStay, isStaySaved, onOp
                             <span className='dot-seperator'>·</span>
                         </div>
                     )}
-                    <span className='location underline'>{stay.loc.address}</span>
+                    <button onClick={() => onOpenLocationModal(LOCATION_MODAL)} className='btn location underline'>
+                        {stay.loc.address}
+                    </button>
                 </div>
                 {!isMobile && (
                     <div className='action-btns-container'>

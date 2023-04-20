@@ -1,11 +1,14 @@
 import GoogleMapReact from 'google-map-react'
+import { LOCATION_MODAL } from '../stay-page'
 import { MdHome } from 'react-icons/md'
+import { GrFormNext } from 'react-icons/gr'
 
 interface Props {
     lat: number
     lng: number
     stayArea: string
     staySummary: string
+    onOpenLocationModal?: (expandedModal: string) => void
 }
 
 const MapMarker = ({ text }: any) => (
@@ -14,7 +17,7 @@ const MapMarker = ({ text }: any) => (
     </div>
 )
 
-export function StayMap({ lat, lng, stayArea, staySummary }: Props) {
+export function StayMap({ lat, lng, stayArea, staySummary, onOpenLocationModal }: Props) {
     const mapProps = {
         center: {
             lat,
@@ -22,6 +25,8 @@ export function StayMap({ lat, lng, stayArea, staySummary }: Props) {
         },
         zoom: 14,
     }
+
+    const staySummaryToDisplay = onOpenLocationModal ? staySummary.slice(0, staySummary.indexOf('.') + 1) : staySummary
 
     return (
         <section className='stay-map'>
@@ -36,7 +41,13 @@ export function StayMap({ lat, lng, stayArea, staySummary }: Props) {
                 </GoogleMapReact>
             </div>
             <h4>{stayArea}</h4>
-            <p>{staySummary}</p>
+            <p>{staySummaryToDisplay}</p>
+            {onOpenLocationModal && (
+                <button onClick={() => onOpenLocationModal(LOCATION_MODAL)} className='btn btn-more underline'>
+                    Show more
+                    <GrFormNext />
+                </button>
+            )}
         </section>
     )
 }

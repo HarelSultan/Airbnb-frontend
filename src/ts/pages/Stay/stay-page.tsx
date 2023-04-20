@@ -30,6 +30,7 @@ import { AirCoverExpanded } from './cmps/air-cover-expanded'
 export const REVIEWS_MODAL = 'reviewsModal'
 export const AIR_COVER_MODAL = 'airCoverModal'
 export const IMG_CAROUSEL_MODAL = 'imgCarouselModal'
+export const LOCATION_MODAL = 'locationModal'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -153,6 +154,19 @@ export function StayPage() {
                 />
             ),
         },
+        locationModal: {
+            className: 'location-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: null,
+            children: (
+                <StayMap
+                    lat={selectedStay.loc.lat}
+                    lng={selectedStay.loc.lng}
+                    stayArea={selectedStay.loc.address}
+                    staySummary={selectedStay.summary}
+                />
+            ),
+        },
     }
 
     const stayHeaderProps = {
@@ -161,6 +175,7 @@ export function StayPage() {
         onToggleSaveStay,
         isStaySaved,
         onOpenReviewsModal: onSetExpandedModal,
+        onOpenLocationModal: onSetExpandedModal,
     }
 
     const reserveStayProps = {
@@ -226,6 +241,7 @@ export function StayPage() {
                 lng={selectedStay.loc.lng}
                 stayArea={selectedStay.loc.address}
                 staySummary={selectedStay.summary}
+                onOpenLocationModal={onSetExpandedModal}
             />
 
             <StayHost host={selectedStay.host} />
