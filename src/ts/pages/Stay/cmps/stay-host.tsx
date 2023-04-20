@@ -3,12 +3,14 @@ import { utilService } from '../../../services/util.service'
 import { AiFillStar } from 'react-icons/ai'
 import { MdVerifiedUser } from 'react-icons/md'
 import { FaMedal } from 'react-icons/fa'
+import { CONTACT_HOST_MODAL } from '../stay-page'
 
 interface Props {
     host: StayHostProps
+    onOpenContactHostModal: (expandedModal: string) => void
 }
 
-export function StayHost({ host }: Props) {
+export function StayHost({ host, onOpenContactHostModal }: Props) {
     const hostFirstName = utilService.getFirstName(host.fullname)
 
     return (
@@ -47,7 +49,9 @@ export function StayHost({ host }: Props) {
             )}
             <p className='response-rate'>Response rate: 100%</p>
             <p>Response time: within an hour</p>
-            <button className='btn btn-contact'>Contact Host</button>
+            <button onClick={() => onOpenContactHostModal(CONTACT_HOST_MODAL)} className='btn btn-contact'>
+                Contact Host
+            </button>
             <div className='disclaimer'>
                 <p>
                     To protect your payment, never transfer money or communicate outside of the Airbnb website or app.

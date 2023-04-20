@@ -26,11 +26,13 @@ import { updateWishList } from '../../store/user/user.action'
 import { Modal, ModalProps } from '../../cmps/modal'
 import { LoginSignup } from '../../cmps/login-signup'
 import { AirCoverExpanded } from './cmps/air-cover-expanded'
+import { ContactHost } from './cmps/contact-host'
 
 export const REVIEWS_MODAL = 'reviewsModal'
 export const AIR_COVER_MODAL = 'airCoverModal'
 export const IMG_CAROUSEL_MODAL = 'imgCarouselModal'
 export const LOCATION_MODAL = 'locationModal'
+export const CONTACT_HOST_MODAL = 'contactHostModal'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -106,16 +108,18 @@ export function StayPage() {
         }
     }
 
+    const onSendHostMessage = (msg: string) => {
+        setExpandedModal(null)
+        console.log(msg)
+    }
+
     const onSetExpandedModal = (expandedModal: string | null) => {
+        if (expandedModal === CONTACT_HOST_MODAL && !loggedInUser) return onToggleLoginSignup()
         setExpandedModal(expandedModal)
     }
 
     const onToggleLoginSignup = (isSignup: boolean = false) => {
         setLoginSignupDisplay(prevState => ({ isOpen: !prevState.isOpen, isSignup }))
-        // setLoginSignupDisplay(prevState=> {
-        //     if (!prevState.isOpen && expandedModal) onSetExpandedModal(null)
-        //     return ({isOpen: !prevState.isOpen, isSignup})
-        // })
     }
 
     const nightsCount = utilService.getNightsCount(reserveBy) || 1
@@ -164,6 +168,18 @@ export function StayPage() {
                     lng={selectedStay.loc.lng}
                     stayArea={selectedStay.loc.address}
                     staySummary={selectedStay.summary}
+                />
+            ),
+        },
+        contactHostModal: {
+            className: 'contact-host-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: null,
+            children: (
+                <ContactHost
+                    host={selectedStay.host}
+                    amenities={selectedStay.amenities}
+                    onSendHostMessage={onSendHostMessage}
                 />
             ),
         },
@@ -244,7 +260,7 @@ export function StayPage() {
                 onOpenLocationModal={onSetExpandedModal}
             />
 
-            <StayHost host={selectedStay.host} />
+            <StayHost host={selectedStay.host} onOpenContactHostModal={onSetExpandedModal} />
             <StayThingsToKnow
                 amenities={selectedStay.amenities}
                 guestsCount={selectedStay.stayDetails.guests}
