@@ -55,7 +55,7 @@
         }
     }
 
-    .modal-wrapper {
+    .modal-wrapper:not(.login-signup-modal) {
         .modal {
             height: 100%;
             overflow-y: scroll;
@@ -109,6 +109,46 @@
             .categories-rating-container {
                 grid-template-columns: 1fr 1fr;
             }
+        }
+    }
+
+    .img-carousel-modal {
+        .modal {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            background-color: black;
+        }
+        .modal .modal-header {
+            background-color: black;
+        }
+
+        .btn-close {
+            color: white;
+            &:hover {
+                background: #4a4a4a;
+            }
+        }
+        .children-wrapper {
+            padding: 0;
+            display: flex;
+            height: calc(100% - 72px);
+            align-items: center;
+            @include for-narrow-layout {
+                padding-inline: 18px;
+            }
+        }
+        .stay-img-carousel {
+            position: static;
+            margin-top: 0;
+        }
+
+        .action-btns-container {
+            z-index: 3;
+        }
+
+        .slider-wrapper {
+            cursor: default;
         }
     }
 

@@ -29,6 +29,7 @@ import { AirCoverExpanded } from './cmps/air-cover-expanded'
 
 export const REVIEWS_MODAL = 'reviewsModal'
 export const AIR_COVER_MODAL = 'airCoverModal'
+export const IMG_CAROUSEL_MODAL = 'imgCarouselModal'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -59,11 +60,15 @@ export function StayPage() {
                 console.log(stay)
             } catch (err) {
                 console.log('Had trouble loading selected stay at stay page with error', err)
-                navigate(-1)
+                onGoBack()
             }
         } else {
-            navigate(-1)
+            onGoBack()
         }
+    }
+
+    const onGoBack = () => {
+        navigate(-1)
     }
 
     const loadReserveBy = () => {
@@ -106,6 +111,10 @@ export function StayPage() {
 
     const onToggleLoginSignup = (isSignup: boolean = false) => {
         setLoginSignupDisplay(prevState => ({ isOpen: !prevState.isOpen, isSignup }))
+        // setLoginSignupDisplay(prevState=> {
+        //     if (!prevState.isOpen && expandedModal) onSetExpandedModal(null)
+        //     return ({isOpen: !prevState.isOpen, isSignup})
+        // })
     }
 
     const nightsCount = utilService.getNightsCount(reserveBy) || 1
@@ -130,6 +139,19 @@ export function StayPage() {
             onCloseModal: () => onSetExpandedModal(null),
             headerTxt: null,
             children: <AirCoverExpanded />,
+        },
+        imgCarouselModal: {
+            className: 'img-carousel-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: null,
+            children: (
+                <StayImgCarousel
+                    imgUrls={selectedStay.imgUrls}
+                    onGoBack={onGoBack}
+                    onToggleSaveStay={onToggleSaveStay}
+                    isStaySaved={isStaySaved}
+                />
+            ),
         },
     }
 
@@ -160,13 +182,6 @@ export function StayPage() {
         onOpenModal: onSetExpandedModal,
     }
 
-    // const reviewsModalProps = {
-    //     className: 'reviews-modal',
-    //     onCloseModal: onToggleReviewsModalDisplay,
-    //     headerTxt: null,
-    //     children: <StayReviews reviews={selectedStay.reviews} isExpanded={true} isMobile={isMobile} />,
-    // }
-
     const loginSignupModalProps = {
         className: 'login-signup-modal',
         onCloseModal: onToggleLoginSignup,
@@ -180,13 +195,15 @@ export function StayPage() {
             {isMobile && (
                 <StayImgCarousel
                     imgUrls={selectedStay.imgUrls}
+                    onGoBack={onGoBack}
                     onToggleSaveStay={onToggleSaveStay}
                     isStaySaved={isStaySaved}
+                    onOpenGalleryModal={onSetExpandedModal}
                 />
             )}
 
             <StayHeader {...stayHeaderProps} />
-            {!isMobile && <StayGallery imgUrls={selectedStay.imgUrls} />}
+            {!isMobile && <StayGallery imgUrls={selectedStay.imgUrls} onOpenGalleryModal={onSetExpandedModal} />}
 
             <div className='layout-wrapper'>
                 <StayDetails {...stayDetailsProps} />

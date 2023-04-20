@@ -1,12 +1,14 @@
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr'
+import { IMG_CAROUSEL_MODAL } from '../../Stay/stay-page'
 
 interface Props {
     imgUrls: string[]
+    onOpenGalleryModal?: (expandedModal: string) => void
 }
 
-export function ImgCarousel({ imgUrls }: Props) {
+export function ImgCarousel({ imgUrls, onOpenGalleryModal }: Props) {
     const carouselSettings = {
         showStatus: false,
         showThumbs: false,
@@ -57,7 +59,11 @@ export function ImgCarousel({ imgUrls }: Props) {
             )}
         >
             {imgUrls.map(url => (
-                <div key={url} className='stay-img-wrapper'>
+                <div
+                    onClick={onOpenGalleryModal ? () => onOpenGalleryModal(IMG_CAROUSEL_MODAL) : undefined}
+                    key={url}
+                    className='stay-img-wrapper'
+                >
                     <img src={url} alt='' />
                 </div>
             ))}
