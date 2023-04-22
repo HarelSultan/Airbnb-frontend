@@ -27,12 +27,16 @@ import { Modal, ModalProps } from '../../cmps/modal'
 import { LoginSignup } from '../../cmps/login-signup'
 import { AirCoverExpanded } from './cmps/air-cover-expanded'
 import { ContactHost } from './cmps/contact-host'
+import { ReserveDates } from './cmps/ReserveStay/cmps/reserve-dates'
+import { AiFillStar } from 'react-icons/ai'
+import { CtaBtn } from '../../cmps/cta-btn'
 
 export const REVIEWS_MODAL = 'reviewsModal'
 export const AIR_COVER_MODAL = 'airCoverModal'
 export const IMG_CAROUSEL_MODAL = 'imgCarouselModal'
 export const LOCATION_MODAL = 'locationModal'
 export const CONTACT_HOST_MODAL = 'contactHostModal'
+export const RESERVE_DATES_MODAL = 'reserveDatesModal'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -183,6 +187,33 @@ export function StayPage() {
                 />
             ),
         },
+        reserveDatesModal: {
+            className: 'reserve-dates-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: null,
+            children: (
+                <>
+                    <ReserveDates
+                        takenDates={selectedStay.takenDates}
+                        reserveBy={reserveBy}
+                        onSetReserveBy={onSetReserveBy}
+                        nightsCount={nightsCount}
+                    />
+                    <div className='reserve-modal-footer'>
+                        <div className='reservation-info'>
+                            <p className='pricing'>
+                                <span className='nightly-price'>${selectedStay.price}</span> night
+                            </p>
+                            <p className='rating'>
+                                <AiFillStar />
+                                <span>{stayService.getStayAverageRating(selectedStay.reviews).toFixed(1)}</span>
+                            </p>
+                        </div>
+                        <CtaBtn onClickCB={() => onSetExpandedModal(null)} txt='Save' />
+                    </div>
+                </>
+            ),
+        },
     }
 
     const stayHeaderProps = {
@@ -239,7 +270,12 @@ export function StayPage() {
             <div className='layout-wrapper'>
                 <StayDetails {...stayDetailsProps} />
                 {isMobile ? (
-                    <MobileReserveStay price={selectedStay.price} reserveBy={reserveBy} onReserveStay={onReserveStay} />
+                    <MobileReserveStay
+                        price={selectedStay.price}
+                        reserveBy={reserveBy}
+                        onReserveStay={onReserveStay}
+                        onOpenDatesModal={onSetExpandedModal}
+                    />
                 ) : (
                     <ReserveStay {...reserveStayProps} />
                 )}

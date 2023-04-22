@@ -49,17 +49,20 @@ export function StayHost({ host, onOpenContactHostModal }: Props) {
             )}
             <p className='response-rate'>Response rate: 100%</p>
             <p>Response time: within an hour</p>
-            <button onClick={() => onOpenContactHostModal(CONTACT_HOST_MODAL)} className='btn btn-contact'>
-                Contact Host
-            </button>
-            <div className='disclaimer'>
-                <p>
-                    To protect your payment, never transfer money or communicate outside of the Airbnb website or app.
-                </p>
-                <img
-                    src='https://res.cloudinary.com/dotasvsuv/image/upload/v1681055703/alpi2hzv1xb1i3q5hefe.svg'
-                    alt=''
-                />
+            <div className='wrapper'>
+                <button onClick={() => onOpenContactHostModal(CONTACT_HOST_MODAL)} className='btn btn-contact'>
+                    Contact Host
+                </button>
+                <div className='disclaimer'>
+                    <p>
+                        To protect your payment, never transfer money or communicate outside of the Airbnb website or
+                        app.
+                    </p>
+                    <img
+                        src='https://res.cloudinary.com/dotasvsuv/image/upload/v1681055703/alpi2hzv1xb1i3q5hefe.svg'
+                        alt=''
+                    />
+                </div>
             </div>
         </section>
     )

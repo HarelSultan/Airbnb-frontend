@@ -65,15 +65,26 @@
         margin-bottom: 6px;
     }
 
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        @include for-narrow-layout {
+            flex-direction: row;
+        }
+    }
+
     .btn-contact {
         width: 100%;
-        @include for-narrow-layout {
-            width: max-content;
-        }
         margin-block: 24px;
+        @include for-narrow-layout {
+            width: 149px;
+            margin-block: 24px 0;
+        }
         border: 1px solid #222222;
         border-radius: 0.5em;
-        padding: 12px 22px;
+        padding-block: 12px;
         font-family: $font-family-medium;
         &:hover {
             border-color: black;
@@ -84,7 +95,7 @@
     .disclaimer {
         display: flex;
         gap: 1rem;
-
+        align-items: center;
         img {
             width: 24px;
         }
@@ -94,7 +105,7 @@
         @include for-narrow-layout {
             flex-direction: row-reverse;
             p {
-                width: 28%;
+                width: 35%;
             }
         }
     }

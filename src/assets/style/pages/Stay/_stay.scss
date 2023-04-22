@@ -274,7 +274,7 @@
             &:focus {
                 box-shadow: 0 0 0 2px $main-text-clr;
             }
-            &:invalid {
+            &:invalid:focus-within {
                 background-color: #fff8f6;
                 box-shadow: inset 0 0 0 1px #c13515;
             }
@@ -288,6 +288,60 @@
             @include for-narrow-layout {
                 width: max-content;
             }
+        }
+    }
+
+    .reserve-dates-modal {
+        .modal {
+            width: 100%;
+            font-size: 14px;
+        }
+        .reserve-dates {
+            padding: 0;
+            position: static;
+            box-shadow: none;
+            margin-bottom: 64px;
+            p {
+                padding-bottom: 12px;
+            }
+        }
+        h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+        .reserve-modal-footer {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 18px;
+            border-top: 1px solid #dddddd;
+        }
+        .reservation-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .nightly-price {
+            font-size: 16px;
+            font-family: $font-family-bold;
+        }
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-family: $font-family-medium;
+            line-height: 1;
+        }
+        .btn-cta {
+            width: max-content;
+            padding-inline: 40px;
+            font-size: 16px;
         }
     }
 

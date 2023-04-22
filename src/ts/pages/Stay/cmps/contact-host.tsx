@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEventHandler, useState } from 'react'
 
 import { StayHostProps } from '../../../interfaces/stay-interface'
 import { utilService } from '../../../services/util.service'
@@ -16,6 +16,10 @@ export function ContactHost({ host, amenities, onSendHostMessage }: Props) {
 
     const handleChange = (ev: React.ChangeEvent<HTMLTextAreaElement>) => {
         setHostMessage(ev.target.value)
+    }
+
+    const onSendMessage = () => {
+        hostMessage && onSendHostMessage(hostMessage)
     }
 
     return (
@@ -64,7 +68,7 @@ export function ContactHost({ host, amenities, onSendHostMessage }: Props) {
             <div className='message-wrapper'>
                 <h3>Message the host</h3>
                 <textarea value={hostMessage} onChange={handleChange} required />
-                <button onClick={() => onSendHostMessage(hostMessage)} className='btn btn-send'>
+                <button onClick={onSendMessage} className='btn btn-send'>
                     Send message
                 </button>
             </div>
