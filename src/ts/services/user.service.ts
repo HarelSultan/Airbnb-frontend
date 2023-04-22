@@ -53,11 +53,11 @@ async function logout() {
 
 async function update(credentials: UserProps) {
     const updatedUser = await storageService.put(STORAGE_KEY_USER_DB, credentials)
-    if (getLoggedinUser()._id === updatedUser._id) _saveLocalUser(updatedUser)
+    if (getLoggedinUser()?._id === updatedUser._id) _saveLocalUser(updatedUser)
     return updatedUser
 }
 
-function getLoggedinUser() {
+function getLoggedinUser(): UserProps | null {
     const loggedinUser = sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)
     return loggedinUser ? JSON.parse(loggedinUser) : null
 }

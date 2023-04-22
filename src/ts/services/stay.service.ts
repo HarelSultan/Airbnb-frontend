@@ -6,6 +6,7 @@ import { StayProps, StayReviewProps } from '../interfaces/stay-interface'
 import { FilterByProps } from '../interfaces/filter-by-interface'
 import { SearchByProps } from '../interfaces/search-by-interface'
 import { ReserveByProps } from '../interfaces/reserve-by-interface'
+import { userService } from './user.service'
 
 const STORAGE_KEY_STAY_DB: string = 'stay_DB'
 const ALL_HOMES: string = 'All homes'
@@ -15,6 +16,7 @@ _createStays()
 export const stayService = {
     query,
     getLabelFilters,
+    getAmenities,
     getStayAverageRating,
     getCategoryAverageRating,
     getDeafultSearchProps,
@@ -22,6 +24,7 @@ export const stayService = {
     getParamsSearchBy,
     getById,
     getReserveByProps,
+    getEmptyStayProps,
 }
 
 async function query(
@@ -98,6 +101,136 @@ function getLabelFilters() {
     return labelFilters
 }
 
+function getAmenities() {
+    return [
+        'TV',
+        'Internet',
+        'Wifi',
+        'Air conditioning',
+        'Kitchen',
+        'Pets allowed',
+        'Elevator',
+        'Buzzer/wireless intercom',
+        'Family/kid friendly',
+        'Washer',
+        'Smoke detector',
+        'Carbon monoxide detector',
+        'Essentials',
+        'Shampoo',
+        'Lock on bedroom door',
+        '24-hour check-in',
+        'Hangers',
+        'Hair dryer',
+        'Iron',
+        'Laptop friendly workspace',
+        'Self check-in',
+        'Keypad',
+        'Window guards',
+        'Room-darkening shades',
+        'Hot water',
+        'Luggage dropoff allowed',
+        'Long term stays allowed',
+        'Free parking on premises',
+        'Breakfast',
+        'Heating',
+        'Suitable for events',
+        'Dryer',
+        'Safety card',
+        'Private entrance',
+        'Paid parking off premises',
+        'Doorman',
+        'Free street parking',
+        'Bathtub',
+        'Host greets you',
+        'Wheelchair accessible',
+        'Gym',
+        'First aid kit',
+        'Fire extinguisher',
+        'Cable TV',
+        'Building staff',
+        'Other',
+        'Lockbox',
+        'Private living room',
+        'Bed linens',
+        'Microwave',
+        'Coffee maker',
+        'Refrigerator',
+        'Dishwasher',
+        'Dishes and silverware',
+        'Cooking basics',
+        'Oven',
+        'Stove',
+        'Smoking allowed',
+        'Extra pillows and blankets',
+        'Ethernet connection',
+        'Single level home',
+        'Patio or balcony',
+        'Pool',
+        'Pets live on this property',
+        'Dog(s)',
+        'Hot tub',
+        'Body soap',
+        'Bath towel',
+        'Toilet paper',
+        'Full kitchen',
+        'Bedroom comforts',
+        'Bathroom essentials',
+        'Outlet covers',
+        'Children’s books and toys',
+        'Children’s dinnerware',
+        'Game console',
+        'High chair',
+        'Crib',
+        'Pack ’n Play/travel crib',
+        'Step-free access',
+        'Wide doorway',
+        'Wide clearance to bed',
+        'Wide entryway',
+        'Mountain view',
+        'Balcony',
+        'Sound system',
+        'Breakfast table',
+        'Espresso machine',
+        'Convection oven',
+        'Standing valet',
+        'En suite bathroom',
+        'Paid parking on premises',
+        'Disabled parking spot',
+        'Beachfront',
+        'Fixed grab bars for shower',
+        'Cat(s)',
+        'Other pet(s)',
+        'BBQ grill',
+        'Garden or backyard',
+        'Beach essentials',
+        'Smart TV',
+        'DVD player',
+        'Beach view',
+        'Rain shower',
+        'Terrace',
+        'Double oven',
+        'Murphy bed',
+        'Baby bath',
+        'Pool with pool hoist',
+        'Wide hallway clearance',
+        'Flat path to front door',
+        'Well-lit path to entrance',
+        'Waterfront',
+        'Accessible-height bed',
+        'Firm mattress',
+        'Handheld shower head',
+        'Fixed grab bars for toilet',
+        'Accessible-height toilet',
+        'Indoor fireplace',
+        'Cleaning before checkout',
+        'Ground floor access',
+        'Smart lock',
+        'Babysitter recommendations',
+        'Stair gates',
+        'Bathtub with bath chair',
+    ]
+}
+
 function getStayAverageRating(reviews: StayReviewProps[]) {
     return (
         reviews.reduce((acc: number, review: StayReviewProps) => {
@@ -130,6 +263,54 @@ function getReserveByProps(searchBy: SearchByProps): ReserveByProps {
 //         guests: reserveBy.guests,
 //     }
 // }
+
+function getEmptyStayProps() {
+    const loggedInUser = userService.getLoggedinUser()
+    const emptyStay: StayProps = {
+        _id: '',
+        name: '',
+        type: '',
+        imgUrls: [],
+        price: 0,
+        summary: '',
+        amenities: [],
+        roomType: '',
+        randomAvaliableDates: {
+            checkIn: new Date(),
+            checkOut: new Date(),
+        },
+        takenDates: [],
+        host: {
+            _id: loggedInUser?._id || '',
+            fullname: loggedInUser?.fullName || '',
+            imgUrl: '',
+            isSuperHost: false,
+        },
+        loc: {
+            country: '',
+            countryCode: '',
+            city: '',
+            address: '',
+            destination: '',
+            lat: 0,
+            lng: 0,
+        },
+        reviews: [],
+        likedByUsers: [],
+        labels: [],
+        stayDetails: {
+            guests: 0,
+            bedrooms: 0,
+            beds: 0,
+            bathrooms: 0,
+        },
+    }
+    while (emptyStay.takenDates.length < 3) {
+        emptyStay.takenDates.push(utilService.getRandomDates(emptyStay.takenDates))
+    }
+    emptyStay.randomAvaliableDates = utilService.getRandomDates(emptyStay.takenDates)
+    return emptyStay
+}
 
 function getDeafultSearchProps() {
     return {
