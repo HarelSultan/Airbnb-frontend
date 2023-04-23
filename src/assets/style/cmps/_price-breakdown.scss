@@ -1,0 +1,47 @@
+.price-breakdown-modal {
+    font-size: 16px;
+    &.modal-wrapper div.modal {
+        height: 350px;
+        width: 350px;
+        border-radius: 12px;
+        max-width: 100vw;
+        @include for-narrow-layout {
+            max-width: 400px;
+            height: max-content;
+        }
+    }
+
+    .wrapper {
+        position: relative;
+        padding-bottom: 24px;
+
+        &::after {
+            content: '';
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0;
+            pointer-events: none;
+        }
+
+        & > * {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &:not(:first-child) {
+                padding-top: 16px;
+            }
+        }
+    }
+    .total-price {
+        font-family: $font-family-medium;
+        font-family: $font-family-bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 24px;
+    }
+}

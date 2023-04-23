@@ -55,7 +55,7 @@
         }
     }
 
-    .modal-wrapper:not(.login-signup-modal) {
+    .modal-wrapper {
         .modal {
             height: 100%;
             overflow-y: scroll;
@@ -70,6 +70,16 @@
             top: 0;
             z-index: 3;
             background: white;
+        }
+    }
+
+    .login-signup-modal {
+        .modal {
+            height: max-content;
+            width: max-content;
+        }
+        .login-signup > * {
+            margin-top: 12px;
         }
     }
 

@@ -19,6 +19,7 @@ interface Props {
     onSetReserveBy: (updatedReservation: ReserveByProps) => void
     onReserveStay: () => void
     nightsCount: number
+    onOpenPriceModal: (expandedModal: string) => void
 }
 
 // Search by ?
@@ -30,6 +31,7 @@ export function ReserveStay({
     onSetReserveBy,
     onReserveStay,
     nightsCount,
+    onOpenPriceModal,
 }: Props) {
     const [selectedReserveModule, setSelectedReserveModule] = useState<string | null>(null)
 
@@ -121,7 +123,7 @@ export function ReserveStay({
             <div ref={activeReserveModuleRef} className='reserve-module-wrapper'>
                 {selectedReserveModule && reserveModuleMap[selectedReserveModule]}
             </div>
-            <PricingSummary nightlyPrice={price} nightsCount={nightsCount} />
+            <PricingSummary nightlyPrice={price} nightsCount={nightsCount} onOpenPriceModal={onOpenPriceModal} />
         </section>
     )
 }

@@ -30,6 +30,7 @@ import { ContactHost } from './cmps/contact-host'
 import { ReserveDates } from './cmps/ReserveStay/cmps/reserve-dates'
 import { AiFillStar } from 'react-icons/ai'
 import { CtaBtn } from '../../cmps/cta-btn'
+import { PriceBreakdown } from '../../cmps/price-breakdown'
 
 export const REVIEWS_MODAL = 'reviewsModal'
 export const AIR_COVER_MODAL = 'airCoverModal'
@@ -37,6 +38,9 @@ export const IMG_CAROUSEL_MODAL = 'imgCarouselModal'
 export const LOCATION_MODAL = 'locationModal'
 export const CONTACT_HOST_MODAL = 'contactHostModal'
 export const RESERVE_DATES_MODAL = 'reserveDatesModal'
+export const PRICE_BREAKDOWN_MODAL = 'priceBreakdownModal'
+export const CLEANING_FEE_MODAL = 'cleaningFeeModal'
+export const AIRBNB_SERVICE_MODAL = 'airbnbServiceModal'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -214,6 +218,26 @@ export function StayPage() {
                 </>
             ),
         },
+        priceBreakdownModal: {
+            className: 'price-breakdown-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: 'Base Price Breakdown',
+            children: (
+                <PriceBreakdown checkIn={reserveBy.checkIn} checkOut={reserveBy.checkOut} price={selectedStay.price} />
+            ),
+        },
+        cleaningFeeModal: {
+            className: 'price-breakdown-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: 'Cleaning Fee',
+            children: <div>One-time fee charged by host to cover the cost of cleaning their spaces</div>,
+        },
+        airbnbServiceModal: {
+            className: 'price-breakdown-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: 'Airbnb Service',
+            children: <div>This helps us run our platform and offer services like 24/7 support on your trip.</div>,
+        },
     }
 
     const stayHeaderProps = {
@@ -233,6 +257,7 @@ export function StayPage() {
         onSetReserveBy,
         onReserveStay,
         nightsCount,
+        onOpenPriceModal: onSetExpandedModal,
     }
 
     const stayDetailsProps = {
