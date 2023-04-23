@@ -6,6 +6,7 @@ interface Props {
     handleCounterChange: (changeBy: number, guestType: keyof GuestProps) => void
     count: number
 }
+// isDisabled
 export function Counter({ handleCounterChange, guestType, count }: Props) {
     return (
         <div className='counter'>

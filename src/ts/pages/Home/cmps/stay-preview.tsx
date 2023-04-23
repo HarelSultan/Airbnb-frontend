@@ -16,7 +16,7 @@ export function StayPreview({ stay, onStayDetails, onToggleSaveStay, wishList }:
             <ImgCarousel imgUrls={stay.imgUrls} />
             <button
                 onClick={ev => onToggleSaveStay(ev, stay)}
-                className={`btn btn-save ${wishList.includes(stay._id) ? 'saved' : ''}`}
+                className={`btn btn-wish-list ${wishList.includes(stay._id) ? 'saved' : ''}`}
             >
                 <svg
                     viewBox='0 0 32 32'

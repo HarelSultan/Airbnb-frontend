@@ -14,13 +14,21 @@ interface Props {
     nightsCount: number
     onCompleteReservation: () => void
     loggedInUser: UserProps | null
+    onSetExpandedModal: (expandedModal: string) => void
 }
 
-export function DesktopStayBooking({ stay, reserveBy, nightsCount, onCompleteReservation, loggedInUser }: Props) {
+export function DesktopStayBooking({
+    stay,
+    reserveBy,
+    nightsCount,
+    onCompleteReservation,
+    loggedInUser,
+    onSetExpandedModal,
+}: Props) {
     return (
         <section className='desktop-stay-booking'>
             <div className='booking-details'>
-                <TripDetails reserveBy={reserveBy} />
+                <TripDetails reserveBy={reserveBy} onSetExpandedModal={onSetExpandedModal} />
                 {loggedInUser ? (
                     <ConfirmBooking
                         isMobile={false}
@@ -45,7 +53,11 @@ export function DesktopStayBooking({ stay, reserveBy, nightsCount, onCompleteRes
                 </section>
                 <section className='price-details'>
                     <h4>Price details</h4>
-                    <PricingSummary nightlyPrice={stay.price} nightsCount={nightsCount} />
+                    <PricingSummary
+                        nightlyPrice={stay.price}
+                        nightsCount={nightsCount}
+                        onOpenPriceModal={onSetExpandedModal}
+                    />
                 </section>
             </div>
         </section>

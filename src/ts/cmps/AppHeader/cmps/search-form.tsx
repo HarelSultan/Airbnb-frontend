@@ -3,7 +3,7 @@ import { SearchByProps, SearchModule } from '../../../interfaces/search-by-inter
 import { utilService } from '../../../services/util.service'
 import { SearchDates } from './search-dates'
 import { SearchDestination } from './search-destination'
-import { SearchGuests } from './search-guests'
+import { GuestCounter } from '../../guest-counter'
 
 interface Props {
     searchBy: SearchByProps
@@ -31,7 +31,7 @@ export function SearchForm({
         searchDestination: <SearchDestination {...searchModuleProps} />,
         searchCheckInDate: <SearchDates {...searchModuleProps} />,
         searchCheckOutDate: <SearchDates {...searchModuleProps} />,
-        searchGuests: <SearchGuests {...searchModuleProps} />,
+        searchGuests: <GuestCounter state={searchBy} onSetSearchBy={onSetSearchBy} />,
     }
 
     return (

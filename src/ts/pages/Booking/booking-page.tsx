@@ -15,10 +15,19 @@ import { MobileStayBooking } from './cmps/mobile-stay-booking'
 import { DesktopStayBooking } from './cmps/desktop-stay-booking'
 
 import { GrPrevious } from 'react-icons/gr'
+import { Modal, ModalProps } from '../../cmps/modal'
+import { PriceBreakdown } from '../../cmps/price-breakdown'
+import { ReserveDates } from '../Stay/cmps/ReserveStay/cmps/reserve-dates'
+import { AiFillStar } from 'react-icons/ai'
+import { CtaBtn } from '../../cmps/cta-btn'
+import { GuestsModal } from './cmps/guests-modal'
+
+export const RESERVE_GUESTS_MODAL = 'reserveGuestsModal'
 
 export function BookingPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
     const [reserveBy, setReserveBy] = useState<ReserveByProps | null>(null)
+    const [expandedModal, setExpandedModal] = useState<string | null>(null)
 
     const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
@@ -53,6 +62,16 @@ export function BookingPage() {
         setReserveBy(stayService.getReserveByProps(searchBy))
     }
 
+    const onSetReserveBy = (updatedReservation: ReserveByProps) => {
+        setReserveBy(updatedReservation)
+    }
+
+    const onSetExpandedModal = (expandedModal: string | null) => {
+        setExpandedModal(expandedModal)
+    }
+
+    const onCancelGuestsEdit = () => {}
+
     const onGoBack = () => {
         navigate(-1)
     }
@@ -62,12 +81,80 @@ export function BookingPage() {
     const nightsCount = utilService.getNightsCount(reserveBy) || 1
 
     if (!selectedStay || !reserveBy) return <section>Loadin'</section>
+
+    type ModalMap = {
+        [key: string]: ModalProps
+    }
+
+    const stayModalsMap: ModalMap = {
+        reserveDatesModal: {
+            className: 'reserve-dates-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: null,
+            children: (
+                <>
+                    <ReserveDates
+                        takenDates={selectedStay.takenDates}
+                        reserveBy={reserveBy}
+                        onSetReserveBy={onSetReserveBy}
+                        nightsCount={nightsCount}
+                    />
+                    <div className='modal-footer'>
+                        <div className='reservation-info'>
+                            <p className='pricing'>
+                                <span className='nightly-price'>${selectedStay.price}</span> night
+                            </p>
+                            <p className='rating'>
+                                <AiFillStar />
+                                <span>{stayService.getStayAverageRating(selectedStay.reviews).toFixed(1)}</span>
+                            </p>
+                        </div>
+                        <CtaBtn onClickCB={() => onSetExpandedModal(null)} txt='Save' />
+                    </div>
+                </>
+            ),
+        },
+        reserveGuestsModal: {
+            className: 'reserve-guests-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: 'Guests',
+            children: (
+                <GuestsModal
+                    reserveBy={reserveBy}
+                    onSetReserveBy={onSetReserveBy}
+                    onSetExpandedModal={onSetExpandedModal}
+                />
+            ),
+        },
+        priceBreakdownModal: {
+            className: 'price-breakdown-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: 'Base Price Breakdown',
+            children: (
+                <PriceBreakdown checkIn={reserveBy.checkIn} checkOut={reserveBy.checkOut} price={selectedStay.price} />
+            ),
+        },
+        cleaningFeeModal: {
+            className: 'price-breakdown-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: 'Cleaning Fee',
+            children: <div>One-time fee charged by host to cover the cost of cleaning their spaces</div>,
+        },
+        airbnbServiceModal: {
+            className: 'price-breakdown-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: 'Airbnb Service',
+            children: <div>This helps us run our platform and offer services like 24/7 support on your trip.</div>,
+        },
+    }
+
     const stayBookingProps = {
         stay: selectedStay,
         reserveBy,
         nightsCount,
         onCompleteReservation,
         loggedInUser,
+        onSetExpandedModal,
     }
 
     return (
@@ -85,7 +172,7 @@ export function BookingPage() {
             </section>
 
             {isMobile ? <MobileStayBooking {...stayBookingProps} /> : <DesktopStayBooking {...stayBookingProps} />}
-
+            {expandedModal && <Modal {...stayModalsMap[expandedModal]} />}
             <AppFooter />
         </section>
     )

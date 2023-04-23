@@ -6,10 +6,10 @@ import { stayService } from '../../../../services/stay.service'
 import { utilService } from '../../../../services/util.service'
 import { ReserveByProps, ReserveModule } from '../../../../interfaces/reserve-by-interface'
 import { ReserveDates } from './cmps/reserve-dates'
-import { ReserveGuests } from './cmps/reserve-guests'
 import { CtaBtn } from '../../../../cmps/cta-btn'
 import { PricingSummary } from './cmps/pricing-summary'
 import { useOnClickOutside } from '../../../../hooks/use-on-click-outside'
+import { GuestCounter } from '../../../../cmps/guest-counter'
 
 interface Props {
     price: number
@@ -66,7 +66,13 @@ export function ReserveStay({
     const reserveModuleMap: ReserveModule = {
         reserveCheckInDate: <ReserveDates {...reserveModuleProps} />,
         reserveCheckOutDate: <ReserveDates {...reserveModuleProps} />,
-        reserveGuests: <ReserveGuests {...reserveModuleProps} />,
+        reserveGuests: (
+            <GuestCounter
+                state={reserveBy}
+                onSetReserveBy={onSetReserveBy}
+                onSelectReserveModule={onSelectReserveModule}
+            />
+        ),
     }
 
     return (

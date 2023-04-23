@@ -3,7 +3,7 @@ import { AIRBNB_SERVICE_MODAL, CLEANING_FEE_MODAL, PRICE_BREAKDOWN_MODAL } from 
 interface Props {
     nightlyPrice: number
     nightsCount: number
-    onOpenPriceModal?: (expandedModal: string) => void
+    onOpenPriceModal: (expandedModal: string) => void
 }
 
 export function PricingSummary({ nightlyPrice, nightsCount, onOpenPriceModal }: Props) {
@@ -14,30 +14,27 @@ export function PricingSummary({ nightlyPrice, nightsCount, onOpenPriceModal }: 
     return (
         <section className='pricing-summary'>
             <div className='nights-pricing'>
-                <p
-                    onClick={onOpenPriceModal ? () => onOpenPriceModal(PRICE_BREAKDOWN_MODAL) : undefined}
-                    className='underline'
-                >
+                <button onClick={() => onOpenPriceModal(PRICE_BREAKDOWN_MODAL)} className='btn underline'>
                     ${nightlyPrice} x {nightsCount} nights
-                </p>
+                </button>
                 <span>${nightsPricing}</span>
             </div>
             <div className='cleanning-fee'>
-                <p
+                <button
                     onClick={onOpenPriceModal ? () => onOpenPriceModal(CLEANING_FEE_MODAL) : undefined}
-                    className='underline'
+                    className='btn underline'
                 >
                     Cleaning fee
-                </p>
+                </button>
                 <span>${cleaningFee}</span>
             </div>
             <div className='air-bnb-fee'>
-                <p
+                <button
                     onClick={onOpenPriceModal ? () => onOpenPriceModal(AIRBNB_SERVICE_MODAL) : undefined}
-                    className='underline'
+                    className='btn underline'
                 >
                     Airbnb service fee
-                </p>
+                </button>
                 <span>${airbnbFee}</span>
             </div>
             <div className='total-price'>

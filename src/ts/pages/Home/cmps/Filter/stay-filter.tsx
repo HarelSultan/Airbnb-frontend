@@ -33,7 +33,7 @@ export function StayFilters({ filterBy, onSetFilterBy, onCloseModal, onClearFilt
                 <button onClick={onClearFilterBy} className='btn btn-clear-filters'>
                     Clear all
                 </button>
-                <button onClick={onFilterStays} className='btn btn-filter-stays'>
+                <button onClick={onFilterStays} className='btn btn-save btn-filter-stays'>
                     Show homes
                 </button>
             </div>

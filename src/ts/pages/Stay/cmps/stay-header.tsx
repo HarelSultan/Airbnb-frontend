@@ -58,7 +58,7 @@ export function StayHeader({
                         </button>
                         <button
                             onClick={onToggleSaveStay}
-                            className={`btn btn-save underline ${isStaySaved ? 'saved' : ''}`}
+                            className={`btn btn-wish-list underline ${isStaySaved ? 'saved' : ''}`}
                         >
                             <FiHeart />
                             Save

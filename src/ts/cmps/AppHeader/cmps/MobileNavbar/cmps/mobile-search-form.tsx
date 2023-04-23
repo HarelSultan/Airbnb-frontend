@@ -2,11 +2,11 @@ import { utilService } from '../../../../../services/util.service'
 import { SearchByProps } from '../../../../../interfaces/search-by-interface'
 import { SearchDestination } from '../../search-destination'
 import { SearchDates } from '../../search-dates'
-import { SearchGuests } from '../../search-guests'
 import { AiOutlineClose } from 'react-icons/ai'
 import { FaSearch } from 'react-icons/fa'
 import { CtaBtn } from '../../../../cta-btn'
 import { stayService } from '../../../../../services/stay.service'
+import { GuestCounter } from '../../../../guest-counter'
 
 interface Props {
     searchBy: SearchByProps
@@ -96,7 +96,7 @@ export function MobileSearchForm({
             ) : (
                 <div className='search-module guests expanded'>
                     <h2>Who's coming?</h2>
-                    <SearchGuests {...searchModuleProps} />
+                    <GuestCounter state={searchBy} onSetSearchBy={onSetSearchBy} />
                 </div>
             )}
             <div className='search-form-footer'>

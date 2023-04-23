@@ -1,10 +1,8 @@
-import { CtaBtn } from '../../../cmps/cta-btn'
 import { LoginSignup } from '../../../cmps/login-signup'
 import { ReserveByProps } from '../../../interfaces/reserve-by-interface'
 import { StayProps } from '../../../interfaces/stay-interface'
 import { UserProps } from '../../../interfaces/user-interface'
 import { PricingSummary } from '../../Stay/cmps/ReserveStay/cmps/pricing-summary'
-import { StayAirCover } from '../../Stay/cmps/StayDetails/stay-air-cover'
 import { ConfirmBooking } from './confirm-booking'
 import { StayListingCard } from './stay-listing-card'
 import { TripDetails } from './trip-details'
@@ -15,9 +13,17 @@ interface Props {
     nightsCount: number
     onCompleteReservation: () => void
     loggedInUser: UserProps | null
+    onSetExpandedModal: (expandedModal: string) => void
 }
 
-export function MobileStayBooking({ stay, reserveBy, nightsCount, onCompleteReservation, loggedInUser }: Props) {
+export function MobileStayBooking({
+    stay,
+    reserveBy,
+    nightsCount,
+    onCompleteReservation,
+    loggedInUser,
+    onSetExpandedModal,
+}: Props) {
     return (
         <section className='main-layout secondary-layout full mobile-stay-booking'>
             <StayListingCard stay={stay} />
@@ -30,12 +36,16 @@ export function MobileStayBooking({ stay, reserveBy, nightsCount, onCompleteRese
                 />
             </section>
             <div className='seperator full'></div>
-            <TripDetails reserveBy={reserveBy} />
+            <TripDetails reserveBy={reserveBy} onSetExpandedModal={onSetExpandedModal} />
             <div className='seperator full'></div>
 
             <section className='price-details'>
                 <h4>Price details</h4>
-                <PricingSummary nightlyPrice={stay.price} nightsCount={nightsCount} />
+                <PricingSummary
+                    nightlyPrice={stay.price}
+                    nightsCount={nightsCount}
+                    onOpenPriceModal={onSetExpandedModal}
+                />
             </section>
             <div className='seperator full'></div>
             {loggedInUser ? (

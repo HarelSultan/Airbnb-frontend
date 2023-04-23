@@ -16,9 +16,9 @@ export function MobileReserveStay({ price, reserveBy, onReserveStay, onOpenDates
                 <p className='pricing'>
                     <span className='nightly-price'>${price}</span> night
                 </p>
-                <p onClick={() => onOpenDatesModal(RESERVE_DATES_MODAL)} className='dates underline'>
+                <button onClick={() => onOpenDatesModal(RESERVE_DATES_MODAL)} className='btn btn-dates underline'>
                     {utilService.formatDateRange({ checkIn: reserveBy.checkIn, checkOut: reserveBy.checkOut })}
-                </p>
+                </button>
             </div>
             <CtaBtn onClickCB={onReserveStay} txt={'Reserve'} />
         </section>

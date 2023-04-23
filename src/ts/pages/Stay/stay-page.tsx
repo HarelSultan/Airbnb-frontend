@@ -203,7 +203,7 @@ export function StayPage() {
                         onSetReserveBy={onSetReserveBy}
                         nightsCount={nightsCount}
                     />
-                    <div className='reserve-modal-footer'>
+                    <div className='modal-footer'>
                         <div className='reservation-info'>
                             <p className='pricing'>
                                 <span className='nightly-price'>${selectedStay.price}</span> night

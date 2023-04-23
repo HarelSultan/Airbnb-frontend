@@ -74,19 +74,4 @@
             background: #f7f7f7;
         }
     }
-
-    .btn-filter-stays {
-        font-size: 16px;
-        font-family: $font-family-medium;
-        font-family: $font-family-bold;
-        background: $main-text-clr;
-        color: white;
-        height: 48px;
-        width: 162.95px;
-        border-radius: 0.5em;
-        margin-right: 10px;
-        &:hover {
-            background-color: black;
-        }
-    }
 }

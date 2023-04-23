@@ -14,12 +14,19 @@
     .modal {
         padding-bottom: 24px;
         background-color: white;
-        @include for-narrow-layout {
-            border-radius: 12px;
-        }
+        height: 100%;
+        overflow-y: auto;
+        position: relative;
+        font-size: 16px;
         box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
         z-index: 3;
         max-width: 1032px;
+
+        @include for-narrow-layout {
+            width: 90.5%;
+            height: 90.5%;
+            border-radius: 12px;
+        }
     }
 
     .modal-header {
@@ -27,8 +34,10 @@
         align-items: center;
         justify-content: center;
         height: 48px;
-        font-size: 16px;
-        position: relative;
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        background: white;
         @include for-narrow-layout {
             height: 64px;
         }
@@ -71,5 +80,133 @@
         & > * {
             margin-top: 24px;
         }
+    }
+
+    .modal-footer {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: white;
+        padding: 18px;
+        border-top: 1px solid #dddddd;
+    }
+}
+
+.login-signup-modal {
+    .modal {
+        height: max-content;
+        width: max-content;
+    }
+    .login-signup > * {
+        margin-top: 12px;
+    }
+}
+
+.reserve-dates-modal {
+    .modal {
+        width: 100%;
+        font-size: 14px;
+    }
+    .reserve-dates {
+        padding: 0;
+        position: static;
+        box-shadow: none;
+        margin-bottom: 64px;
+        p {
+            padding-bottom: 12px;
+        }
+    }
+    h2 {
+        font-size: 22px;
+        margin-bottom: 8px;
+    }
+    .modal-footer {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: white;
+        padding: 18px;
+        border-top: 1px solid #dddddd;
+    }
+    .reservation-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .nightly-price {
+        font-size: 16px;
+        font-family: $font-family-bold;
+    }
+    .rating {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        font-family: $font-family-medium;
+        line-height: 1;
+    }
+    .btn-cta {
+        width: max-content;
+        padding-inline: 40px;
+        font-size: 16px;
+    }
+}
+
+.reserve-guests-modal {
+    .modal {
+        height: max-content;
+        width: max-content;
+        padding-bottom: 16px;
+    }
+    .children-wrapper {
+        padding: 0;
+    }
+    .guest-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        padding: 12px 24px;
+        &:first-child {
+            padding-top: 0;
+        }
+        &:last-child {
+            padding-bottom: 24px;
+        }
+    }
+
+    .guest-title {
+        text-transform: capitalize;
+        font-family: $font-family-bold;
+    }
+
+    .guest-desc {
+        color: $sub-text-clr;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .counter {
+        grid-area: 1/2/3/3;
+        justify-self: end;
+    }
+    .modal-footer {
+        position: static;
+        padding: 16px 24px 0;
+    }
+
+    .btn-cancel {
+        font-family: $font-family-medium;
+    }
+    .btn-save {
+        width: 83.5px;
+        margin: 0;
     }
 }

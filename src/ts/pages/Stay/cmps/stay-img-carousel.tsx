@@ -22,7 +22,10 @@ export function StayImgCarousel({ imgUrls, onGoBack, onToggleSaveStay, isStaySav
                 <button className='btn btn-share underline'>
                     <FiShare />
                 </button>
-                <button onClick={onToggleSaveStay} className={`btn btn-save underline ${isStaySaved ? 'saved' : ''}`}>
+                <button
+                    onClick={onToggleSaveStay}
+                    className={`btn btn-wish-list underline ${isStaySaved ? 'saved' : ''}`}
+                >
                     <FiHeart />
                 </button>
             </div>
