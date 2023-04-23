@@ -15,7 +15,6 @@ export function EditStay() {
     const amenities = stayService.getAmenities()
 
     const handleChange = (ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        console.log(stayToEdit)
         const { name: field, type } = ev.target
         let value: string | number = ev.target.value
         value = type === 'number' ? +value : value
@@ -26,14 +25,6 @@ export function EditStay() {
                 return setStayToEdit(prevStay => {
                     const updatedLoc = { ...prevStay.loc, [field]: value }
                     return { ...prevStay, loc: updatedLoc }
-                })
-            case 'guests':
-            case 'bedrooms':
-            case 'beds':
-            case 'bathrooms':
-                return setStayToEdit(prevStay => {
-                    const updatedCapacity = { ...prevStay.stayDetails, [field]: value }
-                    return { ...prevStay, stayDetails: updatedCapacity }
                 })
             default: {
                 console.log('went to deafult with field:', field)
@@ -97,7 +88,7 @@ export function EditStay() {
             </header>
             <form onSubmit={onEditStay}>
                 <h4 className='name-header'>Property name</h4>
-                <label className='stay-name'>
+                <label className={`stay-name ${stayToEdit.name ? 'filled' : ''}`}>
                     <div className='place-holder'>Name</div>
                     <input
                         type='text'
@@ -110,7 +101,7 @@ export function EditStay() {
                 </label>
                 <h4 className='location-header'>Location</h4>
                 <div className='location-wrapper'>
-                    <label className='city'>
+                    <label className={`city ${stayToEdit.loc.city ? 'filled' : ''}`}>
                         <div className='place-holder'>City</div>
                         <input
                             type='text'
@@ -121,7 +112,7 @@ export function EditStay() {
                             required
                         />
                     </label>
-                    <label className='country'>
+                    <label className={`country ${stayToEdit.loc.country ? 'filled' : ''}`}>
                         <div className='place-holder'>Country</div>
                         <input
                             type='text'
@@ -132,7 +123,7 @@ export function EditStay() {
                             required
                         />
                     </label>
-                    <label className='address'>
+                    <label className={`address ${stayToEdit.loc.address ? 'filled' : ''}`}>
                         <div className='place-holder'>Address</div>
                         <input
                             type='text'
@@ -167,81 +158,54 @@ export function EditStay() {
                     </label>
                 </div>
 
-                <div className='capacity-wrapper'>
-                    <h4 className='capacity-header'>Capacity</h4>
-                    {capacityTypes.map(capacityType => (
-                        <div key={capacityType.type} className='capacity-type'>
-                            <h5>{capacityType.type}</h5>
-                            <Counter
-                                type={capacityType.type}
-                                handleStayCounterChange={handleCounterChange}
-                                count={capacityType.count}
+                <div className='wrapper'>
+                    <div className='capacity-wrapper'>
+                        <h4 className='capacity-header'>Capacity</h4>
+                        {capacityTypes.map(capacityType => (
+                            <div key={capacityType.type} className='capacity-type'>
+                                <h5>{capacityType.type}</h5>
+                                <Counter
+                                    type={capacityType.type}
+                                    handleStayCounterChange={handleCounterChange}
+                                    count={capacityType.count}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                    <div className='stay-info-wrapper'>
+                        <select onChange={handleChange} name='labels'>
+                            Labels
+                            {labels.map(label => (
+                                <option key={label}>{label}</option>
+                            ))}
+                        </select>
+
+                        <select onChange={handleChange} name='roomType'>
+                            Property type
+                            <option value='Private room'>Private room</option>
+                            <option value='Entire home/apt'>Entire home/apt</option>
+                        </select>
+
+                        <select onChange={handleChange} name='amenities'>
+                            Amenities
+                            {amenities.map(amenity => (
+                                <option key={amenity}>{amenity}</option>
+                            ))}
+                        </select>
+                        <label className={`price ${stayToEdit.price ? 'filled' : ''}`}>
+                            <div className='place-holder'>Price</div>
+
+                            <input
+                                type='number'
+                                name='price'
+                                value={stayToEdit.price}
+                                onChange={handleChange}
+                                min={10}
                             />
-                        </div>
-                    ))}
-
-                    {/* <label className='guests'>
-                        Guests
-                        <input
-                            type='number'
-                            name='guests'
-                            value={stayToEdit.stayDetails.guests}
-                            onChange={handleChange}
-                            min={1}
-                        />
-                    </label>
-                    <label className='bedrooms'>
-                        Bedrooms
-                        <input
-                            type='number'
-                            name='bedrooms'
-                            value={stayToEdit.stayDetails.bedrooms}
-                            onChange={handleChange}
-                            min={1}
-                        />
-                    </label>
-                    <label className='beds'>
-                        Beds
-                        <input
-                            type='number'
-                            name='beds'
-                            value={stayToEdit.stayDetails.beds}
-                            onChange={handleChange}
-                            min={1}
-                        />
-                    </label>
-                    <label className='bathrooms'>
-                        Bathrooms
-                        <input
-                            type='number'
-                            name='bathrooms'
-                            value={stayToEdit.stayDetails.bathrooms}
-                            onChange={handleChange}
-                            min={1}
-                        />
-                    </label> */}
+                        </label>
+                    </div>
                 </div>
-                <select onChange={handleChange} name='labels'>
-                    Labels
-                    {labels.map(label => (
-                        <option key={label}>{label}</option>
-                    ))}
-                </select>
 
-                <select onChange={handleChange} name='roomType'>
-                    Property type
-                    <option value='Private room'>Private room</option>
-                    <option value='Entire home/apt'>Entire home/apt</option>
-                </select>
-                <label className='price'>
-                    <input type='number' name='price' value={stayToEdit.price} onChange={handleChange} min={10} />
-                </label>
-                <select onChange={handleChange} name='amenities'>
-                    Amenities
-                    {amenities.map(amenity => (
-                        <option key={amenity}>{amenity}</option>
-                    ))}
-                </select>
                 <h4 className='summary-header'>Description</h4>
                 <textarea name='summary' value={stayToEdit.summary} onChange={handleChange} minLength={20}></textarea>
 

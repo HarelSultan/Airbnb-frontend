@@ -18,11 +18,11 @@ export function Counter({ type, handleGuestCounterChange, handleStayCounterChang
 
     return (
         <div className='counter'>
-            <button type='button' disabled={count === 0} onClick={() => handleCounterChange(-1)}>
+            <button className='btn' type='button' disabled={count === 0} onClick={() => handleCounterChange(-1)}>
                 <AiOutlineMinus />
             </button>
             <p>{count}</p>
-            <button type='button' onClick={() => handleCounterChange(1)}>
+            <button className='btn' type='button' onClick={() => handleCounterChange(1)}>
                 <AiOutlinePlus />
             </button>
         </div>
