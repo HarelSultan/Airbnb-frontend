@@ -56,9 +56,9 @@ export function GuestsModal({ reserveBy, onSetReserveBy, onSetExpandedModal }: P
                     <h4 className='guest-title'>{guest.guestType}</h4>
                     <p className='guest-desc'>{guest.desc}</p>
                     <Counter
-                        guestType={guest.guestType}
+                        type={guest.guestType}
                         count={guestCount[guest.guestType]}
-                        handleCounterChange={handleCounterChange}
+                        handleGuestCounterChange={handleCounterChange}
                     />
                 </div>
             ))}

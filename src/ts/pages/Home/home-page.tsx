@@ -111,7 +111,7 @@ export function HomePage() {
                             focusable='false'
                         >
                             <path
-                                fill-rule='evenodd'
+                                fillRule='evenodd'
                                 d='M2.5 11.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM15 12v2H6v-2h9zM2.5 6.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM15 7v2H6V7h9zM2.5 1.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM15 2v2H6V2h9z'
                             ></path>
                         </svg>

@@ -55,9 +55,9 @@ export function GuestCounter({ state, onSetSearchBy, onSetReserveBy, onSelectRes
                     <h4 className='guest-title'>{guest.guestType}</h4>
                     <p className='guest-desc'>{guest.desc}</p>
                     <Counter
-                        guestType={guest.guestType}
+                        type={guest.guestType}
                         count={state.guests[guest.guestType]}
-                        handleCounterChange={handleCounterChange}
+                        handleGuestCounterChange={handleCounterChange}
                     />
                 </div>
             ))}

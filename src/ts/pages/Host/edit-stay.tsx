@@ -1,11 +1,12 @@
 import { useState } from 'react'
 
-import { StayProps } from '../../interfaces/stay-interface'
+import { StayDetailsProps, StayProps } from '../../interfaces/stay-interface'
 import { stayService } from '../../services/stay.service'
 import { uploadService } from '../../services/upload.service'
 import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
 import { Counter } from '../../cmps/counter'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+import { GuestCounter } from '../../cmps/guest-counter'
 
 export function EditStay() {
     const [stayToEdit, setStayToEdit] = useState<StayProps>(stayService.getEmptyStayProps())
@@ -41,6 +42,14 @@ export function EditStay() {
         }
     }
 
+    const handleCounterChange = (changeBy: number, type: keyof StayDetailsProps) => {
+        setStayToEdit(prevStay => {
+            const updatedCount = prevStay.stayDetails[type] + changeBy
+            const updatedDetails = { ...prevStay.stayDetails, [type]: updatedCount }
+            return { ...prevStay, stayDetails: updatedDetails }
+        })
+    }
+
     const onUploadImage = async (ev: React.ChangeEvent<HTMLInputElement>) => {
         try {
             const image = await uploadService.uploadImg(ev)
@@ -56,6 +65,30 @@ export function EditStay() {
     const onEditStay: React.FormEventHandler<HTMLFormElement> = ev => {
         ev.preventDefault()
     }
+
+    interface CapacityType {
+        type: keyof StayDetailsProps
+        count: number
+    }
+
+    const capacityTypes: CapacityType[] = [
+        {
+            type: 'guests',
+            count: stayToEdit.stayDetails.guests,
+        },
+        {
+            type: 'bedrooms',
+            count: stayToEdit.stayDetails.bedrooms,
+        },
+        {
+            type: 'beds',
+            count: stayToEdit.stayDetails.beds,
+        },
+        {
+            type: 'bathrooms',
+            count: stayToEdit.stayDetails.bathrooms,
+        },
+    ]
 
     return (
         <section className='main-layout full edit-stay'>
@@ -136,7 +169,18 @@ export function EditStay() {
 
                 <div className='capacity-wrapper'>
                     <h4 className='capacity-header'>Capacity</h4>
-                    <label className='guests'>
+                    {capacityTypes.map(capacityType => (
+                        <div key={capacityType.type} className='capacity-type'>
+                            <h5>{capacityType.type}</h5>
+                            <Counter
+                                type={capacityType.type}
+                                handleStayCounterChange={handleCounterChange}
+                                count={capacityType.count}
+                            />
+                        </div>
+                    ))}
+
+                    {/* <label className='guests'>
                         Guests
                         <input
                             type='number'
@@ -175,7 +219,7 @@ export function EditStay() {
                             onChange={handleChange}
                             min={1}
                         />
-                    </label>
+                    </label> */}
                 </div>
                 <select onChange={handleChange} name='labels'>
                     Labels

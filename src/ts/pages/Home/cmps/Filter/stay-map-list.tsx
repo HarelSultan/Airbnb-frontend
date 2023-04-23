@@ -75,7 +75,13 @@ export function StayMapList({ stays, onStayDetails, onToggleSaveStay, wishList }
                 defaultZoom={mapProps.zoom}
             >
                 {stays.map(stay => (
-                    <StayMapMarker stay={stay} onClickCB={onOpenStayModal} lat={stay.loc.lat} lng={stay.loc.lng} />
+                    <StayMapMarker
+                        key={stay._id}
+                        stay={stay}
+                        onClickCB={onOpenStayModal}
+                        lat={stay.loc.lat}
+                        lng={stay.loc.lng}
+                    />
                 ))}
             </GoogleMapReact>
         </section>
