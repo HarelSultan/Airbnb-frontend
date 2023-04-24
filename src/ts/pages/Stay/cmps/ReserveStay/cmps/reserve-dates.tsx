@@ -24,11 +24,11 @@ export const ReserveDates = forwardRef<HTMLDivElement, Props>(
         }
 
         const handleDateSelect = (ranges: any) => {
-            const updatedReserveBy = {
-                ...reserveBy,
-                checkIn: ranges.selection.startDate,
-                checkOut: ranges.selection.endDate,
-            }
+            const updatedReserveBy =
+                selectedReserveModule === 'reserveCheckOutDate'
+                    ? { ...reserveBy, checkOut: ranges.selection.endDate }
+                    : { ...reserveBy, checkIn: ranges.selection.startDate, checkOut: ranges.selection.endDate }
+
             onSetReserveBy(updatedReserveBy)
             if (onSelectReserveModule) {
                 const nextReserveModule =

@@ -4,13 +4,19 @@ import { stayService } from '../../services/stay.service'
 
 export const SET_STAYS = 'SET_STAYS'
 export const SET_FILTER = 'SET_FILTER'
+export const ADD_STAY = 'ADD_STAY'
+export const UPDATE_STAY = 'UPDATE_STAY'
 
 export interface StayStateProps {
     stays: StayProps[]
     filterBy: FilterByProps
 }
 
-export type StayAction = { type: 'SET_STAYS'; stays: StayProps[] } | { type: 'SET_FILTER'; filterBy: FilterByProps }
+export type StayAction =
+    | { type: 'SET_STAYS'; stays: StayProps[] }
+    | { type: 'SET_FILTER'; filterBy: FilterByProps }
+    | { type: 'ADD_STAY'; stay: StayProps }
+    | { type: 'UPDATE_STAY'; stay: StayProps }
 
 const initialState: StayStateProps = {
     stays: [],
@@ -24,6 +30,13 @@ export function stayReducer(state = initialState, action: StayAction) {
 
         case SET_FILTER:
             return { ...state, filterBy: action.filterBy }
+
+        case ADD_STAY:
+            return { ...state, stays: [...state.stays, action.stay] }
+
+        case UPDATE_STAY:
+            const updatedStays = state.stays.map(stay => (stay._id === action.stay._id ? action.stay : stay))
+            return { ...state, stays: updatedStays }
 
         default:
             console.log('Went to deafult at stayReducer')

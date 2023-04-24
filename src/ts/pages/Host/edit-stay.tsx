@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { StayDetailsProps, StayProps } from '../../interfaces/stay-interface'
 import { stayService } from '../../services/stay.service'
@@ -7,9 +8,35 @@ import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
 import { Counter } from '../../cmps/counter'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { GuestCounter } from '../../cmps/guest-counter'
+import { saveStay } from '../../store/stay/stay.action'
+import { useSelector } from 'react-redux'
+import { RootStateProps } from '../../store/store'
+import { addListing } from '../../store/user/user.action'
 
 export function EditStay() {
     const [stayToEdit, setStayToEdit] = useState<StayProps>(stayService.getEmptyStayProps())
+    const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
+
+    const { stayId } = useParams()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!loggedInUser) navigate('/')
+        if (!stayId) return
+        loadStays()
+    }, [])
+
+    const loadStays = async () => {
+        if (!stayId) return
+        try {
+            const stay = await stayService.getById(stayId)
+            setStayToEdit(stay)
+        } catch (err) {
+            console.log('Failed to load stay with error :', err)
+            // TODO: showErrorMsg('Cannot edit stay, try again later'.)
+            navigate(-1)
+        }
+    }
 
     const labels = stayService.getLabelFilters().map(label => label.desc)
     const amenities = stayService.getAmenities()
@@ -49,12 +76,24 @@ export function EditStay() {
                 return { ...prevStay, imgUrls: updatedImgUrls }
             })
         } catch (err) {
-            console.log(err)
+            console.log('Failed to upload image with error', err)
+            // TODO: showErrorMsg(Cannot upload image, try again later.)
         }
     }
 
-    const onEditStay: React.FormEventHandler<HTMLFormElement> = ev => {
+    const onSaveStay: React.FormEventHandler<HTMLFormElement> = async ev => {
         ev.preventDefault()
+        try {
+            const savedStay: StayProps = await saveStay(stayToEdit)
+            // Checking if the user is creating a new listing, if so adding it to his staysListing array.
+            if (!stayToEdit._id && loggedInUser) await addListing(loggedInUser, savedStay._id)
+            console.log(savedStay)
+            // TODO: showSucessMsg(`${loggedInUser.fullname} Your listing saved successfully`)
+            // TODO: navigate(/listing)
+        } catch (err) {
+            console.log(err)
+            // TODO: showErrorMsg(Cannot save listing, try again later.)
+        }
     }
 
     interface CapacityType {
@@ -86,7 +125,7 @@ export function EditStay() {
             <header className='full host-header'>
                 <AppLogo />
             </header>
-            <form onSubmit={onEditStay}>
+            <form onSubmit={onSaveStay}>
                 <h4 className='name-header'>Property name</h4>
                 <label className={`stay-name ${stayToEdit.name ? 'filled' : ''}`}>
                     <div className='place-holder'>Name</div>
@@ -180,7 +219,7 @@ export function EditStay() {
                             ))}
                         </select>
 
-                        <select onChange={handleChange} name='roomType'>
+                        <select onChange={handleChange} name='type'>
                             Property type
                             <option value='Private room'>Private room</option>
                             <option value='Entire home/apt'>Entire home/apt</option>

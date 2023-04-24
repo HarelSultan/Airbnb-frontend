@@ -29,6 +29,7 @@ function App() {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/stay/:stayId' element={<StayPage />} />
                 <Route path='/book/:stayId' element={<BookingPage />} />
+                <Route path='/host/edit' element={<EditStay />} />
                 <Route path='/host/edit/:stayId' element={<EditStay />} />
             </Routes>
         </div>

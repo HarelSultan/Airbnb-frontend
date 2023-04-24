@@ -4,6 +4,7 @@ export interface UserProps {
     password: string
     fullName: string
     stayWishList: string[]
+    staysListing: string[]
 }
 
 export interface UserLoginProps {

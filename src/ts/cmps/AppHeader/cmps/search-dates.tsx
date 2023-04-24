@@ -26,7 +26,11 @@ export function SearchDates({
     }
 
     const handleDateSelect = (ranges: any) => {
-        const updatedSearchBy = { ...searchBy, checkIn: ranges.selection.startDate, checkOut: ranges.selection.endDate }
+        const updatedSearchBy =
+            selectedSearchModule === 'searchCheckOutDate'
+                ? { ...searchBy, checkOut: ranges.selection.endDate }
+                : { ...searchBy, checkIn: ranges.selection.startDate, checkOut: ranges.selection.endDate }
+        console.log(updatedSearchBy)
         onSetSearchBy(updatedSearchBy)
         const nextSearchModule = selectedSearchModule === 'searchCheckInDate' ? 'searchCheckOutDate' : 'searchGuests'
         onSelectSearchModule(nextSearchModule)

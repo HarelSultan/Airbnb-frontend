@@ -15,6 +15,8 @@ _createStays()
 
 export const stayService = {
     query,
+    getById,
+    save,
     getLabelFilters,
     getAmenities,
     getStayAverageRating,
@@ -22,7 +24,6 @@ export const stayService = {
     getDeafultSearchProps,
     getDefaultFilterProps,
     getParamsSearchBy,
-    getById,
     getReserveByProps,
     getEmptyStayProps,
 }
@@ -42,6 +43,14 @@ async function query(
 
 async function getById(stayId: string) {
     return storageService.get(STORAGE_KEY_STAY_DB, stayId) as Promise<StayProps>
+}
+
+function save(stay: StayProps) {
+    if (stay._id) {
+        return storageService.put(STORAGE_KEY_STAY_DB, stay)
+    } else {
+        return storageService.post(STORAGE_KEY_STAY_DB, stay)
+    }
 }
 
 function searchStays(stays: StayProps[], searchBy: SearchByProps) {

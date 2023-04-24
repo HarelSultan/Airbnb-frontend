@@ -69,6 +69,7 @@ function getUserDefaultCreds(): UserProps {
         username: '',
         password: '',
         stayWishList: [],
+        staysListing: [],
     }
 }
 
@@ -85,6 +86,7 @@ function _createDemoUser() {
         username: 'Demo123',
         password: 'Demo123',
         stayWishList: [],
+        staysListing: [],
     }
     utilService.saveToStorage(STORAGE_KEY_USER_DB, [demoUser])
 }
