@@ -5,7 +5,7 @@ import { RESERVE_GUESTS_MODAL } from '../booking-page'
 
 interface Props {
     reserveBy: ReserveByProps
-    onSetExpandedModal: (expandedModal: string) => void
+    onSetExpandedModal?: (expandedModal: string) => void
 }
 export function TripDetails({ reserveBy, onSetExpandedModal }: Props) {
     return (
@@ -14,7 +14,10 @@ export function TripDetails({ reserveBy, onSetExpandedModal }: Props) {
             <div className='trip-detail trip-dates'>
                 <h5>Dates</h5>
                 <p>{utilService.formatDateRange({ checkIn: reserveBy.checkIn, checkOut: reserveBy.checkOut })}</p>
-                <button onClick={() => onSetExpandedModal(RESERVE_DATES_MODAL)} className='btn btn-edit underline'>
+                <button
+                    onClick={() => (onSetExpandedModal ? onSetExpandedModal(RESERVE_DATES_MODAL) : undefined)}
+                    className='btn btn-edit underline'
+                >
                     Edit
                 </button>
             </div>
@@ -22,7 +25,10 @@ export function TripDetails({ reserveBy, onSetExpandedModal }: Props) {
             <div className='trip-detail trip-guests'>
                 <h5>Guests</h5>
                 <p>{utilService.formatGuestCount(reserveBy.guests)}</p>
-                <button onClick={() => onSetExpandedModal(RESERVE_GUESTS_MODAL)} className='btn btn-edit underline'>
+                <button
+                    onClick={() => (onSetExpandedModal ? onSetExpandedModal(RESERVE_GUESTS_MODAL) : undefined)}
+                    className='btn btn-edit underline'
+                >
                     Edit
                 </button>
             </div>

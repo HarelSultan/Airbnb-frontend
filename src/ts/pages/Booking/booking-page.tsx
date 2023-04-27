@@ -21,8 +21,10 @@ import { ReserveDates } from '../Stay/cmps/ReserveStay/cmps/reserve-dates'
 import { AiFillStar } from 'react-icons/ai'
 import { CtaBtn } from '../../cmps/cta-btn'
 import { GuestsModal } from './cmps/guests-modal'
+import { ReservationSummary } from '../../cmps/reservation-summary'
 
 export const RESERVE_GUESTS_MODAL = 'reserveGuestsModal'
+export const RESERVATION_SUMMARY_MODAL = 'reservationSummaryModal'
 
 export function BookingPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -76,7 +78,9 @@ export function BookingPage() {
         navigate(-1)
     }
 
-    const onCompleteReservation = () => {}
+    const onCompleteReservation = () => {
+        onSetExpandedModal(RESERVATION_SUMMARY_MODAL)
+    }
 
     const nightsCount = utilService.getNightsCount(reserveBy) || 1
 
@@ -145,6 +149,22 @@ export function BookingPage() {
             onCloseModal: () => onSetExpandedModal(null),
             headerTxt: 'Airbnb Service',
             children: <div>This helps us run our platform and offer services like 24/7 support on your trip.</div>,
+        },
+        reservationSummaryModal: {
+            className: 'reservation-summary-modal',
+            onCloseModal: () => navigate('/'),
+            headerTxt: null,
+            children: (
+                <>
+                    <h2>Reservation complete!</h2>
+                    <p className='host-confirmation'>
+                        Your booking has been sent to the your host, you can watch the status of your reservation in
+                        your profile.
+                    </p>
+                    <ReservationSummary reserveBy={reserveBy} stay={selectedStay} nightsCount={nightsCount} />
+                    <CtaBtn onClickCB={() => navigate('/')} txt={'Look for more places to stay'} />
+                </>
+            ),
         },
     }
 

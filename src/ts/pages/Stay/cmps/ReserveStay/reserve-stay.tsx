@@ -10,6 +10,7 @@ import { CtaBtn } from '../../../../cmps/cta-btn'
 import { PricingSummary } from './cmps/pricing-summary'
 import { useOnClickOutside } from '../../../../hooks/use-on-click-outside'
 import { GuestCounter } from '../../../../cmps/guest-counter'
+import { REVIEWS_MODAL } from '../../stay-page'
 
 interface Props {
     price: number
@@ -19,7 +20,7 @@ interface Props {
     onSetReserveBy: (updatedReservation: ReserveByProps) => void
     onReserveStay: () => void
     nightsCount: number
-    onOpenPriceModal: (expandedModal: string) => void
+    onOpenModal: (expandedModal: string) => void
 }
 
 // Search by ?
@@ -31,7 +32,7 @@ export function ReserveStay({
     onSetReserveBy,
     onReserveStay,
     nightsCount,
-    onOpenPriceModal,
+    onOpenModal,
 }: Props) {
     const [selectedReserveModule, setSelectedReserveModule] = useState<string | null>(null)
 
@@ -85,7 +86,9 @@ export function ReserveStay({
                 <div className='stay-rating flex align-center'>
                     <AiFillStar />
                     <span>{stayService.getStayAverageRating(reviews).toFixed(1)} ·</span>
-                    <span className='review-count underline'> {reviews.length} reviews</span>
+                    <button onClick={() => onOpenModal(REVIEWS_MODAL)} className='btn review-count underline'>
+                        {reviews.length} reviews
+                    </button>
                 </div>
             </div>
 
@@ -129,7 +132,7 @@ export function ReserveStay({
             <div ref={activeReserveModuleRef} className='reserve-module-wrapper'>
                 {selectedReserveModule && reserveModuleMap[selectedReserveModule]}
             </div>
-            <PricingSummary nightlyPrice={price} nightsCount={nightsCount} onOpenPriceModal={onOpenPriceModal} />
+            <PricingSummary nightlyPrice={price} nightsCount={nightsCount} onOpenPriceModal={onOpenModal} />
         </section>
     )
 }

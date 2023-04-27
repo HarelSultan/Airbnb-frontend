@@ -257,7 +257,7 @@ export function StayPage() {
         onSetReserveBy,
         onReserveStay,
         nightsCount,
-        onOpenPriceModal: onSetExpandedModal,
+        onOpenModal: onSetExpandedModal,
     }
 
     const stayDetailsProps = {

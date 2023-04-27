@@ -1,0 +1,47 @@
+.reservation-summary {
+    h4 {
+        font-size: 18px;
+        font-family: $font-family-medium;
+        color: $brand-clr;
+        margin-block: 24px 12px;
+    }
+    h5 {
+        font-size: 16px;
+        font-family: $font-family-medium;
+    }
+    .trip-wrapper,
+    .pricing-wrapper {
+        position: relative;
+        padding-bottom: 24px;
+        &::after {
+            content: '';
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0;
+            pointer-events: none;
+        }
+
+        & > * {
+            display: flex;
+            justify-content: space-between;
+            &:not(:last-child) {
+                margin-bottom: 8px;
+            }
+        }
+    }
+    .stay-listing-card {
+        padding-block: 0 28px;
+        .listing-details {
+            grid-template-rows: repeat(3, 1fr);
+            gap: 8px;
+            font-size: 16px;
+        }
+        .stay-name {
+            align-self: center;
+        }
+    }
+}

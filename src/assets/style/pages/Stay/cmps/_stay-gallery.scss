@@ -12,6 +12,7 @@
 
     .img-wrapper {
         position: relative;
+        aspect-ratio: 1/0.879;
 
         &:first-child {
             grid-row: 1/3;

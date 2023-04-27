@@ -1,4 +1,5 @@
 .booking-page {
+    min-height: 100vh;
     .booking-header {
         padding: 24px;
     }
@@ -121,5 +122,6 @@
         padding-block: 24px;
         position: relative;
         background-color: rgb(235, 235, 235);
+        align-items: center;
     }
 }

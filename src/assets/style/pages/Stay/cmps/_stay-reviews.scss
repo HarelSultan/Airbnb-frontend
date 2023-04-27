@@ -29,7 +29,7 @@
     .reviews-container {
         display: flex;
         gap: 16px;
-
+        overflow-x: scroll;
         @include for-narrow-layout {
             flex-direction: column;
             gap: 0;

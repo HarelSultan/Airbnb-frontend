@@ -120,6 +120,20 @@
             padding-bottom: 12px;
         }
     }
+    .rdrDefinedRangesWrapper {
+        display: none;
+    }
+    .rdrDateRangePickerWrapper {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .rdrMonth,
+    .rdrCalendarWrapper {
+        max-width: 650px;
+        width: 100%;
+        margin: 0 auto;
+    }
     h2 {
         font-size: 22px;
         margin-bottom: 8px;
@@ -208,5 +222,23 @@
     .btn-save {
         width: 83.5px;
         margin: 0;
+    }
+}
+
+.reservation-summary-modal {
+    .modal {
+        max-width: 700px;
+        font-size: 16px;
+    }
+    h2 {
+        font-size: 22px;
+        @include for-narrow-layout {
+            font-size: 28px;
+        }
+    }
+    .host-confirmation {
+        color: $sub-text-clr;
+        margin-top: 8px;
+        font-family: $font-family-medium;
     }
 }
