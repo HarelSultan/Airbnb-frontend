@@ -9,6 +9,7 @@ import { MOBILE_MAX_WIDTH } from './ts/store/app/app.reducer'
 import { setIsMobile } from './ts/store/app/app.action'
 import { BookingPage } from './ts/pages/Booking/booking-page'
 import { EditStay } from './ts/pages/Host/edit-stay'
+import { HostListings } from './ts/pages/Host/host-listings'
 
 function App() {
     const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
@@ -29,6 +30,7 @@ function App() {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/stay/:stayId' element={<StayPage />} />
                 <Route path='/book/:stayId' element={<BookingPage />} />
+                <Route path='/host' element={<HostListings />} />
                 <Route path='/host/edit' element={<EditStay />} />
                 <Route path='/host/edit/:stayId' element={<EditStay />} />
             </Routes>

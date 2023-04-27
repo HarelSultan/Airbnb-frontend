@@ -4,9 +4,10 @@ import { stayService } from '../../../services/stay.service'
 
 interface Props {
     stay: StayProps
+    isPriceDisplayed?: boolean
 }
 
-export function StayListingCard({ stay }: Props) {
+export function StayListingCard({ stay, isPriceDisplayed }: Props) {
     return (
         <section className='stay-listing-card'>
             <div className='stay-img-wrapper'>
@@ -20,6 +21,7 @@ export function StayListingCard({ stay }: Props) {
                     <span className='avg-rating'>{stayService.getStayAverageRating(stay.reviews).toFixed(2)}</span>
                     <span className='reviews-count'>({stay.reviews.length})</span>
                 </div>
+                {isPriceDisplayed && <h3 className='listing-price'>${stay.price}</h3>}
             </div>
         </section>
     )
