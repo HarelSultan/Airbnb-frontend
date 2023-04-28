@@ -7,6 +7,7 @@ import { FilterByProps } from '../interfaces/filter-by-interface'
 import { SearchByProps } from '../interfaces/search-by-interface'
 import { ReserveByProps } from '../interfaces/reserve-by-interface'
 import { userService } from './user.service'
+import { UserProps } from '../interfaces/user-interface'
 
 const STORAGE_KEY_STAY_DB: string = 'stay_DB'
 const ALL_HOMES: string = 'All homes'
@@ -89,6 +90,10 @@ function filterStays(stays: StayProps[], filterBy: FilterByProps) {
     }
     return stays
 }
+
+// function getHostListings(loggedInUser: UserProps, listingName: string = '') {
+//     return loggedInUser.listings.filter(listing=>listing.name.includes(listingName))
+// }
 
 function getParamsSearchBy(searchParams: URLSearchParams): SearchByProps {
     const params = Object.fromEntries(searchParams.entries())

@@ -9,6 +9,7 @@ export async function loadStays(searchBy: SearchByProps, filterBy: FilterByProps
     try {
         const stays = await stayService.query(searchBy, filterBy)
         store.dispatch<StayAction>({ type: SET_STAYS, stays })
+        return stays
     } catch (err) {
         console.log('Failed loading stays with error', err)
         throw err

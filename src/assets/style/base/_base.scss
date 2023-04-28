@@ -89,4 +89,28 @@ a {
             background-color: black;
         }
     }
+
+    &.btn-success {
+        background-color: #f0f9eb;
+        color: #67c23a;
+        border: 1px solid #b3e19d;
+        border-radius: 4px;
+        &:hover {
+            background-color: #67c23a;
+            border-color: #67c23a;
+            color: white;
+        }
+    }
+    &.btn-danger {
+        background-color: #fef0f0;
+        color: #f56c6c;
+        border-color: #fab6b6;
+        border-radius: 4px;
+
+        &:hover {
+            background-color: #f56c6c;
+            color: white;
+            border-color: #f56c6c;
+        }
+    }
 }

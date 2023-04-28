@@ -10,6 +10,7 @@ import { setIsMobile } from './ts/store/app/app.action'
 import { BookingPage } from './ts/pages/Booking/booking-page'
 import { EditStay } from './ts/pages/Host/edit-stay'
 import { HostListings } from './ts/pages/Host/host-listings'
+import { Reservations } from './ts/pages/Host/reservations'
 
 function App() {
     const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
@@ -30,7 +31,8 @@ function App() {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/stay/:stayId' element={<StayPage />} />
                 <Route path='/book/:stayId' element={<BookingPage />} />
-                <Route path='/host' element={<HostListings />} />
+                <Route path='/host/listings' element={<HostListings />} />
+                <Route path='/host/reservations' element={<Reservations />} />
                 <Route path='/host/edit' element={<EditStay />} />
                 <Route path='/host/edit/:stayId' element={<EditStay />} />
             </Routes>

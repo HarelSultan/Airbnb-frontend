@@ -1,48 +1,29 @@
 .reservations {
-    overflow-x: scroll;
-    .reservations-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-block: 32px;
+    overflow-x: auto;
+    font-size: 14px;
+
+    .host-header {
+        padding: 18.5px 21px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
     }
 
-    .btn-create {
-        height: 32px;
-        font-family: $font-family-medium;
-        border: 1px solid $main-text-clr;
-        background-color: white;
-        font-size: 0;
-        border-radius: 50%;
-        padding-inline: 6px;
-        &:hover {
-            border-color: black;
-            background-color: #f7f7f7;
-        }
-        svg {
-            font-size: 18px;
-        }
-        @include for-narrow-layout {
-            height: 40px;
-            padding-inline: 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            svg {
-                margin-right: 6px;
+    .table-container {
+        overflow-x: auto;
+        &.scrolled {
+            .guest {
+                background-color: white;
+                &::after {
+                    box-shadow: inset 10px 0 10px -10px rgba(0, 0, 0, 0.15);
+                }
             }
         }
     }
-    .table-container {
-        overflow-x: auto;
-        &.scrolled .guest::after {
-            box-shadow: inset 10px 0 10px -10px rgba(0, 0, 0, 0.15);
-        }
-    }
+
     table {
         display: inline-table;
-        table-layout: fixed;
         border-collapse: separate;
         text-indent: initial;
+        width: 100%;
     }
 
     tr {
@@ -65,8 +46,8 @@
         text-align: left;
         text-transform: uppercase;
         white-space: nowrap;
-        position: sticky;
-        top: 0;
+        // position: sticky;
+        // top: 0;
         background-color: white;
         font-size: 12px;
         color: $sub-text-clr;
@@ -79,30 +60,45 @@
 
     td {
         padding: 16px 8px;
-        font-size: 14px;
-        font-family: $font-family-medium;
+        // font-size: 14px;
+        &.guest,
+        &.status {
+            font-family: $font-family-bold;
+        }
     }
 
     .guest {
         position: sticky;
         left: 0;
         z-index: 2;
-        background-color: white;
-        min-width: 150px;
+        min-width: 100px;
         &::after {
             content: '';
             position: absolute;
             top: 0;
             width: 10px;
-            // overflow: hidden;
             height: 100%;
             right: -10px;
+            transition: box-shadow 0.2s ease-in-out;
         }
-        & p {
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+    }
+    .listing {
+        min-width: 200px;
+    }
+    .guest p,
+    .listing p {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .actions-wrapper {
+        display: flex;
+        gap: 8px;
+        & > * {
+            height: 32px;
+            padding: 8px 15px;
+            transition: all 0.15s ease-in-out;
         }
     }
 }
