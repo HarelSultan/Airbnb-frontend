@@ -6,6 +6,7 @@ import { StayListingCard } from '../Booking/cmps/stay-listing-card'
 import { StayProps } from '../../interfaces/stay-interface'
 import { loadStays } from '../../store/stay/stay.action'
 import { stayService } from '../../services/stay.service'
+import { Reservations } from './reservations'
 
 export function HostListings() {
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
@@ -31,7 +32,7 @@ export function HostListings() {
             <header className='full host-header'>
                 <AppLogo />
             </header>
-            <h1>Welcome back, {loggedInUser?.fullName}</h1>
+            {/* <h1>Welcome back, {loggedInUser?.fullName}</h1>
             <h2>Your Listings</h2>
             <div className='listings-wrapper'>
                 {staysToDisplay.map(stay => (
@@ -44,7 +45,8 @@ export function HostListings() {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div> */}
+            <Reservations />
         </section>
     )
 }
