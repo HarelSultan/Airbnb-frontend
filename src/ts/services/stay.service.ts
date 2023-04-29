@@ -92,8 +92,7 @@ function filterStays(stays: StayProps[], filterBy: FilterByProps) {
     return stays
 }
 
-async function getHostListings(loggedInUser: UserProps, listingName: string = '') {
-    // return loggedInUser.listingsId.filter(listing=>listing.name.includes(listingName))
+async function getHostListings(loggedInUser: UserProps) {
     try {
         const stays = await query()
         return stays.filter(stay => loggedInUser.listingsId.includes(stay._id))

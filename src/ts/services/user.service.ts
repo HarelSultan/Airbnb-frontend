@@ -9,9 +9,10 @@ export const userService = {
     login,
     signup,
     logout,
-    getUserDefaultCreds,
+    saveLocalUser,
     getLoggedinUser,
     update,
+    getUserDefaultCreds,
 }
 
 _createDemoUser()
@@ -26,7 +27,7 @@ async function signup(credentials: UserProps) {
         const isUsernameTaken = users.find(user => user.username === credentials.username)
         if (isUsernameTaken) throw new Error('Username already taken.')
         const user = await storageService.post(STORAGE_KEY_USER_DB, credentials)
-        return _saveLocalUser(user)
+        return saveLocalUser(user)
     } catch (err) {
         console.log(err)
         throw new Error('Try again later')
@@ -38,7 +39,7 @@ async function login(credentials: UserLoginProps) {
         const users = (await getUsers()) as UserProps[]
         const user = users.find(u => u.username === credentials.username && u.password === credentials.password)
         if (user) {
-            return _saveLocalUser(user)
+            return saveLocalUser(user)
         }
         throw new Error('Invalid username or password')
     } catch (err) {
@@ -53,7 +54,7 @@ async function logout() {
 
 async function update(credentials: UserProps) {
     const updatedUser = await storageService.put(STORAGE_KEY_USER_DB, credentials)
-    if (getLoggedinUser()?._id === updatedUser._id) _saveLocalUser(updatedUser)
+    if (getLoggedinUser()?._id === updatedUser._id) saveLocalUser(updatedUser)
     return updatedUser
 }
 
@@ -74,7 +75,7 @@ function getUserDefaultCreds(): UserProps {
     }
 }
 
-function _saveLocalUser(user: UserProps) {
+function saveLocalUser(user: UserProps) {
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }

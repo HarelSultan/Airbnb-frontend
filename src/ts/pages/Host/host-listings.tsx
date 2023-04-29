@@ -4,27 +4,31 @@ import { RootStateProps } from '../../store/store'
 import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
 import { StayProps } from '../../interfaces/stay-interface'
 import { stayService } from '../../services/stay.service'
-import { AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai'
 import { IoIosSearch } from 'react-icons/io'
 import { utilService } from '../../services/util.service'
 import { FiEdit2 } from 'react-icons/fi'
+import { useNavigate } from 'react-router-dom'
+import { setUserListings } from '../../store/user/user.action'
+
+// TODO: Create mobile-layout showing only listing and update
+// TODO: add user.action: adding his stays to loggedInUser object
+// TODO: Allow filtering and sorting
+// TODO: Make skeleton stays, show msg if doesn't have any listing.
 
 export function HostListings() {
     const [isTableScrolled, setIsTableScrolled] = useState<boolean>(false)
+    const [staysToDisplay, setStaysToDisplay] = useState<StayProps[] | null>(null)
+    const [searchListingsBy, setSearchListingsBy] = useState<string>('')
 
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
     const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
 
-    // TODO: Create mobile-layout showing only listing and update
-    // TODO: add user.action: adding his stays to loggedInUser object
-    // TODO: Allow filtering and sorting
-
-    // TODO: Make skeleton stays, show msg if doesn't have any listing.
-    const [staysToDisplay, setStaysToDisplay] = useState<StayProps[] | null>(null)
-
+    const navigate = useNavigate()
     const tableContainerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+        // loggedInUser?.listings ? setStaysToDisplay(loggedInUser.listings) : onLoadHostStays()
         onLoadHostStays()
         // if (isMobile) return
         function handleScroll() {
@@ -42,12 +46,12 @@ export function HostListings() {
     }, [])
 
     const onLoadHostStays = async () => {
+        if (!loggedInUser) return navigate('/')
         console.log('loading host')
-        if (!loggedInUser) return console.log('loggedinUser', loggedInUser)
 
         try {
-            const hostListings: StayProps[] = await stayService.getHostListings(loggedInUser)
-            setStaysToDisplay(hostListings)
+            const hostListing: StayProps[] = await setUserListings(loggedInUser)
+            setStaysToDisplay(hostListing)
         } catch (err) {
             // Show error msg
             console.log('Getting stays failed with error:', err)
@@ -60,9 +64,16 @@ export function HostListings() {
     }
 
     const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-        if (!staysToDisplay) return
-        const searchBy: string = ev.target.value
-        const updatedStays: StayProps[] = staysToDisplay.filter(stay => stay.name.includes(searchBy))
+        onSetSearchListingsBy(ev.target.value.toLowerCase())
+    }
+
+    const onSetSearchListingsBy = (searchBy: string) => {
+        if (!loggedInUser?.listings) return
+
+        setSearchListingsBy(searchBy)
+        const updatedStays: StayProps[] = searchBy
+            ? loggedInUser.listings.filter(stay => stay.name.toLowerCase().includes(searchBy))
+            : loggedInUser.listings
         setStaysToDisplay(updatedStays)
     }
 
@@ -73,36 +84,31 @@ export function HostListings() {
             <header className='full host-header'>
                 <AppLogo />
             </header>
+
             <div className='listing-header'>
                 <h2>{utilService.formatPlural(staysToDisplay.length, ' listing')}</h2>
-                <button title='Create listing' className='btn btn-create'>
+                <button onClick={() => navigate('/host/edit')} title='Create listing' className='btn btn-create'>
                     <AiOutlinePlus />
                     Create listing
                 </button>
             </div>
-            <div className='search-listing-wrapper'>
-                <IoIosSearch />
 
-                <input type='text' onChange={handleChange} placeholder='Search listings' />
-            </div>
-            {/* <div className='listings-wrapper'>
-                {staysToDisplay.map(stay => (
-                    <div key={stay._id} className='listing-wrapper'>
-                        <StayListingCard stay={stay} isPriceDisplayed={true} />
-                        <div className='actions-wrapper'>
-                            <button className='btn btn-preview'>Preview</button>
-                            <button className='btn btn-save'>Edit</button>
-                            <button className='btn btn-delete'>Delete</button>
-                        </div>
-                    </div>
-                ))}
-            </div> */}
+            <label className='search-listing-wrapper'>
+                <IoIosSearch className='search-icon' />
+                <input type='text' value={searchListingsBy} onChange={handleChange} placeholder='Search listings' />
+                {searchListingsBy && (
+                    <button onClick={() => onSetSearchListingsBy('')} className='btn btn-clear'>
+                        <AiOutlineClose />
+                    </button>
+                )}
+            </label>
+
             {isMobile ? (
                 <table cellSpacing={0}>
                     <thead>
                         <tr className='table-header'>
-                            <th className='listing listing-header'>listing</th>
-                            <th className='actions actions-header'>to-do</th>
+                            <th>listing</th>
+                            <th>to-do</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -128,14 +134,14 @@ export function HostListings() {
                     <table cellSpacing={0}>
                         <thead>
                             <tr className='table-header'>
-                                <th className='listing listing-header'>listing</th>
-                                <th className='status status-header'>status</th>
-                                <th className='actions actions-header'>to-do</th>
-                                <th className='bedrooms bedrooms-header'>bedrooms</th>
-                                <th className='beds beds-header'>beds</th>
-                                <th className='baths baths-header'>baths</th>
-                                <th className='price price-header'>price</th>
-                                <th className='location location-header'>location</th>
+                                <th>listing</th>
+                                <th>status</th>
+                                <th>to-do</th>
+                                <th>bedrooms</th>
+                                <th>beds</th>
+                                <th>baths</th>
+                                <th>price</th>
+                                <th>location</th>
                             </tr>
                         </thead>
                         <tbody>

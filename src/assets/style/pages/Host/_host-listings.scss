@@ -33,19 +33,34 @@
         box-shadow: inset 0 0 0 1px #b0b0b0;
         padding-inline: 12px 6px;
         margin-bottom: 28px;
-        svg {
+        position: relative;
+        .search-icon {
             font-size: 20px;
             color: $sub-text-clr;
         }
         &:focus-within {
             box-shadow: inset 0 0 0 2px $main-text-clr;
-            svg {
+            .search-icon {
                 color: $main-text-clr;
                 stroke-width: 12;
             }
         }
+        .btn-clear {
+            background-color: #dddddd;
+            padding: 4px;
+            border-radius: 50%;
+            position: absolute;
+            right: 6px;
+            svg {
+                font-size: 12px;
+                stroke-width: 12;
+            }
+            &:hover {
+                background-color: #b0b0b0;
+            }
+        }
         @include for-narrow-layout {
-            width: 300px;
+            width: 327px;
         }
     }
 

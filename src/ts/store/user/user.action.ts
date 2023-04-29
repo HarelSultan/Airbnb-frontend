@@ -1,4 +1,6 @@
+import { StayProps } from '../../interfaces/stay-interface'
 import { UserLoginProps, UserProps } from '../../interfaces/user-interface'
+import { stayService } from '../../services/stay.service'
 import { userService } from '../../services/user.service'
 import { store } from '../store'
 import { SET_USER } from './user.reducer'
@@ -60,6 +62,19 @@ export async function updateWishList(user: UserProps, stayId: string) {
         store.dispatch({ type: SET_USER, user })
         console.log(err)
         throw new Error('Failed to save to wish list, try again later.')
+    }
+}
+
+export async function setUserListings(loggedInUser: UserProps) {
+    try {
+        const userListings: StayProps[] = await stayService.getHostListings(loggedInUser)
+        const updatedUser: UserProps = { ...loggedInUser, listings: userListings }
+        userService.saveLocalUser(updatedUser)
+        store.dispatch({ type: SET_USER, user: updatedUser })
+        return userListings
+    } catch (err) {
+        console.log('Failed to load user listings with error:', err)
+        throw new Error('Cannot load listings, try again later.')
     }
 }
 

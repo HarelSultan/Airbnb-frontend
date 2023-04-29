@@ -1,3 +1,5 @@
+import { StayProps } from './stay-interface'
+
 export interface UserProps {
     _id: string
     username: string
@@ -6,6 +8,7 @@ export interface UserProps {
     stayWishList: string[]
     listingsId: string[]
     imgUrl: string
+    listings?: StayProps[]
 }
 
 export interface UserLoginProps {
