@@ -17,9 +17,10 @@ export const ReserveDates = forwardRef<HTMLDivElement, Props>(
         { reserveBy, onSetReserveBy, selectedReserveModule, onSelectReserveModule, takenDates, nightsCount }: Props,
         ref
     ) => {
+        console.log(reserveBy)
         const selectionRange = {
-            startDate: reserveBy.checkIn,
-            endDate: reserveBy.checkOut,
+            startDate: reserveBy.checkIn || new Date(),
+            endDate: reserveBy.checkOut || new Date(),
             key: 'selection',
         }
 

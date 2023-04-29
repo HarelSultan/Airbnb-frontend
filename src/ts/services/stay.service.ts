@@ -106,8 +106,8 @@ function getParamsSearchBy(searchParams: URLSearchParams): SearchByProps {
     const params = Object.fromEntries(searchParams.entries())
     const searchBy = {
         destination: params.destination || '',
-        checkIn: params.checkIn ? new Date(params.checkIn) : null,
-        checkOut: params.checkOut ? new Date(params.checkOut) : null,
+        checkIn: params.checkIn ? new Date(params.checkIn) : new Date(),
+        checkOut: params.checkOut ? new Date(params.checkOut) : new Date(),
         guests: {
             adults: +params.adults || 0,
             children: +params.children || 0,

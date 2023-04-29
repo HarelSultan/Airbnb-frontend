@@ -85,6 +85,7 @@ export function StayPage() {
     const loadReserveBy = () => {
         const searchParams = new URLSearchParams(location.search)
         const searchBy = stayService.getParamsSearchBy(searchParams)
+        console.log(searchBy)
         setReserveBy(stayService.getReserveByProps(searchBy))
     }
 

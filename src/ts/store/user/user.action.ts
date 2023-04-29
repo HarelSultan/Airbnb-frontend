@@ -68,7 +68,7 @@ export async function updateWishList(user: UserProps, stayId: string) {
 export async function setUserListings(loggedInUser: UserProps) {
     try {
         const userListings: StayProps[] = await stayService.getHostListings(loggedInUser)
-        const updatedUser: UserProps = { ...loggedInUser, listings: userListings }
+        const updatedUser: UserProps = userService.loadUsersDemoData({ ...loggedInUser, listings: userListings })
         userService.saveLocalUser(updatedUser)
         store.dispatch({ type: SET_USER, user: updatedUser })
         return userListings
