@@ -51,6 +51,7 @@ export function HostListings() {
 
         try {
             const hostListing: StayProps[] = await setUserListings(loggedInUser)
+            console.log(hostListing)
             setStaysToDisplay(hostListing)
         } catch (err) {
             // Show error msg
@@ -58,9 +59,20 @@ export function HostListings() {
         }
     }
 
+    const onUpdateListing = (ev: React.MouseEvent<HTMLButtonElement>, stayId: string) => {
+        ev.stopPropagation()
+        navigate(`/host/edit/${stayId}`)
+    }
+
     const getListingStatus = (stay: StayProps) => {
         // TODO: check if listing is currently avaliable/reserved
-        return 'Avaliable'
+        const currDate = Date.now()
+        const isOccupied = stay.takenDates.some(takenDate => {
+            if (currDate > new Date(takenDate.checkIn).getTime() && currDate < new Date(takenDate.checkOut).getTime())
+                return true
+            return false
+        })
+        return isOccupied ? 'Occupied' : 'Avaliable'
     }
 
     const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +125,7 @@ export function HostListings() {
                     </thead>
                     <tbody>
                         {staysToDisplay.map(stay => (
-                            <tr key={stay._id}>
+                            <tr onClick={() => navigate(`/stay/${stay._id}`)} key={stay._id}>
                                 <td className='listing listing-data'>
                                     <img src={stay.imgUrls[1]} alt={stay.imgUrls[0]} />
                                     <h3 title={stay.name} className='listing-name'>
@@ -121,7 +133,11 @@ export function HostListings() {
                                     </h3>
                                 </td>
                                 <td className='actions'>
-                                    <button title='Edit' className='btn btn-update'>
+                                    <button
+                                        onClick={ev => onUpdateListing(ev, stay._id)}
+                                        title='Edit'
+                                        className='btn btn-update'
+                                    >
                                         <FiEdit2 />
                                     </button>
                                 </td>
@@ -146,7 +162,7 @@ export function HostListings() {
                         </thead>
                         <tbody>
                             {staysToDisplay.map(stay => (
-                                <tr key={stay._id}>
+                                <tr onClick={() => navigate(`/stay/${stay._id}`)} key={stay._id}>
                                     <td className='listing listing-data'>
                                         <img src={stay.imgUrls[1]} alt={stay.imgUrls[0]} />
                                         <h3 title={stay.name} className='listing-name'>
@@ -155,7 +171,12 @@ export function HostListings() {
                                     </td>
                                     <td className='status'>{getListingStatus(stay)}</td>
                                     <td className='actions'>
-                                        <button className='btn btn-update'>Update</button>
+                                        <button
+                                            onClick={ev => onUpdateListing(ev, stay._id)}
+                                            className='btn btn-update'
+                                        >
+                                            Update
+                                        </button>
                                     </td>
                                     <td className='bedrooms'>{stay.stayDetails.bedrooms}</td>
                                     <td className='beds'>{stay.stayDetails.beds}</td>

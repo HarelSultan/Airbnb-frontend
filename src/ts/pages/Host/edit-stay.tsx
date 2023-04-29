@@ -173,24 +173,24 @@ export function EditStay() {
                     </label>
                 </div>
                 <div className='imgs-wrapper'>
-                    <label>
-                        Upload image
+                    <label style={{ backgroundImage: `url(${stayToEdit.imgUrls[0]})` }}>
+                        {!stayToEdit.imgUrls[0] && 'Upload image'}
                         <input type='file' hidden onChange={onUploadImage} />
                     </label>
-                    <label>
-                        Upload image
+                    <label style={{ backgroundImage: `url(${stayToEdit.imgUrls[1]})` }}>
+                        {!stayToEdit.imgUrls[1] && 'Upload image'}
                         <input type='file' hidden onChange={onUploadImage} />
                     </label>
-                    <label>
-                        Upload image
+                    <label style={{ backgroundImage: `url(${stayToEdit.imgUrls[2]})` }}>
+                        {!stayToEdit.imgUrls[2] && 'Upload image'}
                         <input type='file' hidden onChange={onUploadImage} />
                     </label>
-                    <label>
-                        Upload image
+                    <label style={{ backgroundImage: `url(${stayToEdit.imgUrls[3]})` }}>
+                        {!stayToEdit.imgUrls[3] && 'Upload image'}
                         <input type='file' hidden onChange={onUploadImage} />
                     </label>
-                    <label>
-                        Upload image
+                    <label style={{ backgroundImage: `url(${stayToEdit.imgUrls[4]})` }}>
+                        {!stayToEdit.imgUrls[4] && 'Upload image'}
                         <input type='file' hidden onChange={onUploadImage} />
                     </label>
                 </div>
