@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
-import { AiOutlinePlus } from 'react-icons/ai'
 import { utilService } from '../../services/util.service'
 import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
+import { useSelector } from 'react-redux'
+import { RootStateProps } from '../../store/store'
+import { useNavigate } from 'react-router-dom'
 
 export function Reservations() {
     const [isTableScrolled, setIsTableScrolled] = useState<boolean>(false)
+
+    const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
+    const navigate = useNavigate()
     const tableContainerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+        if (!loggedInUser) navigate('/')
         function handleScroll() {
             if (!tableContainerRef.current) return
             const isScrolled: boolean = tableContainerRef.current.scrollLeft > 0
@@ -20,6 +26,14 @@ export function Reservations() {
             tableContainerRef.current && tableContainerRef.current.removeEventListener('scroll', handleScroll)
         }
     }, [])
+
+    const formatDate = (date: Date) => {
+        return new Date(date).toLocaleDateString('en-US', {
+            month: 'numeric',
+            day: 'numeric',
+            year: 'numeric',
+        })
+    }
 
     return (
         <section className='main-layout reservations'>
@@ -44,44 +58,31 @@ export function Reservations() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className='guest guest-desc'>
-                                <p>{utilService.getFirstName('Moshe Cohen')}</p>
-                            </td>
-                            <td className='date date-desc'>21/2/2023</td>
-                            <td className='date date-desc'>25/2/2023</td>
-                            <td className='date date-desc'>18/2/2023</td>
-                            <td className='listing listing-desc'>
-                                <p> Grand apartment sagarada familia</p>
-                            </td>
-                            <td className='total-payout total-payout-desc'>$1023</td>
-                            <td className='status status-desc'>Pending</td>
-                            <td className='actions actions-desc'>
-                                <div className='actions-wrapper'>
-                                    <button className='btn btn-success'>Approve</button>
-                                    <button className='btn btn-danger'>Reject</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='guest guest-desc'>
-                                <p>{utilService.getFirstName('Avi Ben Zikieor')}</p>
-                            </td>
-                            <td className='date date-desc'>1/2/2023</td>
-                            <td className='date date-desc'>5/2/2023</td>
-                            <td className='date date-desc'>18/12/2023</td>
-                            <td className='listing listing-desc'>
-                                <p> Grand</p>
-                            </td>
-                            <td className='total-payout total-payout-desc'>$10023</td>
-                            <td className='status status-desc'>Approved</td>
-                            <td className='actions actions-desc'>
-                                <div className='actions-wrapper'>
-                                    <button className='btn btn-success'>Approve</button>
-                                    <button className='btn btn-danger'>Reject</button>
-                                </div>
-                            </td>
-                        </tr>
+                        {loggedInUser?.listingReservations?.map(reservation => (
+                            <tr>
+                                <td className='guest guest-desc'>
+                                    <p>{utilService.getFirstName('Moshe Cohen')}</p>
+                                </td>
+                                <td className='date date-desc'>{formatDate(reservation.reservationDates.checkIn)}</td>
+                                <td className='date date-desc'>{formatDate(reservation.reservationDates.checkOut)}</td>
+                                <td className='date date-desc'>{formatDate(reservation.bookedAt)}</td>
+                                <td className='listing listing-desc'>
+                                    <p>{reservation.stayName}</p>
+                                </td>
+                                <td className='total-payout total-payout-desc'>{reservation.totalPayout}</td>
+                                <td className='status status-desc'>{reservation.status}</td>
+                                <td className='actions actions-desc'>
+                                    <div
+                                        className={`actions-wrapper ${
+                                            reservation.status === 'pending' ? '' : 'disabled'
+                                        }`}
+                                    >
+                                        <button className='btn btn-success'>Approve</button>
+                                        <button className='btn btn-danger'>Reject</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
