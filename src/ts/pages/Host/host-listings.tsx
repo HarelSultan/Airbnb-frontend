@@ -2,34 +2,51 @@ import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { RootStateProps } from '../../store/store'
 import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
-import { StayListingCard } from '../Booking/cmps/stay-listing-card'
 import { StayProps } from '../../interfaces/stay-interface'
-import { loadStays } from '../../store/stay/stay.action'
 import { stayService } from '../../services/stay.service'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { FaSearch } from 'react-icons/fa'
+import { IoIosSearch } from 'react-icons/io'
+import { utilService } from '../../services/util.service'
+import { FiEdit2 } from 'react-icons/fi'
 
 export function HostListings() {
     const [isTableScrolled, setIsTableScrolled] = useState<boolean>(false)
 
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
+    const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
 
-    // TODO: Load host stays
+    // TODO: Create mobile-layout showing only listing and update
+    // TODO: add user.action: adding his stays to loggedInUser object
+    // TODO: Allow filtering and sorting
+
     // TODO: Make skeleton stays, show msg if doesn't have any listing.
     const [staysToDisplay, setStaysToDisplay] = useState<StayProps[] | null>(null)
 
-    const tableContainerRef = useRef(null)
+    const tableContainerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         onLoadHostStays()
+        // if (isMobile) return
+        function handleScroll() {
+            if (!tableContainerRef.current) return
+            console.log('in')
+            const isScrolled: boolean = tableContainerRef.current.scrollLeft > 0
+            setIsTableScrolled(isScrolled)
+        }
+        console.log(tableContainerRef)
+        tableContainerRef.current && tableContainerRef.current.addEventListener('scroll', handleScroll)
+
+        return () => {
+            tableContainerRef.current && tableContainerRef.current.removeEventListener('scroll', handleScroll)
+        }
     }, [])
 
     const onLoadHostStays = async () => {
+        console.log('loading host')
         if (!loggedInUser) return console.log('loggedinUser', loggedInUser)
+
         try {
             const hostListings: StayProps[] = await stayService.getHostListings(loggedInUser)
-            console.log(loggedInUser)
-            console.log(hostListings)
             setStaysToDisplay(hostListings)
         } catch (err) {
             // Show error msg
@@ -42,7 +59,6 @@ export function HostListings() {
         return 'Avaliable'
     }
 
-    console.log(staysToDisplay)
     const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
         if (!staysToDisplay) return
         const searchBy: string = ev.target.value
@@ -57,16 +73,16 @@ export function HostListings() {
             <header className='full host-header'>
                 <AppLogo />
             </header>
-            <h1>Welcome back, {loggedInUser?.fullName}</h1>
             <div className='listing-header'>
-                <h2>Your Listings</h2>
+                <h2>{utilService.formatPlural(staysToDisplay.length, ' listing')}</h2>
                 <button title='Create listing' className='btn btn-create'>
                     <AiOutlinePlus />
                     Create listing
                 </button>
             </div>
             <div className='search-listing-wrapper'>
-                <FaSearch />
+                <IoIosSearch />
+
                 <input type='text' onChange={handleChange} placeholder='Search listings' />
             </div>
             {/* <div className='listings-wrapper'>
@@ -81,77 +97,73 @@ export function HostListings() {
                     </div>
                 ))}
             </div> */}
-            <div ref={tableContainerRef} className={`table-container ${isTableScrolled ? 'scrolled' : ''}`}>
-                <table border={0} cellSpacing={0} cellPadding={0}>
+            {isMobile ? (
+                <table cellSpacing={0}>
                     <thead>
                         <tr className='table-header'>
                             <th className='listing listing-header'>listing</th>
-                            <th className='status status-header'>status</th>
                             <th className='actions actions-header'>to-do</th>
-                            <th className='bedrooms bedrooms-header'>bedrooms</th>
-                            <th className='beds beds-header'>beds</th>
-                            <th className='baths baths-header'>baths</th>
-                            <th className='price price-header'>price</th>
-                            <th className='location location-header'>location</th>
                         </tr>
                     </thead>
                     <tbody>
                         {staysToDisplay.map(stay => (
                             <tr key={stay._id}>
-                                <td className='listing'>
-                                    <img src={stay.imgUrls[0]} alt={stay.imgUrls[1]} />
-                                    <h3>{stay.name}</h3>
+                                <td className='listing listing-data'>
+                                    <img src={stay.imgUrls[1]} alt={stay.imgUrls[0]} />
+                                    <h3 title={stay.name} className='listing-name'>
+                                        {stay.name}
+                                    </h3>
                                 </td>
-                                <td className='status'>{getListingStatus(stay)}</td>
                                 <td className='actions'>
-                                    <div className='actions-wrapper'>
-                                        <button className='btn btn-save'>Edit</button>
-                                        <button className='btn btn-delete'>Delete</button>
-                                    </div>
-                                </td>
-                                <td className='bedrooms'>{stay.stayDetails.bedrooms}</td>
-                                <td className='beds'>{stay.stayDetails.beds}</td>
-                                <td className='baths'>{stay.stayDetails.bathrooms}</td>
-                                <td className='price'>{stay.price}</td>
-                                <td className='location'>
-                                    <p>
-                                        {stay.loc.city}
-                                        {stay.loc.countryCode}
-                                    </p>
+                                    <button title='Edit' className='btn btn-update'>
+                                        <FiEdit2 />
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-            </div>
+            ) : (
+                <div ref={tableContainerRef} className={`table-container ${isTableScrolled ? 'scrolled' : ''}`}>
+                    <table cellSpacing={0}>
+                        <thead>
+                            <tr className='table-header'>
+                                <th className='listing listing-header'>listing</th>
+                                <th className='status status-header'>status</th>
+                                <th className='actions actions-header'>to-do</th>
+                                <th className='bedrooms bedrooms-header'>bedrooms</th>
+                                <th className='beds beds-header'>beds</th>
+                                <th className='baths baths-header'>baths</th>
+                                <th className='price price-header'>price</th>
+                                <th className='location location-header'>location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {staysToDisplay.map(stay => (
+                                <tr key={stay._id}>
+                                    <td className='listing listing-data'>
+                                        <img src={stay.imgUrls[1]} alt={stay.imgUrls[0]} />
+                                        <h3 title={stay.name} className='listing-name'>
+                                            {stay.name}
+                                        </h3>
+                                    </td>
+                                    <td className='status'>{getListingStatus(stay)}</td>
+                                    <td className='actions'>
+                                        <button className='btn btn-update'>Update</button>
+                                    </td>
+                                    <td className='bedrooms'>{stay.stayDetails.bedrooms}</td>
+                                    <td className='beds'>{stay.stayDetails.beds}</td>
+                                    <td className='baths'>{stay.stayDetails.bathrooms}</td>
+                                    <td className='price'>{stay.price}</td>
+                                    <td className='location'>
+                                        <p className='listing-location'>{stay.loc.city}</p>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </section>
     )
-}
-
-{
-    /* <div className='listings-wrapper'>
-    <div className='listing-header'>
-        <h3>Listing</h3>
-        <h3>Capacity</h3>
-        <h3>Rooms</h3>
-        <h3>Price</h3>
-        <h3>Actions</h3>
-    </div>
-    <div className='listing-wrapper'>
-        <div className='stay-info-wrapper'>
-            <img
-                src='http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436937/mkbcjfockxezgrvimska.jpg'
-                alt=''
-            />
-            <h4> Moshe's house</h4>
-        </div>
-        <h4 className='listing-capcity'>4</h4>
-        <h4 className='listing-rooms'>2</h4>
-        <h4 className='listing-price'>$125</h4>
-        <div className='listing-actions'>
-            <button className='btn btn save'>Edit</button>
-            <button className='btn btn-delete'>Delete</button>
-        </div>
-    </div>
-</div> */
 }
