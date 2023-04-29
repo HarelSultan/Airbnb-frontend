@@ -34692,9 +34692,9 @@
         ],
         "roomType": "Entire home/apt",
         "host": {
-            "_id": "622f3407e36c59e6164fbe81",
-            "fullname": "Vick",
-            "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ykdkmw4dzdbd9llcx8kn.jpg",
+            "_id": "Demo555",
+            "fullname": "Chiro De Marzio",
+            "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/qjkthitcs6pbonblobmi.jpg",
             "isSuperHost": true
         },
         "loc": {
@@ -35131,9 +35131,9 @@
         ],
         "roomType": "Private room",
         "host": {
-            "_id": "622f3407e36c59e6164fbded",
-            "fullname": "Maria Alice",
-            "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/soxgedrvonz2z3q1u1mi.jpg",
+            "_id": "Demo555",
+            "fullname": "Chiro De Marzio",
+            "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/qjkthitcs6pbonblobmi.jpg",
             "isSuperHost": true
         },
         "loc": {
@@ -35217,8 +35217,8 @@
         ],
         "roomType": "Entire home/apt",
         "host": {
-            "_id": "622f3405e36c59e6164fb99d",
-            "fullname": "Mariana & Ramón",
+            "_id": "Demo555",
+            "fullname": "Chiro De Marzio",
             "imgUrl": "https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/qjkthitcs6pbonblobmi.jpg",
             "isSuperHost": true
         },

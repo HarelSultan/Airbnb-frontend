@@ -18,6 +18,7 @@ export const stayService = {
     query,
     getById,
     save,
+    getHostListings,
     getLabelFilters,
     getAmenities,
     getStayAverageRating,
@@ -91,9 +92,16 @@ function filterStays(stays: StayProps[], filterBy: FilterByProps) {
     return stays
 }
 
-// function getHostListings(loggedInUser: UserProps, listingName: string = '') {
-//     return loggedInUser.listings.filter(listing=>listing.name.includes(listingName))
-// }
+async function getHostListings(loggedInUser: UserProps, listingName: string = '') {
+    // return loggedInUser.listingsId.filter(listing=>listing.name.includes(listingName))
+    try {
+        const stays = await query()
+        return stays.filter(stay => loggedInUser.listingsId.includes(stay._id))
+    } catch (err) {
+        console.log('Failed to get host listings with error:', err)
+        throw err
+    }
+}
 
 function getParamsSearchBy(searchParams: URLSearchParams): SearchByProps {
     const params = Object.fromEntries(searchParams.entries())
@@ -361,7 +369,6 @@ function _makeStays() {
     let stays: any = minifiedStays
     stays.sort(() => (Math.random() > 0.5 ? 1 : -1))
     stays = stays.map((stay: StayProps) => {
-        stay._id = utilService.makeId()
         stay.takenDates = []
         while (stay.takenDates.length < 3) {
             stay.takenDates.push(utilService.getRandomDates(stay.takenDates))

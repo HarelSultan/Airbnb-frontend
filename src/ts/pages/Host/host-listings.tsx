@@ -13,7 +13,6 @@ export function HostListings() {
     const [isTableScrolled, setIsTableScrolled] = useState<boolean>(false)
 
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
-    const stays: StayProps[] = useSelector((storeState: RootStateProps) => storeState.stayModule.stays)
 
     // TODO: Load host stays
     // TODO: Make skeleton stays, show msg if doesn't have any listing.
@@ -26,9 +25,12 @@ export function HostListings() {
     }, [])
 
     const onLoadHostStays = async () => {
+        if (!loggedInUser) return console.log('loggedinUser', loggedInUser)
         try {
-            await loadStays(stayService.getDeafultSearchProps(), stayService.getDefaultFilterProps())
-            setStaysToDisplay(stays.slice(0, 8))
+            const hostListings: StayProps[] = await stayService.getHostListings(loggedInUser)
+            console.log(loggedInUser)
+            console.log(hostListings)
+            setStaysToDisplay(hostListings)
         } catch (err) {
             // Show error msg
             console.log('Getting stays failed with error:', err)
@@ -95,7 +97,7 @@ export function HostListings() {
                     </thead>
                     <tbody>
                         {staysToDisplay.map(stay => (
-                            <tr>
+                            <tr key={stay._id}>
                                 <td className='listing'>
                                     <img src={stay.imgUrls[0]} alt={stay.imgUrls[1]} />
                                     <h3>{stay.name}</h3>

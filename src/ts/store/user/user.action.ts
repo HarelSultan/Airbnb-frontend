@@ -65,7 +65,7 @@ export async function updateWishList(user: UserProps, stayId: string) {
 
 export async function addListing(user: UserProps, stayId: string) {
     try {
-        const updatedUser = await userService.update({ ...user, staysListing: [...user.staysListing, stayId] })
+        const updatedUser = await userService.update({ ...user, listingsId: [...user.listingsId, stayId] })
         store.dispatch({ type: SET_USER, user: updatedUser })
     } catch (err) {
         console.log('Failed to add user listing with error :', err)

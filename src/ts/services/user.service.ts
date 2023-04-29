@@ -68,8 +68,9 @@ function getUserDefaultCreds(): UserProps {
         fullName: '',
         username: '',
         password: '',
+        imgUrl: '',
         stayWishList: [],
-        staysListing: [],
+        listingsId: [],
     }
 }
 
@@ -82,11 +83,12 @@ function _createDemoUser() {
     if (utilService.loadFromStorage(STORAGE_KEY_USER_DB)) return
     const demoUser: UserProps = {
         _id: 'Demo555',
-        fullName: 'DemoUser',
+        fullName: 'Chiro De Marzio',
         username: 'Demo123',
         password: 'Demo123',
+        imgUrl: 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/qjkthitcs6pbonblobmi.jpg',
         stayWishList: [],
-        staysListing: [],
+        listingsId: ['yYBFw2', '8ZzQpW', 'rchFGQ'],
     }
     utilService.saveToStorage(STORAGE_KEY_USER_DB, [demoUser])
 }
