@@ -6,6 +6,7 @@ import { RootStateProps } from '../../store/store'
 import { useNavigate } from 'react-router-dom'
 import { ReservationProps } from '../../interfaces/user-interface'
 import { changeReservationStatus } from '../../store/user/user.action'
+import { HostDashboard } from './host-dashboard'
 
 export function Reservations() {
     const [isTableScrolled, setIsTableScrolled] = useState<boolean>(false)
@@ -56,6 +57,7 @@ export function Reservations() {
                 <div>No Reservations</div>
             ) : (
                 <>
+                    <HostDashboard host={loggedInUser} />
                     <div className='reservations-header'>
                         <h2>{utilService.formatPlural(loggedInUser?.listingReservations?.length, ' reservation')}</h2>
                     </div>
@@ -104,7 +106,7 @@ export function Reservations() {
                                                     Approve
                                                 </button>
                                                 <button
-                                                    onClick={() => onChangeReservationStatus(reservation, true)}
+                                                    onClick={() => onChangeReservationStatus(reservation, false)}
                                                     className='btn btn-danger'
                                                 >
                                                     Reject

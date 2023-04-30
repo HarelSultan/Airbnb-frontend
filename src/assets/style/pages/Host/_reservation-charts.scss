@@ -1,0 +1,10 @@
+.reservation-charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    display: flex;
+
+    .chart {
+        max-width: 350px;
+        max-height: 350px;
+    }
+}
