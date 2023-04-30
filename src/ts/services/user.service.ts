@@ -1,6 +1,5 @@
-import { UserLoginProps, UserProps } from '../interfaces/user-interface'
+import { ReservationProps, UserLoginProps, UserProps } from '../interfaces/user-interface'
 import { storageService } from './async-storage.service'
-import { stayService } from './stay.service'
 import { utilService } from './util.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
@@ -15,6 +14,7 @@ export const userService = {
     update,
     getUserDefaultCreds,
     loadUsersDemoData,
+    updateReservation,
 }
 
 _createDemoUser()
@@ -54,10 +54,30 @@ async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
 }
 
+async function getById(userId: string) {
+    return storageService.get(STORAGE_KEY_USER_DB, userId) as Promise<UserProps>
+}
+
 async function update(credentials: UserProps) {
     const updatedUser = await storageService.put(STORAGE_KEY_USER_DB, credentials)
     if (getLoggedinUser()?._id === updatedUser._id) saveLocalUser(updatedUser)
     return updatedUser
+}
+
+async function updateReservation(updatedHost: UserProps, updatedReservation: ReservationProps) {
+    try {
+        const reservationGuest = await getById(updatedReservation.guestId)
+        const updatedGuestReservations = reservationGuest.trips.map(trip =>
+            trip._id === updatedReservation._id ? updatedReservation : trip
+        )
+        const updatedGuest = { ...reservationGuest, trips: updatedGuestReservations }
+        update(updatedHost)
+        update(updatedGuest)
+        // Should keep reservations db ? Should keep reservations on User and Host
+    } catch (err) {
+        console.log('Failed to update Reservation with error:', err)
+        throw err
+    }
 }
 
 function getLoggedinUser(): UserProps | null {
@@ -97,32 +117,6 @@ async function _createDemoUser() {
         listingReservations: [],
     }
 
-    // const hostListings = await stayService.getHostListings(demoHost)
-    // console.log(hostListings)
-    // hostListings.map(listing =>
-    //     listing.takenDates.forEach(takenDate => {
-    //         const guest = Math.random() > 0.5 ? demoUser1 : demoUser2
-    //         const randomPastDate = new Date()
-    //         randomPastDate.setDate(randomPastDate.getDate() - utilService.getRandomInt(1, 15))
-    //         const nightsCount = utilService.getNightsCount(takenDate) || 2
-    //         const totalPayout = listing.price * nightsCount
-    //         const reservation = {
-    //             stayId: listing._id,
-    //             stayName: listing.name,
-    //             guestId: guest._id,
-    //             reservationDates: takenDate,
-    //             bookedAt: randomPastDate,
-    //             totalPayout,
-    //             status: 'pending',
-    //         }
-    //         guest.trips.push(reservation)
-    //         demoHost.listingReservations?.push(reservation)
-    //     })
-    // )
-    // console.log('demoHost', demoHost)
-    // console.log('demoUser1', demoUser1)
-    // console.log('demoUser2', demoUser2)
-    // utilService.saveToStorage(STORAGE_KEY_USER_DB, [demoHost, demoUser1, demoUser2])
     utilService.saveToStorage(STORAGE_KEY_USER_DB, [demoHost])
 }
 
@@ -162,9 +156,11 @@ function loadUsersDemoData(demoHost: UserProps) {
                 }) || 2
             const totalPayout = listing.price * nightsCount
             const reservation = {
+                _id: utilService.makeId(),
                 stayId: listing._id,
                 stayName: listing.name,
                 guestId: guest._id,
+                guestName: guest.fullName,
                 reservationDates: takenDate,
                 bookedAt: randomPastDate,
                 totalPayout,

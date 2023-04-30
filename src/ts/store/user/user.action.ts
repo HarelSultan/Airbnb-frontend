@@ -1,5 +1,5 @@
 import { StayProps } from '../../interfaces/stay-interface'
-import { UserLoginProps, UserProps } from '../../interfaces/user-interface'
+import { ReservationProps, UserLoginProps, UserProps } from '../../interfaces/user-interface'
 import { stayService } from '../../services/stay.service'
 import { userService } from '../../services/user.service'
 import { store } from '../store'
@@ -85,6 +85,24 @@ export async function addListing(user: UserProps, stayId: string) {
     } catch (err) {
         console.log('Failed to add user listing with error :', err)
         throw new Error('Cannot add listing, try again later')
+    }
+}
+
+export async function changeReservationStatus(host: UserProps, reservation: ReservationProps, isApproved: boolean) {
+    try {
+        const updatedStatus = isApproved ? 'approved' : 'declined'
+        const updatedReservation: ReservationProps = { ...reservation, status: updatedStatus }
+        const updatedHostReservations = host.listingReservations?.map(listingReservation =>
+            listingReservation._id === reservation._id ? updatedReservation : listingReservation
+        )
+        const updatedHost = { ...host, listingReservations: updatedHostReservations }
+        store.dispatch({ type: SET_USER, user: updatedHost })
+
+        userService.updateReservation(updatedHost, updatedReservation)
+    } catch (err) {
+        console.log('Failed to change reservation status with error:', err)
+        store.dispatch({ type: SET_USER, user: host })
+        throw new Error('Cannot change reservation status, try again later')
     }
 }
 

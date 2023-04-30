@@ -19,9 +19,11 @@ export interface UserLoginProps {
 }
 
 export interface ReservationProps {
+    _id: string
     stayId: string
     stayName: string
     guestId: string
+    guestName: string
     reservationDates: DatesProps
     bookedAt: Date
     totalPayout: number
