@@ -1,10 +1,50 @@
 .reservation-charts {
+    // display: grid;
+    // grid-template-columns: 1fr 1fr;
+    // display: flex;
+    margin-top: 48px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    display: flex;
-
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px 24px;
+    grid-auto-flow: row dense;
+    font-size: 16px;
+    & > * {
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+        padding: 24px;
+        border-radius: 12px;
+    }
+    h2 {
+        font-size: 22.5px;
+        font-family: $font-family-bold;
+        margin-bottom: 16px;
+    }
     .chart {
-        max-width: 350px;
-        max-height: 350px;
+        max-height: 180px;
+    }
+    .reservations-status-container {
+        display: flex;
+        flex-direction: column;
+    }
+    .status-wrapper {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        align-items: center;
+        font-family: $font-family-medium;
+        p {
+            text-transform: capitalize;
+        }
+        span {
+            font-size: 20px;
+        }
+        .pending-count {
+            color: #ffbd03;
+        }
+        .approved-count {
+            color: #33b249;
+        }
+        .rejected-count {
+            color: #fc3d39;
+        }
     }
 }

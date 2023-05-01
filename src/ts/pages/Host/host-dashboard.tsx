@@ -33,7 +33,17 @@ export function HostDashboard({ host }: Props) {
             {
                 label: 'Dataset 1',
                 data: labels.map(() => 1),
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                backgroundColor: [
+                    '#b30000',
+                    '#7c1158',
+                    '#4421af',
+                    '#1a53ff',
+                    '#0d88e6',
+                    '#00b7c7',
+                    '#5ad45a',
+                    '#8be04e',
+                    '#ebdc78',
+                ],
             },
         ],
     }
@@ -49,31 +59,36 @@ export function HostDashboard({ host }: Props) {
         return Object.values(reservationsCountMap)
     }
 
-    host.listingReservations && getListingsReservationsCount(host.listingReservations)
+    const getReservationsStatusCount = (reservations: ReservationProps[]) => {
+        const reservationsStatusMap = reservations.reduce((acc: ReservationCountMap, reservation) => {
+            if (!acc[reservation.status]) acc[reservation.status] = 0
+            acc[reservation.status]++
+            return acc
+        }, {})
+        return reservationsStatusMap
+    }
 
-    const pieChartLabels = host.listings && host?.listings.map(listing => listing.name)
+    const pieChartLabels = host.listings && host.listings.map(listing => listing.name)
+    // host.listings.map(listing => (listing.name.length > 20 ? `${listing.name.slice(0, 15)}...` : listing.name))
+
     const pieChartData = {
         labels: pieChartLabels,
         datasets: [
             {
                 labels: pieChartLabels,
-                data: [12, 19, 3, 5, 2, 3],
+                data: host.listingReservations && getListingsReservationsCount(host.listingReservations),
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
+                    '#e60049',
+                    '#0bb4ff',
+                    '#50e991',
+                    '#e6d800',
+                    '#9b19f5',
+                    '#ffa300',
+                    '#dc0ab4',
+                    '#b3d4ff',
+                    '#00bfa0',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+
                 borderWidth: 1,
             },
         ],
@@ -83,9 +98,12 @@ export function HostDashboard({ host }: Props) {
         plugins: {
             legend: {
                 position: 'left' as const,
+                padding: 30,
+                maxWidth: 180,
                 labels: {
+                    padding: 20,
                     font: {
-                        size: 16,
+                        size: 14,
                     },
                     usePointStyle: true,
                     pointStyle: 'rectRounded',
@@ -94,20 +112,54 @@ export function HostDashboard({ host }: Props) {
             title: {
                 display: false,
             },
+            tooltip: {
+                bodySpacing: 20,
+                callbacks: {
+                    label: function (context: any) {
+                        const label = context.label
+                        const value = context.formattedValue
+                        return `${label}: ${value} reservations`
+                    },
+                    title: () => '',
+                },
+            },
         },
-        maintainAspectRatio: false,
     }
+    // maintainAspectRatio: false,
 
     return (
         <section className='reservation-charts'>
-            <Bar width={'unset'} height={'unset'} className='chart line-chart' options={options} data={data} />
-            <Pie
-                className='chart pie-chart'
-                width={'unset'}
-                height={'unset'}
-                data={pieChartData}
-                options={pieChartOptions}
-            />
+            <div className='bar-chart-container'>
+                <h2>Revenue / month</h2>
+                <Bar width={'unset'} height={'unset'} className='chart line-chart' options={options} data={data} />
+            </div>
+
+            <div className='reservations-status-container'>
+                <h2>Reservations status</h2>
+                <div className='status-wrapper'>
+                    <p>pending</p>
+                    <span className='pending-count'>{/* {reservationsStatusCountMap.pending} */}2</span>
+                </div>
+                <div className='status-wrapper'>
+                    <p>approved</p>
+                    <span className='approved-count'>{/* {reservationsStatusCountMap.approved} */}4</span>
+                </div>
+                <div className='status-wrapper'>
+                    <p>rejected</p>
+                    <span className='rejected-count'>{/* {reservationsStatusCountMap.pending} */}1</span>
+                </div>
+            </div>
+
+            <div className='pie-chart-container'>
+                <h2>Reservations / listing</h2>
+                <Pie
+                    className='chart pie-chart'
+                    width={'unset'}
+                    height={'unset'}
+                    data={pieChartData}
+                    options={pieChartOptions}
+                />
+            </div>
         </section>
     )
 }

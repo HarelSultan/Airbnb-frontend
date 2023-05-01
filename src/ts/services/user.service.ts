@@ -121,7 +121,7 @@ async function _createDemoUser() {
 }
 
 function loadUsersDemoData(demoHost: UserProps) {
-    if (!demoHost.listings) return demoHost
+    if (!demoHost.listings || demoHost.listingReservations?.length) return demoHost
 
     const demoUser1: UserProps = {
         _id: 'Demo777',
