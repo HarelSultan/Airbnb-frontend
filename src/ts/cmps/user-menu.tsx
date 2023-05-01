@@ -5,13 +5,16 @@ import { FaUserCircle } from 'react-icons/fa'
 import { useOnClickOutside } from '../hooks/use-on-click-outside'
 import { UserProps } from '../interfaces/user-interface'
 import { logout } from '../store/user/user.action'
+import { NavigateFunction } from 'react-router-dom'
 
 interface Props {
     onToggleLoginSignup?: (isSignup: boolean) => void
     loggedInUser: UserProps | null
+    onBecomeHost: () => void
+    navigate: NavigateFunction
 }
 
-export function UserMenu({ onToggleLoginSignup, loggedInUser }: Props) {
+export function UserMenu({ onToggleLoginSignup, loggedInUser, onBecomeHost, navigate }: Props) {
     const [isUserToolTipOpen, setIsUserToolTipOpen] = useState<boolean>(false)
 
     const toolTipRef = useRef<HTMLDivElement | null>(null)
@@ -43,9 +46,24 @@ export function UserMenu({ onToggleLoginSignup, loggedInUser }: Props) {
             {isUserToolTipOpen && (
                 <div className='user-tool-tip'>
                     {loggedInUser ? (
-                        <button onClick={logout} className='btn btn-logout'>
-                            Log out
-                        </button>
+                        <>
+                            {loggedInUser.listingsId && (
+                                <div className='host-menu-wrapper'>
+                                    <button onClick={() => navigate('/host/listings')} className='btn btn-listings'>
+                                        Listings
+                                    </button>
+                                    <button
+                                        onClick={() => navigate('/host/reservations')}
+                                        className='btn btn-dashboard'
+                                    >
+                                        Dashboard
+                                    </button>
+                                </div>
+                            )}
+                            <button onClick={logout} className='btn btn-logout'>
+                                Log out
+                            </button>
+                        </>
                     ) : (
                         <>
                             <button onClick={() => onOpenLoginSignup(false)} className='btn btn-login'>
@@ -57,7 +75,9 @@ export function UserMenu({ onToggleLoginSignup, loggedInUser }: Props) {
                         </>
                     )}
                     <div className='seperator'></div>
-                    <button className='btn btn-airbnb'>Airbnb your home</button>
+                    <button onClick={onBecomeHost} className='btn btn-airbnb'>
+                        Airbnb your home
+                    </button>
                 </div>
             )}
         </div>

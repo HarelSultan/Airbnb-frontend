@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { SearchTeaser } from '../search-teaser'
 import { UserMenu } from '../user-menu'
 import { AppLogo } from './Logo/logo'
@@ -13,7 +13,7 @@ import { UserProps } from '../../interfaces/user-interface'
 
 interface Props {
     isMobile?: boolean
-    onToggleLoginSignup?: (isSignup: boolean) => void
+    onToggleLoginSignup: (isSignup: boolean) => void
     loggedInUser: UserProps | null
 }
 
@@ -22,6 +22,7 @@ export function AppHeader({ isMobile, onToggleLoginSignup, loggedInUser }: Props
     const [searchBy, setSearchBy] = useState<SearchByProps>(stayService.getDeafultSearchProps())
     const [selectedSearchModule, setSelectedSearchModule] = useState<string>('searchDestination')
 
+    const navigate = useNavigate()
     const searchFormWrapperRef = useRef<HTMLDivElement>(null)
     const [_, setSearchParams] = useSearchParams()
 
@@ -51,6 +52,11 @@ export function AppHeader({ isMobile, onToggleLoginSignup, loggedInUser }: Props
         setIsSearchOpen(false)
         const searchParams = new URLSearchParams(utilService.formatSearchParams(searchBy))
         setSearchParams(searchParams)
+    }
+
+    const onBecomeHost = () => {
+        if (!loggedInUser) return onToggleLoginSignup(false)
+        navigate('/host/edit')
     }
 
     const searchProps = {
@@ -88,10 +94,16 @@ export function AppHeader({ isMobile, onToggleLoginSignup, loggedInUser }: Props
                                 onSelectSearchModule={onSelectSearchModule}
                             />
                         )}
-                        <Link className='air-bnb-host' to='./'>
+
+                        <button onClick={onBecomeHost} className='btn air-bnb-host'>
                             Airbnb your home
-                        </Link>
-                        <UserMenu onToggleLoginSignup={onToggleLoginSignup} loggedInUser={loggedInUser} />
+                        </button>
+                        <UserMenu
+                            onToggleLoginSignup={onToggleLoginSignup}
+                            loggedInUser={loggedInUser}
+                            onBecomeHost={onBecomeHost}
+                            navigate={navigate}
+                        />
                     </nav>
                 </>
             )}
