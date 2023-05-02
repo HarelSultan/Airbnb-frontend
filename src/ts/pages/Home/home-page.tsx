@@ -84,7 +84,7 @@ export function HomePage() {
         stays,
         onStayDetails,
         onToggleSaveStay,
-        wishList: loggedInUser?.stayWishList || [''],
+        wishList: loggedInUser?.wishListStaysId || [''],
     }
 
     const loginSignupModalProps = {

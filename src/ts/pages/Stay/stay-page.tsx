@@ -135,7 +135,7 @@ export function StayPage() {
 
     if (!selectedStay || !reserveBy) return <section>Loadin'</section>
 
-    const isStaySaved: boolean = loggedInUser?.stayWishList.includes(selectedStay?._id) || false
+    const isStaySaved: boolean = loggedInUser?.wishListStaysId.includes(selectedStay?._id) || false
 
     type ModalMap = {
         [key: string]: ModalProps

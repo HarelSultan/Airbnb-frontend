@@ -5,7 +5,8 @@ export interface UserProps {
     username: string
     password: string
     fullName: string
-    stayWishList: string[]
+    wishListStaysId: string[]
+    wishListStays?: StayProps[]
     listingsId: string[]
     imgUrl: string
     listings?: StayProps[]

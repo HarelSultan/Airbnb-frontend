@@ -92,7 +92,7 @@ function getUserDefaultCreds(): UserProps {
         username: '',
         password: '',
         imgUrl: '',
-        stayWishList: [],
+        wishListStaysId: [],
         listingsId: [],
         trips: [],
     }
@@ -111,7 +111,7 @@ async function _createDemoUser() {
         username: 'Demo123',
         password: 'Demo123',
         imgUrl: 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/qjkthitcs6pbonblobmi.jpg',
-        stayWishList: [],
+        wishListStaysId: [],
         listingsId: ['yYBFw2', '8ZzQpW', 'rchFGQ'],
         trips: [],
         listingReservations: [],
@@ -129,7 +129,7 @@ function loadUsersDemoData(demoHost: UserProps) {
         username: 'Demo777',
         password: 'Demo777',
         imgUrl: 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/geec3czlrtp18udpuuyg.jpg',
-        stayWishList: [],
+        wishListStaysId: [],
         trips: [],
         listingsId: [],
     }
@@ -139,7 +139,7 @@ function loadUsersDemoData(demoHost: UserProps) {
         username: 'Demo888',
         password: 'Demo888',
         imgUrl: 'https://res.cloudinary.com/dp32ucj0y/image/upload/v1674657025/ykdkmw4dzdbd9llcx8kn.jpg',
-        stayWishList: [],
+        wishListStaysId: [],
         trips: [],
         listingsId: [],
     }

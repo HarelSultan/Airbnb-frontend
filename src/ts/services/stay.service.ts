@@ -18,7 +18,7 @@ export const stayService = {
     query,
     getById,
     save,
-    getHostListings,
+    getStays,
     getLabelFilters,
     getAmenities,
     getStayAverageRating,
@@ -93,10 +93,11 @@ function filterStays(stays: StayProps[], filterBy: FilterByProps) {
     return stays
 }
 
-async function getHostListings(loggedInUser: UserProps) {
+async function getStays(staysId: string[]) {
     try {
+        console.log(staysId)
         const stays = await query()
-        return stays.filter(stay => loggedInUser.listingsId.includes(stay._id))
+        return stays.filter(stay => staysId.includes(stay._id))
     } catch (err) {
         console.log('Failed to get host listings with error:', err)
         throw err

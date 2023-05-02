@@ -50,13 +50,13 @@ export async function updateWishList(user: UserProps, stayId: string) {
         // Checking if the stayId is already in the wish list
         // If so returning updatedWishList excluding the clicked stay
         // If not returning updatedWishList including the clicked stay
-        const isRemoving = user.stayWishList.includes(stayId)
+        const isRemoving = user.wishListStaysId.includes(stayId)
         const updatedWishList = isRemoving
-            ? user.stayWishList.filter(savedStayId => savedStayId !== stayId)
-            : [...user.stayWishList, stayId]
+            ? user.wishListStaysId.filter(savedStayId => savedStayId !== stayId)
+            : [...user.wishListStaysId, stayId]
         // Optimistic approach
-        store.dispatch({ type: SET_USER, user: { ...user, stayWishList: updatedWishList } })
-        await userService.update({ ...user, stayWishList: updatedWishList })
+        store.dispatch({ type: SET_USER, user: { ...user, wishListStaysId: updatedWishList } })
+        await userService.update({ ...user, wishListStaysId: updatedWishList })
     } catch (err) {
         console.log(user)
         store.dispatch({ type: SET_USER, user })
@@ -67,7 +67,7 @@ export async function updateWishList(user: UserProps, stayId: string) {
 
 export async function setUserListings(loggedInUser: UserProps) {
     try {
-        const userListings: StayProps[] = await stayService.getHostListings(loggedInUser)
+        const userListings: StayProps[] = await stayService.getStays(loggedInUser.listingsId)
         const updatedUser: UserProps = userService.loadUsersDemoData({ ...loggedInUser, listings: userListings })
         userService.saveLocalUser(updatedUser)
         store.dispatch({ type: SET_USER, user: updatedUser })
@@ -75,6 +75,19 @@ export async function setUserListings(loggedInUser: UserProps) {
     } catch (err) {
         console.log('Failed to load user listings with error:', err)
         throw new Error('Cannot load listings, try again later.')
+    }
+}
+
+export async function setUserWishListStays(loggedInUser: UserProps) {
+    try {
+        const userWishListStays: StayProps[] = await stayService.getStays(loggedInUser.wishListStaysId)
+        const updatedUser: UserProps = { ...loggedInUser, wishListStays: userWishListStays }
+        userService.saveLocalUser(updatedUser)
+        store.dispatch({ type: SET_USER, user: updatedUser })
+        return userWishListStays
+    } catch (err) {
+        console.log('Failed to load user wish list stays with error:', err)
+        throw new Error('Cannot load wishlist, try again later')
     }
 }
 
