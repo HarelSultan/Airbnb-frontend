@@ -7,7 +7,7 @@ import { FilterByProps } from '../interfaces/filter-by-interface'
 import { SearchByProps } from '../interfaces/search-by-interface'
 import { ReserveByProps } from '../interfaces/reserve-by-interface'
 import { userService } from './user.service'
-import { UserProps } from '../interfaces/user-interface'
+import { DashboardDataProps, ReservationCountMap, ReservationProps, UserProps } from '../interfaces/user-interface'
 
 const STORAGE_KEY_STAY_DB: string = 'stay_DB'
 const ALL_HOMES: string = 'All homes'
@@ -28,6 +28,7 @@ export const stayService = {
     getParamsSearchBy,
     getReserveByProps,
     getEmptyStayProps,
+    getHostDashboardData,
 }
 
 async function query(
@@ -275,6 +276,70 @@ function getReserveByProps(searchBy: SearchByProps): ReserveByProps {
         guests: reserveBy.guests,
     }
 }
+
+function getHostDashboardData(reservations: ReservationProps[]) {
+    const reservationsStatusCountMap: ReservationCountMap = {
+        pending: 0,
+        approved: 0,
+        rejected: 0,
+    }
+    const dashboardData = reservations.reduce(
+        (acc: DashboardDataProps, reservation) => {
+            const reservationMonth = new Date(reservation.reservationDates.checkIn).toLocaleDateString('default', {
+                month: 'short',
+            })
+            if (!acc.hostMonthlyRevenue[reservationMonth]) acc.hostMonthlyRevenue[reservationMonth] = 0
+            acc.hostMonthlyRevenue[reservationMonth] =
+                acc.hostMonthlyRevenue[reservationMonth] + reservation.totalPayout
+
+            if (!acc.listingReservationsCountMap[reservation.stayId])
+                acc.listingReservationsCountMap[reservation.stayId] = 0
+            acc.listingReservationsCountMap[reservation.stayId]++
+
+            acc.reservationsStatusCountMap[reservation.status]++
+            return acc
+        },
+        {
+            hostMonthlyRevenue: {} as ReservationCountMap,
+            listingReservationsCountMap: {} as ReservationCountMap,
+            reservationsStatusCountMap,
+        }
+    )
+    return dashboardData
+}
+
+// function getHostMonthlyRevenue(listingReservations: ReservationProps[]) {
+//     return listingReservations.reduce((acc: ReservationCountMap, reservation) => {
+//         const reservationMonth = new Date(reservation.reservationDates.checkIn).toLocaleDateString('default', {
+//             month: 'short',
+//         })
+//         if (!acc[reservationMonth]) acc[reservationMonth] = 0
+//         acc[reservationMonth] = acc[reservationMonth] + reservation.totalPayout
+//         return acc
+//     }, {})
+// }
+
+// function getListingsReservationsCount(reservations: ReservationProps[]) {
+//     const reservationsCountMap = reservations.reduce((acc: ReservationCountMap, reservation) => {
+//         if (!acc[reservation.stayId]) acc[reservation.stayId] = 0
+//         acc[reservation.stayId]++
+//         return acc
+//     }, {})
+//     return Object.values(reservationsCountMap)
+// }
+
+// function getReservationsStatusCount(reservations: ReservationProps[]) {
+//     const defaultReservationStatusCount: ReservationCountMap = {
+//         pending: 0,
+//         approved: 0,
+//         rejected: 0,
+//     }
+//     return reservations.reduce((acc: ReservationCountMap, reservation) => {
+//         // if (!acc[reservation.status]) acc[reservation.status] = 0
+//         acc[reservation.status]++
+//         return acc
+//     }, defaultReservationStatusCount)
+// }
 // function getReserveByProps(searchBy: SearchByProps): ReserveByProps {
 //     const reserveBy = JSON.parse(JSON.stringify(searchBy))
 //     delete reserveBy.destination

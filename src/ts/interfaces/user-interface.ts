@@ -30,4 +30,11 @@ export interface ReservationProps {
     status: string
 }
 
+export interface DashboardDataProps {
+    [key: string]: ReservationCountMap
+}
+
+export interface ReservationCountMap {
+    [key: string]: number
+}
 // WishList

@@ -90,7 +90,7 @@ export async function addListing(user: UserProps, stayId: string) {
 
 export async function changeReservationStatus(host: UserProps, reservation: ReservationProps, isApproved: boolean) {
     try {
-        const updatedStatus = isApproved ? 'approved' : 'declined'
+        const updatedStatus = isApproved ? 'approved' : 'rejected'
         const updatedReservation: ReservationProps = { ...reservation, status: updatedStatus }
         const updatedHostReservations = host.listingReservations?.map(listingReservation =>
             listingReservation._id === reservation._id ? updatedReservation : listingReservation
@@ -105,14 +105,3 @@ export async function changeReservationStatus(host: UserProps, reservation: Rese
         throw new Error('Cannot change reservation status, try again later')
     }
 }
-
-// export async function setUser(user:UserProps) {
-//     try {
-//         const user = await userService.getById(userId)
-//         store.dispatch({ type: SET_USER, user })
-//         return user
-//     } catch (err) {
-//         console.error('UserActions: err in loadUser', err)
-//         throw err
-//     }
-// }

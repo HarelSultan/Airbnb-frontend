@@ -1,165 +1,60 @@
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend } from 'chart.js'
-import { Bar, Pie } from 'react-chartjs-2'
-import { ReservationProps, UserProps } from '../../interfaces/user-interface'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-interface Props {
-    host: UserProps
-}
+import { stayService } from '../../services/stay.service'
+import { changeReservationStatus } from '../../store/user/user.action'
 
-interface ReservationCountMap {
-    [key: string]: number
-}
-export function HostDashboard({ host }: Props) {
-    ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend)
+import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
+import { HostCharts } from './host-charts'
+import { Reservations } from './reservations'
 
-    const options = {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false,
-            },
-            title: {
-                display: false,
-            },
-        },
-        maintainAspectRatio: false,
+import { ReservationProps } from '../../interfaces/user-interface'
+import { RootStateProps } from '../../store/store'
+
+export function HostDashboard() {
+    const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!loggedInUser) navigate('/')
+    }, [])
+
+    const onChangeReservationStatus = async (reservation: ReservationProps, isApproved: boolean) => {
+        if (!loggedInUser) return
+        try {
+            await changeReservationStatus(loggedInUser, reservation, isApproved)
+        } catch (err) {
+            // TODO: showErrorMsg(err.txt)
+        }
     }
 
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+    const listingsName = loggedInUser?.listings?.map(listing => listing.name) || ['']
 
-    const data = {
-        labels,
-        datasets: [
-            {
-                label: 'Dataset 1',
-                data: labels.map(() => 1),
-                backgroundColor: [
-                    '#b30000',
-                    '#7c1158',
-                    '#4421af',
-                    '#1a53ff',
-                    '#0d88e6',
-                    '#00b7c7',
-                    '#5ad45a',
-                    '#8be04e',
-                    '#ebdc78',
-                ],
-            },
-        ],
+    if (loggedInUser?.listingReservations) {
+        const data = stayService.getHostDashboardData(loggedInUser.listingReservations)
     }
-    // if (!acc[reservation.stayId]) acc[reservation.stayId] = 0
-    // acc[reservation.stayId]++
-    // return acc
-    const getListingsReservationsCount = (reservations: ReservationProps[]) => {
-        const reservationsCountMap = reservations.reduce((acc: ReservationCountMap, reservation) => {
-            if (!acc[reservation.stayId]) acc[reservation.stayId] = 0
-            acc[reservation.stayId]++
-            return acc
-        }, {})
-        return Object.values(reservationsCountMap)
-    }
-
-    const getReservationsStatusCount = (reservations: ReservationProps[]) => {
-        const reservationsStatusMap = reservations.reduce((acc: ReservationCountMap, reservation) => {
-            if (!acc[reservation.status]) acc[reservation.status] = 0
-            acc[reservation.status]++
-            return acc
-        }, {})
-        return reservationsStatusMap
-    }
-
-    const pieChartLabels = host.listings && host.listings.map(listing => listing.name)
-    // host.listings.map(listing => (listing.name.length > 20 ? `${listing.name.slice(0, 15)}...` : listing.name))
-
-    const pieChartData = {
-        labels: pieChartLabels,
-        datasets: [
-            {
-                labels: pieChartLabels,
-                data: host.listingReservations && getListingsReservationsCount(host.listingReservations),
-                backgroundColor: [
-                    '#e60049',
-                    '#0bb4ff',
-                    '#50e991',
-                    '#e6d800',
-                    '#9b19f5',
-                    '#ffa300',
-                    '#dc0ab4',
-                    '#b3d4ff',
-                    '#00bfa0',
-                ],
-
-                borderWidth: 1,
-            },
-        ],
-    }
-
-    const pieChartOptions = {
-        plugins: {
-            legend: {
-                position: 'left' as const,
-                padding: 30,
-                maxWidth: 180,
-                labels: {
-                    padding: 20,
-                    font: {
-                        size: 14,
-                    },
-                    usePointStyle: true,
-                    pointStyle: 'rectRounded',
-                },
-            },
-            title: {
-                display: false,
-            },
-            tooltip: {
-                bodySpacing: 20,
-                callbacks: {
-                    label: function (context: any) {
-                        const label = context.label
-                        const value = context.formattedValue
-                        return `${label}: ${value} reservations`
-                    },
-                    title: () => '',
-                },
-            },
-        },
-    }
-    // maintainAspectRatio: false,
 
     return (
-        <section className='reservation-charts'>
-            <div className='bar-chart-container'>
-                <h2>Revenue / month</h2>
-                <Bar width={'unset'} height={'unset'} className='chart line-chart' options={options} data={data} />
-            </div>
+        <section className='main-layout host-dashboard'>
+            <header className='full host-header'>
+                <AppLogo />
+            </header>
 
-            <div className='reservations-status-container'>
-                <h2>Reservations status</h2>
-                <div className='status-wrapper'>
-                    <p>pending</p>
-                    <span className='pending-count'>{/* {reservationsStatusCountMap.pending} */}2</span>
-                </div>
-                <div className='status-wrapper'>
-                    <p>approved</p>
-                    <span className='approved-count'>{/* {reservationsStatusCountMap.approved} */}4</span>
-                </div>
-                <div className='status-wrapper'>
-                    <p>rejected</p>
-                    <span className='rejected-count'>{/* {reservationsStatusCountMap.pending} */}1</span>
-                </div>
-            </div>
-
-            <div className='pie-chart-container'>
-                <h2>Reservations / listing</h2>
-                <Pie
-                    className='chart pie-chart'
-                    width={'unset'}
-                    height={'unset'}
-                    data={pieChartData}
-                    options={pieChartOptions}
-                />
-            </div>
+            {!loggedInUser?.listingReservations?.length ? (
+                <div>No Reservations</div>
+            ) : (
+                <>
+                    <HostCharts
+                        listingsName={listingsName}
+                        hostChartData={stayService.getHostDashboardData(loggedInUser.listingReservations)}
+                    />
+                    <Reservations
+                        listingReservations={loggedInUser.listingReservations}
+                        onChangeReservationStatus={onChangeReservationStatus}
+                    />
+                </>
+            )}
         </section>
     )
 }

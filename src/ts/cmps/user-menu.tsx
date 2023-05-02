@@ -52,10 +52,7 @@ export function UserMenu({ onToggleLoginSignup, loggedInUser, onBecomeHost, navi
                                     <button onClick={() => navigate('/host/listings')} className='btn btn-listings'>
                                         Listings
                                     </button>
-                                    <button
-                                        onClick={() => navigate('/host/reservations')}
-                                        className='btn btn-dashboard'
-                                    >
+                                    <button onClick={() => navigate('/host/dashboard')} className='btn btn-dashboard'>
                                         Dashboard
                                     </button>
                                 </div>
