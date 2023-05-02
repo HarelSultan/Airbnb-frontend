@@ -84,10 +84,22 @@ export async function setUserWishListStays(loggedInUser: UserProps) {
         const updatedUser: UserProps = { ...loggedInUser, wishListStays: userWishListStays }
         userService.saveLocalUser(updatedUser)
         store.dispatch({ type: SET_USER, user: updatedUser })
-        return userWishListStays
     } catch (err) {
         console.log('Failed to load user wish list stays with error:', err)
         throw new Error('Cannot load wishlist, try again later')
+    }
+}
+
+export async function setUserTripsStays(loggedInUser: UserProps) {
+    try {
+        const tripsStaysId = loggedInUser.trips.map(trip => trip.stayId)
+        const userTripsStays: StayProps[] = await stayService.getStays(tripsStaysId)
+        const updatedUser: UserProps = { ...loggedInUser, tripsStays: userTripsStays }
+        userService.saveLocalUser(updatedUser)
+        store.dispatch({ type: SET_USER, user: updatedUser })
+    } catch (err) {
+        console.log('Failed to load user trips stays with error:', err)
+        throw new Error('Cannot load trips, try again later')
     }
 }
 

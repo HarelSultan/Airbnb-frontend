@@ -11,6 +11,7 @@ export interface UserProps {
     imgUrl: string
     listings?: StayProps[]
     trips: ReservationProps[]
+    tripsStays?: StayProps[]
     listingReservations?: ReservationProps[]
 }
 
@@ -28,6 +29,7 @@ export interface ReservationProps {
     reservationDates: DatesProps
     bookedAt: Date
     totalPayout: number
+    guestCount: number
     status: string
 }
 

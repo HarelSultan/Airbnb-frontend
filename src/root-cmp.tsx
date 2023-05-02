@@ -12,6 +12,7 @@ import { EditStay } from './ts/pages/Host/edit-stay'
 import { HostListings } from './ts/pages/Host/host-listings'
 import { HostDashboard } from './ts/pages/Host/host-dashboard'
 import { WishList } from './ts/pages/User/wish-list'
+import { Trips } from './ts/pages/User/trips'
 
 function App() {
     const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
@@ -33,6 +34,7 @@ function App() {
                 <Route path='/stay/:stayId' element={<StayPage />} />
                 <Route path='/book/:stayId' element={<BookingPage />} />
                 <Route path='/wishlist' element={<WishList />} />
+                <Route path='/trips' element={<Trips />} />
                 <Route path='/host/listings' element={<HostListings />} />
                 <Route path='/host/dashboard' element={<HostDashboard />} />
                 <Route path='/host/edit' element={<EditStay />} />

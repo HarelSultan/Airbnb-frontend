@@ -164,6 +164,7 @@ function loadUsersDemoData(demoHost: UserProps) {
                 reservationDates: takenDate,
                 bookedAt: randomPastDate,
                 totalPayout,
+                guestCount: 3,
                 status: 'pending',
             }
             guest.trips.push(reservation)

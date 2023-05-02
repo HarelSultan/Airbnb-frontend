@@ -1,17 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootStateProps } from '../../store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
-import { GrPrevious } from 'react-icons/gr'
 import { FiShare } from 'react-icons/fi'
 import { setUserWishListStays, updateWishList } from '../../store/user/user.action'
 import { StayProps } from '../../interfaces/stay-interface'
 import { StayList } from '../Home/cmps/stay-list'
+import { BiArrowBack } from 'react-icons/bi'
 
 export function WishList() {
-    // const [wishListStays, setWishListStays] = useState<StayProps[] | null>(null)
-
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
     const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
 
@@ -20,8 +18,7 @@ export function WishList() {
 
     useEffect(() => {
         if (!loggedInUser) navigate('/')
-        // loggedInUser?.wishListStays ? setWishListStays(loggedInUser.wishListStays) : loadUserWishList()
-        if (!loggedInUser?.wishListStays || loggedInUser.wishListStays.length < loggedInUser.wishListStaysId.length)
+        if (!loggedInUser?.wishListStays || loggedInUser.wishListStays.length !== loggedInUser.wishListStaysId.length)
             loadUserWishList()
     }, [])
 
@@ -29,7 +26,6 @@ export function WishList() {
         if (!loggedInUser) return
         try {
             await setUserWishListStays(loggedInUser)
-            // setWishListStays(userWishListStays)
         } catch (err) {
             console.log(err)
             // TODO: showErrorMsg(err.msg)
@@ -63,21 +59,22 @@ export function WishList() {
 
     return (
         <section className='main-layout wish-list'>
-            {isMobile ? (
-                <div className='full wish-list-mobile-header'>
-                    <button onClick={onGoBack} className='btn btn-go-back'>
-                        <GrPrevious />
-                    </button>
-                    <button className='btn btn-share underline'>
-                        <FiShare />
-                    </button>
-                </div>
-            ) : (
-                <header className='full wish-list-header'>
+            {!isMobile && (
+                <header className='full header'>
                     <AppLogo />
                 </header>
             )}
-            <h1>Wishlist</h1>
+            <div className='full wish-list-header'>
+                <div className='actions-wrapper'>
+                    <button onClick={onGoBack} className='btn btn-go-back'>
+                        <BiArrowBack className='go-back-icon' />
+                    </button>
+                    <button className='btn btn-share underline'>
+                        <FiShare className='share-icon' />
+                    </button>
+                </div>
+                <h1>Wishlist</h1>
+            </div>
             <StayList
                 onStayDetails={onStayDetails}
                 onToggleSaveStay={onToggleSaveStay}

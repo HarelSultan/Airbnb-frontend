@@ -1,0 +1,26 @@
+.trips {
+    font-size: 16px;
+
+    .trips-stays-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 40px 24px;
+        grid-auto-flow: row dense;
+    }
+
+    .listing-details {
+        grid-template-rows: repeat(4, auto);
+        gap: 8px;
+    }
+    .stay-name {
+        -webkit-line-clamp: 2;
+    }
+    .stay-rating {
+        // align-self: start;
+        margin-top: 0;
+    }
+    .listing-price {
+        align-self: end;
+        line-height: 1;
+    }
+}
