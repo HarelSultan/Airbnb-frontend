@@ -5,14 +5,15 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { utilService } from '../../services/util.service'
 
 import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
+import { Map } from '../../cmps/map'
 import { ImgCarousel } from '../Home/cmps/img-carousel'
 import { StayAirCover } from '../Stay/cmps/StayDetails/stay-air-cover'
 
 import { RootStateProps } from '../../store/store'
 import { ReservationProps } from '../../interfaces/user-interface'
 
-import { GrNext } from 'react-icons/gr'
-import { Map } from '../../cmps/map'
+import { GrFormNext, GrNext } from 'react-icons/gr'
+import { BiArrowBack } from 'react-icons/bi'
 
 export function TripDetails() {
     const [selectedTrip, setSelectedTrip] = useState<ReservationProps | null>(null)
@@ -52,17 +53,25 @@ export function TripDetails() {
     lastCancellationDate.setDate(checkIn.getDate() - 1)
 
     return (
-        <section className='main-layout trip-details'>
+        <section className='trip-details'>
             {!isMobile && (
-                <header className='full header'>
+                <header className='header'>
                     <AppLogo />
                 </header>
             )}
-            <div className='trip-wrapper'>
+            <div className='main-layout layout-wrapper'>
                 {!isMobile && <Map lat={selectedTrip.stayLocation.lat} lng={selectedTrip.stayLocation.lng} />}
-                <>
-                    <div className='stay-wrapper'>
-                        <ImgCarousel imgUrls={selectedTrip?.stayImgsUrl} onOpenGalleryModal={onOpenImgCarouselModal} />
+                <div className='trip-wrapper'>
+                    <div className='wrapper'>
+                        <div className={`carousel-wrapper ${isMobile ? 'full' : ''}`}>
+                            <ImgCarousel
+                                imgUrls={selectedTrip?.stayImgsUrl}
+                                onOpenGalleryModal={onOpenImgCarouselModal}
+                            />
+                            <button onClick={() => navigate(-1)} className='btn btn-go-back'>
+                                <BiArrowBack />
+                            </button>
+                        </div>
                         <div className='trip-dates-wrapper'>
                             <div className='check-in-wrapper'>
                                 <p>Check-in</p>
@@ -75,78 +84,84 @@ export function TripDetails() {
                                 <span>11:00 AM</span>
                             </div>
                         </div>
-                        <div className='message-host'>
+                        <div className='message-host-wrapper'>
                             <img
                                 src='https://res.cloudinary.com/dotasvsuv/image/upload/v1683373329/uczdfcwovytqsgu9oyzh.svg'
                                 alt='message-svg'
                             />
-                            <>
+                            <div className='message-host'>
                                 <h4>Message your host</h4>
                                 <span className='host-name'>{hostFirstName}</span>
-                            </>
+                            </div>
                         </div>
-                        <div className='stay-info'>
+                        <div className='stay-info-wrapper'>
                             <img
                                 src='https://res.cloudinary.com/dotasvsuv/image/upload/v1683373349/nj4yzchkqwcyra6jfhbz.svg'
                                 alt='stay-svg'
                             />
-                            <>
+                            <div className='stay-info'>
                                 <h4>Your place</h4>
-                                <span className='stay-name'></span>
-                            </>
+                                <span className='stay-name'>{selectedTrip.stayName}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className='reservation-details'>
-                        <h2>Reservation Details</h2>
-                        <div className='trip-guests'>
-                            <h4>Who's coming</h4>
-                            <p>{utilService.formatGuestCount(selectedTrip.guests)}</p>
-                            <img
-                                src='https://res.cloudinary.com/dotasvsuv/image/upload/v1683373391/eh2r5z8phoctktynlf26.png'
-                                alt='guest-svg'
-                            />
+                        <div className='reservation-details-wrapper'>
+                            <h2>Reservation Details</h2>
+                            <div className='trip-guests-wrapper'>
+                                <div className='trip-guests'>
+                                    <h4>Who's coming</h4>
+                                    <p>{utilService.formatGuestCount(selectedTrip.guests)}</p>
+                                </div>
+                                <img
+                                    src='https://res.cloudinary.com/dotasvsuv/image/upload/v1683373391/eh2r5z8phoctktynlf26.png'
+                                    alt='guest-svg'
+                                />
+                            </div>
+                            <div className='confirmation-code'>
+                                <h4>Confirmation code</h4>
+                                <span>{selectedTrip._id}</span>
+                            </div>
+                            <div className='air-cover-wrapper'>
+                                <p>Your booking is protected by</p>
+                                <img
+                                    className='air-cover-img'
+                                    src='https://res.cloudinary.com/dotasvsuv/image/upload/v1680445107/f9axjhl7sxlnhy5owbbw.webp'
+                                    alt=''
+                                />
+                            </div>
+                            <div className='cancellation-policy'>
+                                <h4>Cancellation policy</h4>
+                                <p>
+                                    Free cancellation before 3:00 PM on {utilService.formatDate(lastCancellationDate)}.
+                                    After that, the reservation is non-refundable.
+                                </p>
+                            </div>
                         </div>
-                        <div className='confirmation-code'>
-                            <h4>Confirmation code</h4>
-                            <span>{selectedTrip._id}</span>
-                        </div>
-                        <div className='air-cover-wrapper'>
-                            <StayAirCover onOpenModal={onOpenImgCarouselModal} />
-                        </div>
-                        <div className='cancellation-policy'>
-                            <h4>Cancellation policy</h4>
-                            <p>
-                                Free cancellation before 3:00 PM on {utilService.formatDate(lastCancellationDate)}.
-                                After that, the reservation is non-refundable.
-                            </p>
-                        </div>
-                    </div>
-                    <div className='rules-and-instructions'>
                         <h2>Rules and instructions</h2>
-                        <h4>House rules</h4>
-                        <p>Self check-in with Lockbox</p>
-                        <p>7 guests maximum</p>
-                        <p>Pets allowed</p>
+                        <div className='stay-rules'>
+                            <h4>House rules</h4>
+                            <p>Self check-in with Lockbox</p>
+                            <p>7 guests maximum</p>
+                            <p>Pets allowed</p>
+                        </div>
                         <div className='show-listing'>
                             <img
                                 src='https://res.cloudinary.com/dotasvsuv/image/upload/v1683373440/epea89jtgpzil4wakxmo.svg'
                                 alt='stay-small-svg'
                             />
                             <p>Show listing</p>
-                            <GrNext />
+                            <GrFormNext />
+                        </div>
+                        <div className='host-wrapper'>
+                            <h2>Hosted by {hostFirstName}</h2>
+                            <img src={selectedTrip.host.imgUrl} alt='stay.host.imgUrl' />
+                        </div>
+                        <div className='payment-info'>
+                            <h2>Payment info</h2>
+                            <h4>Total cost</h4>
+                            <p>${selectedTrip.totalPayout} USD</p>
                         </div>
                     </div>
-                    <div className='host-wrapper'>
-                        <h2>Hosted by {hostFirstName}</h2>
-                        <img src={selectedTrip.host.imgUrl} alt='stay.host.imgUrl' />
-                        <button className='btn btn-show-more'>Show more</button>
-                    </div>
-                    <div className='payment-info'>
-                        <h2>Payment info</h2>
-                        <h4>Total cost</h4>
-                        <p>${selectedTrip.totalPayout}</p>
-                    </div>
-                </>
+                </div>
             </div>
         </section>
     )
