@@ -40,6 +40,15 @@
             padding-inline: 24px;
             background-color: white;
         }
+        h2 {
+            font-size: 22px;
+            padding-top: 24px;
+        }
+
+        h4 {
+            font-size: 16px;
+            font-family: $font-family-medium;
+        }
     }
 
     .carousel-wrapper {
@@ -61,16 +70,12 @@
                 font-size: 18px;
             }
         }
-    }
-    .carousel-root {
-        &,
         .carousel-slider,
         .slider,
         .slider-wrapper {
             height: 100%;
         }
         button {
-            opacity: 1;
             top: auto;
             bottom: 20px;
         }
@@ -83,14 +88,10 @@
         }
     }
 
-    h2 {
-        font-size: 22px;
-        padding-top: 24px;
-    }
-
-    h4 {
-        font-size: 16px;
-        font-family: $font-family-medium;
+    .carousel-root {
+        .carousel button {
+            opacity: 1;
+        }
     }
 
     .trip-dates-wrapper {
@@ -213,6 +214,19 @@
         h4 {
             padding-top: 24px;
             margin-bottom: 4px;
+        }
+    }
+    .modal-wrapper {
+        top: 0;
+
+        .carousel-root {
+            @include for-narrow-layout {
+                max-width: 1053px;
+                margin: auto;
+            }
+            .stay-img-wrapper img {
+                border-radius: 0;
+            }
         }
     }
 }

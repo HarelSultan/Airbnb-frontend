@@ -14,9 +14,14 @@ import { ReservationProps } from '../../interfaces/user-interface'
 
 import { GrFormNext, GrNext } from 'react-icons/gr'
 import { BiArrowBack } from 'react-icons/bi'
+import { Modal, ModalProps } from '../../cmps/modal'
+import { StayImgCarousel } from '../Stay/cmps/stay-img-carousel'
+import { ContactHost } from '../Stay/cmps/contact-host'
+import { CONTACT_HOST_MODAL } from '../Stay/stay-page'
 
 export function TripDetails() {
     const [selectedTrip, setSelectedTrip] = useState<ReservationProps | null>(null)
+    const [expandedModal, setExpandedModal] = useState<string | null>(null)
 
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
     const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
@@ -43,8 +48,36 @@ export function TripDetails() {
         return date.toLocaleDateString('default', { weekday: 'short', month: 'short', day: 'numeric' })
     }
 
+    const onSetExpandedModal = (expandedModal: string | null) => {
+        setExpandedModal(expandedModal)
+    }
+
+    const onSendHostMessage = (msg: string) => {
+        console.log(msg)
+    }
+
     // TODO: find a godo name for stay-wrapper
     if (!selectedTrip) return <div>Trip skeleton</div>
+
+    type ModalMap = {
+        [key: string]: ModalProps
+    }
+
+    const tripModalsMap: ModalMap = {
+        imgCarouselModal: {
+            className: 'img-carousel-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: null,
+            children: <ImgCarousel imgUrls={selectedTrip.stayImgsUrl} />,
+        },
+
+        contactHostModal: {
+            className: 'contact-host-modal',
+            onCloseModal: () => onSetExpandedModal(null),
+            headerTxt: null,
+            children: <ContactHost host={selectedTrip.host} amenities={[]} onSendHostMessage={onSendHostMessage} />,
+        },
+    }
 
     const hostFirstName = utilService.getFirstName(selectedTrip.host.fullname)
     const checkIn = new Date(selectedTrip.reservationDates.checkIn)
@@ -64,10 +97,7 @@ export function TripDetails() {
                 <div className='trip-wrapper'>
                     <div className='wrapper'>
                         <div className={`carousel-wrapper ${isMobile ? 'full' : ''}`}>
-                            <ImgCarousel
-                                imgUrls={selectedTrip?.stayImgsUrl}
-                                onOpenGalleryModal={onOpenImgCarouselModal}
-                            />
+                            <ImgCarousel imgUrls={selectedTrip?.stayImgsUrl} onOpenGalleryModal={onSetExpandedModal} />
                             <button onClick={() => navigate(-1)} className='btn btn-go-back'>
                                 <BiArrowBack />
                             </button>
@@ -89,12 +119,12 @@ export function TripDetails() {
                                 src='https://res.cloudinary.com/dotasvsuv/image/upload/v1683373329/uczdfcwovytqsgu9oyzh.svg'
                                 alt='message-svg'
                             />
-                            <div className='message-host'>
+                            <div onClick={() => onSetExpandedModal(CONTACT_HOST_MODAL)} className='message-host'>
                                 <h4>Message your host</h4>
                                 <span className='host-name'>{hostFirstName}</span>
                             </div>
                         </div>
-                        <div className='stay-info-wrapper'>
+                        <div onClick={() => navigate(`/stay/${selectedTrip.stayId}`)} className='stay-info-wrapper'>
                             <img
                                 src='https://res.cloudinary.com/dotasvsuv/image/upload/v1683373349/nj4yzchkqwcyra6jfhbz.svg'
                                 alt='stay-svg'
@@ -143,7 +173,7 @@ export function TripDetails() {
                             <p>7 guests maximum</p>
                             <p>Pets allowed</p>
                         </div>
-                        <div className='show-listing'>
+                        <div onClick={() => navigate(`/stay/${selectedTrip.stayId}`)} className='show-listing'>
                             <img
                                 src='https://res.cloudinary.com/dotasvsuv/image/upload/v1683373440/epea89jtgpzil4wakxmo.svg'
                                 alt='stay-small-svg'
@@ -163,6 +193,7 @@ export function TripDetails() {
                     </div>
                 </div>
             </div>
+            {expandedModal && <Modal {...tripModalsMap[expandedModal]} />}
         </section>
     )
 }
