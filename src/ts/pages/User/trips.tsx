@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootStateProps } from '../../store/store'
 import { useNavigate } from 'react-router-dom'
-import { setUserTripsStays } from '../../store/user/user.action'
 import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
 import { TripPreview } from './trip-preview'
 import { NoTrips } from './no-trips'
@@ -16,16 +15,9 @@ export function Trips() {
         if (!loggedInUser) navigate('/')
     }, [])
 
-    const onLoadUserTrips = () => {
-        try {
-            loggedInUser && setUserTripsStays(loggedInUser)
-        } catch (err) {
-            // Show error msg
-            console.log('Getting stays failed with error:', err)
-        }
+    const onTripDetails = (tripId: string) => {
+        navigate(`/trips/${tripId}`)
     }
-
-    const onTripDetails = () => {}
 
     const onSearchTrips = () => {
         navigate('/')
@@ -45,7 +37,7 @@ export function Trips() {
             ) : (
                 <div className='trips-stays-wrapper'>
                     {loggedInUser.trips.map((trip, idx) => (
-                        <div key={`${trip._id}${idx}`} className='listing-wrapper'>
+                        <div onClick={() => onTripDetails(trip._id)} key={`${trip._id}${idx}`} className='trip-wrapper'>
                             <TripPreview trip={trip} />
                         </div>
                     ))}

@@ -5,7 +5,7 @@ import { UserProps } from '../../../interfaces/user-interface'
 import { PricingSummary } from '../../Stay/cmps/ReserveStay/cmps/pricing-summary'
 import { ConfirmBooking } from './confirm-booking'
 import { StayListingCard } from './stay-listing-card'
-import { TripDetails } from './trip-details'
+import { ReservationDetails } from './reservation-details'
 
 interface Props {
     stay: StayProps
@@ -36,7 +36,7 @@ export function MobileStayBooking({
                 />
             </section>
             <div className='seperator full'></div>
-            <TripDetails reserveBy={reserveBy} onSetExpandedModal={onSetExpandedModal} />
+            <ReservationDetails reserveBy={reserveBy} onSetExpandedModal={onSetExpandedModal} />
             <div className='seperator full'></div>
 
             <section className='price-details'>

@@ -25,7 +25,7 @@
 
     @include for-narrow-layout {
         .air-cover,
-        .trip-details {
+        .reservation-details {
             position: relative;
             &::after {
                 content: '';

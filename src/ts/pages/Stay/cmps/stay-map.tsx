@@ -1,7 +1,6 @@
-import GoogleMapReact from 'google-map-react'
 import { LOCATION_MODAL } from '../stay-page'
-import { MdHome } from 'react-icons/md'
 import { GrFormNext } from 'react-icons/gr'
+import { Map } from '../../../cmps/map'
 
 interface Props {
     lat: number
@@ -11,35 +10,13 @@ interface Props {
     onOpenLocationModal?: (expandedModal: string) => void
 }
 
-const MapMarker = ({ text }: any) => (
-    <div className='map-marker'>
-        <MdHome />
-    </div>
-)
-
 export function StayMap({ lat, lng, stayArea, staySummary, onOpenLocationModal }: Props) {
-    const mapProps = {
-        center: {
-            lat,
-            lng,
-        },
-        zoom: 14,
-    }
-
     const staySummaryToDisplay = onOpenLocationModal ? staySummary.slice(0, staySummary.indexOf('.') + 1) : staySummary
 
     return (
         <section className='stay-map'>
             <h2>Where you'll be</h2>
-            <div className='map-wrapper'>
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: 'AIzaSyCl84V5HhaYpXpF0C_et_OYStOFmNKjz1E' }}
-                    defaultCenter={mapProps.center}
-                    defaultZoom={mapProps.zoom}
-                >
-                    <MapMarker {...mapProps.center} />
-                </GoogleMapReact>
-            </div>
+            <Map lat={lat} lng={lng} />
             <h4>{stayArea}</h4>
             <p>{staySummaryToDisplay}</p>
             {onOpenLocationModal && (
@@ -51,4 +28,3 @@ export function StayMap({ lat, lng, stayArea, staySummary, onOpenLocationModal }
         </section>
     )
 }
-// bootstrapURLKeys={{ key: 'AIzaSyCl84V5HhaYpXpF0C_et_OYStOFmNKjz1E' }}

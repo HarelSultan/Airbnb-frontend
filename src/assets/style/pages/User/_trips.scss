@@ -23,20 +23,4 @@
         gap: 40px 24px;
         grid-auto-flow: row dense;
     }
-
-    .listing-details {
-        grid-template-rows: repeat(4, auto);
-        gap: 8px;
-    }
-    .stay-name {
-        -webkit-line-clamp: 2;
-    }
-    .stay-rating {
-        // align-self: start;
-        margin-top: 0;
-    }
-    .dates {
-        align-self: end;
-        line-height: 1;
-    }
 }

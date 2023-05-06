@@ -7,11 +7,11 @@ interface Props {
     reserveBy: ReserveByProps
     onSetExpandedModal?: (expandedModal: string) => void
 }
-export function TripDetails({ reserveBy, onSetExpandedModal }: Props) {
+export function ReservationDetails({ reserveBy, onSetExpandedModal }: Props) {
     return (
-        <section className='trip-details'>
+        <section className='reservation-details'>
             <h4>Your trip</h4>
-            <div className='trip-detail trip-dates'>
+            <div className='reservation-detail reservation-dates'>
                 <h5>Dates</h5>
                 <p>{utilService.formatDateRange({ checkIn: reserveBy.checkIn, checkOut: reserveBy.checkOut })}</p>
                 <button
@@ -22,7 +22,7 @@ export function TripDetails({ reserveBy, onSetExpandedModal }: Props) {
                 </button>
             </div>
 
-            <div className='trip-detail trip-guests'>
+            <div className='reservation-detail reservation-guests'>
                 <h5>Guests</h5>
                 <p>{utilService.formatGuestCount(reserveBy.guests)}</p>
                 <button

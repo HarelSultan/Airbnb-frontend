@@ -1,4 +1,4 @@
-.trip-details {
+.reservation-details {
     font-size: 16px;
     & > * {
         padding-bottom: 24px;
@@ -10,7 +10,7 @@
         padding-top: 24px;
     }
 
-    .trip-detail {
+    .reservation-detail {
         display: grid;
         grid-template-columns: 1fr auto;
         grid-template-rows: 1fr 1fr;

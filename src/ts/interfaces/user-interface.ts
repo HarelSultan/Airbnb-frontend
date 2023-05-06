@@ -1,5 +1,5 @@
 import { GuestProps } from './search-by-interface'
-import { DatesProps, StayProps } from './stay-interface'
+import { DatesProps, StayHostProps, StayProps } from './stay-interface'
 
 export interface UserProps {
     _id: string
@@ -25,9 +25,13 @@ export interface ReservationProps {
     _id: string
     stayId: string
     stayName: string
-    stayLocation: string
+    stayLocation: {
+        city: string
+        lat: number
+        lng: number
+    }
     stayImgsUrl: string[]
-    hostName: string
+    host: StayHostProps
     guestId: string
     guestName: string
     reservationDates: DatesProps

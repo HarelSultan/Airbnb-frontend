@@ -10,8 +10,8 @@ export function TripPreview({ trip }: Props) {
         <section className='trip-preview'>
             <img src={trip.stayImgsUrl[0]} alt={trip.stayImgsUrl[1]} />
             <div className='stay-details-wrapper'>
-                <h4 className='stay-address'>{trip.stayLocation}</h4>
-                <p>Hosted by {utilService.getFirstName(trip.hostName)}</p>
+                <h4 className='stay-address'>{trip.stayLocation.city}</h4>
+                <p>Hosted by {utilService.getFirstName(trip.host.fullname)}</p>
                 <p>{utilService.formatDateRange(trip.reservationDates)}</p>
             </div>
         </section>
