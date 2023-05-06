@@ -1,0 +1,27 @@
+.trip-preview {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    img {
+        height: 74px;
+        aspect-ratio: 1/0.75;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-right: 16px;
+    }
+
+    .stay-details-wrapper {
+        & > * {
+            padding-bottom: 2px;
+        }
+        h4 {
+            font-size: 16px;
+            font-family: $font-family-medium;
+        }
+        p {
+            font-size: 14px;
+            color: $sub-text-clr;
+        }
+    }
+}

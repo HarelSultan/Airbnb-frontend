@@ -1,13 +1,14 @@
-import { StayProps } from '../../../interfaces/stay-interface'
+import { DatesProps, StayProps } from '../../../interfaces/stay-interface'
 import { AiFillStar } from 'react-icons/ai'
 import { stayService } from '../../../services/stay.service'
+import { utilService } from '../../../services/util.service'
 
 interface Props {
     stay: StayProps
-    isPriceDisplayed?: boolean
+    reservationDates?: DatesProps
 }
 
-export function StayListingCard({ stay, isPriceDisplayed }: Props) {
+export function StayListingCard({ stay, reservationDates }: Props) {
     return (
         <section className='stay-listing-card'>
             <div className='stay-img-wrapper'>
@@ -21,7 +22,7 @@ export function StayListingCard({ stay, isPriceDisplayed }: Props) {
                     <span className='avg-rating'>{stayService.getStayAverageRating(stay.reviews).toFixed(2)}</span>
                     <span className='reviews-count'>({stay.reviews.length})</span>
                 </div>
-                {isPriceDisplayed && <h3 className='listing-price'>${stay.price}</h3>}
+                {reservationDates && <h3 className='dates'>{utilService.formatDateRange(reservationDates)}</h3>}
             </div>
         </section>
     )

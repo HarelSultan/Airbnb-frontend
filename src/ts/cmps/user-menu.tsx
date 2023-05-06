@@ -47,16 +47,29 @@ export function UserMenu({ onToggleLoginSignup, loggedInUser, onBecomeHost, navi
                 <div className='user-tool-tip'>
                     {loggedInUser ? (
                         <>
-                            {loggedInUser.listingsId && (
-                                <div className='host-menu-wrapper'>
-                                    <button onClick={() => navigate('/host/listings')} className='btn btn-listings'>
-                                        Listings
-                                    </button>
-                                    <button onClick={() => navigate('/host/dashboard')} className='btn btn-dashboard'>
-                                        Dashboard
-                                    </button>
-                                </div>
-                            )}
+                            <div className='host-menu-wrapper'>
+                                <button onClick={() => navigate('/trips')} className='btn btn-trips'>
+                                    Trips
+                                </button>
+                                <button onClick={() => navigate('/wishlist')} className='btn btn-wish-list'>
+                                    Wishlists
+                                </button>
+                                {loggedInUser.listingsId && (
+                                    <>
+                                        <div className='seperator'></div>
+
+                                        <button onClick={() => navigate('/host/listings')} className='btn btn-listings'>
+                                            Listings
+                                        </button>
+                                        <button
+                                            onClick={() => navigate('/host/dashboard')}
+                                            className='btn btn-dashboard'
+                                        >
+                                            Dashboard
+                                        </button>
+                                    </>
+                                )}
+                            </div>
                             <button onClick={logout} className='btn btn-logout'>
                                 Log out
                             </button>

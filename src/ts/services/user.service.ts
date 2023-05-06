@@ -159,12 +159,20 @@ function loadUsersDemoData(demoHost: UserProps) {
                 _id: utilService.makeId(),
                 stayId: listing._id,
                 stayName: listing.name,
+                stayLocation: listing.loc.city,
+                stayImgsUrl: listing.imgUrls,
+                hostName: listing.host.fullname,
                 guestId: guest._id,
                 guestName: guest.fullName,
                 reservationDates: takenDate,
                 bookedAt: randomPastDate,
                 totalPayout,
-                guestCount: 3,
+                guests: {
+                    adults: 3,
+                    children: 1,
+                    infants: 1,
+                    pets: 1,
+                },
                 status: 'pending',
             }
             guest.trips.push(reservation)

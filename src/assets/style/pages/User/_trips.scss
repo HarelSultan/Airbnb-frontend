@@ -1,6 +1,22 @@
 .trips {
     font-size: 16px;
 
+    .header {
+        padding: 24px;
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 3;
+    }
+
+    h1 {
+        font-size: 32px;
+        padding-block: 48px 24px;
+    }
+    h2 {
+        padding-block: 24px;
+    }
+
     .trips-stays-wrapper {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -19,7 +35,7 @@
         // align-self: start;
         margin-top: 0;
     }
-    .listing-price {
+    .dates {
         align-self: end;
         line-height: 1;
     }

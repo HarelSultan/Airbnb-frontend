@@ -1,3 +1,4 @@
+import { GuestProps } from './search-by-interface'
 import { DatesProps, StayProps } from './stay-interface'
 
 export interface UserProps {
@@ -24,12 +25,15 @@ export interface ReservationProps {
     _id: string
     stayId: string
     stayName: string
+    stayLocation: string
+    stayImgsUrl: string[]
+    hostName: string
     guestId: string
     guestName: string
     reservationDates: DatesProps
     bookedAt: Date
     totalPayout: number
-    guestCount: number
+    guests: GuestProps
     status: string
 }
 

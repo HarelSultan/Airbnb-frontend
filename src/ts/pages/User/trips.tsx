@@ -1,18 +1,19 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootStateProps } from '../../store/store'
-import { StayListingCard } from '../Booking/cmps/stay-listing-card'
 import { useNavigate } from 'react-router-dom'
 import { setUserTripsStays } from '../../store/user/user.action'
+import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
+import { TripPreview } from './trip-preview'
+import { NoTrips } from './no-trips'
 
 export function Trips() {
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
-
+    const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
     const navigate = useNavigate()
 
     useEffect(() => {
         if (!loggedInUser) navigate('/')
-        if (!loggedInUser?.tripsStays || loggedInUser.tripsStays.length < loggedInUser.trips.length) onLoadUserTrips()
     }, [])
 
     const onLoadUserTrips = () => {
@@ -24,18 +25,32 @@ export function Trips() {
         }
     }
 
-    if (!loggedInUser?.trips) return <div>No trips</div>
-    if (!loggedInUser?.tripsStays) return <div>Skeleton</div>
+    const onTripDetails = () => {}
+
+    const onSearchTrips = () => {
+        navigate('/')
+    }
 
     return (
         <section className='main-layout trips'>
-            <div className='trips-stays-wrapper'>
-                {loggedInUser.tripsStays.map((stay, idx) => (
-                    <div key={`${stay._id}${idx}`} className='listing-wrapper'>
-                        <StayListingCard stay={stay} isPriceDisplayed={true} />
-                    </div>
-                ))}
-            </div>
+            {!isMobile && (
+                <header className='full header'>
+                    <AppLogo />
+                </header>
+            )}
+            <h1>Trips</h1>
+            <h2>Where you're going to stay</h2>
+            {!loggedInUser?.trips.length ? (
+                <NoTrips isMobile={isMobile} onSearchTrips={onSearchTrips} />
+            ) : (
+                <div className='trips-stays-wrapper'>
+                    {loggedInUser.trips.map((trip, idx) => (
+                        <div key={`${trip._id}${idx}`} className='listing-wrapper'>
+                            <TripPreview trip={trip} />
+                        </div>
+                    ))}
+                </div>
+            )}
         </section>
     )
 }
