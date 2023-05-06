@@ -1,3 +1,4 @@
+import { ReserveByProps } from '../interfaces/reserve-by-interface'
 import { GuestProps, SearchByProps } from '../interfaces/search-by-interface'
 import { DatesProps } from '../interfaces/stay-interface'
 
@@ -94,9 +95,9 @@ function getFirstName(fullName: string) {
     return fullName.split(' ')[0]
 }
 
-function formatSearchParams(searchBy: SearchByProps) {
+function formatSearchParams(searchBy: SearchByProps | ReserveByProps) {
     const searchParams: any = {}
-    searchParams.destination = searchBy.destination
+    if ('destination' in searchBy) searchParams.destination = searchBy.destination
     if (searchBy.checkIn) searchParams.checkIn = searchBy.checkIn.toISOString().slice(0, 10)
     if (searchBy.checkOut) searchParams.checkOut = searchBy.checkOut.toISOString().slice(0, 10)
     if (searchBy.guests.adults) {

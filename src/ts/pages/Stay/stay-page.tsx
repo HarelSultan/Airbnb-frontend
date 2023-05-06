@@ -94,11 +94,8 @@ export function StayPage() {
     }
 
     const onReserveStay = () => {
-        if (!selectedStay) return
-        const searchParams = new URLSearchParams(location.search)
-        searchParams.set('checkIn', selectedStay.randomAvaliableDates.checkIn.toString().slice(0, 10))
-        searchParams.set('checkOut', selectedStay.randomAvaliableDates.checkOut.toString().slice(0, 10))
-        if (!searchParams.get('adults')) searchParams.set('adults', '1')
+        if (!selectedStay || !reserveBy) return
+        const searchParams = new URLSearchParams(utilService.formatSearchParams(reserveBy))
         navigate(`/book/${selectedStay._id}?${searchParams}`)
     }
 
