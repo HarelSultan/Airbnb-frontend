@@ -8,6 +8,8 @@ import { setUserWishListStays, updateWishList } from '../../store/user/user.acti
 import { StayProps } from '../../interfaces/stay-interface'
 import { StayList } from '../Home/cmps/stay-list'
 import { BiArrowBack } from 'react-icons/bi'
+import { UserPageHeader } from '../../cmps/user-page-header'
+import { MobileHeader } from '../../cmps/mobile-header'
 
 export function WishList() {
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
@@ -59,11 +61,7 @@ export function WishList() {
 
     return (
         <section className='main-layout wish-list'>
-            {!isMobile && (
-                <header className='full header'>
-                    <AppLogo />
-                </header>
-            )}
+            {isMobile ? <MobileHeader /> : <UserPageHeader loggedInUser={loggedInUser} />}
             <div className='full wish-list-header'>
                 <div className='actions-wrapper'>
                     <button onClick={onGoBack} className='btn btn-go-back'>

@@ -1,15 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { RootStateProps } from '../../store/store'
-import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
 import { StayProps } from '../../interfaces/stay-interface'
-import { stayService } from '../../services/stay.service'
 import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai'
 import { IoIosSearch } from 'react-icons/io'
 import { utilService } from '../../services/util.service'
 import { FiEdit2 } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import { setUserListings } from '../../store/user/user.action'
+import { UserPageHeader } from '../../cmps/user-page-header'
 
 // TODO: Create mobile-layout showing only listing and update
 // TODO: add user.action: adding his stays to loggedInUser object
@@ -93,9 +92,7 @@ export function HostListings() {
 
     return (
         <section className='main-layout host-listings'>
-            <header className='full host-header'>
-                <AppLogo />
-            </header>
+            <UserPageHeader loggedInUser={loggedInUser} />
 
             <div className='listing-header'>
                 <h2>{utilService.formatPlural(staysToDisplay.length, ' listing')}</h2>

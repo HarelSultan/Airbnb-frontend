@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import { stayService } from '../../services/stay.service'
 import { changeReservationStatus } from '../../store/user/user.action'
 
-import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
 import { HostCharts } from './host-charts'
 import { Reservations } from './reservations'
 
 import { ReservationProps } from '../../interfaces/user-interface'
 import { RootStateProps } from '../../store/store'
+import { UserPageHeader } from '../../cmps/user-page-header'
 
 export function HostDashboard() {
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
@@ -37,9 +37,7 @@ export function HostDashboard() {
 
     return (
         <section className='main-layout host-dashboard'>
-            <header className='full host-header'>
-                <AppLogo />
-            </header>
+            <UserPageHeader loggedInUser={loggedInUser} />
 
             {!loggedInUser?.listingReservations?.length ? (
                 <div>No Reservations</div>

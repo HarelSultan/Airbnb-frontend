@@ -16,6 +16,7 @@ import { StayMapList } from './cmps/Filter/stay-map-list'
 import { Modal } from '../../cmps/modal'
 import { LoginSignup } from '../../cmps/login-signup'
 import { updateWishList } from '../../store/user/user.action'
+import { MobileHeader } from '../../cmps/mobile-header'
 
 export interface LoginSignupDisplayProps {
     isOpen: boolean
@@ -132,7 +133,7 @@ export function HomePage() {
                 )}
             </button>
             {loginSignupDisplay.isOpen && !loggedInUser && <Modal {...loginSignupModalProps} />}
-            {!isMapOpen && <AppFooter />}
+            {!isMapOpen && isMobile ? <MobileHeader /> : <AppFooter />}
         </section>
     )
 }

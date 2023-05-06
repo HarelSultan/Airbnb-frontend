@@ -12,9 +12,10 @@ interface Props {
     loggedInUser: UserProps | null
     onBecomeHost: () => void
     navigate: NavigateFunction
+    onLogout: () => void
 }
 
-export function UserMenu({ onToggleLoginSignup, loggedInUser, onBecomeHost, navigate }: Props) {
+export function UserMenu({ onToggleLoginSignup, loggedInUser, onBecomeHost, navigate, onLogout }: Props) {
     const [isUserToolTipOpen, setIsUserToolTipOpen] = useState<boolean>(false)
 
     const toolTipRef = useRef<HTMLDivElement | null>(null)
@@ -70,7 +71,7 @@ export function UserMenu({ onToggleLoginSignup, loggedInUser, onBecomeHost, navi
                                     </>
                                 )}
                             </div>
-                            <button onClick={logout} className='btn btn-logout'>
+                            <button onClick={onLogout} className='btn btn-logout'>
                                 Log out
                             </button>
                         </>

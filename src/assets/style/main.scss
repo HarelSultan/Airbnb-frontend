@@ -11,6 +11,7 @@
 
 // Cmps
 // Common:
+@import './cmps/_logo.scss';
 @import './cmps/_login-signup.scss';
 @import './cmps/_dark-overlay.scss';
 @import './cmps/_counter.scss';
@@ -26,6 +27,9 @@
 
 // Header:
 @import './cmps/_app-header.scss';
+@import './cmps/_user-page-header.scss';
+@import './cmps/_mobile-header.scss';
+
 // PC:
 @import './cmps/_search-teaser.scss';
 @import './cmps/_search-form.scss';

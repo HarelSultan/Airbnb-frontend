@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
 import { TripPreview } from './trip-preview'
 import { NoTrips } from './no-trips'
+import { UserPageHeader } from '../../cmps/user-page-header'
+import { MobileHeader } from '../../cmps/mobile-header'
 
 export function Trips() {
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
@@ -25,11 +27,7 @@ export function Trips() {
 
     return (
         <section className='main-layout trips'>
-            {!isMobile && (
-                <header className='full header'>
-                    <AppLogo />
-                </header>
-            )}
+            {isMobile ? <MobileHeader /> : <UserPageHeader loggedInUser={loggedInUser} />}
             <h1>Trips</h1>
             <h2>Where you're going to stay</h2>
             {!loggedInUser?.trips.length ? (

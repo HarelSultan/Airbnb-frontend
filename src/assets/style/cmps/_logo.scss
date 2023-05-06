@@ -1,0 +1,11 @@
+.logo-wrapper {
+    display: flex;
+
+    .airbnb {
+        display: none;
+        @include for-wide-secondary-layout {
+            display: block;
+            margin-left: -28px;
+        }
+    }
+}

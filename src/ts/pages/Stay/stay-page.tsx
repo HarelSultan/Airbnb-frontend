@@ -279,7 +279,9 @@ export function StayPage() {
 
     return (
         <section className='main-layout secondary-layout stay-page'>
-            {!isMobile && <AppHeader onToggleLoginSignup={onToggleLoginSignup} loggedInUser={loggedInUser} />}
+            {!isMobile && (
+                <AppHeader onToggleLoginSignup={onToggleLoginSignup} loggedInUser={loggedInUser} isMobile={isMobile} />
+            )}
             {isMobile && (
                 <StayImgCarousel
                     imgUrls={selectedStay.imgUrls}

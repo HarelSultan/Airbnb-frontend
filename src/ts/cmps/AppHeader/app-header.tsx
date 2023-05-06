@@ -10,9 +10,10 @@ import { DarkOverlay } from './cmps/dark-overlay'
 import { utilService } from '../../services/util.service'
 import { MobileNavbar } from './cmps/MobileNavbar/mobile-navbar'
 import { UserProps } from '../../interfaces/user-interface'
+import { logout } from '../../store/user/user.action'
 
 interface Props {
-    isMobile?: boolean
+    isMobile: boolean
     onToggleLoginSignup: (isSignup: boolean) => void
     loggedInUser: UserProps | null
 }
@@ -59,6 +60,10 @@ export function AppHeader({ isMobile, onToggleLoginSignup, loggedInUser }: Props
         navigate('/host/edit')
     }
 
+    const onLogout = () => {
+        logout()
+    }
+
     const searchProps = {
         searchBy,
         onSelectSearchModule,
@@ -103,6 +108,7 @@ export function AppHeader({ isMobile, onToggleLoginSignup, loggedInUser }: Props
                             loggedInUser={loggedInUser}
                             onBecomeHost={onBecomeHost}
                             navigate={navigate}
+                            onLogout={onLogout}
                         />
                     </nav>
                 </>

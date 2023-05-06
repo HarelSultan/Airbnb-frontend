@@ -1,12 +1,5 @@
 .wish-list {
-    .header {
-        padding: 24px;
-        position: sticky;
-        top: 0;
-        background: white;
-        z-index: 3;
-    }
-
+    min-height: 100vh;
     .wish-list-header {
         padding-inline: 24px;
     }

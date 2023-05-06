@@ -1,0 +1,73 @@
+.mobile-header {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 1px solid rgb(235, 235, 235);
+    background-color: white;
+    z-index: 7;
+    padding-block: 10.4px;
+    nav {
+        display: flex;
+        justify-content: space-between;
+        & > * {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 4px;
+            align-items: center;
+            flex: 1;
+            // justify-content: space-evenly;
+        }
+    }
+    span {
+        color: $sub-text-clr;
+        font-size: 10px;
+        font-family: $font-family-medium;
+    }
+    svg {
+        height: 24px;
+        width: 24px;
+        overflow: visible;
+        fill: none;
+        color: #b0b0b0;
+    }
+    .explore-wrapper {
+        svg {
+            stroke-width: 4;
+            stroke: currentColor;
+        }
+    }
+
+    .wishlist-wrapper {
+        svg {
+            stroke-width: 2.66667;
+            stroke: currentColor;
+        }
+    }
+
+    .trips-wrapper {
+        svg {
+            fill: currentcolor;
+        }
+    }
+    .inbox-wrapper {
+        svg {
+            fill: currentcolor;
+        }
+    }
+
+    .active {
+        svg {
+            stroke: $brand-clr;
+        }
+        span {
+            color: $main-text-clr;
+        }
+        &.trips-wrapper {
+            svg {
+                fill: $brand-clr;
+                stroke: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+.user-page-header {
+    padding: 24px;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    @include for-narrow-layout {
+        padding-inline: 40px;
+    }
+    @include for-wide-layout {
+        padding-inline: 80px;
+    }
+
+    .user-menu {
+        z-index: 3;
+    }
+}
