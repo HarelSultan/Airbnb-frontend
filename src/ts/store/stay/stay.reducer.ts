@@ -3,6 +3,7 @@ import { StayProps } from '../../interfaces/stay-interface'
 import { stayService } from '../../services/stay.service'
 
 export const SET_STAYS = 'SET_STAYS'
+export const SET_MORE_STAYS = 'SET_MORE_STAYS'
 export const SET_TOTAL_PAGE_COUNT = 'SET_TOTAL_PAGE_COUNT'
 export const SET_FILTER = 'SET_FILTER'
 export const ADD_STAY = 'ADD_STAY'
@@ -16,6 +17,7 @@ export interface StayStateProps {
 
 export type StayAction =
     | { type: 'SET_STAYS'; stays: StayProps[] }
+    | { type: 'SET_MORE_STAYS'; stays: StayProps[] }
     | { type: 'SET_TOTAL_PAGE_COUNT'; totalPageCount: number }
     | { type: 'SET_FILTER'; filterBy: FilterByProps }
     | { type: 'ADD_STAY'; stay: StayProps }
@@ -30,13 +32,16 @@ const initialState: StayStateProps = {
 export function stayReducer(state = initialState, action: StayAction) {
     switch (action.type) {
         case SET_STAYS:
-            const newStays = [...state.stays, ...action.stays]
-            console.log(newStays)
-            return { ...state, stays: newStays }
+            return { ...state, stays: action.stays }
 
         case SET_TOTAL_PAGE_COUNT:
             state.totalPageCount = action.totalPageCount
             return state
+
+        case SET_MORE_STAYS:
+            const newStays = [...state.stays, ...action.stays]
+            console.log(newStays)
+            return { ...state, stays: newStays }
 
         case SET_FILTER:
             return { ...state, filterBy: action.filterBy }

@@ -8,7 +8,7 @@ import { RootStateProps } from '../../store/store'
 import { AppHeader } from '../../cmps/AppHeader/app-header'
 import { Filter } from './cmps/filter'
 import { StayList } from './cmps/stay-list'
-import { loadStays } from '../../store/stay/stay.action'
+import { loadMoreStays, loadStays } from '../../store/stay/stay.action'
 import { stayService } from '../../services/stay.service'
 import { SearchByProps } from '../../interfaces/search-by-interface'
 import { AppFooter } from '../../cmps/app-footer'
@@ -47,7 +47,8 @@ export function HomePage() {
         try {
             const searchParams = new URLSearchParams(location.search)
             const searchBy = stayService.getParamsSearchBy(searchParams)
-            await loadStays(currStayPagination, searchBy, filterBy)
+            if (currStayPagination === 0) return await loadStays(currStayPagination, searchBy, filterBy)
+            await loadMoreStays(currStayPagination, searchBy, filterBy)
         } catch (err) {
             // Show error msg
             console.log('Getting stays failed with error:', err)

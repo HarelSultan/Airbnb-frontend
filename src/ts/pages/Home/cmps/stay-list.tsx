@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-import { StayProps, StaySkeletonProps } from '../../../interfaces/stay-interface'
+import { StayProps } from '../../../interfaces/stay-interface'
 import { StayPreview } from './stay-preview'
 import { useSelector } from 'react-redux'
 import { RootStateProps } from '../../../store/store'
