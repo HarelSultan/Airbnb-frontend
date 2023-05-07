@@ -21,10 +21,10 @@ export function EditStay() {
     useEffect(() => {
         if (!loggedInUser) navigate('/')
         if (!stayId) return
-        loadStays()
+        loadStay()
     }, [])
 
-    const loadStays = async () => {
+    const loadStay = async () => {
         if (!stayId) return
         try {
             const stay = await stayService.getById(stayId)

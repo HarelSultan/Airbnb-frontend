@@ -2,17 +2,25 @@ import { FilterByProps } from '../../interfaces/filter-by-interface'
 import { SearchByProps } from '../../interfaces/search-by-interface'
 import { StayProps } from '../../interfaces/stay-interface'
 import { stayService } from '../../services/stay.service'
+import { setIsLoading } from '../app/app.action'
 import { store } from '../store'
-import { ADD_STAY, SET_FILTER, SET_STAYS, StayAction, UPDATE_STAY } from './stay.reducer'
+import { ADD_STAY, SET_FILTER, SET_STAYS, SET_TOTAL_PAGE_COUNT, StayAction, UPDATE_STAY } from './stay.reducer'
 
-export async function loadStays(searchBy: SearchByProps, filterBy: FilterByProps) {
+export async function loadStays(idx: number, searchBy: SearchByProps, filterBy: FilterByProps) {
     try {
-        const stays = await stayService.query(searchBy, filterBy)
-        store.dispatch<StayAction>({ type: SET_STAYS, stays })
-        return stays
+        setIsLoading(true)
+        const totalPageCount = store.getState().stayModule.totalPageCount
+        const staysData = await stayService.loadStays(idx, searchBy, filterBy)
+        if (!totalPageCount) {
+            store.dispatch<StayAction>({ type: SET_TOTAL_PAGE_COUNT, totalPageCount: staysData.pageCount })
+        }
+        store.dispatch<StayAction>({ type: SET_STAYS, stays: staysData.stays })
+        return staysData.stays
     } catch (err) {
         console.log('Failed loading stays with error', err)
         throw err
+    } finally {
+        setIsLoading(false)
     }
 }
 

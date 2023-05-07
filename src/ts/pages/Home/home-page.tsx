@@ -1,4 +1,4 @@
-import { useState, useEffect, ErrorInfo } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -34,18 +34,20 @@ export function HomePage() {
     const isMobile: boolean = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
     const filterBy = useSelector((storeState: RootStateProps) => storeState.stayModule.filterBy)
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
+    const isLoading = useSelector((storeState: RootStateProps) => storeState.appModule.isLoading)
+
     const location = useLocation()
     const navigate = useNavigate()
 
     useEffect(() => {
-        const searchParams = new URLSearchParams(location.search)
-        const searchBy = stayService.getParamsSearchBy(searchParams)
-        onLoadStays(searchBy)
+        onLoadStays()
     }, [filterBy, location.search])
 
-    const onLoadStays = (searchBy: SearchByProps) => {
+    const onLoadStays = async (currStayPagination: number = 0) => {
         try {
-            loadStays(searchBy, filterBy)
+            const searchParams = new URLSearchParams(location.search)
+            const searchBy = stayService.getParamsSearchBy(searchParams)
+            await loadStays(currStayPagination, searchBy, filterBy)
         } catch (err) {
             // Show error msg
             console.log('Getting stays failed with error:', err)
@@ -86,6 +88,9 @@ export function HomePage() {
         onStayDetails,
         onToggleSaveStay,
         wishList: loggedInUser?.wishListStaysId || [''],
+        onLoadStays,
+        isLoading,
+        // currStayPagination: currStayPagination.current,
     }
 
     const loginSignupModalProps = {

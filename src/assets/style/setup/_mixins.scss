@@ -31,3 +31,29 @@
 @mixin layoutGTC($layoutPadding) {
     grid-template-columns: $layoutPadding 1fr $layoutPadding;
 }
+
+@mixin aspect-ratio($width: 1, $height: 1) {
+    position: relative;
+    overflow: hidden;
+
+    &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        padding-top: calc($height / $width) * 100%;
+    }
+
+    > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    > img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}

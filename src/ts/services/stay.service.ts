@@ -11,11 +11,13 @@ import { DashboardDataProps, ReservationCountMap, ReservationProps, UserProps } 
 
 const STORAGE_KEY_STAY_DB: string = 'stay_DB'
 const ALL_HOMES: string = 'All homes'
+const STAYS_INCREMENT_COUNT = 20
 
 _createStays()
 
 export const stayService = {
     query,
+    loadStays,
     getById,
     save,
     getStays,
@@ -31,17 +33,24 @@ export const stayService = {
     getHostDashboardData,
 }
 
-async function query(
+async function query() {
+    return storageService.query(STORAGE_KEY_STAY_DB) as Promise<StayProps[]>
+}
+
+async function loadStays(
+    idx: number = 0,
     searchBy: SearchByProps = getDeafultSearchProps(),
     filterBy: FilterByProps = getDefaultFilterProps()
 ) {
-    console.log(searchBy)
-    console.log(filterBy)
-
     let stays = (await storageService.query(STORAGE_KEY_STAY_DB)) as StayProps[]
+    const pageCount = Math.ceil(stays.length / STAYS_INCREMENT_COUNT)
+    console.log(pageCount)
     stays = searchStays(stays, searchBy)
     stays = filterStays(stays, filterBy)
-    return stays
+    return {
+        pageCount,
+        stays: stays.slice(idx * STAYS_INCREMENT_COUNT, idx * STAYS_INCREMENT_COUNT + STAYS_INCREMENT_COUNT),
+    }
 }
 
 async function getById(stayId: string) {
