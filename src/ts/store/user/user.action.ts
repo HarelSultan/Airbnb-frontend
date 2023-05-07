@@ -1,7 +1,9 @@
+import { ReserveByProps } from '../../interfaces/reserve-by-interface'
 import { StayProps } from '../../interfaces/stay-interface'
 import { ReservationProps, UserLoginProps, UserProps } from '../../interfaces/user-interface'
 import { stayService } from '../../services/stay.service'
 import { userService } from '../../services/user.service'
+import { utilService } from '../../services/util.service'
 import { store } from '../store'
 import { SET_USER } from './user.reducer'
 
@@ -87,6 +89,42 @@ export async function setUserWishListStays(loggedInUser: UserProps) {
     } catch (err) {
         console.log('Failed to load user wish list stays with error:', err)
         throw new Error('Cannot load wishlist, try again later')
+    }
+}
+
+export async function addReservation(
+    reserveBy: ReserveByProps,
+    nightsCount: number,
+    loggedInUser: UserProps,
+    stay: StayProps
+) {
+    try {
+        const reservation = {
+            _id: utilService.makeId(),
+            stayId: stay._id,
+            stayName: stay.name,
+            stayLocation: {
+                city: stay.loc.city,
+                lat: stay.loc.lat,
+                lng: stay.loc.lng,
+            },
+            stayImgsUrl: stay.imgUrls,
+            host: stay.host,
+            guestId: loggedInUser._id,
+            guestName: loggedInUser.fullName,
+            reservationDates: {
+                checkIn: reserveBy.checkIn,
+                checkOut: reserveBy.checkOut,
+            },
+            bookedAt: new Date(),
+            totalPayout: nightsCount * stay.price,
+            guests: reserveBy.guests,
+            status: 'pending',
+        }
+        const updatedGuest: UserProps = await userService.addReservation(reservation, loggedInUser)
+        store.dispatch({ type: SET_USER, user: updatedGuest })
+    } catch (err) {
+        throw new Error('Cannot complete reservation, try again later')
     }
 }
 

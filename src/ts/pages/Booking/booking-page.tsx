@@ -22,6 +22,7 @@ import { AiFillStar } from 'react-icons/ai'
 import { CtaBtn } from '../../cmps/cta-btn'
 import { GuestsModal } from './cmps/guests-modal'
 import { ReservationSummary } from '../../cmps/reservation-summary'
+import { addReservation } from '../../store/user/user.action'
 
 export const RESERVE_GUESTS_MODAL = 'reserveGuestsModal'
 export const RESERVATION_SUMMARY_MODAL = 'reservationSummaryModal'
@@ -78,8 +79,14 @@ export function BookingPage() {
         navigate(-1)
     }
 
-    const onCompleteReservation = () => {
-        onSetExpandedModal(RESERVATION_SUMMARY_MODAL)
+    const onCompleteReservation = async () => {
+        if (!reserveBy || !loggedInUser || !selectedStay) return
+        try {
+            await addReservation(reserveBy, nightsCount, loggedInUser, selectedStay)
+            onSetExpandedModal(RESERVATION_SUMMARY_MODAL)
+        } catch (err) {
+            // TODO: showErrorMsg(err.txt)
+        }
     }
 
     const nightsCount = utilService.getNightsCount(reserveBy) || 1

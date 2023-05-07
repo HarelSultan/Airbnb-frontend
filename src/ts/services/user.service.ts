@@ -14,6 +14,7 @@ export const userService = {
     update,
     getUserDefaultCreds,
     loadUsersDemoData,
+    addReservation,
     updateReservation,
 }
 
@@ -64,6 +65,26 @@ async function update(credentials: UserProps) {
     return updatedUser
 }
 
+async function addReservation(reservation: ReservationProps, guest: UserProps): Promise<UserProps> {
+    try {
+        const host = await getById(reservation.host._id)
+        const updatedGuestTrips = [...guest.trips, reservation]
+        console.log(updatedGuestTrips)
+        const updatedHostReservations = host.listingReservations
+            ? [...host.listingReservations, reservation]
+            : [reservation]
+        const updatedGuest = { ...guest, trips: updatedGuestTrips }
+        const updatedHost = { ...host, listingReservations: updatedHostReservations }
+        console.log(updatedGuest)
+        await update(updatedGuest)
+        await update(updatedHost)
+        return updatedGuest
+    } catch (err) {
+        console.log('Failed to add reservation with error:', err)
+        throw err
+    }
+}
+
 async function updateReservation(updatedHost: UserProps, updatedReservation: ReservationProps) {
     try {
         const reservationGuest = await getById(updatedReservation.guestId)
@@ -71,8 +92,8 @@ async function updateReservation(updatedHost: UserProps, updatedReservation: Res
             trip._id === updatedReservation._id ? updatedReservation : trip
         )
         const updatedGuest = { ...reservationGuest, trips: updatedGuestReservations }
-        update(updatedHost)
-        update(updatedGuest)
+        await update(updatedHost)
+        await update(updatedGuest)
         // Should keep reservations db ? Should keep reservations on User and Host
     } catch (err) {
         console.log('Failed to update Reservation with error:', err)
