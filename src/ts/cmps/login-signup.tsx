@@ -24,8 +24,8 @@ export function LoginSignup({ isSignningUp, onLoginSignupCB }: Props) {
         try {
             const user = isSignup ? signup(credentials) : login(credentials)
             if (onLoginSignupCB) onLoginSignupCB()
-            // TODO: showSucessMsg(`Welcome back, ${user.fullName}`)
-            // ? return user ? showSucessMsg(`Welcome back, ${user.fullName}`) : ''
+            // TODO: showSucessMsg(`Welcome back, ${user.fullname}`)
+            // ? return user ? showSucessMsg(`Welcome back, ${user.fullname}`) : ''
         } catch (err) {
             // TODO: showErrorMsg(err.txt)
         }
@@ -57,10 +57,10 @@ export function LoginSignup({ isSignningUp, onLoginSignupCB }: Props) {
                 </div>
             </div>
             {isSignup && (
-                <label className={`full-name ${credentials.fullName ? 'filled' : ''}`}>
+                <label className={`full-name ${credentials.fullname ? 'filled' : ''}`}>
                     <div className='place-holder'>Full name</div>
 
-                    <input placeholder='Full name' {...register('fullName')} required />
+                    <input placeholder='Full name' {...register('fullname')} required />
                 </label>
             )}
             <label className={`user-name ${credentials.username ? 'filled' : ''}`}>

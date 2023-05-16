@@ -2,21 +2,21 @@ import { useState, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { StayProps } from '../../interfaces/stay-interface'
-import { RootStateProps } from '../../store/store'
+import { _stayService } from '../../services/_stay.service'
 
 import { AppHeader } from '../../cmps/AppHeader/app-header'
 import { Filter } from './cmps/filter'
 import { StayList } from './cmps/stay-list'
 import { loadMoreStays, loadStays } from '../../store/stay/stay.action'
-import { stayService } from '../../services/stay.service'
-import { SearchByProps } from '../../interfaces/search-by-interface'
 import { AppFooter } from '../../cmps/app-footer'
 import { StayMapList } from './cmps/Filter/stay-map-list'
 import { Modal } from '../../cmps/modal'
 import { LoginSignup } from '../../cmps/login-signup'
 import { updateWishList } from '../../store/user/user.action'
 import { MobileHeader } from '../../cmps/mobile-header'
+
+import { RootStateProps } from '../../store/store'
+import { StayProps } from '../../interfaces/stay-interface'
 
 export interface LoginSignupDisplayProps {
     isOpen: boolean
@@ -31,24 +31,51 @@ export function HomePage() {
     })
 
     const stays: StayProps[] = useSelector((storeState: RootStateProps) => storeState.stayModule.stays)
-    const isMobile: boolean = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
     const filterBy = useSelector((storeState: RootStateProps) => storeState.stayModule.filterBy)
-    const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
+    const isMobile: boolean = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
     const isLoading = useSelector((storeState: RootStateProps) => storeState.appModule.isLoading)
+    const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
 
+    const pageCountRef = useRef(null)
+    const currStayPagination = useRef(0)
+    const filterByRef = useRef(filterBy)
     const location = useLocation()
     const navigate = useNavigate()
+    const searchParamsRef = useRef(new URLSearchParams(location.search))
 
     useEffect(() => {
+        if (filterByRef.current !== filterBy) {
+            filterByRef.current = filterBy
+        }
+        if (searchParamsRef.current !== new URLSearchParams(location.search)) {
+            searchParamsRef.current = new URLSearchParams(location.search)
+        }
+
+        currStayPagination.current = 0
         onLoadStays()
     }, [filterBy, location.search])
 
-    const onLoadStays = async (currStayPagination: number = 0) => {
+    const onLoadStays = async () => {
         try {
-            const searchParams = new URLSearchParams(location.search)
-            const searchBy = stayService.getParamsSearchBy(searchParams)
-            if (currStayPagination === 0) return await loadStays(currStayPagination, searchBy, filterBy)
-            await loadMoreStays(currStayPagination, searchBy, filterBy)
+            if (
+                pageCountRef.current !== null &&
+                currStayPagination.current &&
+                pageCountRef.current <= currStayPagination.current
+            )
+                return
+
+            const searchBy = _stayService.getParamsSearchBy(searchParamsRef.current)
+            let pageCount
+            if (currStayPagination.current === 0) {
+                pageCount = await loadStays(currStayPagination.current, searchBy, filterBy)
+                pageCountRef.current = pageCount
+                currStayPagination.current++
+                return
+            }
+            pageCount = await loadMoreStays(currStayPagination.current, searchBy, filterBy)
+            pageCountRef.current = pageCount
+
+            currStayPagination.current++
         } catch (err) {
             // Show error msg
             console.log('Getting stays failed with error:', err)
@@ -72,7 +99,6 @@ export function HomePage() {
     }
 
     const onToggleLoginSignup = (isSignup: boolean = false) => {
-        console.log(loginSignupDisplay)
         setLoginSignupDisplay(prevState => ({ isOpen: !prevState.isOpen, isSignup }))
     }
 
@@ -103,7 +129,12 @@ export function HomePage() {
 
     return (
         <section className={`main-layout home-page ${isMapOpen ? 'map-open' : ''}`}>
-            <AppHeader isMobile={isMobile} onToggleLoginSignup={onToggleLoginSignup} loggedInUser={loggedInUser} />
+            <AppHeader
+                isMobile={isMobile}
+                onToggleLoginSignup={onToggleLoginSignup}
+                loggedInUser={loggedInUser}
+                searchParams={searchParamsRef}
+            />
             <Filter isMobile={isMobile} />
             {isMapOpen ? <StayMapList {...stayListProps} /> : <StayList {...stayListProps} />}
             <button onClick={onToggleMapDisplay} className='btn btn-toggle-map'>

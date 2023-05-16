@@ -9,16 +9,9 @@ interface Props {
     onSetSearchBy: (updatedSearchBy: SearchByProps) => void
     selectedSearchModule: string
     onSelectSearchModule: (searchModule: string) => void
-    takenDates?: DatesProps[] | null
 }
 
-export function SearchDates({
-    searchBy,
-    onSetSearchBy,
-    selectedSearchModule,
-    onSelectSearchModule,
-    takenDates = null,
-}: Props) {
+export function SearchDates({ searchBy, onSetSearchBy, selectedSearchModule, onSelectSearchModule }: Props) {
     const selectionRange = {
         startDate: searchBy.checkIn || new Date(),
         endDate: searchBy.checkOut || new Date(),
@@ -30,7 +23,6 @@ export function SearchDates({
             selectedSearchModule === 'searchCheckOutDate'
                 ? { ...searchBy, checkOut: ranges.selection.endDate }
                 : { ...searchBy, checkIn: ranges.selection.startDate, checkOut: ranges.selection.endDate }
-        console.log(updatedSearchBy)
         onSetSearchBy(updatedSearchBy)
         const nextSearchModule = selectedSearchModule === 'searchCheckInDate' ? 'searchCheckOutDate' : 'searchGuests'
         onSelectSearchModule(nextSearchModule)

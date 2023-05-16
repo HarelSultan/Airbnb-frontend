@@ -4,23 +4,28 @@ import { UserMenu } from '../user-menu'
 import { AppLogo } from './Logo/logo'
 import { useState, useRef } from 'react'
 import { SearchForm } from './cmps/search-form'
-import { stayService } from '../../services/stay.service'
 import { SearchByProps } from '../../interfaces/search-by-interface'
 import { DarkOverlay } from './cmps/dark-overlay'
 import { utilService } from '../../services/util.service'
 import { MobileNavbar } from './cmps/MobileNavbar/mobile-navbar'
 import { UserProps } from '../../interfaces/user-interface'
 import { logout } from '../../store/user/user.action'
+import { _stayService } from '../../services/_stay.service'
 
 interface Props {
     isMobile: boolean
     onToggleLoginSignup: (isSignup: boolean) => void
     loggedInUser: UserProps | null
+    searchParams?: React.MutableRefObject<URLSearchParams>
 }
 
-export function AppHeader({ isMobile, onToggleLoginSignup, loggedInUser }: Props) {
+export function AppHeader({ isMobile, onToggleLoginSignup, loggedInUser, searchParams }: Props) {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
-    const [searchBy, setSearchBy] = useState<SearchByProps>(stayService.getDeafultSearchProps())
+    const [searchBy, setSearchBy] = useState<SearchByProps>(
+        searchParams?.current.entries
+            ? _stayService.getParamsSearchBy(searchParams?.current)
+            : _stayService.getDeafultSearchProps()
+    )
     const [selectedSearchModule, setSelectedSearchModule] = useState<string>('searchDestination')
 
     const navigate = useNavigate()

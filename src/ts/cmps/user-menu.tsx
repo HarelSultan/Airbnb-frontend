@@ -4,7 +4,6 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { FaUserCircle } from 'react-icons/fa'
 import { useOnClickOutside } from '../hooks/use-on-click-outside'
 import { UserProps } from '../interfaces/user-interface'
-import { logout } from '../store/user/user.action'
 import { NavigateFunction } from 'react-router-dom'
 
 interface Props {
@@ -21,7 +20,6 @@ export function UserMenu({ onToggleLoginSignup, loggedInUser, onBecomeHost, navi
     const toolTipRef = useRef<HTMLDivElement | null>(null)
 
     const onToggleUserToolTipDisplay = () => {
-        console.log('toggling')
         setIsUserToolTipOpen(prevState => !prevState)
     }
 
