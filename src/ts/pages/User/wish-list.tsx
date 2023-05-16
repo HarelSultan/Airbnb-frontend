@@ -18,14 +18,17 @@ export function WishList() {
     const navigate = useNavigate()
     const location = useLocation()
 
+    console.log(loggedInUser)
+
     useEffect(() => {
-        if (!loggedInUser) navigate('/')
-        if (!loggedInUser?.wishListStays || loggedInUser.wishListStays.length !== loggedInUser.wishListStaysId.length)
+        if (!loggedInUser) return navigate('/')
+        if (!loggedInUser.wishListStays || loggedInUser.wishListStays.length !== loggedInUser.wishListStaysId.length)
             loadUserWishList()
     }, [])
 
+    console.log(loggedInUser)
     const loadUserWishList = async () => {
-        if (!loggedInUser) return
+        if (!loggedInUser || !loggedInUser.wishListStaysId.length) return
         try {
             await setUserWishListStays(loggedInUser)
         } catch (err) {
@@ -57,7 +60,7 @@ export function WishList() {
         navigate(-1)
     }
 
-    if (!loggedInUser?.wishListStays) return <div>No stays to display</div>
+    if (!loggedInUser?.wishListStays?.length) return <div>No stays to display</div>
 
     return (
         <section className='main-layout wish-list'>

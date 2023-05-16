@@ -91,8 +91,8 @@ function formatPlural(count: number, key: string) {
     return count > 1 ? count + key + 's' : count + key
 }
 
-function getFirstName(fullName: string) {
-    return fullName.split(' ')[0]
+function getFirstName(fullname: string) {
+    return fullname.split(' ')[0]
 }
 
 function formatSearchParams(searchBy: SearchByProps | ReserveByProps) {

@@ -1,6 +1,6 @@
+import { stayService } from '../../services/stay.service'
 import { FilterByProps } from '../../interfaces/filter-by-interface'
 import { StayProps } from '../../interfaces/stay-interface'
-import { stayService } from '../../services/stay.service'
 
 export const SET_STAYS = 'SET_STAYS'
 export const SET_MORE_STAYS = 'SET_MORE_STAYS'

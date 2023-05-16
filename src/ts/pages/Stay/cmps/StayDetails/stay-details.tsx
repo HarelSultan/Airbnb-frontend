@@ -1,5 +1,5 @@
 import { ReserveByProps } from '../../../../interfaces/reserve-by-interface'
-import { DatesProps, StayProps } from '../../../../interfaces/stay-interface'
+import { StayProps, StayReservationProps } from '../../../../interfaces/stay-interface'
 import { ReserveDates } from '../ReserveStay/cmps/reserve-dates'
 import { StayAirCover } from './stay-air-cover'
 import { StayAmenities } from './stay-amenities'
@@ -10,14 +10,14 @@ import { StaySummary } from './stay-summary'
 
 interface Props {
     stay: StayProps
-    takenDates: DatesProps[]
+    stayReservations: StayReservationProps[]
     reserveBy: ReserveByProps
     onSetReserveBy: (updatedReservation: ReserveByProps) => void
     nightsCount: number
     onOpenModal: (expandedModal: string) => void
 }
 
-export function StayDetails({ stay, takenDates, reserveBy, onSetReserveBy, nightsCount, onOpenModal }: Props) {
+export function StayDetails({ stay, stayReservations, reserveBy, onSetReserveBy, nightsCount, onOpenModal }: Props) {
     const stayDetailsHeaderProps = {
         host: stay.host,
         details: stay.stayDetails,
@@ -25,7 +25,7 @@ export function StayDetails({ stay, takenDates, reserveBy, onSetReserveBy, night
     }
 
     const reserveDatesProps = {
-        takenDates,
+        stayReservations,
         reserveBy,
         onSetReserveBy,
         nightsCount,

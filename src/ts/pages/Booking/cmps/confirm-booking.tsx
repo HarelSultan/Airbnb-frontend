@@ -16,7 +16,7 @@ export function ConfirmBooking({ isMobile, loggedInUser, checkIn, onCompleteRese
     return (
         <section className={`confirm-booking ${isMobile ? 'main-layout secondary-layout full' : ''}`}>
             <div className='confirm-booking-header'>
-                <h2>{`Hi ${utilService.getFirstName(loggedInUser.fullName)}, you're logged in`}</h2>
+                <h2>{`Hi ${utilService.getFirstName(loggedInUser.fullname)}, you're logged in`}</h2>
                 <p>Review your booking details to continue.</p>
             </div>
             {isMobile && <div className='seperator full'></div>}

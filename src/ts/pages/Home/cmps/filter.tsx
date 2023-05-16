@@ -4,16 +4,16 @@ import { FilterByProps } from '../../../interfaces/filter-by-interface'
 import { StayFilters } from './Filter/stay-filter'
 import { DarkOverlay } from '../../../cmps/AppHeader/cmps/dark-overlay'
 import { setFilter } from '../../../store/stay/stay.action'
-import { _stayService } from '../../../services/_stay.service'
+import { stayService } from '../../../services/stay.service'
 
 interface Props {
     isMobile: boolean
 }
 
-const labelFilters = _stayService.getLabelFilters()
+const labelFilters = stayService.getLabelFilters()
 
 export const Filter = memo(function Filter({ isMobile }: Props) {
-    const [filterBy, setFilterBy] = useState<FilterByProps>(_stayService.getDefaultFilterProps())
+    const [filterBy, setFilterBy] = useState<FilterByProps>(stayService.getDefaultFilterProps())
     const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false)
 
     const onSelectLabelFilter = (selectedLabel: string) => {
@@ -36,7 +36,7 @@ export const Filter = memo(function Filter({ isMobile }: Props) {
     }
 
     const onClearFilterBy = () => {
-        setFilterBy(_stayService.getDefaultFilterProps())
+        setFilterBy(stayService.getDefaultFilterProps())
     }
 
     const onFilterStays = () => {

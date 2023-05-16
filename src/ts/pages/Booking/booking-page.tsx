@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { RootStateProps } from '../../store/store'
-import { stayService } from '../../services/stay.service'
 import { utilService } from '../../services/util.service'
 
 import { ReserveByProps } from '../../interfaces/reserve-by-interface'
@@ -22,7 +21,9 @@ import { AiFillStar } from 'react-icons/ai'
 import { CtaBtn } from '../../cmps/cta-btn'
 import { GuestsModal } from './cmps/guests-modal'
 import { ReservationSummary } from '../../cmps/reservation-summary'
+import { stayService } from '../../services/stay.service'
 import { addReservation } from '../../store/user/user.action'
+// import { addReservation } from '../../store/user/user.action'
 
 export const RESERVE_GUESTS_MODAL = 'reserveGuestsModal'
 export const RESERVATION_SUMMARY_MODAL = 'reservationSummaryModal'
@@ -49,7 +50,6 @@ export function BookingPage() {
             try {
                 const stay = await stayService.getById(stayId)
                 setSelectedStay(stay)
-                console.log(stay)
             } catch (err) {
                 console.log('Had trouble loading selected stay at stay page with error', err)
                 navigate('/')
@@ -105,7 +105,7 @@ export function BookingPage() {
             children: (
                 <>
                     <ReserveDates
-                        takenDates={selectedStay.takenDates}
+                        stayReservations={selectedStay.reservations}
                         reserveBy={reserveBy}
                         onSetReserveBy={onSetReserveBy}
                         nightsCount={nightsCount}

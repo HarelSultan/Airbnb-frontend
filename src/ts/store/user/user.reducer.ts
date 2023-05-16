@@ -1,5 +1,5 @@
-import { UserProps } from '../../interfaces/user-interface'
 import { userService } from '../../services/user.service'
+import { UserProps } from '../../interfaces/user-interface'
 
 export const SET_USER = 'SET_USER'
 

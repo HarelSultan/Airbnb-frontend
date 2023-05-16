@@ -5,8 +5,8 @@ import { SearchDates } from '../../search-dates'
 import { AiOutlineClose } from 'react-icons/ai'
 import { FaSearch } from 'react-icons/fa'
 import { CtaBtn } from '../../../../cta-btn'
-import { stayService } from '../../../../../services/stay.service'
 import { GuestCounter } from '../../../../guest-counter'
+import { stayService } from '../../../../../services/stay.service'
 
 interface Props {
     searchBy: SearchByProps

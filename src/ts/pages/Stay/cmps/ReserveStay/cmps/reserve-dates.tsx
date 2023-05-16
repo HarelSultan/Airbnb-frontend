@@ -1,20 +1,27 @@
 import { forwardRef } from 'react'
 import { DateRangePicker } from 'react-date-range'
 import { ReserveByProps } from '../../../../../interfaces/reserve-by-interface'
-import { DatesProps } from '../../../../../interfaces/stay-interface'
+import { DatesProps, StayReservationProps } from '../../../../../interfaces/stay-interface'
 
 interface Props {
     reserveBy: ReserveByProps
     onSetReserveBy: (updatedReservation: ReserveByProps) => void
     selectedReserveModule?: string | null
     onSelectReserveModule?: (reserveModule: string | null) => void
-    takenDates?: DatesProps[]
+    stayReservations?: StayReservationProps[]
     nightsCount: number
 }
 
 export const ReserveDates = forwardRef<HTMLDivElement, Props>(
     (
-        { reserveBy, onSetReserveBy, selectedReserveModule, onSelectReserveModule, takenDates, nightsCount }: Props,
+        {
+            reserveBy,
+            onSetReserveBy,
+            selectedReserveModule,
+            onSelectReserveModule,
+            stayReservations,
+            nightsCount,
+        }: Props,
         ref
     ) => {
         console.log(reserveBy)
@@ -39,9 +46,9 @@ export const ReserveDates = forwardRef<HTMLDivElement, Props>(
         }
 
         const formatTakenDates = () => {
-            if (!takenDates) return undefined
-            return takenDates.reduce((acc: Date[], takenDate) => {
-                acc.push(...getTakenDates(takenDate.checkIn, takenDate.checkOut))
+            if (!stayReservations) return undefined
+            return stayReservations.reduce((acc: Date[], reservation) => {
+                acc.push(...getTakenDates(reservation.dates.checkIn, reservation.dates.checkOut))
                 return acc
             }, [])
         }

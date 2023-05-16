@@ -46,8 +46,10 @@ export function HostListings() {
 
     const onLoadHostStays = async () => {
         if (!loggedInUser) return navigate('/')
-        console.log('loading host')
 
+        if (loggedInUser.listings?.length && loggedInUser.listings.length === loggedInUser.listingsId.length) {
+            return setStaysToDisplay(loggedInUser.listings)
+        }
         try {
             const hostListing: StayProps[] = await setUserListings(loggedInUser)
             console.log(hostListing)
@@ -66,8 +68,11 @@ export function HostListings() {
     const getListingStatus = (stay: StayProps) => {
         // TODO: check if listing is currently avaliable/reserved
         const currDate = Date.now()
-        const isOccupied = stay.takenDates.some(takenDate => {
-            if (currDate > new Date(takenDate.checkIn).getTime() && currDate < new Date(takenDate.checkOut).getTime())
+        const isOccupied = stay.reservations.some(reservation => {
+            if (
+                currDate > new Date(reservation.dates.checkIn).getTime() &&
+                currDate < new Date(reservation.dates.checkOut).getTime()
+            )
                 return true
             return false
         })

@@ -1,11 +1,11 @@
+import { store } from '../store'
+import { SET_USER } from './user.reducer'
+import { stayService } from '../../services/stay.service'
+import { userService } from '../../services/user.service'
+import { reservationService } from '../../services/reservation.service'
 import { ReserveByProps } from '../../interfaces/reserve-by-interface'
 import { StayProps } from '../../interfaces/stay-interface'
 import { ReservationProps, UserLoginProps, UserProps } from '../../interfaces/user-interface'
-import { stayService } from '../../services/stay.service'
-import { userService } from '../../services/user.service'
-import { utilService } from '../../services/util.service'
-import { store } from '../store'
-import { SET_USER } from './user.reducer'
 
 export async function login(credentials: UserLoginProps) {
     try {
@@ -43,8 +43,14 @@ export async function logout() {
 }
 
 export async function demoUserLogin() {
-    const demoUserCreds = { username: 'Demo123', password: 'Demo123' }
-    return login(demoUserCreds)
+    try {
+        const demoUser = await userService.demoLogin()
+        store.dispatch({ type: SET_USER, user: demoUser })
+        return demoUser
+    } catch (err) {
+        console.log('Cannot demo login with error:', err)
+        throw new Error('Cannot demo login, signup or try again later.')
+    }
 }
 
 export async function updateWishList(user: UserProps, stayId: string) {
@@ -56,8 +62,13 @@ export async function updateWishList(user: UserProps, stayId: string) {
         const updatedWishList = isRemoving
             ? user.wishListStaysId.filter(savedStayId => savedStayId !== stayId)
             : [...user.wishListStaysId, stayId]
+        let updatedUser = { ...user, wishListStaysId: updatedWishList }
+        if (isRemoving && user.wishListStays?.length) {
+            const updatedWishListStays = user.wishListStays.filter(stay => stay._id !== stayId)
+            updatedUser = { ...updatedUser, wishListStays: updatedWishListStays }
+        }
         // Optimistic approach
-        store.dispatch({ type: SET_USER, user: { ...user, wishListStaysId: updatedWishList } })
+        store.dispatch({ type: SET_USER, user: updatedUser })
         await userService.update({ ...user, wishListStaysId: updatedWishList })
     } catch (err) {
         console.log(user)
@@ -69,8 +80,8 @@ export async function updateWishList(user: UserProps, stayId: string) {
 
 export async function setUserListings(loggedInUser: UserProps) {
     try {
-        const userListings: StayProps[] = await stayService.getStays(loggedInUser.listingsId)
-        const updatedUser: UserProps = userService.loadUsersDemoData({ ...loggedInUser, listings: userListings })
+        const userListings: StayProps[] = await stayService.getUserStays(loggedInUser.listingsId)
+        const updatedUser: UserProps = { ...loggedInUser, listings: userListings }
         userService.saveLocalUser(updatedUser)
         store.dispatch({ type: SET_USER, user: updatedUser })
         return userListings
@@ -82,13 +93,25 @@ export async function setUserListings(loggedInUser: UserProps) {
 
 export async function setUserWishListStays(loggedInUser: UserProps) {
     try {
-        const userWishListStays: StayProps[] = await stayService.getStays(loggedInUser.wishListStaysId)
+        const userWishListStays: StayProps[] = await stayService.getUserStays(loggedInUser.wishListStaysId)
         const updatedUser: UserProps = { ...loggedInUser, wishListStays: userWishListStays }
         userService.saveLocalUser(updatedUser)
         store.dispatch({ type: SET_USER, user: updatedUser })
     } catch (err) {
         console.log('Failed to load user wish list stays with error:', err)
         throw new Error('Cannot load wishlist, try again later')
+    }
+}
+
+export async function setUserTrips(loggedInUser: UserProps) {
+    try {
+        const userTrips: ReservationProps[] = await reservationService.query(loggedInUser.tripsId)
+        const updatedUser: UserProps = { ...loggedInUser, trips: userTrips }
+        userService.saveLocalUser(updatedUser)
+        store.dispatch({ type: SET_USER, user: updatedUser })
+    } catch (err) {
+        console.log('Failed to load user trips with error:', err)
+        throw new Error('Cannot load your trips, try again later')
     }
 }
 
@@ -99,47 +122,18 @@ export async function addReservation(
     stay: StayProps
 ) {
     try {
-        const reservation = {
-            _id: utilService.makeId(),
-            stayId: stay._id,
-            stayName: stay.name,
-            stayLocation: {
-                city: stay.loc.city,
-                lat: stay.loc.lat,
-                lng: stay.loc.lng,
-            },
-            stayImgsUrl: stay.imgUrls,
-            host: stay.host,
-            guestId: loggedInUser._id,
-            guestName: loggedInUser.fullName,
-            reservationDates: {
-                checkIn: reserveBy.checkIn,
-                checkOut: reserveBy.checkOut,
-            },
-            bookedAt: new Date(),
-            totalPayout: nightsCount * stay.price,
-            guests: reserveBy.guests,
-            status: 'pending',
-        }
-        const updatedGuest: UserProps = await userService.addReservation(reservation, loggedInUser)
-        store.dispatch({ type: SET_USER, user: updatedGuest })
+        const updatedUser: UserProps = await reservationService.addReservation(
+            reserveBy,
+            nightsCount,
+            loggedInUser,
+            stay
+        )
+        userService.saveLocalUser(updatedUser)
+        store.dispatch({ type: SET_USER, user: updatedUser })
     } catch (err) {
         throw new Error('Cannot complete reservation, try again later')
     }
 }
-
-// export async function setUserTripsStays(loggedInUser: UserProps) {
-//     try {
-//         const tripsStaysId = loggedInUser.trips.map(trip => trip.stayId)
-//         const userTripsStays: StayProps[] = await stayService.getStays(tripsStaysId)
-//         const updatedUser: UserProps = { ...loggedInUser, tripsStays: userTripsStays }
-//         userService.saveLocalUser(updatedUser)
-//         store.dispatch({ type: SET_USER, user: updatedUser })
-//     } catch (err) {
-//         console.log('Failed to load user trips stays with error:', err)
-//         throw new Error('Cannot load trips, try again later')
-//     }
-// }
 
 export async function addListing(user: UserProps, stayId: string) {
     try {
@@ -148,23 +142,5 @@ export async function addListing(user: UserProps, stayId: string) {
     } catch (err) {
         console.log('Failed to add user listing with error :', err)
         throw new Error('Cannot add listing, try again later')
-    }
-}
-
-export async function changeReservationStatus(host: UserProps, reservation: ReservationProps, isApproved: boolean) {
-    try {
-        const updatedStatus = isApproved ? 'approved' : 'rejected'
-        const updatedReservation: ReservationProps = { ...reservation, status: updatedStatus }
-        const updatedHostReservations = host.listingReservations?.map(listingReservation =>
-            listingReservation._id === reservation._id ? updatedReservation : listingReservation
-        )
-        const updatedHost = { ...host, listingReservations: updatedHostReservations }
-        store.dispatch({ type: SET_USER, user: updatedHost })
-
-        userService.updateReservation(updatedHost, updatedReservation)
-    } catch (err) {
-        console.log('Failed to change reservation status with error:', err)
-        store.dispatch({ type: SET_USER, user: host })
-        throw new Error('Cannot change reservation status, try again later')
     }
 }

@@ -1,5 +1,7 @@
 import { AiFillStar } from 'react-icons/ai'
+
 import { stayService } from '../../../../services/stay.service'
+
 import { StayReviewProps } from '../../../../interfaces/stay-interface'
 import { StayCategoryRating } from './cmps/stay-category-rating'
 import { Stayreview } from './cmps/stay-review'

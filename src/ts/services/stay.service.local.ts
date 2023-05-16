@@ -1,81 +1,119 @@
-import { httpService } from './http.service'
-import { userService } from './user.service'
+import { storageService } from './async-storage.service'
+import minifiedStays from '../data/minified-stays.json'
 import labelFilters from '../data/label-filters.json'
-
+import { utilService } from './util.service'
 import { StayProps, StayReviewProps } from '../interfaces/stay-interface'
+import { userService } from './user.service'
 import { FilterByProps } from '../interfaces/filter-by-interface'
 import { SearchByProps } from '../interfaces/search-by-interface'
-import { DashboardDataProps, ReservationCountMap, ReservationProps } from '../interfaces/user-interface'
 import { ReserveByProps } from '../interfaces/reserve-by-interface'
+import { DashboardDataProps, ReservationCountMap, ReservationProps, UserProps } from '../interfaces/user-interface'
+
+const STORAGE_KEY_STAY_DB: string = 'stay_DB'
+const ALL_HOMES: string = 'All homes'
+const STAYS_INCREMENT_COUNT = 20
+
+_createStays()
 
 export const stayService = {
+    query,
     loadStays,
     getById,
     save,
-    getUserStays,
-    getParamsSearchBy,
+    getStays,
     getLabelFilters,
     getAmenities,
     getStayAverageRating,
     getCategoryAverageRating,
-    getReserveByProps,
-    getHostDashboardData,
-    getEmptyStayProps,
     getDeafultSearchProps,
     getDefaultFilterProps,
+    getParamsSearchBy,
+    getReserveByProps,
+    getEmptyStayProps,
+    getHostDashboardData,
 }
 
-const ALL_HOMES: string = 'All homes'
-const BASE_URL: string = 'stay'
+async function query() {
+    return storageService.query(STORAGE_KEY_STAY_DB) as Promise<StayProps[]>
+}
 
 async function loadStays(
-    pageIdx: number = 0,
+    idx: number = 0,
     searchBy: SearchByProps = getDeafultSearchProps(),
     filterBy: FilterByProps = getDefaultFilterProps()
 ) {
-    return httpService.get(BASE_URL, { pageIdx, filterBy, searchBy })
+    let stays = (await storageService.query(STORAGE_KEY_STAY_DB)) as StayProps[]
+    const pageCount = Math.ceil(stays.length / STAYS_INCREMENT_COUNT)
+    console.log(pageCount)
+    stays = searchStays(stays, searchBy)
+    stays = filterStays(stays, filterBy)
+    return {
+        pageCount,
+        stays: stays.slice(idx * STAYS_INCREMENT_COUNT, idx * STAYS_INCREMENT_COUNT + STAYS_INCREMENT_COUNT),
+    }
 }
 
 async function getById(stayId: string) {
-    return httpService.get(BASE_URL + `/${stayId}`)
+    return storageService.get(STORAGE_KEY_STAY_DB, stayId) as Promise<StayProps>
 }
 
-async function save(stay: StayProps) {
-    let savedStay
+function save(stay: StayProps) {
     if (stay._id) {
-        savedStay = await httpService.put(BASE_URL + `/${stay._id}`, stay)
+        return storageService.put(STORAGE_KEY_STAY_DB, stay)
     } else {
-        savedStay = await httpService.post(BASE_URL, stay)
-    }
-    return savedStay
-}
-
-async function getUserStays(staysId: string[]) {
-    return await httpService.get(BASE_URL + '/user', {
-        staysId,
-    })
-}
-
-function getDeafultSearchProps() {
-    return {
-        destination: '',
-        checkIn: null,
-        checkOut: null,
-        guests: {
-            adults: 0,
-            children: 0,
-            infants: 0,
-            pets: 0,
-        },
+        return storageService.post(STORAGE_KEY_STAY_DB, stay)
     }
 }
 
-function getDefaultFilterProps() {
-    return {
-        label: ALL_HOMES,
-        minPrice: 0,
-        maxPrice: 0,
-        type: [],
+function searchStays(stays: StayProps[], searchBy: SearchByProps) {
+    if (searchBy.destination) {
+        stays = stays.filter(stay => stay.loc.destination === searchBy.destination)
+    }
+
+    if (searchBy.checkIn && searchBy.checkOut) {
+        const { checkIn, checkOut } = searchBy
+        // stays = stays.filter(stay => !utilService.isDateRangeTaken(stay.takenDates, { checkIn, checkOut }))
+        stays = stays.filter(stay => {
+            const takenDates = stay.reservations.map(reservation => reservation.dates)
+            return !utilService.isDateRangeTaken(takenDates, { checkIn, checkOut })
+        })
+    }
+
+    if (searchBy.guests.adults) {
+        const { adults, children, infants, pets } = searchBy.guests
+        const guestCount = adults + children + infants + pets
+        stays = stays.filter(stay => stay.stayDetails.guests >= guestCount)
+    }
+    return stays
+}
+
+function filterStays(stays: StayProps[], filterBy: FilterByProps) {
+    if (filterBy.label && filterBy.label !== ALL_HOMES) {
+        stays = stays.filter(stay => stay.labels.includes(filterBy.label))
+    }
+
+    if (filterBy.minPrice > 0) {
+        stays = stays.filter(stay => stay.price >= filterBy.minPrice)
+    }
+
+    if (filterBy.maxPrice > 0) {
+        stays = stays.filter(stay => stay.price <= filterBy.maxPrice)
+    }
+
+    if (filterBy.type.length) {
+        stays = stays.filter(stay => filterBy.type.includes(stay.type))
+    }
+    return stays
+}
+
+async function getStays(staysId: string[]) {
+    try {
+        console.log(staysId)
+        const stays = await query()
+        return stays.filter(stay => staysId.includes(stay._id))
+    } catch (err) {
+        console.log('Failed to get host listings with error:', err)
+        throw err
     }
 }
 
@@ -327,4 +365,53 @@ function getEmptyStayProps() {
         },
     }
     return emptyStay
+}
+
+function getDeafultSearchProps() {
+    return {
+        destination: '',
+        checkIn: null,
+        checkOut: null,
+        guests: {
+            adults: 0,
+            children: 0,
+            infants: 0,
+            pets: 0,
+        },
+    }
+}
+
+function getDefaultFilterProps() {
+    return {
+        label: ALL_HOMES,
+        minPrice: 0,
+        maxPrice: 0,
+        type: [],
+    }
+}
+
+function _createStays() {
+    let stays = utilService.loadFromStorage(STORAGE_KEY_STAY_DB)
+    if (!stays || !stays.length) {
+        stays = _makeStays()
+        utilService.saveToStorage(STORAGE_KEY_STAY_DB, stays)
+    }
+}
+
+function _makeStays() {
+    let stays: any = minifiedStays
+    stays.sort(() => (Math.random() > 0.5 ? 1 : -1))
+    stays = stays.map((stay: StayProps) => {
+        stay.reservations = []
+        while (stay.reservations.length < 3) {
+            const takenDates = stay.reservations.map(reservation => reservation.dates)
+            stay.reservations.push({
+                _id: utilService.makeId(),
+                dates: utilService.getRandomDates(takenDates),
+            })
+        }
+        stay.randomAvaliableDates = utilService.getRandomDates(stay.reservations.map(reservation => reservation.dates))
+        return stay
+    })
+    return stays
 }

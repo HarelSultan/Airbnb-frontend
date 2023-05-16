@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { _stayService } from '../../services/_stay.service'
+import { stayService } from '../../services/stay.service'
 
 import { AppHeader } from '../../cmps/AppHeader/app-header'
 import { Filter } from './cmps/filter'
@@ -64,7 +64,7 @@ export function HomePage() {
             )
                 return
 
-            const searchBy = _stayService.getParamsSearchBy(searchParamsRef.current)
+            const searchBy = stayService.getParamsSearchBy(searchParamsRef.current)
             let pageCount
             if (currStayPagination.current === 0) {
                 pageCount = await loadStays(currStayPagination.current, searchBy, filterBy)

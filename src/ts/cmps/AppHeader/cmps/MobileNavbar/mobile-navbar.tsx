@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { SearchByProps } from '../../../../interfaces/search-by-interface'
 import { MobileSearchTeaser } from './cmps/mobile-search-teaser'
 import { FilterByProps } from '../../../../interfaces/filter-by-interface'
-import { stayService } from '../../../../services/stay.service'
 import { setFilter } from '../../../../store/stay/stay.action'
 import { StayFilters } from '../../../../pages/Home/cmps/Filter/stay-filter'
 import { DarkOverlay } from '../dark-overlay'
 import { MobileSearchForm } from './cmps/mobile-search-form'
+import { stayService } from '../../../../services/stay.service'
 
 interface Props {
     searchBy: SearchByProps
@@ -37,7 +37,6 @@ export function MobileNavbar({
     }
 
     const onSetFilterBy = (updatedFilter: FilterByProps) => {
-        console.log(updatedFilter)
         setFilterBy(updatedFilter)
     }
 

@@ -10,7 +10,7 @@ import { utilService } from '../../services/util.service'
 import { MobileNavbar } from './cmps/MobileNavbar/mobile-navbar'
 import { UserProps } from '../../interfaces/user-interface'
 import { logout } from '../../store/user/user.action'
-import { _stayService } from '../../services/_stay.service'
+import { stayService } from '../../services/stay.service'
 
 interface Props {
     isMobile: boolean
@@ -23,8 +23,8 @@ export function AppHeader({ isMobile, onToggleLoginSignup, loggedInUser, searchP
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
     const [searchBy, setSearchBy] = useState<SearchByProps>(
         searchParams?.current.entries
-            ? _stayService.getParamsSearchBy(searchParams?.current)
-            : _stayService.getDeafultSearchProps()
+            ? stayService.getParamsSearchBy(searchParams?.current)
+            : stayService.getDeafultSearchProps()
     )
     const [selectedSearchModule, setSelectedSearchModule] = useState<string>('searchDestination')
 

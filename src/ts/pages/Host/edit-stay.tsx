@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { StayDetailsProps, StayProps } from '../../interfaces/stay-interface'
-import { stayService } from '../../services/stay.service'
 import { uploadService } from '../../services/upload.service'
 import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
 import { Counter } from '../../cmps/counter'
@@ -10,6 +9,7 @@ import { saveStay } from '../../store/stay/stay.action'
 import { useSelector } from 'react-redux'
 import { RootStateProps } from '../../store/store'
 import { addListing } from '../../store/user/user.action'
+import { stayService } from '../../services/stay.service'
 
 export function EditStay() {
     const [stayToEdit, setStayToEdit] = useState<StayProps>(stayService.getEmptyStayProps())

@@ -196,7 +196,7 @@ export function StayPage() {
             children: (
                 <>
                     <ReserveDates
-                        takenDates={selectedStay.takenDates}
+                        stayReservations={selectedStay.reservations}
                         reserveBy={reserveBy}
                         onSetReserveBy={onSetReserveBy}
                         nightsCount={nightsCount}
@@ -250,7 +250,7 @@ export function StayPage() {
     const reserveStayProps = {
         price: selectedStay?.price,
         reviews: selectedStay?.reviews,
-        takenDates: selectedStay?.takenDates,
+        stayReservations: selectedStay?.reservations,
         reserveBy,
         onSetReserveBy,
         onReserveStay,
@@ -260,7 +260,7 @@ export function StayPage() {
 
     const stayDetailsProps = {
         stay: selectedStay,
-        takenDates: selectedStay?.takenDates,
+        stayReservations: selectedStay?.reservations,
         reserveBy,
         onSetReserveBy,
         nightsCount,

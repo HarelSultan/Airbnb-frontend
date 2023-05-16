@@ -14,12 +14,10 @@ export const useFormRegister = (
             default:
                 break
         }
-        console.log('didnt return')
         return cb({ ...initialState, [field]: value })
     }
 
     const register = (field: string, type = 'text') => {
-        console.log(initialState)
         return {
             type,
             name: field,

@@ -1,21 +1,23 @@
 import { useState, useRef } from 'react'
 
-import { AiFillStar, AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
-import { DatesProps, StayReviewProps } from '../../../../interfaces/stay-interface'
+import { useOnClickOutside } from '../../../../hooks/use-on-click-outside'
 import { stayService } from '../../../../services/stay.service'
 import { utilService } from '../../../../services/util.service'
+
+import { StayReservationProps, StayReviewProps } from '../../../../interfaces/stay-interface'
 import { ReserveByProps, ReserveModule } from '../../../../interfaces/reserve-by-interface'
+
 import { ReserveDates } from './cmps/reserve-dates'
 import { CtaBtn } from '../../../../cmps/cta-btn'
 import { PricingSummary } from './cmps/pricing-summary'
-import { useOnClickOutside } from '../../../../hooks/use-on-click-outside'
 import { GuestCounter } from '../../../../cmps/guest-counter'
 import { REVIEWS_MODAL } from '../../stay-page'
+import { AiFillStar, AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
 
 interface Props {
     price: number
     reviews: StayReviewProps[]
-    takenDates: DatesProps[]
+    stayReservations: StayReservationProps[]
     reserveBy: ReserveByProps
     onSetReserveBy: (updatedReservation: ReserveByProps) => void
     onReserveStay: () => void
@@ -27,7 +29,7 @@ interface Props {
 export function ReserveStay({
     price,
     reviews,
-    takenDates,
+    stayReservations,
     reserveBy,
     onSetReserveBy,
     onReserveStay,
@@ -60,7 +62,7 @@ export function ReserveStay({
         onSetReserveBy,
         selectedReserveModule,
         onSelectReserveModule,
-        takenDates,
+        stayReservations,
         nightsCount,
     }
 

@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { UserProps } from '../interfaces/user-interface'
-import { userService } from '../services/user.service'
 import { useFormRegister } from '../hooks/use-form'
-import { CtaBtn } from './cta-btn'
+import { userService } from '../services/user.service'
 import { demoUserLogin, login, signup } from '../store/user/user.action'
+import { CtaBtn } from './cta-btn'
+import { UserProps } from '../interfaces/user-interface'
 
 interface Props {
     isSignningUp: boolean

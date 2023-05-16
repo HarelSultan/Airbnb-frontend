@@ -1,10 +1,9 @@
 import { StayProps } from '../../../interfaces/stay-interface'
-import { stayService } from '../../../services/stay.service'
 import { FiShare, FiHeart } from 'react-icons/fi'
 import { FaMedal } from 'react-icons/fa'
-import { BsHeart } from 'react-icons/bs'
 import { AiFillStar } from 'react-icons/ai'
 import { LOCATION_MODAL, REVIEWS_MODAL } from '../stay-page'
+import { stayService } from '../../../services/stay.service'
 
 interface Props {
     stay: StayProps

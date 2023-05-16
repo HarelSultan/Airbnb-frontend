@@ -18,6 +18,7 @@ import { Modal, ModalProps } from '../../cmps/modal'
 import { StayImgCarousel } from '../Stay/cmps/stay-img-carousel'
 import { ContactHost } from '../Stay/cmps/contact-host'
 import { CONTACT_HOST_MODAL } from '../Stay/stay-page'
+import { reservationService } from '../../services/reservation.service'
 
 export function TripDetails() {
     const [selectedTrip, setSelectedTrip] = useState<ReservationProps | null>(null)
@@ -33,9 +34,21 @@ export function TripDetails() {
         loadTrip()
     }, [])
 
-    const loadTrip = () => {
-        const trip = loggedInUser?.trips.find(trip => trip._id === tripId)
-        trip ? setSelectedTrip(trip) : navigate('/')
+    const loadTrip = async () => {
+        // const trip = loggedInUser?.trips.find(trip => trip._id === tripId)
+        // trip ? setSelectedTrip(trip) : navigate('/')
+        if (!tripId) return
+        try {
+            let trip
+            // Trying to minimize server request and get the selectedTrip from the global state user
+            if (loggedInUser?.trips?.length) trip = loggedInUser.trips.find(trip => trip._id === tripId)
+            // If the attempt failed, getting the selectedTrip from the server.
+            if (!trip) trip = await reservationService.getById(tripId)
+            setSelectedTrip(trip)
+        } catch (err) {
+            // TODO: showErrorMsg('Cannot load your trip, try again later')
+            console.log('Failed to load user trip with error', err)
+        }
     }
 
     const onOpenImgCarouselModal = () => {

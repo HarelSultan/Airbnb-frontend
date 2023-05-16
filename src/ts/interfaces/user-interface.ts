@@ -5,16 +5,29 @@ export interface UserProps {
     _id: string
     username: string
     password: string
-    fullName: string
+    fullname: string
+    imgUrl: string
     wishListStaysId: string[]
     wishListStays?: StayProps[]
     listingsId: string[]
-    imgUrl: string
     listings?: StayProps[]
-    trips: ReservationProps[]
-    tripsStays?: StayProps[]
-    listingReservations?: ReservationProps[]
+    tripsId: string[]
+    trips?: ReservationProps[]
 }
+// export interface UserProps {
+//     _id: string
+//     username: string
+//     password: string
+//     fullName: string
+//     imgUrl: string
+//     wishListStaysId: string[]
+//     wishListStays?: StayProps[]
+//     listingsId: string[]
+//     listings?: StayProps[]
+//     trips: ReservationProps[]
+//     tripsStays?: StayProps[]
+//     listingReservations?: ReservationProps[]
+// }
 
 export interface UserLoginProps {
     username: string
@@ -48,4 +61,3 @@ export interface DashboardDataProps {
 export interface ReservationCountMap {
     [key: string]: number
 }
-// WishList
