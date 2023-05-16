@@ -76,7 +76,7 @@
         position: relative;
         cursor: pointer;
         &::after {
-            background: #dddddd;
+            background: $light-grey;
             content: '';
             height: 2px;
             opacity: 0;

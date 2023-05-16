@@ -25,13 +25,13 @@
         cursor: pointer;
 
         &:hover {
-            background: #dddddd;
+            background: $light-grey;
         }
 
         &:not(.destination)::before {
             content: '';
             position: absolute;
-            border-right: 1px #dddddd solid;
+            border-right: 1px $light-grey solid;
             left: 4px;
             height: 34px;
         }

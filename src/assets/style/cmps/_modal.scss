@@ -43,15 +43,7 @@
         }
 
         &::after {
-            content: '';
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1;
-            box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0;
-            pointer-events: none;
+            @include afterSeperator;
         }
     }
     .btn-close {
@@ -92,7 +84,7 @@
         justify-content: space-between;
         background-color: white;
         padding: 18px;
-        border-top: 1px solid #dddddd;
+        border-top: 1px solid $light-grey;
     }
 }
 
@@ -148,7 +140,7 @@
         justify-content: space-between;
         background-color: white;
         padding: 18px;
-        border-top: 1px solid #dddddd;
+        border-top: 1px solid $light-grey;
     }
     .reservation-info {
         display: flex;
@@ -260,15 +252,7 @@
     .common-question {
         position: relative;
         &::after {
-            content: '';
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1;
-            box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0;
-            pointer-events: none;
+            @include afterSeperator;
         }
     }
 
@@ -312,7 +296,7 @@
         height: 116px;
         padding: 10px;
         border-radius: 8px;
-        box-shadow: inset 0 0 0 1px #b0b0b0;
+        box-shadow: inset 0 0 0 1px $medium-grey;
         outline: none;
         border: none;
         &:focus {

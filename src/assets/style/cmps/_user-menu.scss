@@ -1,5 +1,5 @@
 .user-menu {
-    border: 1px solid #dddddd;
+    border: 1px solid $light-grey;
     padding: 5px 5px 5px 12px;
     border-radius: 1.4rem;
     display: flex;
@@ -44,7 +44,7 @@
         .seperator {
             height: 1px;
             margin-block: 4px;
-            background-color: #dddddd;
+            background-color: $light-grey;
         }
     }
 }

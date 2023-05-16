@@ -16,14 +16,7 @@
     }
     @include for-narrow-layout {
         &::after {
-            content: '';
-            height: 100%;
-            position: absolute;
-            top: 0;
-            width: 100%;
-            z-index: 3;
-            box-shadow: rgb(0 0 0 / 8%) 0 1px 0;
-            pointer-events: none;
+            @include afterSeperator;
         }
     }
     .app-nav {

@@ -1,6 +1,6 @@
 .no-trips {
     border-radius: 12px;
-    border: 1px solid #dddddd;
+    border: 1px solid $light-grey;
     @include for-narrow-layout {
         display: flex;
         justify-content: space-between;

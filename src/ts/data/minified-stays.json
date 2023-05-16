@@ -457,7 +457,7 @@
             "Casas particulares",
             "Grand pianos"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Trendy Bright Loft in The Plateau",
@@ -550,7 +550,7 @@
             "Earth homes",
             "Islands"
         ],
-        "takenDates": ["2023-07-13T21:00:00.000Z", "2023-07-14T21:00:00.000Z"]
+        "reservations": ["2023-07-13T21:00:00.000Z", "2023-07-14T21:00:00.000Z"]
     },
     {
         "name": "Big Private BR Steps to Barnard Columbia & Subways",
@@ -1012,7 +1012,7 @@
             "Bed & breakfasts",
             "Barns"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Luxury 1-Bdrm in Downtown Brooklyn",
@@ -1110,7 +1110,7 @@
             "Vineyards",
             "Dammusi"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Clean, comfortable and convenient",
@@ -1248,7 +1248,7 @@
         },
         "_id": "LL4KE1",
         "labels": ["Surfing", "Tropical", "Houseboats", "Trending", "Adapted", "OMG!", "Farms", "Campers"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Old Montreal.  ( Rent for at least 12 months)",
@@ -1688,7 +1688,7 @@
         },
         "_id": "dmEIN2",
         "labels": ["Amazing views", "Adapted", "Lakefront", "Tropical", "Boats", "Tropical", "Tiny homes", "Campers"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "SUİTE ROOM 2 or 3 people WİTH TERRACE",
@@ -1905,7 +1905,7 @@
         },
         "_id": "Il3ERF",
         "labels": ["Skiing", "Mansions", "Cabins", "Hanoks", "Yurts", "Ryokans", "Adapted", "Containers"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Nice Cosy Room In Taksim",
@@ -2348,7 +2348,7 @@
             "A-frames",
             "Design"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Sunny appartment on the Plateau",
@@ -2798,7 +2798,7 @@
             "Countryside",
             "Hanoks"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Artsy 4BR in Plateau by Sonder",
@@ -3262,7 +3262,7 @@
             "Cycladic homes",
             "Tiny homes"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "205 Punahoa 2 Bed Condo- Oceanfront",
@@ -3361,7 +3361,7 @@
             "Minsus",
             "Containers"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Deniz, orman ve şehir manzaralı.",
@@ -3453,7 +3453,7 @@
         },
         "_id": "6Nn6ea",
         "labels": ["Private rooms", "OMG!", "Campers", "Truli", "Campers", "Adapted", "Creative spaces", "New"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Nuevo espacioso apartamento en BCN",
@@ -3630,7 +3630,7 @@
             "Treehouses",
             "Yurts"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "L'IDÉAL, ( à 2 min du métro Pie-IX ).",
@@ -4104,7 +4104,7 @@
             "Yurts",
             "Off-the-grid"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Lachine room+Free parking+Airport",
@@ -4190,7 +4190,7 @@
         },
         "_id": "dYGULF",
         "labels": ["Surfing", "Caves", "Castles", "Houseboats", "Windmills", "National parks", "Towers", "Farms"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "1 Stop fr. Manhattan! Private Suite,Landmark Block",
@@ -4645,7 +4645,7 @@
             "Top of the world",
             "Amazing pools"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Park Guell apartment with terrace",
@@ -5097,7 +5097,7 @@
             "Trending",
             "Bed & breakfasts"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Feel at home.. in a cosy and warm",
@@ -5359,7 +5359,7 @@
             "Ski-on/out",
             "Adapted"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Sunny, private room on St. Denis",
@@ -5551,7 +5551,7 @@
         },
         "_id": "g5uSTx",
         "labels": ["Caves", "Creative spaces", "Arctic", "Boats", "Containers", "Ski-on/out", "Yurts", "Play"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Wander to the Beach from a Cozy Wailea Condo",
@@ -5798,7 +5798,7 @@
         },
         "_id": "gXsJjp",
         "labels": ["Vineyards", "Beach", "Tropical", "Boats", "Containers", "Earth homes", "A-frames", "Ski-on/out"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Museum Mile 1 BR - Madison Ave",
@@ -6004,7 +6004,7 @@
             "Bed & breakfasts",
             "Trending"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Private Cozy Bedroom in Brooklyn",
@@ -6468,7 +6468,7 @@
         },
         "_id": "7oAAwq",
         "labels": ["Earth homes", "Riads", "Arctic", "Boats", "Beachfront", "Castles", "Play", "Houseboats"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Modern West Kowloon Based Apartment",
@@ -6633,7 +6633,7 @@
             "Casas particulares",
             "Trending"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Quaint Polynesian Style Cabin on a Working Farm",
@@ -7080,7 +7080,7 @@
             "Trending",
             "Iconic cities"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Allotja't en un elegant i lluminós pis modernista al costat de Passeig de Gràcia",
@@ -7581,7 +7581,7 @@
             "Minsus",
             "Chef's kitchens"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "SOOTHING WAVES WITH A 180* OCEAN VIEW",
@@ -8037,7 +8037,7 @@
         },
         "_id": "lc3FaQ",
         "labels": ["Grand pianos", "Trending", "Lakefront", "Desert", "New", "Riads", "Desert", "Beach"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Ocean View Hawaiian Bungalow on a private ranch",
@@ -8156,7 +8156,7 @@
         },
         "_id": "I8g5WB",
         "labels": ["Windmills", "Riads", "Luxe", "Islands", "Houseboats", "Islands", "Barns", "Top of the world"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Spacious 3bdrm. Artsy and Perfect Location!",
@@ -8592,7 +8592,7 @@
         },
         "_id": "EYdrbB",
         "labels": ["Cycladic homes", "Farms", "Caves", "Yurts", "Windmills", "Cabins", "Minsus", "Houseboats"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Modern Beachside Apartment with Balcony",
@@ -9058,7 +9058,7 @@
         },
         "_id": "bjiyl7",
         "labels": ["Minsus", "Ski-on/out", "Farms", "Casas particulares", "Play", "Creative spaces", "Riads", "Arctic"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Very special island bed and brunch",
@@ -9504,7 +9504,7 @@
         },
         "_id": "W4D33C",
         "labels": ["Beach", "Tropical", "Barns", "Mansions", "Tiny homes", "Caves", "Beachfront", "Barns"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Penthouse Sands of Kahana Sandy Swimmable Beach",
@@ -9929,7 +9929,7 @@
         },
         "_id": "5kuGmE",
         "labels": ["Farms", "Towers", "Boats", "Containers", "Creative spaces", "Skiing", "Caves", "New"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Ipanema: moderno apê 2BR + garagem",
@@ -10387,7 +10387,7 @@
             "Historical homes",
             "Amazing pools"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Westin Kaanapali KORVS 2BR OCEAN VIEW",
@@ -10593,7 +10593,7 @@
         },
         "_id": "pewfsM",
         "labels": ["Amazing views", "Luxe", "Houseboats", "Play", "A-frames", "Luxe", "Cycladic homes", "Lakefront"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Monte dos Burgos - Cosy Room",
@@ -10750,7 +10750,7 @@
         },
         "_id": "dv6HTt",
         "labels": ["Off-the-grid", "Historical homes", "OMG!", "Ski-on/out", "Hanoks", "Ski-on/out", "Farms", "Yurts"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Fresh and modern 1BR in Bed-Stuy",
@@ -11202,7 +11202,7 @@
             "Cycladic homes",
             "Casas particulares"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Large well-lit & quiet room in the Plateau",
@@ -11417,7 +11417,7 @@
         },
         "_id": "pfsqaP",
         "labels": ["National parks", "Minsus", "Arctic", "New", "Historical homes", "Desert", "Desert", "Skiing"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Stunning Oceanfront. Amazing Views. 2 Bed 2 Baths",
@@ -11891,7 +11891,7 @@
             "Lakefront",
             "Islands"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "ROOM + ENSUITE INNER CITY MOD HOUSE",
@@ -12186,7 +12186,7 @@
             "Yurts",
             "Minsus"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "SUPERHOST-LARGE&CLEAN-Near Pierloti",
@@ -12638,7 +12638,7 @@
         },
         "_id": "GGtnD5",
         "labels": ["Minsus", "Iconic cities", "Castles", "Top of the world", "A-frames", "Design", "Towers", "Desert"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Spacious, Sunny Room in Park Slope",
@@ -12723,7 +12723,7 @@
             "Domes",
             "Camping"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Mike's House- Uilani Room",
@@ -13177,7 +13177,7 @@
             "Hanoks",
             "Cabins"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Center of Istanbul, comfortable for family house",
@@ -13264,7 +13264,7 @@
         },
         "_id": "bOJ3jz",
         "labels": ["Minsus", "Cycladic homes", "Trending", "Skiing", "Treehouses", "Skiing", "OMG!", "Windmills"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Elegance and Peace in Potts Point",
@@ -13715,7 +13715,7 @@
         },
         "_id": "llD7OM",
         "labels": ["Hanoks", "Desert", "Farms", "Beachfront", "Amazing views", "Yurts", "Yurts", "Design"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Sydney Olympic Park High Level Stunning View Apt",
@@ -14173,7 +14173,7 @@
             "Arctic",
             "Barns"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Sunny Room (for One) Minutes from Coogee Beach!",
@@ -14635,7 +14635,7 @@
             "Historical homes",
             "Shepherd's huts"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "The Porto Concierge - Beach Manor",
@@ -15085,7 +15085,7 @@
             "Ryokans",
             "Amazing views"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "East Village Sanctuary",
@@ -15517,7 +15517,7 @@
             "Barns",
             "Lakefront"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Habitación centro de Barcelona",
@@ -15619,7 +15619,7 @@
             "Arctic",
             "A-frames"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Double room with private bathroom",
@@ -15922,7 +15922,7 @@
             "Grand pianos",
             "Houseboats"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "M&M Space MM2  Apartamento no centro da cidade",
@@ -16361,7 +16361,7 @@
         },
         "_id": "Ln0D6Y",
         "labels": ["Top of the world", "Caves", "Tiny homes", "Barns", "Domes", "Minsus", "Camping", "Castles"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Cozy and modern Lapa-studio",
@@ -16836,7 +16836,7 @@
             "Historical homes",
             "Historical homes"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Grand apartment Sagrada Familia",
@@ -17279,7 +17279,7 @@
         },
         "_id": "UydI8r",
         "labels": ["OMG!", "Cabins", "Amazing views", "Minsus", "Campers", "Skiing", "Caves", "Amazing views"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Stylish, spacious, central, shared rooftop terrace",
@@ -17732,7 +17732,7 @@
         },
         "_id": "6W9jCd",
         "labels": ["Towers", "Beach", "Tropical", "Treehouses", "Riads", "Golfing", "Desert", "Hanoks"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "18C.  NICE AND COZY 2 BEDROOMS. PERFECT LOCATION!",
@@ -18188,7 +18188,7 @@
             "Bed & breakfasts",
             "OMG!"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "☼☼ Lovely Colorful Studio ☼☼ Tsim Sha Tsui",
@@ -18656,7 +18656,7 @@
             "Top of the world",
             "Beach"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Sydney Hyde Park City Apartment (checkin from 6am)",
@@ -19131,7 +19131,7 @@
             "Private rooms",
             "Historical homes"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Burgazada da çarşıya yakın daire",
@@ -19573,7 +19573,7 @@
         },
         "_id": "w9ksww",
         "labels": ["Design", "Surfing", "Arctic", "Chef's kitchens", "Barns", "Containers", "Vineyards", "Design"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Chic 2BR in Festival Quarter by Sonder",
@@ -20012,7 +20012,7 @@
         },
         "_id": "6N7EfV",
         "labels": ["Boats", "Houseboats", "Towers", "Castles", "Islands", "Cycladic homes", "Minsus", "Lakefront"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Quarto Taquara - Jacarepaguá",
@@ -20098,7 +20098,7 @@
             "Countryside",
             "Dammusi"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Belle chambre à côté Metro Papineau",
@@ -20233,7 +20233,7 @@
         },
         "_id": "J2fO0x",
         "labels": ["Castles", "Truli", "Farms", "Top of the world", "Domes", "Ski-on/out", "Off-the-grid", "Desert"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Peaceful Apartment near Casa da Música",
@@ -20602,7 +20602,7 @@
             "Earth homes",
             "Off-the-grid"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "cozy house and garden in the heart of Montréal",
@@ -20762,7 +20762,7 @@
         },
         "_id": "2xQpTt",
         "labels": ["National parks", "Domes", "Dammusi", "Beachfront", "Vineyards", "Dammusi", "Farms", "Barns"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Westin Kaanapali KORVN 2BR",
@@ -21033,7 +21033,7 @@
         },
         "_id": "TIRBkB",
         "labels": ["Containers", "Truli", "Countryside", "Ryokans", "Historical homes", "New", "Vineyards", "Play"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "+Spacious Studio&Kitchenette near Blue Mosque+",
@@ -21483,7 +21483,7 @@
             "Windmills",
             "Off-the-grid"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Wellyet Guest House@Room 2",
@@ -21937,7 +21937,7 @@
             "Earth homes",
             "Houseboats"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Habitación indiv con cama extra",
@@ -22391,7 +22391,7 @@
             "Grand pianos",
             "Earth homes"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Cheerful new renovated central apt",
@@ -22842,7 +22842,7 @@
         },
         "_id": "Nz9B7G",
         "labels": ["Cabins", "Ski-on/out", "Hanoks", "Surfing", "Farms", "Containers", "Boats", "Mansions"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "BEACH ESCAPE",
@@ -23306,7 +23306,7 @@
             "Play",
             "Earth homes"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Downtown Exposed Brick Studio",
@@ -23768,7 +23768,7 @@
             "Amazing views",
             "Luxe"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Mouzinho 244 Ap4 by RUA Apartments",
@@ -24224,7 +24224,7 @@
             "Trending",
             "Historical homes"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Unit 414 Luxurious Top Floor Condo Great Views",
@@ -24535,7 +24535,7 @@
             "National parks",
             "Play"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Nice room with queen sized bed",
@@ -24982,7 +24982,7 @@
             "Shepherd's huts",
             "Iconic cities"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Bright room in Spacious house close to Airport",
@@ -25446,7 +25446,7 @@
             "Treehouses",
             "Creative spaces"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Sunny and quiet room with private shower room",
@@ -25894,7 +25894,7 @@
         },
         "_id": "ZhUF3I",
         "labels": ["Yurts", "Grand pianos", "Vineyards", "Surfing", "A-frames", "Golfing", "Treehouses", "Lakefront"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "1 sunny bedroom in large St-Henri appartment",
@@ -25992,7 +25992,7 @@
         },
         "_id": "CndTdg",
         "labels": ["Creative spaces", "OMG!", "Domes", "Windmills", "Tropical", "Trending", "Play", "Bed & breakfasts"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Bright, sunny quite room Bushwick",
@@ -26095,7 +26095,7 @@
             "Historical homes",
             "Arctic"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Heroísmo IV",
@@ -26558,7 +26558,7 @@
             "Riads",
             "Containers"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Vista magnifica mar,lagoa,montanha.",
@@ -26716,7 +26716,7 @@
         },
         "_id": "BukJSt",
         "labels": ["Castles", "Iconic cities", "Minsus", "Arctic", "Cabins", "Hanoks", "Windmills", "Boats"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Elegant Flat in the Center",
@@ -26842,7 +26842,7 @@
         },
         "_id": "yELPlj",
         "labels": ["Luxe", "Minsus", "Bed & breakfasts", "Luxe", "Grand pianos", "Play", "Earth homes", "Off-the-grid"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Spacious and quiet duplex apartment in Poble Sec",
@@ -27326,7 +27326,7 @@
             "Trending",
             "Towers"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Hibiscus Hideaway in Kihei",
@@ -27587,7 +27587,7 @@
             "Minsus",
             "Off-the-grid"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Beautiful 1 Bedroom Apartment",
@@ -27828,7 +27828,7 @@
         },
         "_id": "ajdPFN",
         "labels": ["Windmills", "Design", "Historical homes", "Truli", "Ski-on/out", "Private rooms", "Play", "Cabins"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Appartement lumineux , Terrasse privée sur le toît",
@@ -28281,7 +28281,7 @@
             "National parks",
             "Design"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Cozy place in Hong Kong Island",
@@ -28535,7 +28535,7 @@
             "Beachfront",
             "Riads"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "COMFORTABLE & COZY! MAUI BY DAY...RELAX AT NIGHT!!",
@@ -29000,7 +29000,7 @@
             "Trending",
             "Iconic cities"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Home, Sweet, Harlem. Welcome!",
@@ -29450,7 +29450,7 @@
         },
         "_id": "s167KU",
         "labels": ["Adapted", "Adapted", "Dammusi", "Creative spaces", "Dammusi", "Caves", "Countryside", "Beach"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "DOUBLE ROOM IN THE HEART OF BCN",
@@ -29891,7 +29891,7 @@
         },
         "_id": "lpjvib",
         "labels": ["Surfing", "Trending", "Beachfront", "Minsus", "Desert", "Historical homes", "Yurts", "Vineyards"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Charming and cozy condo Plateau Mt-Royal/ McGill",
@@ -30256,7 +30256,7 @@
         },
         "_id": "6WsCGV",
         "labels": ["Campers", "Camping", "Castles", "Skiing", "Windmills", "Caves", "Adapted", "Boats"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "*CoZy Private Williamsburg Home*",
@@ -30712,7 +30712,7 @@
             "Cabins",
             "Amazing pools"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Vacances de reve à Espinho (Porto)",
@@ -31184,7 +31184,7 @@
             "Hanoks",
             "Private rooms"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Oceanfront & Breath Taking Views.",
@@ -31669,7 +31669,7 @@
         },
         "_id": "CRUitH",
         "labels": ["Caves", "Skiing", "Trending", "National parks", "Minsus", "Yurts", "Riads", "Luxe"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "2 bedroom Upper east side",
@@ -31909,7 +31909,7 @@
             "Top of the world",
             "Off-the-grid"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "One bdrm apt in Central/Sheung Wan next to Soho",
@@ -32221,7 +32221,7 @@
         },
         "_id": "GiqZA5",
         "labels": ["Shepherd's huts", "Beach", "OMG!", "Mansions", "Trending", "Truli", "Cycladic homes", "Farms"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "302 Kanai A Nalu Ocean front/view",
@@ -32458,7 +32458,7 @@
             "Shepherd's huts",
             "Lakefront"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Mike's House- Hina Room",
@@ -32911,7 +32911,7 @@
             "Historical homes",
             "Countryside"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Apartamento en casco antiguo",
@@ -33134,7 +33134,7 @@
         },
         "_id": "asRsTN",
         "labels": ["Camping", "Windmills", "Caves", "Windmills", "Cabins", "Chef's kitchens", "Castles", "Truli"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Amazing NEW Food Lover Balcony, close to FIRA, MWC",
@@ -33601,7 +33601,7 @@
             "Arctic",
             "Off-the-grid"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Inner City Terrace - 2 rooms 2 beds - 4 ppl.",
@@ -33736,7 +33736,7 @@
             "Skiing",
             "Domes"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Newly and comfortable apt",
@@ -34174,7 +34174,7 @@
         },
         "_id": "yaFl9C",
         "labels": ["Grand pianos", "New", "Luxe", "Beachfront", "Dammusi", "Design", "Countryside", "Desert"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "PORTO DOWNTOWN FLATS-RIBEIRA STUDIO",
@@ -34646,7 +34646,7 @@
             "New",
             "Earth homes"
         ],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Large railroad style 3 bedroom apt in Manhattan!",
@@ -35098,7 +35098,7 @@
         },
         "_id": "rchFGQ",
         "labels": ["Surfing", "Golfing", "Islands", "Lakefront", "Dammusi", "Camping", "Luxe", "Camping"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "2017 , férias no Rio",
@@ -35176,7 +35176,7 @@
         },
         "_id": "8ZzQpW",
         "labels": ["Adapted", "Minsus", "Golfing", "Trending", "Skiing", "Tropical", "Luxe", "Ski-on/out"],
-        "takenDates": []
+        "reservations": []
     },
     {
         "name": "Two bedroom apartment",
@@ -35623,6 +35623,6 @@
         },
         "_id": "yYBFw2",
         "labels": ["Camping", "Countryside", "Luxe", "Containers", "Cabins", "Tropical", "Dammusi", "Iconic cities"],
-        "takenDates": []
+        "reservations": []
     }
 ]

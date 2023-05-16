@@ -49,7 +49,7 @@
         }
         img {
             cursor: pointer;
-            border: 2px solid #dddddd;
+            border: 2px solid $light-grey;
             border-radius: 1rem;
             transition: border-color 0.15s ease-in-out;
             @include for-narrow-layout {
