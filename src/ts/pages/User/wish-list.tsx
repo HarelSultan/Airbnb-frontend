@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootStateProps } from '../../store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
 import { FiShare } from 'react-icons/fi'
 import { setUserWishListStays, updateWishList } from '../../store/user/user.action'
 import { StayProps } from '../../interfaces/stay-interface'
@@ -18,15 +17,12 @@ export function WishList() {
     const navigate = useNavigate()
     const location = useLocation()
 
-    console.log(loggedInUser)
-
     useEffect(() => {
         if (!loggedInUser) return navigate('/')
         if (!loggedInUser.wishListStays || loggedInUser.wishListStays.length !== loggedInUser.wishListStaysId.length)
             loadUserWishList()
     }, [])
 
-    console.log(loggedInUser)
     const loadUserWishList = async () => {
         if (!loggedInUser || !loggedInUser.wishListStaysId.length) return
         try {

@@ -33,7 +33,7 @@ export function LoginSignup({ isSignningUp, onLoginSignupCB }: Props) {
 
     const onDemoUserLogin = async () => {
         try {
-            const demoUser = demoUserLogin()
+            const demoUser = await demoUserLogin()
             if (onLoginSignupCB) onLoginSignupCB()
             // TODO: showSucessMsg(`Welcome, you are logged in with a demo user`)
         } catch (err) {
@@ -65,12 +65,12 @@ export function LoginSignup({ isSignningUp, onLoginSignupCB }: Props) {
             )}
             <label className={`user-name ${credentials.username ? 'filled' : ''}`}>
                 <div className='place-holder'>Username</div>
-                <input placeholder='Username' {...register('username')} required />
+                <input placeholder='Username' {...register('username')} autoComplete='off' required />
             </label>
             <label className={`password ${credentials.password ? 'filled' : ''}`}>
                 <div className='place-holder'>Password</div>
 
-                <input placeholder='Password' {...register('password')} required />
+                <input placeholder='Password' {...register('password', 'password')} autoComplete='off' required />
             </label>
             <CtaBtn onClickCB={onLoginSignup} txt={isSignup ? 'Sign up' : 'Login'} />
         </section>

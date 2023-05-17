@@ -1,6 +1,6 @@
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend } from 'chart.js'
 import { Bar, Pie } from 'react-chartjs-2'
-import { DashboardDataProps, ReservationCountMap } from '../../interfaces/user-interface'
+import { DashboardDataProps } from '../../interfaces/user-interface'
 
 interface Props {
     listingsName: string[]

@@ -1,6 +1,6 @@
 .user-menu {
     border: 1px solid $light-grey;
-    padding: 5px 5px 5px 12px;
+    padding: 5px 4px 5px 12px;
     border-radius: 1.4rem;
     display: flex;
     align-items: center;
@@ -14,7 +14,11 @@
 
     .user-wrapper {
         font-size: 2rem;
-        margin-left: 0.8rem;
+        margin-left: 0.935rem;
+        img {
+            width: 30px;
+            border-radius: 50%;
+        }
     }
 
     .user-tool-tip {

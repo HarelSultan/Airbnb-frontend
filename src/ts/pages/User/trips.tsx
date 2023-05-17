@@ -1,20 +1,16 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootStateProps } from '../../store/store'
 import { useNavigate } from 'react-router-dom'
-import { AppLogo } from '../../cmps/AppHeader/Logo/logo'
 import { TripPreview } from './trip-preview'
 import { NoTrips } from './no-trips'
 import { UserPageHeader } from '../../cmps/user-page-header'
 import { MobileHeader } from '../../cmps/mobile-header'
-import { reservationService } from '../../services/reservation.service'
-import { ReservationProps } from '../../interfaces/user-interface'
 import { setUserTrips } from '../../store/user/user.action'
 
 export function Trips() {
     const loggedInUser = useSelector((storeState: RootStateProps) => storeState.userModule.loggedInUser)
     const isMobile = useSelector((storeState: RootStateProps) => storeState.appModule.isMobile)
-    // const [userTrips, setUserTrips] = useState<ReservationProps[] | null>(null)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -24,12 +20,8 @@ export function Trips() {
 
     const loadUserTrips = async () => {
         if (!loggedInUser || !loggedInUser.tripsId?.length) return
-        // if (!loggedInUser.tripsId.length) return
         try {
             await setUserTrips(loggedInUser)
-            // const userTrips = await reservationService.query(loggedInUser.tripsId)
-            // console.log(userTrips)
-            // setUserTrips(userTrips)
         } catch (err) {
             // TODO: showErrorMsg('Cannot load your trips, try again later')
             console.log(err)
@@ -60,17 +52,6 @@ export function Trips() {
                     ))}
                 </div>
             )}
-            {/* {!loggedInUser?.trips.length ? (
-                <NoTrips isMobile={isMobile} onSearchTrips={onSearchTrips} />
-            ) : (
-                <div className='trips-stays-wrapper'>
-                    {loggedInUser.trips.map((trip, idx) => (
-                        <div onClick={() => onTripDetails(trip._id)} key={`${trip._id}${idx}`} className='trip-wrapper'>
-                            <TripPreview trip={trip} />
-                        </div>
-                    ))}
-                </div>
-            )} */}
         </section>
     )
 }

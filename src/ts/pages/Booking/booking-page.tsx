@@ -23,7 +23,6 @@ import { GuestsModal } from './cmps/guests-modal'
 import { ReservationSummary } from '../../cmps/reservation-summary'
 import { stayService } from '../../services/stay.service'
 import { addReservation } from '../../store/user/user.action'
-// import { addReservation } from '../../store/user/user.action'
 
 export const RESERVE_GUESTS_MODAL = 'reserveGuestsModal'
 export const RESERVATION_SUMMARY_MODAL = 'reservationSummaryModal'

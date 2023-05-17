@@ -40,7 +40,7 @@ export function UserMenu({ onToggleLoginSignup, loggedInUser, onBecomeHost, navi
                 <GiHamburgerMenu />
             </div>
             <div className='user-wrapper'>
-                <FaUserCircle />
+                {loggedInUser?.imgUrl ? <img src={loggedInUser.imgUrl} alt='User Img' /> : <FaUserCircle />}
             </div>
             {isUserToolTipOpen && (
                 <div className='user-tool-tip'>

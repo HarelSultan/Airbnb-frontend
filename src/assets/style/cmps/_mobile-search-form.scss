@@ -1,5 +1,5 @@
 .mobile-search-form {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     height: 100vh;
@@ -62,7 +62,7 @@
             margin-top: 15px;
         }
         &.guests {
-            // margin-bottom: 60px;
+            margin-bottom: 85px;
         }
         &.expanded {
             box-shadow: 0 0 0 1px rgb(0 0 0 / 4%), 0 6px 20px rgb(0 0 0 / 20%);
@@ -103,14 +103,15 @@
     }
 
     .search-form-footer {
-        background: rgba(255, 255, 255, 0.5);
+        width: 100%;
+        padding: 12px 24px;
+        font-size: 16px;
         background: #fbfbfb;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 24px;
-        font-size: 16px;
-        position: sticky;
+        position: fixed;
         bottom: 0;
         z-index: 3;
 
