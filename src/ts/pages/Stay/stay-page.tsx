@@ -116,6 +116,16 @@ export function StayPage() {
         }
     }
 
+    const onShareStay = async () => {
+        try {
+            const { pathname, search } = location
+            await navigator.clipboard.writeText('https://airbnb-1qmb.onrender.com' + pathname + search)
+            // TODO:ShowSuccessMsg('Link Copied to your clipboard.')
+        } catch (err) {
+            console.log('Failed to copy to clipboard with err:', err)
+        }
+    }
+
     const onSendHostMessage = (msg: string) => {
         setExpandedModal(null)
         console.log(msg)
@@ -253,6 +263,7 @@ export function StayPage() {
         isStaySaved,
         onOpenReviewsModal: onSetExpandedModal,
         onOpenLocationModal: onSetExpandedModal,
+        onShareStay,
     }
 
     const reserveStayProps = {
@@ -294,6 +305,7 @@ export function StayPage() {
                     onToggleSaveStay={onToggleSaveStay}
                     isStaySaved={isStaySaved}
                     onOpenGalleryModal={onSetExpandedModal}
+                    onShareStay={onShareStay}
                 />
             )}
 

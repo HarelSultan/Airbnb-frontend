@@ -52,6 +52,7 @@ export function StayAmenities({ amenities, onOpenModal }: Props) {
                     </div>
                 ))}
             </div>
+
             <button onClick={() => onOpenModal(AMENITIES_MODAL)} className='btn btn-more-amenities'>
                 Show all {amenities.length} amenities
             </button>

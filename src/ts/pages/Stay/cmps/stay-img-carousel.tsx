@@ -8,9 +8,17 @@ interface Props {
     onToggleSaveStay: (ev: React.MouseEvent<HTMLButtonElement>) => void
     isStaySaved: boolean
     onOpenGalleryModal?: (expandedModal: string) => void
+    onShareStay?: () => void
 }
 
-export function StayImgCarousel({ imgUrls, onGoBack, onToggleSaveStay, isStaySaved, onOpenGalleryModal }: Props) {
+export function StayImgCarousel({
+    imgUrls,
+    onGoBack,
+    onToggleSaveStay,
+    isStaySaved,
+    onOpenGalleryModal,
+    onShareStay,
+}: Props) {
     return (
         <section className='full stay-img-carousel'>
             {onGoBack && (
@@ -19,7 +27,7 @@ export function StayImgCarousel({ imgUrls, onGoBack, onToggleSaveStay, isStaySav
                 </button>
             )}
             <div className='action-btns-container'>
-                <button className='btn btn-share underline'>
+                <button onClick={onShareStay ? onShareStay : undefined} className='btn btn-share underline'>
                     <FiShare />
                 </button>
                 <button

@@ -14,7 +14,7 @@ interface Props {
 
 export function StayList({ stays, onStayDetails, onToggleSaveStay, wishList, onLoadStays, isLoading }: Props) {
     const lastSkeletonRef = useRef<HTMLDivElement>(null)
-
+    console.log('STAYS LENGTH:', stays.length)
     useEffect(() => {
         if (!onLoadStays) return
         const observer = new IntersectionObserver(

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { stayService } from '../../services/stay.service'
@@ -7,7 +7,7 @@ import { stayService } from '../../services/stay.service'
 import { AppHeader } from '../../cmps/AppHeader/app-header'
 import { Filter } from './cmps/filter'
 import { StayList } from './cmps/stay-list'
-import { loadMoreStays, loadStays } from '../../store/stay/stay.action'
+import { loadMoreStays, loadStays, setFilter } from '../../store/stay/stay.action'
 import { AppFooter } from '../../cmps/app-footer'
 import { StayMapList } from './cmps/Filter/stay-map-list'
 import { Modal } from '../../cmps/modal'
@@ -17,6 +17,7 @@ import { MobileHeader } from '../../cmps/mobile-header'
 
 import { RootStateProps } from '../../store/store'
 import { StayProps } from '../../interfaces/stay-interface'
+import { NoStays } from './cmps/no-stays'
 
 export interface LoginSignupDisplayProps {
     isOpen: boolean
@@ -42,6 +43,7 @@ export function HomePage() {
     const location = useLocation()
     const navigate = useNavigate()
     const searchParamsRef = useRef(new URLSearchParams(location.search))
+    const [_, setSearchParams] = useSearchParams()
 
     useEffect(() => {
         if (filterByRef.current !== filterBy) {
@@ -50,7 +52,7 @@ export function HomePage() {
         if (searchParamsRef.current !== new URLSearchParams(location.search)) {
             searchParamsRef.current = new URLSearchParams(location.search)
         }
-
+        document.body.scrollTo({ top: 0 })
         currStayPagination.current = 0
         onLoadStays()
     }, [filterBy, location.search])
@@ -98,6 +100,11 @@ export function HomePage() {
         }
     }
 
+    const onRemoveFilters = () => {
+        setSearchParams(new URLSearchParams())
+        setFilter(stayService.getDefaultFilterProps())
+    }
+
     const onToggleLoginSignup = (isSignup: boolean = false) => {
         setLoginSignupDisplay(prevState => ({ isOpen: !prevState.isOpen, isSignup }))
     }
@@ -126,7 +133,6 @@ export function HomePage() {
         headerTxt: 'Welcome to Airbnb',
         children: <LoginSignup isSignningUp={loginSignupDisplay.isSignup} onLoginSignupCB={onToggleLoginSignup} />,
     }
-
     return (
         <section className={`main-layout home-page ${isMapOpen ? 'map-open' : ''}`}>
             <AppHeader
@@ -136,7 +142,11 @@ export function HomePage() {
                 searchParams={searchParamsRef}
             />
             <Filter isMobile={isMobile} />
-            {isMapOpen ? <StayMapList {...stayListProps} /> : <StayList {...stayListProps} />}
+            {stays.length === 0 ? (
+                <NoStays onRemoveFilters={onRemoveFilters} />
+            ) : (
+                <>{isMapOpen ? <StayMapList {...stayListProps} /> : <StayList {...stayListProps} />}</>
+            )}
             <button onClick={onToggleMapDisplay} className='btn btn-toggle-map'>
                 {isMapOpen ? (
                     <div>

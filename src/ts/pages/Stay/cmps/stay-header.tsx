@@ -12,6 +12,7 @@ interface Props {
     isStaySaved: boolean
     onOpenReviewsModal: (expandedModal: string) => void
     onOpenLocationModal: (expandedModal: string) => void
+    onShareStay: () => void
 }
 
 export function StayHeader({
@@ -21,6 +22,7 @@ export function StayHeader({
     isStaySaved,
     onOpenReviewsModal,
     onOpenLocationModal,
+    onShareStay,
 }: Props) {
     return (
         <section className='stay-header'>
@@ -51,7 +53,7 @@ export function StayHeader({
                 </div>
                 {!isMobile && (
                     <div className='action-btns-container'>
-                        <button className='btn btn-share underline'>
+                        <button onClick={onShareStay} className='btn btn-share underline'>
                             <FiShare />
                             Share
                         </button>
