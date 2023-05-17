@@ -378,3 +378,13 @@
         cursor: default;
     }
 }
+
+.amenities-modal {
+    @include for-narrow-layout {
+        padding: 40px;
+    }
+    .modal {
+        width: 100%;
+        max-width: 780px;
+    }
+}
