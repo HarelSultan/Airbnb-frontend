@@ -38,7 +38,7 @@ export function StayDetails({ stay, stayReservations, reserveBy, onSetReserveBy,
             <StayAirCover onOpenModal={onOpenModal} />
             <StaySummary summary={stay.summary} />
             <StaySleepingArrangement details={stay.stayDetails} />
-            <StayAmenities amenities={stay.amenities} />
+            <StayAmenities amenities={stay.amenities} onOpenModal={onOpenModal} />
             <ReserveDates {...reserveDatesProps} />
         </section>
     )

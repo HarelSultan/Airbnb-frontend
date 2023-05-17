@@ -31,6 +31,7 @@ import { ReserveDates } from './cmps/ReserveStay/cmps/reserve-dates'
 import { AiFillStar } from 'react-icons/ai'
 import { CtaBtn } from '../../cmps/cta-btn'
 import { PriceBreakdown } from '../../cmps/price-breakdown'
+import { ExpandedStayAmenities } from './cmps/StayDetails/expanded-stay-amenities'
 
 export const REVIEWS_MODAL = 'reviewsModal'
 export const AIR_COVER_MODAL = 'airCoverModal'
@@ -41,6 +42,7 @@ export const RESERVE_DATES_MODAL = 'reserveDatesModal'
 export const PRICE_BREAKDOWN_MODAL = 'priceBreakdownModal'
 export const CLEANING_FEE_MODAL = 'cleaningFeeModal'
 export const AIRBNB_SERVICE_MODAL = 'airbnbServiceModal'
+export const AMENITIES_MODAL = 'amenitiesModal'
 
 export function StayPage() {
     const [selectedStay, setSelectedStay] = useState<StayProps | null>(null)
@@ -235,6 +237,12 @@ export function StayPage() {
             onCloseModal: () => onSetExpandedModal(null),
             headerTxt: 'Airbnb Service',
             children: <div>This helps us run our platform and offer services like 24/7 support on your trip.</div>,
+        },
+        amenitiesModal: {
+            className: 'amenities-modal',
+            onCloseModal: () => setExpandedModal(null),
+            headerTxt: null,
+            children: <ExpandedStayAmenities />,
         },
     }
 
